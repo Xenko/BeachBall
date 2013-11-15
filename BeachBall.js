@@ -1,0 +1,1 @@
+$('#sectionControls').append('<a class="minifloatbox"><h4>Beach Holiday</h4></a>');
