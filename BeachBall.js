@@ -25,7 +25,7 @@ var Time_to_ONG = 1800000;
 	
 	//Create Menu
 	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-	
+	WriteOptionDescription('RKAutoClick',RKAutoClickStatus);
 
 
 
@@ -68,10 +68,6 @@ function Ninja() {
     else if (KeepBlue == 0) {
         $("#beach").css("border","1px solid white");
 	}
-}
-
-function WriteOptionDescription(option, description) {
-
 }
 
 function RedundaKitty() {
@@ -117,5 +113,9 @@ function SwitchOption(option) {
 		}
 
 	}
-	g(option + 'Desc').innerHTML = '<br>' + desc;
+	WriteOptionDescription(option, desc);
+}
+
+function WriteOptionDescription(option, description) {
+	g(option + 'Desc').innerHTML = '<br>' + description;
 }
