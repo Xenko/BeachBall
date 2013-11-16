@@ -2,7 +2,7 @@
 //v2.0 Cleaning up code. Setting up Menu Structure
 
 //Declare and Initialize Variables
-var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
+/*var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
 	audio_Bell.volume=1;
 var audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
 	audio_Chime.volume=1;
@@ -118,4 +118,6 @@ function WriteOptionDescription(option, status) {
 			}
 	}
 	g(option + 'Desc').innerHTML = '<br>' + description;
-}
+}*/
+
+Molpy.Notify('abc123', 1);
