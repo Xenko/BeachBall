@@ -2,7 +2,7 @@
 //v2.0 Cleaning up code. Setting up Menu Structure
 
 //Declare and Initialize Variables
-/*var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
+var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
 	audio_Bell.volume=1;
 var audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
 	audio_Chime.volume=1;
@@ -31,14 +31,6 @@ var Time_to_ONG = 1800000;
 
 	Molpy.Notify('abc123', 1);
 	
-//Main Loop
-setInterval(function() {
-    RedundaKitty();
-    Ninja();
-	Molpy.Notify('abc321', 1);
-}, 1800);
-
-
 
 function Ninja() {
 	//Ninja Warnings and Incoming ONG Warning
@@ -118,9 +110,16 @@ function WriteOptionDescription(option, status) {
 			}
 	}
 	g(option + 'Desc').innerHTML = '<br>' + description;
-}*/
+}
 
-var BeachBall = {};
+//Main Loop
+setInterval(function() {
+    RedundaKitty();
+    Ninja();
+	Molpy.Notify('abc321', 1);
+}, 1800);
+
+/*var BeachBall = {};
 
 BeachBall.WriteMessage = function () {
 	Molpy.Notify('abc123 function', 1);
@@ -133,4 +132,4 @@ function WMT () {
 
 Molpy.Notify('abc123', 1);
 BeachBall.WriteMessage();
-WMT();
+WMT();*/
