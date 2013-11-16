@@ -17,15 +17,18 @@ var RKAlertFrequency = 8;
 var Time_to_ONG = 1800000;
 
 //Beach Ball Startup
-	//Create Menu
-	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-	
-
 	//Set Settings
 	IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)");
 	RKAutoClickStatus = IdleStatus;
 	NinjaAutoClickStatus = IdleStatus;
 	if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
+	
+	//Create Menu
+	Beachball.OptionNames = ['RKAutoClick', 'NinjaAutoClick'];
+	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
+	
+
+
 
 
 //Main Loop
@@ -68,6 +71,10 @@ function Ninja() {
 	}
 }
 
+function Beachball.WriteOptionDescription(option, description) {
+
+}
+
 function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
@@ -91,8 +98,8 @@ function RedundaKitty() {
 	}
 }
 
-function SwitchOption(bacon) {
-	if (bacon == 'RKAutoClick') {
+function SwitchOption(option) {
+	if (option == 'RKAutoClick') {
 		RKAutoClickStatus++;
 		/*if (RKAutoClickStatus > 1) {
 			RKAutoClickStatus = 0;
@@ -111,5 +118,5 @@ function SwitchOption(bacon) {
 		}
 
 	}
-	g(bacon + 'Desc').innerHTML = '<br>' + desc;
+	g(option + 'Desc').innerHTML = '<br>' + desc;
 }
