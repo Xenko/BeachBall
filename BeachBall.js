@@ -29,12 +29,12 @@ var Time_to_ONG = 1800000;
 
 
 
-
+	Molpy.Notify('Test',1);
+	
 //Main Loop
 setInterval(function() {
     RedundaKitty();
     Ninja();
-	Molpy.Notify('Test',0);
 }, 1800);
 
 
