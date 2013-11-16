@@ -79,7 +79,7 @@ function SwitchOption(option) {
 			status = RKAutoClickStatus;
 		break;
 	}
-	WriteOptionDescription(option, status);
+	DisplayDescription(option, status);
 }
 
 function DisplayDescription(option, status) {
