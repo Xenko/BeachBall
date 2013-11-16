@@ -99,14 +99,13 @@ function SwitchOption(option) {
 			RKAutoClickStatus++;
 			if (RKAutoClickStatus > 2) {RKAutoClickStatus = 0};
 			status = RKAutoClickStatus;
-			break;
+		break;
 	}
 	WriteOptionDescription(option, status);
 }
 
 function WriteOptionDescription(option, status) {
-	switch (option)
-		case 'RKAutoClick':
+	if (option == 'RKAutoClick') {
 			switch (status) {
 					case 1:
 						description = "On";
@@ -115,7 +114,6 @@ function WriteOptionDescription(option, status) {
 						description = "Off";
 						break;
 			}
-			break;
-	break;
+	}
 	g(option + 'Desc').innerHTML = '<br>' + description;
 }
