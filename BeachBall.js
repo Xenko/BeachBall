@@ -97,7 +97,7 @@ function SwitchOption(option) {
 	switch (option) {
 		case 'RKAutoClick':
 			RKAutoClickStatus++;
-			if RKAutoClickStatus > 2 {RKAutoClickStatus = 0};
+			if (RKAutoClickStatus > 2) {RKAutoClickStatus = 0};
 			status = RKAutoClickStatus;
 			break;
 	}
