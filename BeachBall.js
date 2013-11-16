@@ -6,6 +6,7 @@ var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
 	audio_Bell.volume=1;
 var audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
 	audio_Chime.volume=1;
+var desc = "Error";
 var i = 0;
 var IdleStatus = 0;
 var incoming_ONG = 0;
@@ -18,8 +19,6 @@ var Time_to_ONG = 1800000;
 //Beach Ball Startup
 	//Create Menu
 	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-	var desc = "Testing Testing";
-	g('RKAutoClickDesc').innerHTML = '<br> abc123' + desc;
 	
 
 	//Set Settings
@@ -95,8 +94,20 @@ function RedundaKitty() {
 function SwitchOption(bacon) {
 	if (bacon == 'RKAutoClick') {
 		RKAutoClickStatus++;
-		if (RKAutoClickStatus > 1) {
+		/*if (RKAutoClickStatus > 1) {
 			RKAutoClickStatus = 0;
+		}*/
+		switch (RKAutoClickStatus) {
+			case 2:
+				RKAutoClickStatus = 0;
+			case 1:
+				desc = "On";
+				break;
+			case 0:
+				desc = "Off";
+				break;
 		}
+
 	}
+	g(bacon + 'Desc').innerHTML = '<br>' + desc;
 }
