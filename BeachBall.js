@@ -85,16 +85,18 @@ function SwitchOption(option) {
 function DisplayDescription(option, status) {
 	Molpy.Notify('RKAC: ' + option + ' ' + status,1);
 	if (option == 'RKAutoClick') {
-			switch (status) {
-					case 1:
-						description = 'On';
-						Molpy.Notify(description,1);
-						break;
-					case 0:
-						description = 'Off';
-						Molpy.Notify(description,1);
-						break;
-			}
+		switch (status) {
+			case 1:
+				description = 'On';
+				Molpy.Notify(description,1);
+				break;
+			case 0:
+				description = 'Off';
+				Molpy.Notify(description,1);
+				break;
+			default:
+				Molpy.Notify('Error',1);
+		}
 	}
 	g(option + 'Desc').innerHTML = '<br>' + description;
 }
