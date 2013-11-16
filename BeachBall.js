@@ -71,7 +71,7 @@ function Ninja() {
 	}
 }
 
-function Beachball.WriteOptionDescription(option, description) {
+function Beachball.WriteOptionDescription() {
 
 }
 
