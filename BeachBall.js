@@ -17,7 +17,8 @@ var Time_to_ONG = 1800000;
 
 //Beach Ball Startup
 	//Create Menu
-	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> </div>');
+	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
+	$('#RKAutoClickDesc').innerHTML = '<br> Testing';
 	
 
 	//Set Settings
