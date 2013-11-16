@@ -29,7 +29,7 @@ var Time_to_ONG = 1800000;
 
 
 
-	Molpy.Notify('Test',1);
+	Molpy.Notify('abc123', 1);
 	
 //Main Loop
 setInterval(function() {
