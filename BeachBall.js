@@ -13,6 +13,7 @@ var KeepBlue = 0;
 var NinjaAutoClickStatus = 0;
 var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
+if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 var Time_to_ONG = 1800000;
 
 //Beach Ball Startup
@@ -32,7 +33,7 @@ function StartUp() {
 	IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)");
 	RKAutoClickStatus = IdleStatus;
 	NinjaAutoClickStatus = IdleStatus;
-	if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
+	
 }
 
 function Ninja() {
