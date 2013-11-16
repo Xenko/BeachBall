@@ -75,27 +75,29 @@ function SwitchOption(option) {
 	switch (option) {
 		case 'RKAutoClick':
 			RKAutoClickStatus++;
-			if (RKAutoClickStatus > 2) {RKAutoClickStatus = 0};
+			if (RKAutoClickStatus > 1) {RKAutoClickStatus = 0};
 			status = RKAutoClickStatus;
-		break;
+			break;
+		case 'NinjaAutoClick':
+			NinjaAutoClickStatus++;
+			if (NinjaAutoClickStatus > 1) {NinjaAutoClickStatus = 0};
+			status = NinjaAutoClickStatus;
+			break;
 	}
 	DisplayDescription(option, status);
 }
 
 function DisplayDescription(option, status) {
-	Molpy.Notify('RKAC: ' + option + ' ' + status,1);
-	if (option == 'RKAutoClick') {
+	if (option == 'RKAutoClick' || option == 'NinjaAutoClick') {
 		switch (status) {
 			case '1':
 				description = 'On';
-				//Molpy.Notify(description,1);
 				break;
 			case '0':
 				description = 'Off';
-				//Molpy.Notify(description,1);
 				break;
 			default:
-				//Molpy.Notify('Error',1);
+				Molpy.Notify('Display Description Error',1);
 		}
 	}
 	g(option + 'Desc').innerHTML = '<br>' + description;
@@ -110,8 +112,9 @@ function DisplayDescription(option, status) {
 	
 	//Create Menu
 	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-	Molpy.Notify('RKAC: ' + RKAutoClickStatus,1);
+	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
 	DisplayDescription('RKAutoClick',RKAutoClickStatus);
+	DisplayDescription('NinjaAutoClick',NinjaAutoClickStatus);
 	
 //Main Loop
 setInterval(function() {
@@ -119,18 +122,3 @@ setInterval(function() {
     Ninja();
 	//Molpy.Notify('abc321', 1);
 }, 1800);
-
-/*var BeachBall = {};
-
-BeachBall.WriteMessage = function () {
-	Molpy.Notify('abc123 function', 1);
-	alert("WriteMessage Called");
-}
-
-function WMT () {
-	Molpy.Notify('abc321 in WMT', 1);
-}
-
-Molpy.Notify('abc123', 1);
-BeachBall.WriteMessage();
-WMT();*/
