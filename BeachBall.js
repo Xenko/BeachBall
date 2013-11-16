@@ -120,12 +120,12 @@ function WriteOptionDescription(option, status) {
 	g(option + 'Desc').innerHTML = '<br>' + description;
 }*/
 
-Molpy.Notify('abc123', 1);
-BeachBall.WriteMessage();
-
 var BeachBall = {};
 
 BeachBall.WriteMessage = function () {
 	Molpy.Notify('abc123 function', 1);
-	alert ("WriteMessage Called");
+	alert("WriteMessage Called");
 }
+
+Molpy.Notify('abc123', 1);
+BeachBall.WriteMessage();
