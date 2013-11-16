@@ -1,3 +1,5 @@
+//v1.0 as Starting Point
+
 $('#sectionControls').append('<a class="minifloatbox"><h4>BeachBall</h4></a>');
 
 var IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)","0");
