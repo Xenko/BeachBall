@@ -87,10 +87,12 @@ function DisplayDescription(option, status) {
 	if (option == 'RKAutoClick') {
 			switch (status) {
 					case 1:
-						description = "On";
+						description = 'On';
+						Molpy.Notify(description,1);
 						break;
 					case 0:
-						description = "Off";
+						description = 'Off';
+						Molpy.Notify(description,1);
 						break;
 			}
 	}
