@@ -83,6 +83,7 @@ function SwitchOption(option) {
 }
 
 function DisplayDescription(option, status) {
+	Molpy.Notify('RKAC: ' + option + ' ' + status,1);
 	if (option == 'RKAutoClick') {
 			switch (status) {
 					case 1:
