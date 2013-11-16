@@ -17,7 +17,8 @@ var Time_to_ONG = 1800000;
 
 //Beach Ball Startup
 	//Create Menu
-	$('#sectionControls').append('<a class="minifloatbox"><h4>BeachBall</h4></a>');
+	$('#optionsItems').append('<div class="minifloatbox"><h4>BeachBall</h4></a></div>');
+	
 
 	//Set Settings
 	IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)");
