@@ -24,7 +24,6 @@ var Time_to_ONG = 1800000;
 	if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 	
 	//Create Menu
-	Beachball.OptionNames = ['RKAutoClick', 'NinjaAutoClick'];
 	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 	
 
@@ -71,7 +70,7 @@ function Ninja() {
 	}
 }
 
-function Beachball.WriteOptionDescription() {
+function WriteOptionDescription(option, description) {
 
 }
 
