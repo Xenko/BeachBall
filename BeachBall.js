@@ -121,3 +121,11 @@ function WriteOptionDescription(option, status) {
 }*/
 
 Molpy.Notify('abc123', 1);
+BeachBall.WriteMessage();
+
+var BeachBall = {};
+
+BeachBall.WriteMessage = function () {
+	Molpy.Notify('abc123 function', 1);
+	alert ("WriteMessage Called");
+}
