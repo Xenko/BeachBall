@@ -100,6 +100,8 @@ function SwitchOption(bacon) {
 		switch (RKAutoClickStatus) {
 			case 2:
 				RKAutoClickStatus = 0;
+				desc = "Off";
+				break;
 			case 1:
 				desc = "On";
 				break;
