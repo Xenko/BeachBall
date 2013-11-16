@@ -19,7 +19,7 @@ var Time_to_ONG = 1800000;
 	//Create Menu
 	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 	var desc = "Testing Testing";
-	$('#RKAutoClickDesc').innerHTML = '<br>' + desc;
+	g('RKAutoClickDesc').innerHTML = '<br> abc123' + desc;
 	
 
 	//Set Settings
