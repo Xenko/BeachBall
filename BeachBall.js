@@ -127,5 +127,10 @@ BeachBall.WriteMessage = function () {
 	alert("WriteMessage Called");
 }
 
+function WMT () {
+	Molpy.Notify('abc321 in WMT', 1);
+}
+
 Molpy.Notify('abc123', 1);
 BeachBall.WriteMessage();
+WMT();
