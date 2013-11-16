@@ -13,11 +13,18 @@ var KeepBlue = 0;
 var NinjaAutoClickStatus = 0;
 var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
-if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 var Time_to_ONG = 1800000;
 
 //Beach Ball Startup
-StartUp();
+	//Create Menu
+	$('#sectionControls').append('<a class="minifloatbox"><h4>BeachBall</h4></a>');
+
+	//Set Settings
+	IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)");
+	RKAutoClickStatus = IdleStatus;
+	NinjaAutoClickStatus = IdleStatus;
+	if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
+
 
 //Main Loop
 setInterval(function() {
@@ -25,16 +32,7 @@ setInterval(function() {
     Ninja();
 }, 1800);
 
-function StartUp() {
-	//Create Menu
-	$('#sectionControls').append('<a class="minifloatbox"><h4>BeachBall</h4></a>');
-	
-	//Set Settings
-	IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)");
-	RKAutoClickStatus = IdleStatus;
-	NinjaAutoClickStatus = IdleStatus;
-	
-}
+
 
 function Ninja() {
 	//Ninja Warnings and Incoming ONG Warning
