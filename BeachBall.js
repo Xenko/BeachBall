@@ -94,28 +94,28 @@ function RedundaKitty() {
 }
 
 function SwitchOption(option) {
-	if (option == 'RKAutoClick') {
-		RKAutoClickStatus++;
-		/*if (RKAutoClickStatus > 1) {
-			RKAutoClickStatus = 0;
-		}*/
-		switch (RKAutoClickStatus) {
-			case 2:
-				RKAutoClickStatus = 0;
-				desc = "Off";
-				break;
-			case 1:
-				desc = "On";
-				break;
-			case 0:
-				desc = "Off";
-				break;
-		}
-
+	switch (option) {
+		case 'RKAutoClick':
+			RKAutoClickStatus++;
+			if RKAutoClickStatus > 2 {RKAutoClickStatus = 0};
+			status = RKAutoClickStatus;
+			break;
 	}
-	WriteOptionDescription(option, desc);
+	WriteOptionDescription(option, status);
 }
 
-function WriteOptionDescription(option, description) {
+function WriteOptionDescription(option, status) {
+	switch (option)
+		case 'RKAutoClick':
+			switch (status) {
+					case 1:
+						description = "On";
+						break;
+					case 0:
+						description = "Off";
+						break;
+			}
+			break;
+	break;
 	g(option + 'Desc').innerHTML = '<br>' + description;
 }
