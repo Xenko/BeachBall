@@ -116,7 +116,7 @@ function WriteOptionDescription(option, status) {
 setInterval(function() {
     RedundaKitty();
     Ninja();
-	Molpy.Notify('abc321', 1);
+	//Molpy.Notify('abc321', 1);
 }, 1800);
 
 /*var BeachBall = {};
