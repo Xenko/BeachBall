@@ -79,7 +79,7 @@ function RedundaKitty() {
 		else {
 			//Redundakitty Notifications (Title Bar and Audio)
 			document.title = "! kitten !";
-			if (Math.floor(i % Kitty_Audio_Frequency) == 0) {
+			if (Math.floor(i % RKAlertFrequency) == 0) {
 				audio_Bell.play();
 			}
 		}
