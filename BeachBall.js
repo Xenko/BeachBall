@@ -17,7 +17,7 @@ var Time_to_ONG = 1800000;
 
 //Beach Ball Startup
 	//Create Menu
-	$('#optionsItems').append('<div class="minifloatbox"><h4>BeachBall</h4></a></div>');
+	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption('RKAutoClick')"<h4>RK Auto Click</h4></a></div>');
 	
 
 	//Set Settings
@@ -90,4 +90,11 @@ function RedundaKitty() {
 	}
 }
 
-
+function SwitchOption(toSwitch) {
+	if (toSwith == 'RKAutoClick') {
+		RKAutoClickStatus++;
+		if (RKAutoClickStatus > 1) {
+			RKAutoClickStatus = 0;
+		}
+	}
+}
