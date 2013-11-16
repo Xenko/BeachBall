@@ -14,7 +14,6 @@ var NinjaAutoClickStatus = 0;
 var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
 var Time_to_ONG = 1800000;
-var toSwitch;
 
 //Beach Ball Startup
 	//Create Menu
@@ -91,8 +90,8 @@ function RedundaKitty() {
 	}
 }
 
-function SwitchOption(toSwitch) {
-	if (toSwith == 'RKAutoClick') {
+function SwitchOption(bacon) {
+	if (bacon == 'RKAutoClick') {
 		RKAutoClickStatus++;
 		if (RKAutoClickStatus > 1) {
 			RKAutoClickStatus = 0;
