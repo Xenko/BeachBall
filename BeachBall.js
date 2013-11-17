@@ -231,7 +231,7 @@ function MainLoop() {
 }
 
 //Run Main Loop after 5 second startup delay
-setTimeout(MainLoop(), 20000);
+setTimeout(MainLoop, 20000);
 
 
 
