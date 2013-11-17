@@ -17,7 +17,7 @@ var IdleStatus = 0;
 var incoming_ONG = 0;
 var LCAutoClickStatus = 0;
 var LCSolution = 'blank';
-var NinjaAutoClickStatus = 0;
+var NinjaAutoClickStatus = 1;
 var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
 var Time_to_ONG = 1800000;
@@ -61,10 +61,11 @@ function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	if (Molpy.redactedVisible > 0) {
-		Molpy.Notify(Molpy.redactedPuzzleTarget, 1);
+		$(":button").text("abc123");
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
 			Molpy.ClickRedacted();
+			//$(":button").click();
 		}
 		//else if (LCAutoClickStatus == 1 && Molpy.redactedPuzzleTarget != undefined) {
 			//Logicat();
@@ -90,6 +91,7 @@ function Logicat() {
 		i++;}
 	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
 	Molpy.ClickRedactedPuzzle(LCSolution);
+	Molpy.redactedPuzzleTarget = undefined;
 	
 	/*while (Molpy.redactedPuzzleTarget != undefined) {
 		LCSolution = String.fromCharCode(i);
