@@ -82,10 +82,15 @@ function RedundaKitty() {
 }
 
 function Logicat() {
-	Molpy.Notify(Molpy.redactedPuzzleTarget,1);
-	LCSolution = Molpy.redactedPuzzleTarget;
-	Molpy.ClickRedactedPuzzle(LCSolution);
-	Molpy.redactedPuzzleTarget = undefined;
+	i = 65;
+	while (Molpy.redactedPuzzleTarget != undefined) {
+		LCSolution = String.fromCharCode(i);
+		if (Molpy.redactedPuzzleTarget == Molpy.redactedSGen.StatementValue(LCSolution) {
+			Molpy.ClickRedactedPuzzle(LCSolution);
+			Molpy.redactedPuzzleTarget = undefined;
+		}
+		else {i++;}
+	}
 }
 
 function SwitchOption(option) {
@@ -152,7 +157,7 @@ if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 //Create Menu
 $('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> </div> <br>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'LCAutoClick\')"> <h4>LogicatAuto Click</h4> </a> <div id="LCAutoClickDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'LCAutoClick\')"> <h4>Logicat Auto Click</h4> </a> <div id="LCAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
