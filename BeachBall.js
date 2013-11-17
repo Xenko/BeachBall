@@ -99,22 +99,11 @@ function DisplayDescription(option, status) {
 	}
 	if (option == 'AudioAlerts') {
 		//Molpy.Notify(isNaN(status),1);
-		switch (status) {
-			case 0:
-				description = 'Off';
-				break;
-			case 1:
-				description = 'RK Only';
-				break;
-			case 2:
-				description = 'ONG Only';
-				break;
-			case 3:
-				description = 'RK and ONG';
-				break;
-			default:
-				Molpy.Notify('Display Description Error - Audio Alerts: ' + status,1);
-		}
+		if (status == 0) {description = 'Off';}
+		else if (status == 1) {description = 'RK Only';}
+		else if (status == 2) {description = 'ONG Only';}
+		else if (status == 3) {description = 'RK and ONG';}
+		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status,1);}
 	}
 	g(option + 'Desc').innerHTML = '<br>' + description;
 }
