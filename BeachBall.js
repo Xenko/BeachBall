@@ -1,6 +1,9 @@
 //v1.0 as Starting Point
 //v2.0 Cleaning up code. Setting up Menu Structure and Initial Settings.
 
+var version = '2.0 Beta';
+var SCBversion = '3.021'; //Last SandCastle Builder version tested
+
 //Declare and Initialize Variables
 var AudioAlertsStatus = 3;
 var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -12,6 +15,8 @@ var description = "Error";
 var i = 0;
 var IdleStatus = 0;
 var incoming_ONG = 0;
+var LCAutoClickStatus = 0;
+var LCSolution = "blank";
 var NinjaAutoClickStatus = 0;
 var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
@@ -59,7 +64,9 @@ function RedundaKitty() {
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
 			Molpy.ClickRedacted();
 		}
-		//else if 	
+		else if (LCAutoClickStatus == 1 && Molpy.redactedPuzzleTarget != undefined) {
+			Logicat();
+		}
 		else {
 			//Redundakitty Notifications (Title Bar and Audio)
 			document.title = "! kitten !";
@@ -74,12 +81,24 @@ function RedundaKitty() {
 	}
 }
 
+function Logicat() {
+	Molpy.Notify(Molpy.redactedPuzzleTarget,1);
+	LCSolution = Molpy.redactedPuzzleTarget;
+	Molpy.ClickRedactedPuzzle(LCSolution);
+	Molpy.redactedPuzzleTarget = undefined;
+}
+
 function SwitchOption(option) {
 	switch (option) {
 		case 'RKAutoClick':
 			RKAutoClickStatus++;
 			if (RKAutoClickStatus > 1) {RKAutoClickStatus = 0;}
 			status = RKAutoClickStatus;
+			break;
+		case 'LCAutoClick':
+			LCAutoClickStatus++;
+			if (LCAutoClickStatus > 1) {LCAutoClickStatus = 0;}
+			status = LCAutoClickStatus;
 			break;
 		case 'NinjaAutoClick':
 			NinjaAutoClickStatus++;
@@ -105,7 +124,7 @@ function SwitchOption(option) {
 
 function DisplayDescription(option, status) {
 	error = 0;
-	if (option == 'RKAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
+	if (option == 'RKAutoClick' || option == 'LCAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
 		else {Molpy.Notify('Display Description Error',1);}
@@ -132,15 +151,18 @@ if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 
 //Create Menu
 $('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> </div> <br>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'LCAutoClick\')"> <h4>LogicatAuto Click</h4> </a> <div id="LCAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
+DisplayDescription('LCAutoClick', LCAutoClickStatus);
 DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
 DisplayDescription('BorderAlert', BorderAlertStatus);
 DisplayDescription('AudioAlerts', AudioAlertsStatus);
-	
+
+Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)	
 //Main Loop
 setInterval(function() {
 	Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
