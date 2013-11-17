@@ -2,6 +2,7 @@
 //v2.0 Cleaning up code. Setting up Menu Structure
 
 //Declare and Initialize Variables
+var AudioAlertsStatus = 0;
 var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
 	audio_Bell.volume=1;
 var audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
@@ -10,16 +11,14 @@ var description = "Error";
 var i = 0;
 var IdleStatus = 0;
 var incoming_ONG = 0;
-var KeepBlue = 0;
 var NinjaAutoClickStatus = 0;
 var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
 var Time_to_ONG = 1800000;
 
+//Ninja AutoClicker and Border Warnings
 function Ninja() {
-	//Ninja Warnings and Incoming ONG Warning
-    Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
-	if (Molpy.ninjad == 0) {
+    if (Molpy.ninjad == 0) {
         if (Molpy.npbONG == 0) {
 			$("#beach").css("border","4px solid red");
         }
@@ -27,7 +26,7 @@ function Ninja() {
             incoming_ONG = 0;
             if (NinjaAutoClickStatus == 1) {
                 Molpy.ClickBeach();
-                $("#beach").css("border","4px solid blue");
+                $("#beach").css("border","4px solid white");
                 KeepBlue = 1;
             }
             else {
@@ -38,12 +37,12 @@ function Ninja() {
 	}
     else if (Time_to_ONG <= 15000) {
         $("#beach").css("border","4px solid yellow");
-            if (incoming_ONG == 0) {
+            if (incoming_ONG == 0 && (AudioAlertsStatus == 3 || AudioAlertsStatus == 4)) {
                 audio_Chime.play();
                 incoming_ONG = 1;
             }  
     }
-    else if (KeepBlue == 0) {
+    else {
         $("#beach").css("border","1px solid white");
 	}
 }
@@ -83,6 +82,11 @@ function SwitchOption(option) {
 			if (NinjaAutoClickStatus > 1) {NinjaAutoClickStatus = 0};
 			status = NinjaAutoClickStatus;
 			break;
+		case 'AudioAlerts':
+			AudioAlertsStatus++;
+			if (AudioAlertsStatus > 4) {AudioAlertsStatus = 0};
+			status = AudioAlertsStatus;
+			break;
 	}
 	DisplayDescription(option, status);
 }
@@ -100,25 +104,45 @@ function DisplayDescription(option, status) {
 				Molpy.Notify('Display Description Error',1);
 		}
 	}
+	if (option == 'AudioAlerts') {
+		switch (status) {
+			case '0':
+				description = 'Off';
+				break;
+			case '1':
+				description = 'RK Only';
+				break;
+			case '3':
+				description = 'ONG Only';
+				break;
+			case '4':
+				description = 'RK and ONG';
+				break;
+			default:
+				Molpy.Notify('Display Description Error',1);
+		}
+	}
 	g(option + 'Desc').innerHTML = '<br>' + description;
 }
 
 //Beach Ball Startup
-	//Set Settings
-	IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)");
-	RKAutoClickStatus = IdleStatus;
-	NinjaAutoClickStatus = IdleStatus;
-	if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
-	
-	//Create Menu
-	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
-	DisplayDescription('RKAutoClick',RKAutoClickStatus);
-	DisplayDescription('NinjaAutoClick',NinjaAutoClickStatus);
+//Set Settings
+IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)");
+RKAutoClickStatus = IdleStatus;
+NinjaAutoClickStatus = IdleStatus;
+if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
+
+//Create Menu
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertDesc"></div></div>');
+DisplayDescription('RKAutoClick',RKAutoClickStatus);
+DisplayDescription('NinjaAutoClick',NinjaAutoClickStatus);
+DisplayDescription('AudioAlerts',AudioAlertsStatus);
 	
 //Main Loop
 setInterval(function() {
+	Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
     RedundaKitty();
     Ninja();
-	//Molpy.Notify('abc321', 1);
 }, 1800);
