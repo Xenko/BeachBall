@@ -71,12 +71,19 @@ function RedundaKitty() {
 		Molpy.Notify('Redacted View Index: ' + Molpy.redactedViewIndex, 1);
 		/*
 		RV of 1 is Sand Tools
-		RV of 2
+		RV of 2 is Castle Tools
 		RV of 3 is Boosts Main Page
 		RV of 4 is Boosts Menu, Hill People Tech
-		RV of 5
-		RV of 6 is Badges Available
+		RV of 5 is Badges Earned?
+		RV of 6 is Badges Available?
 		*/
+		
+		if (Molpy.redactedVisible == 1 || Molpy.redactedVisible == 2 || Molpy.redactedVisible == 3) {
+			//Do Nothing
+		}
+		else if (Molpy.redactedVisible == 5) {
+			//showhideToggle('badges');
+		}
 	
 		//Determines if it is a Logicat. It it is, Logicat = 1, otherwise 0
 		var content = $('#redacteditem').html();
@@ -214,10 +221,17 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
 
-//Main Loop
-setInterval(function() {
-	//Molpy.Notify(Molpy.redactedToggle, 0);
-	Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
-    RedundaKitty();
-    Ninja();
-}, 1800);
+function MainLoop() {
+	setInterval(function() {
+		Molpy.Notify('1 mNP', 0);
+		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
+		RedundaKitty();
+		Ninja();
+	}, 1800);
+}
+
+//Run Main Loop after 5 second startup delay
+setTimeout(MainLoop(), 5000);
+
+
+
