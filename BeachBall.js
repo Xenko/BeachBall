@@ -85,7 +85,7 @@ function RedundaKitty() {
 			//Do Nothing
 		}
 		else if (Molpy.redactedVisible == 4) {
-			RKLocation = 'null';
+			RKLocation = '4';
 			Molpy.Notify('Unknown Location', 0);
 		}
 		else if (Molpy.redactedVisible == 5) {
@@ -100,7 +100,7 @@ function RedundaKitty() {
 		}
 	
 		//Determines if it is a Logicat or RK
-		if (RKLocation  != 'null') {
+		if (RKLocation  != '4') {
 			var content = $('#redacteditem').html();
 		}
 		
