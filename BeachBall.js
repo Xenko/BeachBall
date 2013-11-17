@@ -92,12 +92,13 @@ function SwitchOption(option) {
 }
 
 function DisplayDescription(option, status) {
+	error = 0;
 	if (option == 'RKAutoClick' || option == 'NinjaAutoClick') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
 		else {Molpy.Notify('Display Description Error',1);}
 	}
-	if (option == 'AudioAlerts') {
+	else if (option == 'AudioAlerts') {
 		//Molpy.Notify(isNaN(status),1);
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'RK Only';}
@@ -105,7 +106,12 @@ function DisplayDescription(option, status) {
 		else if (status == 3) {description = 'RK and ONG';}
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status,1);}
 	}
-	g(option + 'Desc').innerHTML = '<br>' + description;
+	else {
+		Molpy.Notify(option + ' is not a valid option', 1);
+		error = 1;
+	}
+		
+	if (error == 0) {g(option + 'Desc').innerHTML = '<br>' + description;}
 }
 
 //Beach Ball Startup
