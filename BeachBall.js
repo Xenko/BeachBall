@@ -86,7 +86,6 @@ function RedundaKitty() {
 		}
 		else if (Molpy.redactedVisible == 4) {
 			RKLocation = '4';
-			Molpy.Notify('Unknown Location', 0);
 		}
 		else if (Molpy.redactedVisible == 5) {
 			RKLocation = 'badges';
@@ -95,7 +94,7 @@ function RedundaKitty() {
 			RKLocation = 'badgesav';
 		}
 		
-		if (RKLocation != 'null' && !Molpy.options.showhide[RKLocation]) {
+		if (RKLocation != 'null' && RKLocation != '4' && !Molpy.options.showhide[RKLocation]) {
 			showhideToggle(RKLocation);
 		}
 	
