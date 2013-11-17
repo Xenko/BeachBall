@@ -59,7 +59,8 @@ function Ninja() {
 function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
-	if (Molpy.redactedVisible > 0) { 
+	if (Molpy.redactedVisible > 0) {
+		Molpy.Notify(Molpy.redactedDrawType[level],1);
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
 			Molpy.ClickRedacted();
@@ -83,14 +84,20 @@ function RedundaKitty() {
 
 function Logicat() {
 	i = 65;
-	while (Molpy.redactedPuzzleTarget != undefined) {
+	do 
+		{LCSolution = String.fromCharCode(i);
+		i++;}
+	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
+	Molpy.ClickRedactedPuzzle(LCSolution);
+	
+	/*while (Molpy.redactedPuzzleTarget != undefined) {
 		LCSolution = String.fromCharCode(i);
 		if (Molpy.redactedPuzzleTarget == Molpy.redactedSGen.StatementValue(LCSolution)) {
 			Molpy.ClickRedactedPuzzle(LCSolution);
 			Molpy.redactedPuzzleTarget = undefined;
 		}
 		else {i++;}
-	}
+	}*/
 }
 
 function SwitchOption(option) {
