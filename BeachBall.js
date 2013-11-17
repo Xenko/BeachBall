@@ -68,6 +68,15 @@ function RedundaKitty() {
 	
 	if (Molpy.redactedVisible > 0) {
 		Molpy.Notify('Redacted Visible: ' + Molpy.redactedVisible, 1);
+		Molpy.Notify('Redacted View Index: ' + Molpy.redactedViewIndex, 1);
+		/*
+		RV of 1 is Sand Tools
+		RV of 2
+		RV of 3 is Boosts Main Page
+		RV of 4 is Boosts Menu, Hill People Tech
+		RV of 5
+		RV of 6 is Badges Available
+		*/
 	
 		//Determines if it is a Logicat. It it is, Logicat = 1, otherwise 0
 		var content = $('#redacteditem').html();
