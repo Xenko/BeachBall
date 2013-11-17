@@ -61,7 +61,7 @@ function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	if (Molpy.redactedVisible > 0) {
-		//Molpy.Notify(Molpy.redactedDrawType,1);
+		Molpy.Notify(Molpy.redactedPuzzleTarget, 1);
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
 			Molpy.ClickRedacted();
@@ -176,9 +176,6 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
 
-Molpy.Notify(RKType,1);
-RKType = g(ongtimer).textContent;
-Molpy.Notify(RKType,1);
 //Main Loop
 setInterval(function() {
 	Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
