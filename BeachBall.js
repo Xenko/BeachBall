@@ -21,7 +21,7 @@ var NinjaAutoClickStatus = 1;
 var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
 var Time_to_ONG = 1800000;
-var RKType = 'blank';
+var RKType = 'abc123';
 
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
@@ -63,7 +63,7 @@ function RedundaKitty() {
 	if (Molpy.redactedVisible > 0) {
 		//Border CSS change works on RK and LC.
 		$('#redacteditem').css("border","2px solid red");
-		var RKType = $('redacteditem').html();
+		RKType = $('redacteditem').html();
 		Molpy.Notify(RKType, 1);
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
