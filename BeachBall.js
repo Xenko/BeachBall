@@ -91,7 +91,7 @@ function RedundaKitty() {
 			RKLocation = 'badgesav';
 		}
 		
-		if (RKLocation != 'null') {
+		if (RKLocation != 'null' && !Molpy.options.showhide[RKLocation]) {
 			showhideToggle(RKLocation);
 		}
 	
@@ -239,11 +239,6 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 function MainLoop() {
 	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
-	Molpy.Notify('Menu Closed: ' + Molpy.options.showhide['badges'],1);
-	showhideToggle('badges');
-	Molpy.Notify('Menu Opened: ' + Molpy.options.showhide['badges'],1);
-	showhideToggle('badges');
-	Molpy.Notify('Menu Closed: ' + Molpy.options.showhide['badges'],1);
 	setInterval(function() {
 		//Molpy.Notify('1 mNP', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
