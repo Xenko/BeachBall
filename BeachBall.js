@@ -85,7 +85,7 @@ function Logicat() {
 	i = 65;
 	while (Molpy.redactedPuzzleTarget != undefined) {
 		LCSolution = String.fromCharCode(i);
-		if (Molpy.redactedPuzzleTarget == Molpy.redactedSGen.StatementValue(LCSolution) {
+		if (Molpy.redactedPuzzleTarget == Molpy.redactedSGen.StatementValue(LCSolution)) {
 			Molpy.ClickRedactedPuzzle(LCSolution);
 			Molpy.redactedPuzzleTarget = undefined;
 		}
