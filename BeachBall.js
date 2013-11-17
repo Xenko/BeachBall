@@ -67,7 +67,7 @@ function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	if (Molpy.redactedVisible > 0) {
-		Molpy.Notify('Redacted Visible: " + Molpy.redactedVisible, 1);
+		Molpy.Notify('Redacted Visible: ' + Molpy.redactedVisible, 1);
 	
 		//Determines if it is a Logicat. It it is, Logicat = 1, otherwise 0
 		var content = $('#redacteditem').html();
