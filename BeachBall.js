@@ -16,11 +16,12 @@ var i = 0;
 var IdleStatus = 0;
 var incoming_ONG = 0;
 var LCAutoClickStatus = 0;
-var LCSolution = "blank";
+var LCSolution = 'blank';
 var NinjaAutoClickStatus = 0;
 var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
 var Time_to_ONG = 1800000;
+var RKType = 'blank';
 
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
@@ -60,6 +61,9 @@ function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	if (Molpy.redactedVisible > 0) {
+		Molpy.Notify(RKType,1);
+		RKType = g(redacteditem).innerHTML;
+		Molpy.Notify(RKType, 1);
 		//Molpy.Notify(Molpy.redactedDrawType,1);
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
