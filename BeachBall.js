@@ -93,16 +93,9 @@ function SwitchOption(option) {
 
 function DisplayDescription(option, status) {
 	if (option == 'RKAutoClick' || option == 'NinjaAutoClick') {
-		switch (status) {
-			case 0:
-				description = 'Off';
-				break;
-			case 1:
-				description = 'On';
-				break;
-			default:
-				Molpy.Notify('Display Description Error',1);
-		}
+		if (status == 0) {description = 'Off';}
+		else if (status == 1) {description = 'On';}
+		else {Molpy.Notify('Display Description Error',1);}
 	}
 	if (option == 'AudioAlerts') {
 		//Molpy.Notify(isNaN(status),1);
