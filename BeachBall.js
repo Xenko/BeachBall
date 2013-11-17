@@ -219,9 +219,11 @@ DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
 DisplayDescription('BorderAlert', BorderAlertStatus);
 DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
-Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
+
 
 function MainLoop() {
+	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
+	
 	setInterval(function() {
 		Molpy.Notify('1 mNP', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
@@ -230,8 +232,8 @@ function MainLoop() {
 	}, 1800);
 }
 
-//Run Main Loop after 5 second startup delay
-setTimeout(MainLoop, 20000);
+//Run Main Loop after 3 second startup delay
+setTimeout(MainLoop, 3000);
 
 
 
