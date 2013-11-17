@@ -119,7 +119,7 @@ function DisplayDescription(option, status) {
 				description = 'RK and ONG';
 				break;
 			default:
-				Molpy.Notify('Display Description Error',1);
+				Molpy.Notify('Display Description Error - Audio Alerts: ' + status,1);
 		}
 	}
 	g(option + 'Desc').innerHTML = '<br>' + description;
