@@ -62,16 +62,16 @@ function RedundaKitty() {
 	
 	if (Molpy.redactedVisible > 0) {
 		Molpy.Notify(RKType,1);
-		RKType = g(RKAutoClickDesc).innerHTML;
+		RKType = g(RKAutoClickDesc).textContent;
 		Molpy.Notify(RKType, 1);
 		//Molpy.Notify(Molpy.redactedDrawType,1);
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
 			Molpy.ClickRedacted();
 		}
-		else if (LCAutoClickStatus == 1 && Molpy.redactedPuzzleTarget != undefined) {
-			Logicat();
-		}
+		//else if (LCAutoClickStatus == 1 && Molpy.redactedPuzzleTarget != undefined) {
+			//Logicat();
+		//}
 		else {
 			//Redundakitty Notifications (Title Bar and Audio)
 			document.title = "! kitten !";
@@ -146,7 +146,6 @@ function DisplayDescription(option, status) {
 		else {Molpy.Notify('Display Description Error',1);}
 	}
 	else if (option == 'AudioAlerts') {
-		//Molpy.Notify(isNaN(status),1);
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'RK Only';}
 		else if (status == 2) {description = 'ONG Only';}
