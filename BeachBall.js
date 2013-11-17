@@ -119,7 +119,7 @@ function DisplayDescription(option, status) {
 if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 
 //Create Menu
-$('#optionsItems').append('<div class="minifloatbox"> <h3>BeachBall Settings</h3>');
+$('#optionsItems').append('<br> <div class="minifloatbox"> <h3>BeachBall Settings</h3>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
