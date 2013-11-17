@@ -102,21 +102,20 @@ function RedundaKitty() {
 		//Determines if it is a Logicat or RK
 		if (RKLocation  != '4') {
 			var content = $('#redacteditem').html();
-		}
-		
-		if (content.indexOf("statement") !== -1) {
-			Logicat = 1;
-			//Molpy.Notify("Logicat Found",0);
-		}
-		else {
-			Logicat = 0;
-			//Molpy.Notify("Redundakitty Found",0);
-			start = content.indexOf("ClickRedacted");
-			content = content.substring(start,start+17);
-			content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-			var length = content.length;
-			RKLevel = content.substring(13,length);
-			Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+			if (content.indexOf("statement") !== -1) {
+				Logicat = 1;
+				//Molpy.Notify("Logicat Found",0);
+			}	
+			else {
+				Logicat = 0;
+				//Molpy.Notify("Redundakitty Found",0);
+				start = content.indexOf("ClickRedacted");
+				content = content.substring(start,start+17);
+				content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
+				var length = content.length;
+				RKLevel = content.substring(13,length);
+				Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+			}
 		}
 		
 		//Highlight Redundakitty Border to make it easier to find
