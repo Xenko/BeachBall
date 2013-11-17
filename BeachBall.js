@@ -2,11 +2,12 @@
 //v2.0 Cleaning up code. Setting up Menu Structure and Initial Settings.
 
 //Declare and Initialize Variables
-var AudioAlertsStatus = 0;
+var AudioAlertsStatus = 3;
 var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
-	audio_Bell.volume=1;
+	audio_Bell.volume = 1;
 var audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
-	audio_Chime.volume=1;
+	audio_Chime.volume = 1;
+var BorderAlertStatus = 1;
 var description = "Error";
 var i = 0;
 var IdleStatus = 0;
@@ -19,30 +20,33 @@ var Time_to_ONG = 1800000;
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
     if (Molpy.ninjad == 0) {
-        if (Molpy.npbONG == 0) {
+        if (Molpy.npbONG == 0 && BorderAlertStatus == 1) {
 			$("#beach").css("border","4px solid red");
         }
         else {
             incoming_ONG = 0;
             if (NinjaAutoClickStatus == 1) {
                 Molpy.ClickBeach();
-                $("#beach").css("border","4px solid white");
-                KeepBlue = 1;
+				if (BorderAlertStatus == 1) {
+					$("#beach").css("border","4px solid white");
+				}
             }
-            else {
+            else if (BorderAlertStatus == 1) {
             $("#beach").css("border","4px solid green");
             }
 
         }
 	}
     else if (Time_to_ONG <= 15000) {
-        $("#beach").css("border","4px solid yellow");
-            if (incoming_ONG == 0 && (AudioAlertsStatus == 3 || AudioAlertsStatus == 4)) {
-                audio_Chime.play();
-                incoming_ONG = 1;
-            }  
+		if (BorderAlertStatus == 1) {
+			$("#beach").css("border","4px solid yellow");
+		}
+        if (incoming_ONG == 0 && (AudioAlertsStatus == 3 || AudioAlertsStatus == 4)) {
+			audio_Chime.play();
+			incoming_ONG = 1;
+        }  
     }
-    else {
+    else if (BorderAlertStatus == 1) {
         $("#beach").css("border","1px solid white");
 	}
 }
@@ -82,6 +86,11 @@ function SwitchOption(option) {
 			if (NinjaAutoClickStatus > 1) {NinjaAutoClickStatus = 0};
 			status = NinjaAutoClickStatus;
 			break;
+		case 'BorderAlert':
+			BorderAlertStatus++;
+			if (BorderAlertStatus > 1) {BorderAlertStatus = 0};
+			status = BorderAlertStatus;
+			break;
 		case 'AudioAlerts':
 			AudioAlertsStatus++;
 			if (AudioAlertsStatus > 3) {AudioAlertsStatus = 0};
@@ -93,7 +102,7 @@ function SwitchOption(option) {
 
 function DisplayDescription(option, status) {
 	error = 0;
-	if (option == 'RKAutoClick' || option == 'NinjaAutoClick') {
+	if (option == 'RKAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
 		else {Molpy.Notify('Display Description Error',1);}
@@ -122,9 +131,11 @@ if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 $('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> </div> <br>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
 DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
+DisplayDescription('BorderAlert', BorderAlertStatus);
 DisplayDescription('AudioAlerts', AudioAlertsStatus);
 	
 //Main Loop
