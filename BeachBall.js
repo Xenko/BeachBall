@@ -62,8 +62,11 @@ function RedundaKitty() {
 	
 	if (Molpy.redactedVisible > 0) {
 		//Border CSS change works on RK and LC.
-		g(redacteditem).css("border","2px solid red");
-		//var content = $('#redacteditem').innerHTML;
+		$('#redacteditem').css("border","2px solid red");
+		var content = $('#redacteditem').html();
+		if (content.indexOf("statement") !== -1) {
+			Molpy.Notify("Redundakitty Found",0);
+		}
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
 			Molpy.ClickRedacted();
