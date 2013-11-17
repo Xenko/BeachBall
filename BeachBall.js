@@ -84,7 +84,7 @@ function SwitchOption(option) {
 			break;
 		case 'AudioAlerts':
 			AudioAlertsStatus++;
-			if (AudioAlertsStatus > 4) {AudioAlertsStatus = 0};
+			if (AudioAlertsStatus > 3) {AudioAlertsStatus = 0};
 			status = AudioAlertsStatus;
 			break;
 	}
@@ -105,6 +105,7 @@ function DisplayDescription(option, status) {
 		}
 	}
 	if (option == 'AudioAlerts') {
+		Molpy.Notify(isNaN(status),1);
 		switch (status) {
 			case '0':
 				description = 'Off';
@@ -112,10 +113,10 @@ function DisplayDescription(option, status) {
 			case '1':
 				description = 'RK Only';
 				break;
-			case '3':
+			case '2':
 				description = 'ONG Only';
 				break;
-			case '4':
+			case '3':
 				description = 'RK and ONG';
 				break;
 			default:
@@ -136,9 +137,9 @@ if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>RK Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertDesc"></div></div>');
-DisplayDescription('RKAutoClick',RKAutoClickStatus);
-DisplayDescription('NinjaAutoClick',NinjaAutoClickStatus);
-DisplayDescription('AudioAlerts',AudioAlertsStatus);
+DisplayDescription('RKAutoClick', RKAutoClickStatus);
+DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
+DisplayDescription('AudioAlerts', AudioAlertsStatus);
 	
 //Main Loop
 setInterval(function() {
