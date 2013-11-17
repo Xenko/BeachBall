@@ -82,7 +82,10 @@ function RedundaKitty() {
 			//Do Nothing
 		}
 		else if (Molpy.redactedVisible == 5) {
-			//showhideToggle('badges');
+			showhideToggle('badges');
+		}
+		else if (Molpy.redactedVisible == 6) {
+			//showhideToggle('');
 		}
 	
 		//Determines if it is a Logicat. It it is, Logicat = 1, otherwise 0
@@ -223,7 +226,6 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 function MainLoop() {
 	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
-	showhideToggle('badges');
 	setInterval(function() {
 		//Molpy.Notify('1 mNP', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
