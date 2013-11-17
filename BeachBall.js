@@ -26,7 +26,7 @@ var Time_to_ONG = 1800000;
 var start = -1;
 var content = "empty";
 var length = 0;
-var RKType = 'abc123';
+var RKLevel = 'abc123';
 
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
@@ -67,6 +67,7 @@ function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	if (Molpy.redactedVisible > 0) {
+		Molpy.Notify('Redacted Visible: " + Molpy.redactedVisible, 1);
 	
 		//Determines if it is a Logicat. It it is, Logicat = 1, otherwise 0
 		var content = $('#redacteditem').html();
@@ -81,8 +82,8 @@ function RedundaKitty() {
 			content = content.substring(start,start+17);
 			content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 			var length = content.length;
-			content = content.substring(13,length);
-			Molpy.Notify('RedundaKitty Level is: ' + content,0);
+			RKLevel = content.substring(13,length);
+			Molpy.Notify('RedundaKitty Level is: ' + RKLevel,0);
 		}
 		
 		//Highlight Redundakitty Border to make it easier to find
@@ -90,7 +91,7 @@ function RedundaKitty() {
 
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Logicat == 0) {
-			Molpy.ClickRedacted();
+			Molpy.ClickRedacted(RKLevel);
 			//$(":button").click();
 		}
 		else if (LCAutoClickStatus == 1 && Logicat == 1) {
