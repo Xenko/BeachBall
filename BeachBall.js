@@ -38,6 +38,7 @@ function Ninja() {
             incoming_ONG = 0;
             if (NinjaAutoClickStatus == 1) {
                 Molpy.ClickBeach();
+				Molpy.Notify('Ninja Auto Click', 1);
 				if (BorderAlertStatus == 1) {
 					$("#beach").css("border","1px solid white");
 				}
@@ -230,7 +231,7 @@ function MainLoop() {
 }
 
 //Run Main Loop after 5 second startup delay
-setTimeout(MainLoop(), 5000);
+setTimeout(MainLoop(), 20000);
 
 
 
