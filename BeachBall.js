@@ -62,7 +62,7 @@ function RedundaKitty() {
 	
 	if (Molpy.redactedVisible > 0) {
 		Molpy.Notify(RKType,1);
-		RKType = g(redacteditem).innerHTML;
+		RKType = g(RKAutoClickDesc).innerHTML;
 		Molpy.Notify(RKType, 1);
 		//Molpy.Notify(Molpy.redactedDrawType,1);
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
