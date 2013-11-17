@@ -84,6 +84,10 @@ function RedundaKitty() {
 		if (Molpy.redactedVisible == 1 || Molpy.redactedVisible == 2 || Molpy.redactedVisible == 3) {
 			//Do Nothing
 		}
+		else if (Molpy.redactedVisible == 4) {
+			RKLocation = 'null';
+			Molpy.Notify('Unknown Location', 0);
+		}
 		else if (Molpy.redactedVisible == 5) {
 			RKLocation = 'badges';
 		}
@@ -96,7 +100,10 @@ function RedundaKitty() {
 		}
 	
 		//Determines if it is a Logicat or RK
-		var content = $('#redacteditem').html();
+		if (RKLocation  != 'null') {
+			var content = $('#redacteditem').html();
+		}
+		
 		if (content.indexOf("statement") !== -1) {
 			Logicat = 1;
 			//Molpy.Notify("Logicat Found",0);
