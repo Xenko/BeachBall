@@ -68,7 +68,6 @@ function RedundaKitty() {
 	
 	if (Molpy.redactedVisible > 0) {
 		Molpy.Notify('Redacted Visible: ' + Molpy.redactedVisible, 1);
-		Molpy.Notify('Redacted View Index: ' + Molpy.redactedViewIndex, 1);
 		/*
 		RV of 1 is Sand Tools
 		RV of 2 is Castle Tools
