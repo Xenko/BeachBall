@@ -78,22 +78,25 @@ function SwitchOption(option) {
 	switch (option) {
 		case 'RKAutoClick':
 			RKAutoClickStatus++;
-			if (RKAutoClickStatus > 1) {RKAutoClickStatus = 0};
+			if (RKAutoClickStatus > 1) {RKAutoClickStatus = 0;}
 			status = RKAutoClickStatus;
 			break;
 		case 'NinjaAutoClick':
 			NinjaAutoClickStatus++;
-			if (NinjaAutoClickStatus > 1) {NinjaAutoClickStatus = 0};
+			if (NinjaAutoClickStatus > 1) {NinjaAutoClickStatus = 0;}
 			status = NinjaAutoClickStatus;
 			break;
 		case 'BorderAlert':
 			BorderAlertStatus++;
-			if (BorderAlertStatus > 1) {BorderAlertStatus = 0};
+			if (BorderAlertStatus > 1) {
+				BorderAlertStatus = 0;
+				$("#beach").css("border","4px solid white");
+			}
 			status = BorderAlertStatus;
 			break;
 		case 'AudioAlerts':
 			AudioAlertsStatus++;
-			if (AudioAlertsStatus > 3) {AudioAlertsStatus = 0};
+			if (AudioAlertsStatus > 3) {AudioAlertsStatus = 0;}
 			status = AudioAlertsStatus;
 			break;
 	}
