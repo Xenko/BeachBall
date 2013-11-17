@@ -61,6 +61,7 @@ function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	if (Molpy.redactedVisible > 0) {
+		//Useless Change
 		$('#redacteditem').css("border","2px solid red");
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
