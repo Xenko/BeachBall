@@ -26,7 +26,8 @@ var Time_to_ONG = 1800000;
 var start = -1;
 var content = "empty";
 var length = 0;
-var RKLevel = 'abc123';
+var RKLevel = '-1';
+var RKLocation = 'null';
 
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
@@ -67,36 +68,42 @@ function RedundaKitty() {
 	//Refresh Timer Variable
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
+	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
-		Molpy.Notify('Redacted Visible: ' + Molpy.redactedVisible, 1);
+		//Molpy.Notify('Redacted Visible: ' + Molpy.redactedVisible, 1);
 		/*
 		RV of 1 is Sand Tools
 		RV of 2 is Castle Tools
 		RV of 3 is Boosts Main Page
-		RV of 4 is Boosts Menu, Hill People Tech
-		RV of 5 is Badges Earned?
-		RV of 6 is Badges Available?
+		RV of 4 is Boosts Menus, Hill People Tech, etc.
+		RV of 5 is Badges Earned
+		RV of 6 is Badges Available
 		*/
 		
+		//Determines RK location
 		if (Molpy.redactedVisible == 1 || Molpy.redactedVisible == 2 || Molpy.redactedVisible == 3) {
 			//Do Nothing
 		}
 		else if (Molpy.redactedVisible == 5) {
-			showhideToggle('badges');
+			RKLocation = 'badges';
 		}
 		else if (Molpy.redactedVisible == 6) {
-			//showhideToggle('');
+			RKLocation = 'badgesav';
+		}
+		
+		if (RKLocation != 'null') {
+			showhideToggle(RKLocation);
 		}
 	
-		//Determines if it is a Logicat. It it is, Logicat = 1, otherwise 0
+		//Determines if it is a Logicat or RK
 		var content = $('#redacteditem').html();
 		if (content.indexOf("statement") !== -1) {
 			Logicat = 1;
-			Molpy.Notify("Logicat Found",0);
+			//Molpy.Notify("Logicat Found",0);
 		}
 		else {
 			Logicat = 0;
-			Molpy.Notify("Redundakitty Found",0);
+			//Molpy.Notify("Redundakitty Found",0);
 			start = content.indexOf("ClickRedacted");
 			content = content.substring(start,start+17);
 			content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
@@ -111,10 +118,17 @@ function RedundaKitty() {
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Logicat == 0) {
 			Molpy.ClickRedacted(RKLevel);
-			//$(":button").click();
+			if (RKLocation != 'null') {
+				showhideToggle(RKLocation);
+				RKLocation = 'null';
+			}
 		}
 		else if (LCAutoClickStatus == 1 && Logicat == 1) {
 			Logicat();
+			if (RKLocation != 'null') {
+				showhideToggle(RKLocation);
+				RKLocation = 'null';
+			}
 		}
 		else {
 			//Redundakitty Notifications (Title Bar and Audio)
@@ -137,7 +151,6 @@ function Logicat() {
 		i++;}
 	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
 	Molpy.ClickRedactedPuzzle(LCSolution);
-	Molpy.redactedPuzzleTarget = undefined;
 	
 	/*while (Molpy.redactedPuzzleTarget != undefined) {
 		LCSolution = String.fromCharCode(i);
@@ -226,6 +239,7 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 function MainLoop() {
 	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
+	Molpy.Notify(Molpy.options.showhide[badges],1);
 	setInterval(function() {
 		//Molpy.Notify('1 mNP', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
