@@ -94,29 +94,29 @@ function SwitchOption(option) {
 function DisplayDescription(option, status) {
 	if (option == 'RKAutoClick' || option == 'NinjaAutoClick') {
 		switch (status) {
-			case '1':
-				description = 'On';
-				break;
-			case '0':
+			case 0:
 				description = 'Off';
+				break;
+			case 1:
+				description = 'On';
 				break;
 			default:
 				Molpy.Notify('Display Description Error',1);
 		}
 	}
 	if (option == 'AudioAlerts') {
-		Molpy.Notify(isNaN(status),1);
+		//Molpy.Notify(isNaN(status),1);
 		switch (status) {
-			case '0':
+			case 0:
 				description = 'Off';
 				break;
-			case '1':
+			case 1:
 				description = 'RK Only';
 				break;
-			case '2':
+			case 2:
 				description = 'ONG Only';
 				break;
-			case '3':
+			case 3:
 				description = 'RK and ONG';
 				break;
 			default:
@@ -128,9 +128,6 @@ function DisplayDescription(option, status) {
 
 //Beach Ball Startup
 //Set Settings
-IdleStatus = prompt("Set to idle? (1 = Yes, 0 = No)");
-RKAutoClickStatus = IdleStatus;
-NinjaAutoClickStatus = IdleStatus;
 if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 
 //Create Menu
