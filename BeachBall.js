@@ -15,6 +15,7 @@ var description = "Error";
 var i = 0;
 var IdleStatus = 0;
 var incoming_ONG = 0;
+var Logicat = 0;
 var LCAutoClickStatus = 0;
 var LCSolution = 'blank';
 var NinjaAutoClickStatus = 1;
@@ -58,23 +59,33 @@ function Ninja() {
 }
 
 function RedundaKitty() {
+	//Refresh Timer Variable
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	if (Molpy.redactedVisible > 0) {
-		//Border CSS change works on RK and LC.
-		$('#redacteditem').css("border","2px solid red");
+	
+		//Determines if it is a Logicat. It it is, Logicat = 1, otherwise 0
 		var content = $('#redacteditem').html();
 		if (content.indexOf("statement") !== -1) {
+			Logicat = 1;
+			Molpy.Notify("Logicat Found",0);
+		}
+		else {
+			Logicat = 0;
 			Molpy.Notify("Redundakitty Found",0);
 		}
+		
+		//Highlight Redundakitty Border to make it easier to find
+		$('#redacteditem').css("border","2px solid red");
+
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
-		if (RKAutoClickStatus == 1 && Molpy.redactedPuzzleTarget == undefined) {
+		if (RKAutoClickStatus == 1 && Logicat == 0) {
 			Molpy.ClickRedacted();
 			//$(":button").click();
 		}
-		//else if (LCAutoClickStatus == 1 && Molpy.redactedPuzzleTarget != undefined) {
-			//Logicat();
-		//}
+		else if (LCAutoClickStatus == 1 && Logicat == 1) {
+			Logicat();
+		}
 		else {
 			//Redundakitty Notifications (Title Bar and Audio)
 			document.title = "! kitten !";
