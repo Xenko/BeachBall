@@ -177,9 +177,8 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
 
 Molpy.Notify(RKType,1);
-element = g(RKAutoClickDesc);
-Molpy.Notify(element,1);
-Molpy.Notify(RKType, 1);
+var xenko = g(RKAutoClickDesc);
+Molpy.Notify(xenko.textContent,1);
 //Main Loop
 setInterval(function() {
 	Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
