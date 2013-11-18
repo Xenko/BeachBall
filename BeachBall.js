@@ -104,8 +104,8 @@ function RedundaKitty() {
 					else {
 						showhideToggle(lootBoxes[i]);
 					}
-				i++;
 				}
+				i++;
 			}
 		}
 		else if (Molpy.redactedVisible == 5) {
