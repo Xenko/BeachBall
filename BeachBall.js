@@ -207,21 +207,9 @@ function SolveLogicat() {
 	var i = 65;
 	do 
 		{LCSolution = String.fromCharCode(i);
-		i++;
-		Molpy.Notify('Target: ' + Molpy.redactedPuzzleTarget, 1);
-		Molpy.Notify('Found: ' + Molpy.redactedSGen.StatementValue(LCSolution), 1);
-		}
+		i++;}
 	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
 	Molpy.ClickRedactedPuzzle(LCSolution);
-	
-	/*while (Molpy.redactedPuzzleTarget != undefined) {
-		LCSolution = String.fromCharCode(i);
-		if (Molpy.redactedPuzzleTarget == Molpy.redactedSGen.StatementValue(LCSolution)) {
-			Molpy.ClickRedactedPuzzle(LCSolution);
-			Molpy.redactedPuzzleTarget = undefined;
-		}
-		else {i++;}
-	}*/
 }
 
 function SwitchOption(option) {
@@ -314,7 +302,7 @@ function MainLoop() {
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 		RedundaKitty();
 		Ninja();
-	}, 1800);
+	}, 500);
 }
 
 //Run Main Loop after 1 second startup delay
