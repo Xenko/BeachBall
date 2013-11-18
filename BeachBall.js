@@ -98,8 +98,7 @@ function FindRK() {
 					if ($('#redacteditem').length) {
 						findLocation = lootBoxes[i];
 					}
-				}, 3000);
-				//useless change
+				}, 200);
 				/*else {
 					showhideToggle(lootBoxes[i]);
 				}*/
