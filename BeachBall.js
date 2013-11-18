@@ -244,7 +244,13 @@ function SwitchOption(option) {
 			status = AudioAlertsStatus;
 			break;
 		case 'RefreshRate':
-			refreshRate = parseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', 1000));
+			newRate = parseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', refreshRate));
+			if (newRate < 500 || newRate > 3600 || isNaN(newRate)){
+				alert('Invalid Refresh Rate');
+			}
+			else {
+				refreshRate = newRate;
+			}
 			break;
 	}
 	DisplayDescription(option, status);
