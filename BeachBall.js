@@ -113,14 +113,14 @@ function FindRK() {
 	}
 	
 	//Opens RK location
-	if (findLocation != '123') {
-		ToggleMenus(findLocation);
-	}
+	ToggleMenus(findLocation);
 	
 	//Resets old RK variables
 	oldRKLocation = Molpy.redactedVisible;
 	oldRC = Molpy.redactedClicks;
 	oldLC = Molpy.Boosts['Logicat'].power;
+	
+	//Returns Location
 	return findLocation;
 }
 
@@ -134,7 +134,10 @@ function RedundaKitty() {
 	
 		//If RK is new, find it.
 		if (RKNew == 1 || Molpy.redactedVisible != oldRKLocation || Molpy.redactedClicks > oldRC || Molpy.Boosts['Logicat'].power != oldLC) {
-			RKLocation = FindRK();
+			//Finds RK if BeachBall option enabled
+			if (RKAutoClickStatus > 0) {	
+				RKLocation = FindRK();
+			}
 			RKNewAudio = 1;
 			RKNew = 0;
 		}
@@ -167,7 +170,7 @@ function RedundaKitty() {
 		}
 
 		//Clicks RK if AutoClick Enabled
-		if (RKAutoClickStatus == 1 && Logicat == 0 ) {
+		if (RKAutoClickStatus == 2 && Logicat == 0 ) {
 			Molpy.ClickRedacted(RKLevel);
 			RKNew = 1;
 			ToggleMenus('none');
@@ -221,7 +224,7 @@ function SwitchOption(option) {
 	switch (option) {
 		case 'RKAutoClick':
 			RKAutoClickStatus++;
-			if (RKAutoClickStatus > 1) {RKAutoClickStatus = 0;}
+			if (RKAutoClickStatus > 2) {RKAutoClickStatus = 0;}
 			status = RKAutoClickStatus;
 			break;
 		case 'LCAutoClick':
@@ -253,18 +256,23 @@ function SwitchOption(option) {
 
 function DisplayDescription(option, status) {
 	error = 0;
-	if (option == 'RKAutoClick' || option == 'LCAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
+	if (option == 'LCAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
-		else {Molpy.Notify('Display Description Error',1);}
+		else {Molpy.Notify('Display Description Error', 1);}
 	}
 	else if (option == 'AudioAlerts') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'RK Only';}
 		else if (status == 2) {description = 'ONG Only';}
 		else if (status == 3) {description = 'RK and ONG';}
-		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status,1);}
+		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
+	else if (option == 'RKAutoClick') {
+		if (status == 0) {description = 'Off';}
+		else if (status == 1) {description = 'Find RK Only';}
+		else if (status == 2) {description = 'On';}
+		else {Molpy.Notify('Display Description Error - RKAutoClick: ' + status, 1);}
 	else {
 		Molpy.Notify(option + ' is not a valid option', 1);
 		error = 1;
