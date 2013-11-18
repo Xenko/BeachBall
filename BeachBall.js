@@ -256,6 +256,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
 DisplayDescription('LCAutoClick', LCAutoClickStatus);
 DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
@@ -266,7 +267,6 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 function MainLoop() {
 	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
-	Molpy.Notify('Boosts: ' + Molpy.BoostsOwned, 1);
 	setInterval(function() {
 		//Molpy.Notify('1 mNP', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
@@ -278,5 +278,7 @@ function MainLoop() {
 //Run Main Loop after 3 second startup delay
 setTimeout(MainLoop, 3000);
 
-
+function SpawnRK() {
+	Molpy.redactedCountup = Molpy.redactedToggle - 5;
+}
 
