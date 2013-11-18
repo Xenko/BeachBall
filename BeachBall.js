@@ -99,6 +99,7 @@ function FindRK() {
 						findLocation = lootBoxes[i];
 					}
 				}, 3000);
+				//useless change
 				/*else {
 					showhideToggle(lootBoxes[i]);
 				}*/
