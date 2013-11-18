@@ -77,7 +77,6 @@ function Ninja() {
 function ToggleMenus(wantOpen) {
 	for (i=0, len = lootBoxes.length; i < len; i++) {
 		if (lootBoxes[i] == wantOpen) {
-			Molpy.Notify(Molpy.options.showhide[lootBoxes[i]], 1);
 			if (Molpy.options.showhide[lootBoxes[i]] != 1) {
 				showhideToggle(lootBoxes[i]);
 			}
