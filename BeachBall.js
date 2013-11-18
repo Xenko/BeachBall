@@ -313,7 +313,7 @@ function MainProgram() {
 	Loop();
 }
 
-funtion Loop() {
+function Loop() {
 	setTimeout(MainProgram, refreshRate);
 }
 	
