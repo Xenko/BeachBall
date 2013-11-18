@@ -101,6 +101,7 @@ function FindRK() {
 	
 	//Determines RK location
 	RKLocation = '123';
+	Molpy.Notify('RK Group: ' + Molpy.redactedGr, 1);
 	if (Molpy.redactedVisible > 3) {
 		RKLocation = Molpy.redactedGr;
 	}
