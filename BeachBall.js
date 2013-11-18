@@ -1,7 +1,7 @@
 //v1.0 as Starting Point
-//v2.0 Cleaning up code. Setting up Menu Structure and Initial Settings.
+//v2.0 Cleaning up code. Setting up Menu Structure and Initial Settings and functions.
 
-var version = '2.0 Beta';
+var version = '2.0';
 var SCBversion = '3.03'; //Last SandCastle Builder version tested
 
 //Declare and Initialize Variables
@@ -39,7 +39,7 @@ var RKNew = 1;
 var RKNewAudio = 1;
 var RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
-//Ninja AutoClicker and Border Warnings
+
 function Ninja() {
     if (Molpy.ninjad == 0) {
         if (Molpy.npbONG == 0 && BorderAlertStatus == 1) {
@@ -51,11 +51,11 @@ function Ninja() {
                 Molpy.ClickBeach();
 				Molpy.Notify('Ninja Auto Click', 1);
 				if (BorderAlertStatus == 1) {
-					$("#beach").css("border","1px solid white");
+					$("#beach").css("border","1px solid green");
 				}
             }
             else if (BorderAlertStatus == 1) {
-            $("#beach").css("border","4px solid green");
+            $("#beach").css("border","4px solid blue");
             }
 
         }
@@ -70,7 +70,7 @@ function Ninja() {
         }  
     }
     else if (BorderAlertStatus == 1) {
-        $("#beach").css("border","1px solid white");
+        $("#beach").css("border","1px solid green");
 	}
 }
 
@@ -145,7 +145,6 @@ function RedundaKitty() {
 			content = $('#redacteditem').html();
 			//If RK contains word statement, it is a LC.
 			if (content.indexOf("statement") !== -1) {
-				//Molpy.Notify('Logicat Found', 1);
 				Logicat = 1;
 			}
 			//Otherwise it is an RK
@@ -156,9 +155,9 @@ function RedundaKitty() {
 				content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 				len = content.length;
 				RKLevel = content.substring(13,len);
-				if (RKLevel != 0) {
+				/*if (RKLevel != 0) {
 					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
-				}
+				}*/
 			}
 		}
 		//If RK not visible, LC to 99.
@@ -282,7 +281,7 @@ function DisplayDescription(option, status) {
 		description = refreshRate;
 	}
 	else {
-		Molpy.Notify(option + ' is not a valid option', 1);
+		Molpy.Notify(option + ' is not a valid option.', 1);
 		error = 1;
 	}
 		
@@ -294,14 +293,14 @@ function DisplayDescription(option, status) {
 if (Molpy.Got('Kitnip') == 1){RKAlertFrequency = 10;}
 
 //Create Menu
-$('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> </div> <br>');
+$('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v.' + version + '</div> <br>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'LCAutoClick\')"> <h4>Logicat Auto Click</h4> </a> <div id="LCAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick=""> <h4>Blank</h4> </a></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
 DisplayDescription('LCAutoClick', LCAutoClickStatus);
@@ -324,7 +323,7 @@ function Loop() {
 	setTimeout(MainProgram, refreshRate);
 }
 
-function SpawnRK() {
+/*function SpawnRK() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
-}
+}*/
 
