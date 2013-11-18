@@ -124,19 +124,28 @@ function RedundaKitty() {
 			RKNew = 0;
 		}
 		
-		//Determines if it is an RK or LC
-		content = $('#redacteditem').html();
-		if (content.indexOf("statement") !== -1) {
-			Logicat = 1;
-		}	
+		//Determines if it is an RK or LC, and also highlights it
+		if ($('#redacteditem').length) {
+			$('#redacteditem').css("border","2px solid red");
+			content = $('#redacteditem').html();
+			if (content.indexOf("statement") !== -1) {
+				Logicat = 1;
+			}	
+			else {
+				Logicat = 0;
+				start = content.indexOf("ClickRedacted");
+				content = content.substring(start,start+17);
+				content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
+				len = content.length;
+				RKLevel = content.substring(13,len);
+				if (RKLevel != 1) {
+					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+				}
+			}
+		}
 		else {
-			Logicat = 0;
-			start = content.indexOf("ClickRedacted");
-			content = content.substring(start,start+17);
-			content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-			len = content.length;
-			RKLevel = content.substring(13,len);
-			Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+			Molpy.Notify('RedundaKitty/Logicat Not Found', 1);
+			Logicat = 99;
 		}
 			
 		//Clicks RK if AutoClick Enabled
@@ -157,9 +166,8 @@ function RedundaKitty() {
 				RKLocation = '123';
 			}
 		}
-		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio, Highlight)
-		else {
-			$('#redacteditem').css("border","2px solid red");	
+		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio)
+		else {	
 			document.title = "! kitten !";
 			if (Math.floor(RKTimer % RKAlertFrequency) == 0 && (AudioAlertsStatus == 1 || AudioAlertsStatus == 3)) {
 				audio_Bell.play();
