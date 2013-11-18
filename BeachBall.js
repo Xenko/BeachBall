@@ -100,30 +100,19 @@ function FindRK() {
 	RV of 6 is Badges Available
 	*/
 	
-	//Determines RK location, does nothing for locations 1, 2 or 3
-	//Molpy.Notify('FindRK Run', 1);
-	findLocation = '123';
-	Molpy.Notify(Molpy.redactedGr, 1);
-	if (Molpy.redactedVisible == 4) {
-		findLocation = Molpy.redactedGr;
-	}
-	else if (Molpy.redactedVisible == 5) {
-		findLocation = 'badges';
-	}
-	else if (Molpy.redactedVisible == 6) {
-		findLocation = 'badgesav';
+	//Determines RK location
+	RKLocation = '123';
+	if (Molpy.redactedVisible > 3) {
+		RKLocation = Molpy.redactedGr;
 	}
 	
 	//Opens RK location
-	ToggleMenus(findLocation);
+	ToggleMenus(RKLocation);
 	
 	//Resets old RK variables
 	oldRKLocation = Molpy.redactedVisible;
 	oldRC = Molpy.redactedClicks;
 	oldLC = Molpy.Boosts['Logicat'].power;
-	
-	//Returns Location
-	return findLocation;
 }
 
 function RedundaKitty() {
@@ -138,7 +127,7 @@ function RedundaKitty() {
 		if (RKNew == 1 || Molpy.redactedVisible != oldRKLocation || Molpy.redactedClicks > oldRC || Molpy.Boosts['Logicat'].power != oldLC) {
 			//Finds RK if BeachBall option enabled
 			if (RKAutoClickStatus > 0) {	
-				RKLocation = FindRK();
+				FindRK();
 			}
 			RKNewAudio = 1;
 			RKNew = 0;
