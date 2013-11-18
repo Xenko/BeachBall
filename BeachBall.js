@@ -87,18 +87,18 @@ function FindRK() {
 	*/
 	
 	//Determines RK location, does nothing for locations 1, 2 or 3
-	Molpy.Notify('FindRK Running', 1);
+	Molpy.Notify('FindRK Run', 1);
 	findLocation = 'null';
 	if (Molpy.redactedVisible == 4) {
-		/*i = 0;
-		do {
-			if (Molpy.redactedGr = lootBoxes[i]) {
-				findLocation = lootBoxes[i];
-			}
-			Molpy.Notify(lootBoxes[i], 1);
-		}
-		while (findLocation = 'null' || i < 6);*/
-	//Useless Change
+		i = 0;
+		Molpy.Notify(Molpy.redactedGr, 1);
+		//do {
+		//	if (Molpy.redactedGr = lootBoxes[i]) {
+		//		findLocation = lootBoxes[i];
+		//	}
+		//	Molpy.Notify(lootBoxes[i], 1);
+		//}
+		//while (findLocation = 'null' || i < 6);*/
 	}
 	else if (Molpy.redactedVisible == 5) {
 		findLocation = 'badges';
