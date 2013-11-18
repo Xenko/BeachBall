@@ -26,7 +26,6 @@ var RKPlayAudio = 1;
 //RK Variables
 var start = -1;
 var content = "empty";
-var findLocation = '123';
 var LCAutoClickStatus = 0;
 var LCSolution = 'blank';
 var len = 0;
@@ -115,22 +114,25 @@ function FindRK() {
 	oldLC = Molpy.Boosts['Logicat'].power;
 }
 
+function ManualRKClick() {
+
+}
+
 function RedundaKitty() {
 	//Refresh Timer Variable
 	RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
-	RKLocation = '123';
 	
 	//If a RedundaKitty is active
 	if (Molpy.redactedVisible > 0) {
 	
-		//If RK is new, find it.
+		//Checks if RK is new
 		if (RKNew == 1 || Molpy.redactedVisible != oldRKLocation || Molpy.redactedClicks > oldRC || Molpy.Boosts['Logicat'].power != oldLC) {
-			//Finds RK if BeachBall option enabled
+			RKNewAudio = 1;
+			RKNew = 0;
+			//Finds RK if appropriate BeachBall option enabled
 			if (RKAutoClickStatus > 0) {	
 				FindRK();
 			}
-			RKNewAudio = 1;
-			RKNew = 0;
 		}
 		
 		//Determines if it is an RK or LC
@@ -140,6 +142,7 @@ function RedundaKitty() {
 			content = $('#redacteditem').html();
 			//If RK contains word statement, it is a LC.
 			if (content.indexOf("statement") !== -1) {
+				Moply.Notify('Logicat Found', 1);
 				Logicat = 1;
 			}
 			//Otherwise it is an RK
@@ -164,15 +167,15 @@ function RedundaKitty() {
 		if (RKAutoClickStatus == 2 && Logicat == 0 ) {
 			Molpy.ClickRedacted(RKLevel);
 			RKNew = 1;
-			ToggleMenus('none');
 			RKLocation = '123';
+			ToggleMenus('123');
 		}
-		//Solves LC if AutoClick Enabled
-		else if (LCAutoClickStatus == 1 && Logicat == 1) {
+		//Solves LC if it is visible and AutoClick enabled
+		else if (Logicat == 1 && $('#redacteditem').length && LCAutoClickStatus == 1) {
 			Logicat();
 			RKNew = 1;
-			ToggleMenus('none');
 			RKLocation = '123';
+			ToggleMenus('123');
 		}
 
 		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio)
