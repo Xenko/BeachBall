@@ -27,6 +27,7 @@ var start = -1;
 var content = "empty";
 var length = 0;
 var RKLevel = '-1';
+var findLocation = 'null';
 var RKLocation = 'null';
 var lootBoxes = new Array();
 	lootBoxes[0] = 'boosts';
@@ -82,15 +83,15 @@ function FindRK() {
 	*/
 	
 	//Determines RK location, do nothing for locations 1, 2 or 3
-	location = 'null';
+	findLocation = 'null';
 	if (Molpy.redactedVisible == 4) {
 		i = 0;
-		while (location = 'null' || i < 6) {
+		while (findLocation = 'null' || i < 6) {
 			Molpy.Notify(lootBoxes[i], 1)
 			if ($('#' + lootboxes[i]).length) {
 				showhideToggle(lootBoxes[i]);
 				if ($('#redacteditem').length) {
-					location = lootBoxes[i];
+					findLocation = lootBoxes[i];
 				}
 				else {
 					showhideToggle(lootBoxes[i]);
@@ -101,12 +102,12 @@ function FindRK() {
 		}
 	}
 	else if (Molpy.redactedVisible == 5) {
-		location = 'badges';
+		findLocation = 'badges';
 	}
 	else if (Molpy.redactedVisible == 6) {
-		location = 'badgesav';
+		findLocation = 'badgesav';
 	}
-	return location;
+	return findLocation;
 }
 
 function RedundaKitty() {
@@ -116,7 +117,7 @@ function RedundaKitty() {
 	
 	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
-		//RKLocation = FindRK();
+		RKLocation = FindRK();
 		
 		if (RKLocation != 'null' && !Molpy.options.showhide[RKLocation]) {
 			showhideToggle(RKLocation);
