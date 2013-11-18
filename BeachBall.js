@@ -246,7 +246,7 @@ function SwitchOption(option) {
 		case 'RefreshRate':
 			newRate = parseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', refreshRate));
 			if (newRate < 500 || newRate > 3600 || isNaN(newRate)){
-				alert('Invalid Refresh Rate');
+				Molpy.Notify('Invalid Refresh Rate', 1);
 			}
 			else {
 				refreshRate = newRate;
