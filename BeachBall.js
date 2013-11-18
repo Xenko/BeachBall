@@ -125,6 +125,7 @@ function RedundaKitty() {
 		}
 		
 		//Determines if it is an RK or LC, and also highlights it
+		Molpy.Notify($('#redacteditem').length, 1);
 		if ($('#redacteditem').length) {
 			$('#redacteditem').css("border","2px solid red");
 			content = $('#redacteditem').html();
