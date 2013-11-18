@@ -128,7 +128,7 @@ function RedundaKitty() {
 	
 		//If RK is new, find it.
 		if (RKNew == 1 || Molpy.redactedVisible != oldRKLocation || Molpy.redactedClicks > oldRC || Molpy.Boosts['Logicat'].power != oldLC) {
-			RKLocation = FindRK();
+			//RKLocation = FindRK();
 			RKNewAudio = 1;
 			RKNew = 0;
 		}
@@ -280,8 +280,6 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 function MainLoop() {
 	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
-	Molpy.Notify('RC: ' + Molpy.redactedClicks, 1);
-	Molpy.Notify('LC: ' + Molpy.Boosts['Logicat'].power, 1);
 	setInterval(function() {
 		//Molpy.Notify('1 mNP', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
