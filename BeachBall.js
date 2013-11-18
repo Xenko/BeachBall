@@ -312,7 +312,6 @@ Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder ve
 Loop();
 
 function MainProgram() {
-	Molpy.Notify('1 Refresh', 0);
 	Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 	RedundaKitty();
 	Ninja();
@@ -322,10 +321,6 @@ function MainProgram() {
 function Loop() {
 	setTimeout(MainProgram, refreshRate);
 }
-	
-
-//Run Main Loop after 1 second startup delay
-//setTimeout(MainLoop, 1000);
 
 function SpawnRK() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
