@@ -98,6 +98,7 @@ function FindRK() {
 			Molpy.Notify(lootBoxes[i], 1);
 		}
 		while (findLocation = 'null' || i < 6);*/
+	//Useless Change
 	}
 	else if (Molpy.redactedVisible == 5) {
 		findLocation = 'badges';
