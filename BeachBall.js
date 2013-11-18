@@ -8,6 +8,7 @@ var SCBversion = '3.021'; //Last SandCastle Builder version tested
 var incoming_ONG = 0;
 var NinjaAutoClickStatus = 1;
 var Time_to_ONG = 1800000;
+var lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'badgesav'];
 
 //BB Options Variables
 var AudioAlertsStatus = 3;
@@ -29,7 +30,6 @@ var LCAutoClickStatus = 0;
 var LCSolution = 'blank';
 var len = 0;
 var Logicat = 0;
-//var lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron'];
 var oldRKLocation = -1;
 var oldRC = Molpy.redactedClicks - 1;
 var oldLC = Molpy.Boosts['Logicat'].power - 1;
@@ -74,6 +74,21 @@ function Ninja() {
 	}
 }
 
+function ToggleMenus(wantOpen) {
+	for (i=0, len = lootBoxes.length; i < len; i++) {
+		if (lootBoxes[i] == wantOpen) {
+			if (!Molpy.options.showhide(lootBoxes[i])) {
+				showhideToggle(lootBoxes[i]);
+			}
+		}
+		else {
+			if (Molpy.options.showhide(lootBoxes[i]){
+				showhideToggle(lootBoxes[i]);
+			}
+		}
+	}
+}
+	
 function FindRK() {
 	/*
 	RV of 1 is Sand Tools
@@ -270,6 +285,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="ToggleMenus(\'boosts\')"> <h4>Spawn RK</h4> </a></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
 DisplayDescription('LCAutoClick', LCAutoClickStatus);
 DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
