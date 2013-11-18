@@ -115,35 +115,31 @@ function RedundaKitty() {
 	
 	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
-		Molpy.Notify('Got Here', 0);
 		RKLocation = FindRK();
 		
-		if (RKLocation != 'null' && RKLocation != '4' && !Molpy.options.showhide[RKLocation]) {
+		if (RKLocation != 'null' && !Molpy.options.showhide[RKLocation]) {
 			showhideToggle(RKLocation);
 		}
 	
 		//Determines if it is a Logicat or RK
-		//if (RKLocation  != '4') {
-			content = $('#redacteditem').html();
-			if (content.indexOf("statement") !== -1) {
-				Logicat = 1;
-				//Molpy.Notify("Logicat Found",0);
-			}	
-			else {
-				Logicat = 0;
-				//Molpy.Notify("Redundakitty Found",0);
-				start = content.indexOf("ClickRedacted");
-				content = content.substring(start,start+17);
-				content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-				var length = content.length;
-				RKLevel = content.substring(13,length);
-				Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
-			}
+		content = $('#redacteditem').html();
+		if (content.indexOf("statement") !== -1) {
+			Logicat = 1;
+			//Molpy.Notify("Logicat Found",0);
+		}	
+		else {
+			Logicat = 0;
+			//Molpy.Notify("Redundakitty Found",0);
+			start = content.indexOf("ClickRedacted");
+			content = content.substring(start,start+17);
+			content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
+			var length = content.length;
+			RKLevel = content.substring(13,length);
+			Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+		}
 			
-			//Highlights RK/LC Border to make it easier to find
-			$('#redacteditem').css("border","2px solid red");
-		//}
-		
+		//Highlights RK/LC Border to make it easier to find
+		$('#redacteditem').css("border","2px solid red");	
 
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
 		if (RKAutoClickStatus == 1 && Logicat == 0 ) {
@@ -169,8 +165,8 @@ function RedundaKitty() {
 		}
 	}
 	else {
-		document.title = Molpy.redactedToggle-Molpy.redactedCountup;
-		if (i != 0) { i = 0; }
+		document.title = i;
+		//if (i != 0) { i = 0; }
 	}
 }
 
