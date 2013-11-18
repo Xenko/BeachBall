@@ -116,7 +116,7 @@ function RedundaKitty() {
 	
 	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
-		RKLocation = FindRK();
+		//RKLocation = FindRK();
 		
 		if (RKLocation != 'null' && !Molpy.options.showhide[RKLocation]) {
 			showhideToggle(RKLocation);
