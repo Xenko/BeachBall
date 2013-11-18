@@ -78,7 +78,7 @@ function ToggleMenus(wantOpen) {
 	for (i=0, len = lootBoxes.length; i < len; i++) {
 		if (lootBoxes[i] == wantOpen) {
 			Molpy.Notify(Molpy.options.showhide[lootBoxes[i]], 1);
-			if (!Molpy.options.showhide[lootBoxes[i]]) {
+			if (Molpy.options.showhide[lootBoxes[i]] != 1) {
 				showhideToggle(lootBoxes[i]);
 			}
 		}
@@ -101,7 +101,7 @@ function FindRK() {
 	*/
 	
 	//Determines RK location, does nothing for locations 1, 2 or 3
-	Molpy.Notify('FindRK Run', 1);
+	//Molpy.Notify('FindRK Run', 1);
 	findLocation = '123';
 	if (Molpy.redactedVisible == 4) {
 		findLocation = Molpy.redactedGr;
@@ -113,9 +113,9 @@ function FindRK() {
 		findLocation = 'badgesav';
 	}
 	
-	//Opens RK location if not already open
-	if (findLocation != '123' && !Molpy.options.showhide[findLocation]) {
-		showhideToggle(findLocation);
+	//Opens RK location
+	if (findLocation != '123') {
+		ToggleMenus(findLocation);
 	}
 	
 	//Resets old RK variables
@@ -286,7 +286,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="ToggleMenus(\'boosts\')"> <h4>Toggle Boosts</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick=""> <h4>Blank</h4> </a></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
 DisplayDescription('LCAutoClick', LCAutoClickStatus);
 DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
