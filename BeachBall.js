@@ -101,7 +101,7 @@ function FindRK() {
 	
 	//Determines RK location
 	RKLocation = '123';
-	if (Molpy.redactedVisible = 6) {
+	if (Molpy.redactedVisible == 6) {
 		RKLocation = 'badgesav';
 	}
 	else if (Molpy.redactedVisible > 3) {
