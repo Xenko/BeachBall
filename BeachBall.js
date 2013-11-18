@@ -142,7 +142,7 @@ function RedundaKitty() {
 			content = $('#redacteditem').html();
 			//If RK contains word statement, it is a LC.
 			if (content.indexOf("statement") !== -1) {
-				Moply.Notify('Logicat Found', 1);
+				Molpy.Notify('Logicat Found', 1);
 				Logicat = 1;
 			}
 			//Otherwise it is an RK
