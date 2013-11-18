@@ -39,6 +39,8 @@ var RKNew = 1;
 var RKNewAudio = 1;
 var RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
+Molpy.redactedPuzzleTarget = true;
+
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
     if (Molpy.ninjad == 0) {
