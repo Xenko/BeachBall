@@ -244,7 +244,7 @@ function SwitchOption(option) {
 			status = AudioAlertsStatus;
 			break;
 		case 'RefreshRate':
-			refreshRate = parsseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', 1000));
+			refreshRate = parseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', 1000));
 			break;
 	}
 	DisplayDescription(option, status);
