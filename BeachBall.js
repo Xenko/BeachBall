@@ -208,7 +208,7 @@ function SolveLogicat() {
 	do 
 		{LCSolution = String.fromCharCode(i);
 		i++;
-		Molpy.Notify('Target: ' LCSolution, 1);
+		Molpy.Notify('Target: ' + Molpy.redactedPuzzleTarget, 1);
 		Molpy.Notify('Found: ' + Molpy.redactedSGen.StatementValue(LCSolution), 1);
 		}
 	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
