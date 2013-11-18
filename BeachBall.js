@@ -88,26 +88,27 @@ function FindRK() {
 		i = 0;
 		do {
 			Molpy.Notify(lootBoxes[i], 1);
-			len = $('#' + lootBoxes[i]).length;
-			//Molpy.Notify(len, 1);
 			if ($('#' + lootBoxes[i]).length) {
 				showhideToggle(lootBoxes[i]);
 				if ($('#redacteditem').length) {
 					findLocation = lootBoxes[i];
 				}
-				else {
+				/*else {
 					showhideToggle(lootBoxes[i]);
-				}
+				}*/
 			}
 			i++;
 			Molpy.Notify(i, 1);
-		} while (findLocation = 'null' || i < 6)
+		} while (i < 6 /*|| findLocation = 'null'*/)
 	}
 	else if (Molpy.redactedVisible == 5) {
 		findLocation = 'badges';
 	}
 	else if (Molpy.redactedVisible == 6) {
 		findLocation = 'badgesav';
+	}
+	if (findLocation != 'null' && !Molpy.options.showhide[findLocation]) {
+			showhideToggle(findLocation);
 	}
 	return findLocation;
 }
@@ -121,10 +122,6 @@ function RedundaKitty() {
 	if (Molpy.redactedVisible > 0) {
 		RKLocation = FindRK();
 		
-		if (RKLocation != 'null' && !Molpy.options.showhide[RKLocation]) {
-			showhideToggle(RKLocation);
-		}
-	
 		//Determines if it is a Logicat or RK
 		content = $('#redacteditem').html();
 		if (content.indexOf("statement") !== -1) {
