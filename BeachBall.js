@@ -94,17 +94,16 @@ function FindRK() {
 			Molpy.Notify(lootBoxes[i], 1);
 			if ($('#' + lootBoxes[i]).length) {
 				showhideToggle(lootBoxes[i]);
-				setTimeout(function() {
+				setTimeout(function() {Molpy.Notify('Delay',1)}, 500);
 					if ($('#redacteditem').length) {
 						findLocation = lootBoxes[i];
 					}
-				}, 200);
+
 				/*else {
 					showhideToggle(lootBoxes[i]);
 				}*/
 			}
 			i++;
-			Molpy.Notify(i, 1);
 		} while (i < 6 /*|| findLocation = 'null'*/)
 	}
 	else if (Molpy.redactedVisible == 5) {
