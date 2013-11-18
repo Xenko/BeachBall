@@ -164,14 +164,13 @@ function RedundaKitty() {
 			Molpy.Notify('RedundaKitty/Logicat Not Found', 1);
 			Logicat = 99;
 		}
-			
+
 		//Clicks RK if AutoClick Enabled
 		if (RKAutoClickStatus == 1 && Logicat == 0 ) {
 			Molpy.ClickRedacted(RKLevel);
 			RKNew = 1;
 			ToggleMenus('none');
 			RKLocation = '123';
-			}
 		}
 		//Solves and Click LC if AutoClick Enabled
 		else if (LCAutoClickStatus == 1 && Logicat == 1) {
@@ -179,8 +178,8 @@ function RedundaKitty() {
 			RKNew = 1;
 			ToggleMenus('none');
 			RKLocation = '123';
-			}
 		}
+
 		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio)
 		else {	
 			document.title = "! kitten !";
