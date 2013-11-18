@@ -169,18 +169,16 @@ function RedundaKitty() {
 		if (RKAutoClickStatus == 1 && Logicat == 0 ) {
 			Molpy.ClickRedacted(RKLevel);
 			RKNew = 1;
-			if (RKLocation != '123') {
-				showhideToggle(RKLocation);
-				RKLocation = '123';
+			ToggleMenus('none');
+			RKLocation = '123';
 			}
 		}
 		//Solves and Click LC if AutoClick Enabled
 		else if (LCAutoClickStatus == 1 && Logicat == 1) {
 			Logicat();
 			RKNew = 1;
-			if (RKLocation != '123') {
-				showhideToggle(RKLocation);
-				RKLocation = '123';
+			ToggleMenus('none');
+			RKLocation = '123';
 			}
 		}
 		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio)
