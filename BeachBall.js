@@ -191,7 +191,7 @@ function RedundaKitty() {
 			//If RK Audio Alerts Enabled
 			if (AudioAlertsStatus == 1 || AudioAlertsStatus == 3) {
 				//If proper mNP and hasn't yet played this mNP
-				if (Math.floor(RKTimer % RKAlertFrequency) == 0 && RKPlayAudio = 1) {
+				if (Math.floor(RKTimer % RKAlertFrequency) == 0 && RKPlayAudio == 1) {
 					audio_Bell.play();
 					RKPlayAudio = 0;
 				}
