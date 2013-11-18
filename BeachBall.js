@@ -51,7 +51,7 @@ function Ninja() {
                 Molpy.ClickBeach();
 				Molpy.Notify('Ninja Auto Click', 1);
 				if (BorderAlertStatus == 1) {
-					$("#beach").css("border","1px solid green");
+					$("#beach").css("border","2px solid green");
 				}
             }
             else if (BorderAlertStatus == 1) {
@@ -70,7 +70,7 @@ function Ninja() {
         }  
     }
     else if (BorderAlertStatus == 1) {
-        $("#beach").css("border","1px solid green");
+        $("#beach").css("border","2px solid green");
 	}
 }
 
