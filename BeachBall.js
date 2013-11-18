@@ -112,6 +112,7 @@ function FindRK() {
 function RedundaKitty() {
 	//Refresh Timer Variable
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
+	RKLocation = 'null';
 	
 	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
