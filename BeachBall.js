@@ -39,8 +39,6 @@ var RKNew = 1;
 var RKNewAudio = 1;
 var RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
-Molpy.redactedPuzzleTarget = true;
-
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
     if (Molpy.ninjad == 0) {
@@ -210,7 +208,7 @@ function SolveLogicat() {
 	do 
 		{LCSolution = String.fromCharCode(i);
 		i++;
-		Molpy.Notify('Target: ' Molpy.redactedPuzzleTarget, 1);
+		Molpy.Notify('Target: ' LCSolution, 1);
 		Molpy.Notify('Found: ' + Molpy.redactedSGen.StatementValue(LCSolution), 1);
 		}
 	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
