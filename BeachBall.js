@@ -24,7 +24,7 @@ var RKAutoClickStatus = 0;
 //RK Variables
 var start = -1;
 var content = "empty";
-var findLocation = 'null';
+var findLocation = '123';
 var LCAutoClickStatus = 0;
 var LCSolution = 'blank';
 var len = 0;
@@ -34,7 +34,7 @@ var oldRKLocation = -1;
 var oldRC = Molpy.redactedClicks - 1;
 var oldLC = Molpy.Boosts['Logicat'].power - 1;
 var RKLevel = '-1';
-var RKLocation = 'null';
+var RKLocation = '123';
 var RKNew = 1;
 var RKNewAudio = 1;
 
@@ -88,17 +88,17 @@ function FindRK() {
 	
 	//Determines RK location, does nothing for locations 1, 2 or 3
 	Molpy.Notify('FindRK Run', 1);
-	findLocation = 'null';
+	findLocation = '123';
 	if (Molpy.redactedVisible == 4) {
 		i = 0;
 		Molpy.Notify(Molpy.redactedGr, 1);
-		//do {
-		//	if (Molpy.redactedGr = lootBoxes[i]) {
-		//		findLocation = lootBoxes[i];
-		//	}
-		//	Molpy.Notify(lootBoxes[i], 1);
-		//}
-		//while (findLocation = 'null' || i < 6);*/
+		do {
+			if (Molpy.redactedGr = lootBoxes[i]) {
+				findLocation = lootBoxes[i];
+			}
+			Molpy.Notify(lootBoxes[i], 1);
+		}
+		while (findLocation = '123' || i < 6);
 	}
 	else if (Molpy.redactedVisible == 5) {
 		findLocation = 'badges';
@@ -108,7 +108,7 @@ function FindRK() {
 	}
 	
 	//Opens RK location if not already open
-	if (findLocation != 'null' && !Molpy.options.showhide[findLocation]) {
+	if (findLocation != '123' && !Molpy.options.showhide[findLocation]) {
 		showhideToggle(findLocation);
 	}
 	
@@ -122,7 +122,7 @@ function FindRK() {
 function RedundaKitty() {
 	//Refresh Timer Variable
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
-	RKLocation = 'null';
+	RKLocation = '123';
 	
 	//If a RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
@@ -153,18 +153,18 @@ function RedundaKitty() {
 		if (RKAutoClickStatus == 1 && Logicat == 0 ) {
 			Molpy.ClickRedacted(RKLevel);
 			RKNew = 1;
-			if (RKLocation != 'null') {
+			if (RKLocation != '123') {
 				showhideToggle(RKLocation);
-				RKLocation = 'null';
+				RKLocation = '123';
 			}
 		}
 		//Solves and Click LC if AutoClick Enabled
 		else if (LCAutoClickStatus == 1 && Logicat == 1) {
 			Logicat();
 			RKNew = 1;
-			if (RKLocation != 'null') {
+			if (RKLocation != '123') {
 				showhideToggle(RKLocation);
-				RKLocation = 'null';
+				RKLocation = '123';
 			}
 		}
 		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio, Highlight)
