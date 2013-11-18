@@ -83,7 +83,7 @@ function ToggleMenus(wantOpen) {
 			}
 		}
 		else {
-			if (Molpy.options.showhide(lootBoxes[i])) {
+			if (Molpy.options.showhide[lootBoxes[i]]) {
 				showhideToggle(lootBoxes[i]);
 			}
 		}
