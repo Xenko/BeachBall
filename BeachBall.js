@@ -273,6 +273,7 @@ function DisplayDescription(option, status) {
 		else if (status == 1) {description = 'Find RK Only';}
 		else if (status == 2) {description = 'On';}
 		else {Molpy.Notify('Display Description Error - RKAutoClick: ' + status, 1);}
+	}
 	else {
 		Molpy.Notify(option + ' is not a valid option', 1);
 		error = 1;
