@@ -86,8 +86,8 @@ function FindRK() {
 	findLocation = 'null';
 	if (Molpy.redactedVisible == 4) {
 		i = 0;
-		while (findLocation = 'null' || i < 6) {
-			Molpy.Notify(lootBoxes[i], 1)
+		do {
+			Molpy.Notify(lootBoxes[i], 1);
 			if ($('#' + lootboxes[i]).length) {
 				showhideToggle(lootBoxes[i]);
 				if ($('#redacteditem').length) {
@@ -99,7 +99,7 @@ function FindRK() {
 			}
 			i++;
 			Molpy.Notify(i, 1);
-		}
+		} while (findLocation = 'null' || i < 6)
 	}
 	else if (Molpy.redactedVisible == 5) {
 		findLocation = 'badges';
