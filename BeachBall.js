@@ -111,12 +111,14 @@ function FindRK() {
 	}
 	return location;
 }
+
 function RedundaKitty() {
 	//Refresh Timer Variable
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
+		Molpy.notify('Got Here', 0);
 		RKLocation = FindRK();
 		
 		if (RKLocation != 'null' && RKLocation != '4' && !Molpy.options.showhide[RKLocation]) {
