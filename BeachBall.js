@@ -2,7 +2,7 @@
 //v2.0 Cleaning up code. Setting up Menu Structure and Initial Settings.
 
 var version = '2.0 Beta';
-var SCBversion = '3.021'; //Last SandCastle Builder version tested
+var SCBversion = '3.03'; //Last SandCastle Builder version tested
 
 //Declare and Initialize Variables
 var incoming_ONG = 0;
@@ -130,7 +130,7 @@ function RedundaKitty() {
 	RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 	RKLocation = '123';
 	
-	//If a RedundaKitty is available
+	//If a RedundaKitty is active
 	if (Molpy.redactedVisible > 0) {
 	
 		//If RK is new, find it.
@@ -140,14 +140,16 @@ function RedundaKitty() {
 			RKNew = 0;
 		}
 		
-		//Determines if it is an RK or LC, and also highlights it
-		Molpy.Notify($('#redacteditem').length, 1);
+		//Determines if it is an RK or LC
+		//If RK is visible
 		if ($('#redacteditem').length) {
-			$('#redacteditem').css("border","2px solid red");
+			$('#redacteditem').css("border","2px solid red"); //Highlights RK
 			content = $('#redacteditem').html();
+			//If RK contains word statement, it is a LC.
 			if (content.indexOf("statement") !== -1) {
 				Logicat = 1;
-			}	
+			}
+			//Otherwise it is an RK
 			else {
 				Logicat = 0;
 				start = content.indexOf("ClickRedacted");
@@ -160,8 +162,8 @@ function RedundaKitty() {
 				}
 			}
 		}
+		//If RK not visible, LC to 99.
 		else {
-			Molpy.Notify('RedundaKitty/Logicat Not Found', 1);
 			Logicat = 99;
 		}
 
@@ -172,7 +174,7 @@ function RedundaKitty() {
 			ToggleMenus('none');
 			RKLocation = '123';
 		}
-		//Solves and Click LC if AutoClick Enabled
+		//Solves LC if AutoClick Enabled
 		else if (LCAutoClickStatus == 1 && Logicat == 1) {
 			Logicat();
 			RKNew = 1;
@@ -187,7 +189,8 @@ function RedundaKitty() {
 				audio_Bell.play();
 			}
 		}
-	}
+	}	
+	//If no RK active, update title Timer. Reset some variables.
 	else {
 		document.title = RKTimer;
 		oldRKLocation = -1;
