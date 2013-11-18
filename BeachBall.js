@@ -89,7 +89,7 @@ function FindRK() {
 	//Determines RK location, does nothing for locations 1, 2 or 3
 	Molpy.Notify('FindRK Run', 1);
 	findLocation = 'null';
-	if (Molpy.redactedVisible == 4) {
+	/*if (Molpy.redactedVisible == 4) {
 		i = 0;
 		do {
 			if (Molpy.redactedGr = lootBoxes[i]) {
@@ -98,7 +98,7 @@ function FindRK() {
 			Molpy.Notify(lootBoxes[i], 1);
 		}
 		while (findLocation = 'null' || i < 6);
-	}
+	}*/
 	else if (Molpy.redactedVisible == 5) {
 		findLocation = 'badges';
 	}
@@ -128,7 +128,7 @@ function RedundaKitty() {
 	
 		//If RK is new, find it.
 		if (RKNew == 1 || Molpy.redactedVisible != oldRKLocation || Molpy.redactedClicks > oldRC || Molpy.Boosts['Logicat'].power != oldLC) {
-			//RKLocation = FindRK();
+			RKLocation = FindRK();
 			RKNewAudio = 1;
 			RKNew = 0;
 		}
@@ -292,6 +292,6 @@ function MainLoop() {
 setTimeout(MainLoop, 1000);
 
 function SpawnRK() {
-	Molpy.redactedCountup = Molpy.redactedToggle - 3;
+	Molpy.redactedCountup = Molpy.redactedToggle - 1;
 }
 
