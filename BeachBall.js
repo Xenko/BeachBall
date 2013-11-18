@@ -103,6 +103,7 @@ function FindRK() {
 	//Determines RK location, does nothing for locations 1, 2 or 3
 	//Molpy.Notify('FindRK Run', 1);
 	findLocation = '123';
+	Molpy.Notify(Molpy.redactedGr, 1);
 	if (Molpy.redactedVisible == 4) {
 		findLocation = Molpy.redactedGr;
 	}
