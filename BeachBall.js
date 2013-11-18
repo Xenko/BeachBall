@@ -36,6 +36,7 @@ var lootBoxes = new Array();
 	lootBoxes[3] = 'hpt';
 	lootBoxes[4] = 'bean';
 	lootBoxes[5] = 'chron';
+var oldRKLocation = -1;
 
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
@@ -110,6 +111,7 @@ function FindRK() {
 	if (findLocation != 'null' && !Molpy.options.showhide[findLocation]) {
 			showhideToggle(findLocation);
 	}
+	oldRKLocation = findLocation;
 	return findLocation;
 }
 
@@ -120,7 +122,9 @@ function RedundaKitty() {
 	
 	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
-		RKLocation = FindRK();
+		if (RKLocation != oldRKLocation) {
+			RKLocation = FindRK();
+		}
 		
 		//Determines if it is a Logicat or RK
 		content = $('#redacteditem').html();
