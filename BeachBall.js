@@ -167,7 +167,7 @@ function RedundaKitty() {
 		}
 	}
 	else {
-		document.title = i;
+		document.title = RKTimer;
 		oldRKLocation = -1;
 		if (RKNew != 1) {
 			RKNew = 1;
