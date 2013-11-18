@@ -88,6 +88,8 @@ function FindRK() {
 		i = 0;
 		do {
 			Molpy.Notify(lootBoxes[i], 1);
+			len = $('#' + lootboxes[i]).length;
+			Molpy.Notify(len, 1);
 			if ($('#' + lootboxes[i]).length) {
 				showhideToggle(lootBoxes[i]);
 				if ($('#redacteditem').length) {
