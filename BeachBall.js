@@ -71,49 +71,53 @@ function Ninja() {
 	}
 }
 
+function FindRK() {
+	/*
+	RV of 1 is Sand Tools
+	RV of 2 is Castle Tools
+	RV of 3 is Boosts Main Page
+	RV of 4 is Boosts Menus, Hill People Tech, etc.
+	RV of 5 is Badges Earned
+	RV of 6 is Badges Available
+	*/
+	
+	//Determines RK location
+	if (Molpy.redactedVisible == 1 || Molpy.redactedVisible == 2 || Molpy.redactedVisible == 3) {
+		//Do Nothing
+	}
+	else if (Molpy.redactedVisible == 4) {
+		location = 'null'
+		i = 0;
+		while (location = 'null' || i < 6) {
+			Molpy.Notify(lootBoxes[i], 1)
+			if ($('#' + lootboxes[i]).length) {
+				showhideToggle(lootBoxes[i]);
+				if ($('#redacteditem').length) {
+					location = lootBoxes[i];
+				}
+				else {
+					showhideToggle(lootBoxes[i]);
+				}
+			}
+			i++;
+			Molpy.Notify(i, 1);
+		}
+	}
+	else if (Molpy.redactedVisible == 5) {
+		location = 'badges';
+	}
+	else if (Molpy.redactedVisible == 6) {
+		location = 'badgesav';
+	}
+	return location;
+}
 function RedundaKitty() {
 	//Refresh Timer Variable
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	
 	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
-		//Molpy.Notify('Redacted Visible: ' + Molpy.redactedVisible, 1);
-		/*
-		RV of 1 is Sand Tools
-		RV of 2 is Castle Tools
-		RV of 3 is Boosts Main Page
-		RV of 4 is Boosts Menus, Hill People Tech, etc.
-		RV of 5 is Badges Earned
-		RV of 6 is Badges Available
-		*/
-		
-		//Determines RK location
-		if (Molpy.redactedVisible == 1 || Molpy.redactedVisible == 2 || Molpy.redactedVisible == 3) {
-			//Do Nothing
-		}
-		else if (Molpy.redactedVisible == 4) {
-			RKLocation = 'null'
-			i = 0;
-			while (RKLocation = 'null' || i < 6) {
-				Molpy.Notify(lootBoxes[i], 1)
-				if ($('#' + lootboxes[i]).length) {
-					showhideToggle(lootBoxes[i]);
-					if ($('#redacteditem').length) {
-						RKLocation = lootBoxes[i];
-					}
-					else {
-						showhideToggle(lootBoxes[i]);
-					}
-				}
-				i++;
-			}
-		}
-		else if (Molpy.redactedVisible == 5) {
-			RKLocation = 'badges';
-		}
-		else if (Molpy.redactedVisible == 6) {
-			RKLocation = 'badgesav';
-		}
+		RKLocation = FindRK();
 		
 		if (RKLocation != 'null' && RKLocation != '4' && !Molpy.options.showhide[RKLocation]) {
 			showhideToggle(RKLocation);
