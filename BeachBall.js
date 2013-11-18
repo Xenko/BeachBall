@@ -18,7 +18,7 @@ var audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
 	audio_Chime.volume = 1;
 var BorderAlertStatus = 1;
 var description = "Error";
-var IdleStatus = 0;
+var refreshRate = 1000;
 var RKAlertFrequency = 8;
 var RKAutoClickStatus = 1;
 var RKPlayAudio = 1;
@@ -242,6 +242,9 @@ function SwitchOption(option) {
 			if (AudioAlertsStatus > 3) {AudioAlertsStatus = 0;}
 			status = AudioAlertsStatus;
 			break;
+		case 'RefreshRate':
+			refreshRate = prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', 1000);
+			break;
 	}
 	DisplayDescription(option, status);
 }
@@ -266,6 +269,9 @@ function DisplayDescription(option, status) {
 		else if (status == 2) {description = 'On'; RKNew = 1;}
 		else {Molpy.Notify('Display Description Error - RKAutoClick: ' + status, 1);}
 	}
+	else if (option == 'RefreshRate') {
+		description = refreshRate;
+	}
 	else {
 		Molpy.Notify(option + ' is not a valid option', 1);
 		error = 1;
@@ -285,6 +291,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'NinjaAutoClick\')"> <h4>Ninja Auto Click</h4> </a> <div id="NinjaAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick=""> <h4>Blank</h4> </a></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
@@ -292,8 +299,7 @@ DisplayDescription('LCAutoClick', LCAutoClickStatus);
 DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
 DisplayDescription('BorderAlert', BorderAlertStatus);
 DisplayDescription('AudioAlerts', AudioAlertsStatus);
-
-
+DisplayDescription('RefreshRate', refreshRate);
 
 function MainLoop() {
 	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
@@ -302,7 +308,7 @@ function MainLoop() {
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 		RedundaKitty();
 		Ninja();
-	}, 500);
+	}, refreshRate);
 }
 
 //Run Main Loop after 1 second startup delay
