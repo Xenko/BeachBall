@@ -99,7 +99,7 @@ function RedundaKitty() {
 				if ($('#' + lootboxes[i]).length) {
 					showhideToggle(lootBoxes[i]);
 					if ($('#redacteditem').length) {
-						RKLocation = lootBoxes[i]);
+						RKLocation = lootBoxes[i];
 					}
 					else {
 						showhideToggle(lootBoxes[i]);
