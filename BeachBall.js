@@ -302,18 +302,24 @@ DisplayDescription('BorderAlert', BorderAlertStatus);
 DisplayDescription('AudioAlerts', AudioAlertsStatus);
 DisplayDescription('RefreshRate', refreshRate);
 
-function MainLoop() {
-	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
-	setInterval(function() {
-		Molpy.Notify('1 Refresh', 0);
-		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
-		RedundaKitty();
-		Ninja();
-	}, refreshRate);
+Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
+Loop();
+
+function MainProgram() {
+	Molpy.Notify('1 Refresh', 0);
+	Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
+	RedundaKitty();
+	Ninja();
+	Loop();
 }
 
+funtion Loop() {
+	setTimeout(MainProgram, refreshRate);
+}
+	
+
 //Run Main Loop after 1 second startup delay
-setTimeout(MainLoop, 1000);
+//setTimeout(MainLoop, 1000);
 
 function SpawnRK() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
