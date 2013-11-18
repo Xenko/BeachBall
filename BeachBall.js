@@ -5,6 +5,11 @@ var version = '2.0 Beta';
 var SCBversion = '3.021'; //Last SandCastle Builder version tested
 
 //Declare and Initialize Variables
+var incoming_ONG = 0;
+var NinjaAutoClickStatus = 1;
+var Time_to_ONG = 1800000;
+
+//BB Options Variables
 var AudioAlertsStatus = 3;
 var audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
 	audio_Bell.volume = 1;
@@ -12,33 +17,29 @@ var audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
 	audio_Chime.volume = 1;
 var BorderAlertStatus = 1;
 var description = "Error";
-var i = 0;
 var IdleStatus = 0;
-var incoming_ONG = 0;
-var Logicat = 0;
-var LCAutoClickStatus = 0;
-var LCSolution = 'blank';
-var NinjaAutoClickStatus = 1;
-var RKAutoClickStatus = 0;
 var RKAlertFrequency = 8;
-var Time_to_ONG = 1800000;
+var RKAutoClickStatus = 0;
 
+//RK Variables
 var start = -1;
 var content = "empty";
-var length = 0;
-var RKLevel = '-1';
 var findLocation = 'null';
-var RKLocation = 'null';
-var lootBoxes = new Array();
-	lootBoxes[0] = 'boosts';
-	lootBoxes[1] = 'ninj';
-	lootBoxes[2] = 'cyb';
-	lootBoxes[3] = 'hpt';
-	lootBoxes[4] = 'bean';
-	lootBoxes[5] = 'chron';
+var LCAutoClickStatus = 0;
+var LCSolution = 'blank';
+var len = 0;
+var Logicat = 0;
+var lootBoxes = {'boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron'}
 var oldRKLocation = -1;
 var oldRC = Molpy.redactedClicks - 1;
 var oldLC = Molpy.Boosts['Logicat'].power - 1;
+var RKLevel = '-1';
+var RKLocation = 'null';
+var RKNew = 1;
+var RKNewAudio = 1;
+
+//Miscellaneous variables
+var i = 0;
 
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
@@ -85,26 +86,18 @@ function FindRK() {
 	RV of 6 is Badges Available
 	*/
 	
-	//Determines RK location, do nothing for locations 1, 2 or 3
+	//Determines RK location, does nothing for locations 1, 2 or 3
 	Molpy.Notify('FindRK Run', 1);
 	findLocation = 'null';
 	if (Molpy.redactedVisible == 4) {
 		i = 0;
 		do {
-			Molpy.Notify(lootBoxes[i], 1);
-			if ($('#' + lootBoxes[i]).length) {
-				showhideToggle(lootBoxes[i]);
-				setTimeout(function() {Molpy.Notify('Delay',1)}, 500);
-					if ($('#redacteditem').length) {
-						findLocation = lootBoxes[i];
-					}
-
-				/*else {
-					showhideToggle(lootBoxes[i]);
-				}*/
+			if (Molpy.redactedGr = lootBoxes[i]) {
+				findLocation = lootBoxes[i];
 			}
-			i++;
-		} while (i < 6 /*|| findLocation = 'null'*/)
+			Molpy.Notify(lootBoxes[i], 1);
+		}
+		while (findLocation = 'null' || i < 6);
 	}
 	else if (Molpy.redactedVisible == 5) {
 		findLocation = 'badges';
@@ -112,9 +105,16 @@ function FindRK() {
 	else if (Molpy.redactedVisible == 6) {
 		findLocation = 'badgesav';
 	}
+	
+	//Opens RK location if not already open
 	if (findLocation != 'null' && !Molpy.options.showhide[findLocation]) {
-			showhideToggle(findLocation);
+		showhideToggle(findLocation);
 	}
+	
+	//Resets old RK variables
+	oldRKLocation = Molpy.redactedVisible;
+	oldRC = Molpy.redactedClicks;
+	oldLC = Molpy.Boosts['Logicat'].power;
 	return findLocation;
 }
 
@@ -123,52 +123,52 @@ function RedundaKitty() {
 	i = Molpy.redactedToggle - Molpy.redactedCountup;
 	RKLocation = 'null';
 	
-	//If RedundaKitty is available
+	//If a RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
-		if (Molpy.redactedVisible != oldRKLocation || Molpy.redactedClicks > oldRC || Molpy.Boosts['Logicat'].power != oldLC) {
+	
+		//If RK is new, find it.
+		if (RKNew == 1 || Molpy.redactedVisible != oldRKLocation || Molpy.redactedClicks > oldRC || Molpy.Boosts['Logicat'].power != oldLC) {
 			RKLocation = FindRK();
-			oldRKLocation = Molpy.redactedVisible;
-			oldRC = Molpy.redactedClicks;
-			oldLC = Molpy.Boosts['Logicat'].power;
+			RKNewAudio = 1;
+			RKNew = 0;
 		}
 		
-		//Determines if it is a Logicat or RK
+		//Determines if it is an RK or LC
 		content = $('#redacteditem').html();
 		if (content.indexOf("statement") !== -1) {
 			Logicat = 1;
-			//Molpy.Notify("Logicat Found",0);
 		}	
 		else {
 			Logicat = 0;
-			//Molpy.Notify("Redundakitty Found",0);
 			start = content.indexOf("ClickRedacted");
 			content = content.substring(start,start+17);
 			content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-			var length = content.length;
-			RKLevel = content.substring(13,length);
+			len = content.length;
+			RKLevel = content.substring(13,len);
 			Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 		}
 			
-		//Highlights RK/LC Border to make it easier to find
-		$('#redacteditem').css("border","2px solid red");	
-
-		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
+		//Clicks RK if AutoClick Enabled
 		if (RKAutoClickStatus == 1 && Logicat == 0 ) {
 			Molpy.ClickRedacted(RKLevel);
+			RKNew = 1;
 			if (RKLocation != 'null') {
 				showhideToggle(RKLocation);
 				RKLocation = 'null';
 			}
 		}
+		//Solves and Click LC if AutoClick Enabled
 		else if (LCAutoClickStatus == 1 && Logicat == 1) {
 			Logicat();
+			RKNew = 1;
 			if (RKLocation != 'null') {
 				showhideToggle(RKLocation);
 				RKLocation = 'null';
 			}
 		}
+		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio, Highlight)
 		else {
-			//Redundakitty Notifications (Title Bar and Audio)
+			$('#redacteditem').css("border","2px solid red");	
 			document.title = "! kitten !";
 			if (Math.floor(i % RKAlertFrequency) == 0 && (AudioAlertsStatus == 1 || AudioAlertsStatus == 3)) {
 				audio_Bell.play();
@@ -177,7 +177,10 @@ function RedundaKitty() {
 	}
 	else {
 		document.title = i;
-		//if (i != 0) { i = 0; }
+		oldRKLocation = -1;
+		if (RKNew != 1) {
+			RKNew = 1;
+		}
 	}
 }
 
@@ -287,8 +290,8 @@ function MainLoop() {
 	}, 1800);
 }
 
-//Run Main Loop after 3 second startup delay
-setTimeout(MainLoop, 3000);
+//Run Main Loop after 1 second startup delay
+setTimeout(MainLoop, 1000);
 
 function SpawnRK() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 3;
