@@ -170,8 +170,8 @@ function RedundaKitty() {
 			RKLocation = '123';
 			ToggleMenus('123');
 		}
-		//Solves LC if it is visible and AutoClick enabled
-		else if (Logicat == 1 && $('#redacteditem').length && LCAutoClickStatus == 1) {
+		//Solves LC if AutoClick enabled
+		else if (Logicat == 1 && LCAutoClickStatus == 1) {
 			Logicat();
 			RKNew = 1;
 			RKLocation = '123';
