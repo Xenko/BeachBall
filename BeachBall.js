@@ -94,7 +94,7 @@ function FindRK() {
 			Molpy.Notify(lootBoxes[i], 1);
 			if ($('#' + lootBoxes[i]).length) {
 				showhideToggle(lootBoxes[i]);
-				setTimeout (Function() {
+				setTimeout(Function(){
 					if ($('#redacteditem').length) {
 						findLocation = lootBoxes[i];
 					}
