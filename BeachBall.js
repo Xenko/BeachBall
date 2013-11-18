@@ -142,7 +142,7 @@ function RedundaKitty() {
 			content = $('#redacteditem').html();
 			//If RK contains word statement, it is a LC.
 			if (content.indexOf("statement") !== -1) {
-				Molpy.Notify('Logicat Found', 1);
+				//Molpy.Notify('Logicat Found', 1);
 				Logicat = 1;
 			}
 			//Otherwise it is an RK
@@ -207,7 +207,9 @@ function SolveLogicat() {
 	var i = 65;
 	do 
 		{LCSolution = String.fromCharCode(i);
-		i++;}
+		i++;
+		Molpy.Notify('Target: ' Molpy.redactedPuzzleTarget + ' Found: ' + Molpy.redactedSGen.StatementValue(LCSolution));
+		}
 	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
 	Molpy.ClickRedactedPuzzle(LCSolution);
 	
