@@ -271,15 +271,15 @@ function DisplayDescription(option, status) {
 	}
 	else if (option == 'AudioAlerts') {
 		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'RK Only';}
+		else if (status == 1) {description = 'RK Only'; RKPlayAudio = 1;}
 		else if (status == 2) {description = 'ONG Only';}
-		else if (status == 3) {description = 'RK and ONG';}
+		else if (status == 3) {description = 'RK and ONG'; RKPlayAudio = 1;}
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
 	else if (option == 'RKAutoClick') {
 		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'Find RK Only';}
-		else if (status == 2) {description = 'On';}
+		else if (status == 1) {description = 'Find RK Only'; RKNew = 1;}
+		else if (status == 2) {description = 'On'; RKNew = 1;}
 		else {Molpy.Notify('Display Description Error - RKAutoClick: ' + status, 1);}
 	}
 	else {
