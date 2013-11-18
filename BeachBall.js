@@ -105,7 +105,8 @@ function RedundaKitty() {
 						showhideToggle(lootBoxes[i]);
 					}
 				i++;
-			}			
+				}
+			}
 		}
 		else if (Molpy.redactedVisible == 5) {
 			RKLocation = 'badges';
