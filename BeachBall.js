@@ -305,7 +305,7 @@ DisplayDescription('RefreshRate', refreshRate);
 function MainLoop() {
 	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
 	setInterval(function() {
-		//Molpy.Notify('1 mNP', 0);
+		Molpy.Notify('1 Refresh', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 		RedundaKitty();
 		Ninja();
