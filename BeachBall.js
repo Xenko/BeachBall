@@ -115,13 +115,14 @@ function RedundaKitty() {
 				RKLevel = content.substring(13,length);
 				Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 			}
+			
+			//Highlights RK/LC Border to make it easier to find
+			$('#redacteditem').css("border","2px solid red");
 		}
 		
-		//Highlight Redundakitty Border to make it easier to find
-		$('#redacteditem').css("border","2px solid red");
 
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
-		if (RKAutoClickStatus == 1 && Logicat == 0) {
+		if (RKAutoClickStatus == 1 && Logicat == 0 ) {
 			Molpy.ClickRedacted(RKLevel);
 			if (RKLocation != 'null') {
 				showhideToggle(RKLocation);
@@ -243,7 +244,8 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 
 function MainLoop() {
-	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1)
+	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
+	Molpy.Notify('Boosts: ' Molpy.BoostsOwned, 1);
 	setInterval(function() {
 		//Molpy.Notify('1 mNP', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
