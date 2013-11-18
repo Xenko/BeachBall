@@ -21,6 +21,7 @@ var description = "Error";
 var IdleStatus = 0;
 var RKAlertFrequency = 8;
 var RKAutoClickStatus = 0;
+var RKPlayAudio = 1;
 
 //RK Variables
 var start = -1;
@@ -187,8 +188,16 @@ function RedundaKitty() {
 		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio)
 		else {	
 			document.title = "! kitten !";
-			if (Math.floor(RKTimer % RKAlertFrequency) == 0 && (AudioAlertsStatus == 1 || AudioAlertsStatus == 3)) {
-				audio_Bell.play();
+			//If RK Audio Alerts Enabled
+			if (AudioAlertsStatus == 1 || AudioAlertsStatus == 3) {
+				//If proper mNP and hasn't yet played this mNP
+				if (Math.floor(RKTimer % RKAlertFrequency) == 0 && RKPlayAudio = 1) {
+					audio_Bell.play();
+					RKPlayAudio = 0;
+				}
+				else {
+					RKPlayAudio = 1;
+				}
 			}
 		}
 	}	
@@ -196,9 +205,8 @@ function RedundaKitty() {
 	else {
 		document.title = RKTimer;
 		oldRKLocation = -1;
-		if (RKNew != 1) {
-			RKNew = 1;
-		}
+		RKNew = 1;
+		RKPlayAudio = 0;
 	}
 }
 
