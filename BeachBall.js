@@ -86,6 +86,7 @@ function FindRK() {
 	*/
 	
 	//Determines RK location, do nothing for locations 1, 2 or 3
+	Molpy.Notify('FindRK Run', 1);
 	findLocation = 'null';
 	if (Molpy.redactedVisible == 4) {
 		i = 0;
@@ -93,9 +94,11 @@ function FindRK() {
 			Molpy.Notify(lootBoxes[i], 1);
 			if ($('#' + lootBoxes[i]).length) {
 				showhideToggle(lootBoxes[i]);
-				if ($('#redacteditem').length) {
-					findLocation = lootBoxes[i];
-				}
+				setTimeout (Function() {
+					if ($('#redacteditem').length) {
+						findLocation = lootBoxes[i];
+					}
+				}, 3000);
 				/*else {
 					showhideToggle(lootBoxes[i]);
 				}*/
