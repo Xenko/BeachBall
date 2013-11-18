@@ -28,6 +28,13 @@ var content = "empty";
 var length = 0;
 var RKLevel = '-1';
 var RKLocation = 'null';
+var lootBoxes = new Array();
+	lootBoxes[0] = 'boosts';
+	lootBoxes[1] = 'ninj';
+	lootBoxes[2] = 'cyb';
+	lootBoxes[3] = 'hpt';
+	lootBoxes[4] = 'bean';
+	lootBoxes[5] = 'chron';
 
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
@@ -85,7 +92,20 @@ function RedundaKitty() {
 			//Do Nothing
 		}
 		else if (Molpy.redactedVisible == 4) {
-			RKLocation = '4';
+			RKLocation = 'null'
+			i = 0;
+			while (RKLocation = 'null' || i < 6) {
+				Molpy.Notify(lootBoxes[i], 1)
+				if ($('#' + lootboxes[i]).length) {
+					showhideToggle(lootBoxes[i]);
+					if ($('#redacteditem').length) {
+						RKLocation = lootBoxes[i]);
+					}
+					else {
+						showhideToggle(lootBoxes[i]);
+					}
+				i++;
+			}			
 		}
 		else if (Molpy.redactedVisible == 5) {
 			RKLocation = 'badges';
@@ -99,8 +119,8 @@ function RedundaKitty() {
 		}
 	
 		//Determines if it is a Logicat or RK
-		if (RKLocation  != '4') {
-			var content = $('#redacteditem').html();
+		//if (RKLocation  != '4') {
+			content = $('#redacteditem').html();
 			if (content.indexOf("statement") !== -1) {
 				Logicat = 1;
 				//Molpy.Notify("Logicat Found",0);
@@ -118,7 +138,7 @@ function RedundaKitty() {
 			
 			//Highlights RK/LC Border to make it easier to find
 			$('#redacteditem').css("border","2px solid red");
-		}
+		//}
 		
 
 		//Clicks if RedundaKitty AutoClicker Enabled and Not a Logicat
