@@ -81,12 +81,9 @@ function FindRK() {
 	RV of 6 is Badges Available
 	*/
 	
-	//Determines RK location
-	if (Molpy.redactedVisible == 1 || Molpy.redactedVisible == 2 || Molpy.redactedVisible == 3) {
-		//Do Nothing
-	}
-	else if (Molpy.redactedVisible == 4) {
-		location = 'null'
+	//Determines RK location, do nothing for locations 1, 2 or 3
+	location = 'null';
+	if (Molpy.redactedVisible == 4) {
 		i = 0;
 		while (location = 'null' || i < 6) {
 			Molpy.Notify(lootBoxes[i], 1)
