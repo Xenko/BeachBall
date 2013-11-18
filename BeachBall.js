@@ -37,6 +37,8 @@ var lootBoxes = new Array();
 	lootBoxes[4] = 'bean';
 	lootBoxes[5] = 'chron';
 var oldRKLocation = -1;
+var oldRC = Molpy.redactedClicks - 1;
+var oldLC = Molpy.Boosts['Logicat'].power - 1;
 
 //Ninja AutoClicker and Border Warnings
 function Ninja() {
@@ -111,7 +113,6 @@ function FindRK() {
 	if (findLocation != 'null' && !Molpy.options.showhide[findLocation]) {
 			showhideToggle(findLocation);
 	}
-	oldRKLocation = findLocation;
 	return findLocation;
 }
 
@@ -122,8 +123,11 @@ function RedundaKitty() {
 	
 	//If RedundaKitty is available
 	if (Molpy.redactedVisible > 0) {
-		if (RKLocation != oldRKLocation) {
+		if (Molpy.redactedVisible != oldRKLocation || Molpy.redactedClicks > oldRC || Molpy.Boosts['Logicat'].power != oldLC) {
 			RKLocation = FindRK();
+			oldRKLocation = Molpy.redactedVisible;
+			oldRC = Molpy.redactedClicks;
+			oldLC = Molpy.Boosts['Logicat'].power;
 		}
 		
 		//Determines if it is a Logicat or RK
@@ -271,6 +275,8 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 
 function MainLoop() {
 	Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
+	Molpy.Notify('RC: ' + Molpy.redactedClicks, 1);
+	Molpy.Notify('LC: ' + Molpy.Boosts['Logicat'].power, 1);
 	setInterval(function() {
 		//Molpy.Notify('1 mNP', 0);
 		Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
