@@ -20,7 +20,7 @@ var BorderAlertStatus = 1;
 var description = "Error";
 var IdleStatus = 0;
 var RKAlertFrequency = 8;
-var RKAutoClickStatus = 0;
+var RKAutoClickStatus = 1;
 var RKPlayAudio = 1;
 
 //RK Variables
@@ -172,7 +172,7 @@ function RedundaKitty() {
 		}
 		//Solves LC if AutoClick enabled
 		else if (Logicat == 1 && LCAutoClickStatus == 1) {
-			Logicat();
+			SolveLogicat();
 			RKNew = 1;
 			RKLocation = '123';
 			ToggleMenus('123');
@@ -203,7 +203,7 @@ function RedundaKitty() {
 	}
 }
 
-function Logicat() {
+function SolveLogicat() {
 	var i = 65;
 	do 
 		{LCSolution = String.fromCharCode(i);
