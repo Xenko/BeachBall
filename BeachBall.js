@@ -168,6 +168,7 @@ function RedundaKitty() {
 					if (RKLevel != 0) {
 						Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 					}
+				}
 				else {
 					Molpy.Notify('YouTube Cat', 1);
 					RKLevel = 0;
