@@ -164,7 +164,7 @@ function RedundaKitty() {
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 					len = content.length;
 					RKLevel = content.substring(18,len);
-					//Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 				}
 				else {
 					start = content.indexOf("iframe src=");
