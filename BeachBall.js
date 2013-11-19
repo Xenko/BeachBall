@@ -1,5 +1,5 @@
-var version = '2.1';
-var SCBversion = '3.05'; //Last SandCastle Builder version tested
+var version = '3.0 Beta';
+var SCBversion = '3.07'; //Last SandCastle Builder version tested
 
 //Declare and Initialize Variables
 var incoming_ONG = 0;
@@ -323,6 +323,7 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 DisplayDescription('RefreshRate', refreshRate);
 
 Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
+Molpy.Notify('You have ' + items + ' items', 1);
 Loop();
 
 function MainProgram() {
