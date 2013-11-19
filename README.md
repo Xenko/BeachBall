@@ -1,8 +1,6 @@
 # BeachBall
-====
 
 ## Changelog
-===
 
 ### Version 2.0
 
