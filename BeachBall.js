@@ -165,13 +165,16 @@ function RedundaKitty() {
 					Molpy.Notify(content, 1);
 					len = content.length;
 					RKLevel = content.substring(18,len);
-					//if (RKLevel != 0) {
-						Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
-					//}
+					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 				}
 				else {
-					Molpy.Notify('YouTube Cat', 1);
-					RKLevel = 0;
+					start = content.indexOf("iframe src=");
+					content = content.substring(start-33,start-10);
+					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
+					Molpy.Notify(content, 1);
+					len = content.length;
+					RKLevel = content.substring(18,len);
+					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 				}
 			}
 		}
