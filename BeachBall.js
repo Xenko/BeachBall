@@ -323,7 +323,7 @@ DisplayDescription('AudioAlerts', AudioAlertsStatus);
 DisplayDescription('RefreshRate', refreshRate);
 
 Molpy.Notify('BeachBall version ' + version + ' loaded for SandCastle Builder version ' + SCBversion, 1);
-Molpy.Notify('You have ' + items + ' items', 1);
+Molpy.Notify('You have ' + Molpy.Boosts['Panther Salve'].power + ' Panther Salve Power', 1);
 Loop();
 
 function MainProgram() {
