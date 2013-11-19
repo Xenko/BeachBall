@@ -161,8 +161,8 @@ function RedundaKitty() {
 				if (content.indexOf("Show") != -1) {
 					start = content.indexOf("Show");
 					content = content.substring(start+15,start+38);
-					Molpy.Notify(content, 1);
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
+					Molpy.Notify(content, 1);
 					len = content.length;
 					RKLevel = content.substring(19,len);
 					if (RKLevel != 0) {
