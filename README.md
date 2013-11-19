@@ -2,6 +2,13 @@
 
 ## Changelog
 
+### Version 2.1
+
+#### Bug Fixes
+* RedundaKitty autoclicker should now properly deal with YouTube RedundaKitties
+* RedundaKitty autoclicker should now properly deal with Redundant RedundaKitties
+* Ninja streak autoclicker shouldn't click during a temporal rift.
+
 ### Version 2.0
 
 #### New Features
