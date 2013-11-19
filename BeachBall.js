@@ -216,6 +216,7 @@ function RedundaKitty() {
 	}	
 	//If no RK active, update title Timer. Reset some variables.
 	else {
+		SpawnRK();
 		document.title = RKTimer;
 		oldRKLocation = -1;
 		RKNew = 1;
