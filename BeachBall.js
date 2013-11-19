@@ -1,7 +1,7 @@
 //v1.0 as Starting Point
 //v2.0 Cleaning up code. Setting up Menu Structure and Initial Settings and functions.
 
-var version = '2.0';
+var version = '2.1 Beta';
 var SCBversion = '3.03'; //Last SandCastle Builder version tested
 
 //Declare and Initialize Variables
