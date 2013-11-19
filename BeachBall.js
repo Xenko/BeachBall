@@ -162,10 +162,9 @@ function RedundaKitty() {
 					start = content.indexOf("Show");
 					content = content.substring(start+15,start+38);
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-					Molpy.Notify(content, 1);
 					len = content.length;
 					RKLevel = content.substring(18,len);
-					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+					//Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 				}
 				else {
 					start = content.indexOf("iframe src=");
@@ -175,7 +174,7 @@ function RedundaKitty() {
 					Molpy.Notify(content, 1);
 					len = content.length;
 					RKLevel = content.substring(18,len);
-					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+					Molpy.Notify('YT RedundaKitty Level is: ' + RKLevel, 1);
 				}
 			}
 		}
