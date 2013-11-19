@@ -39,6 +39,14 @@ var RKNew = 1;
 var RKNewAudio = 1;
 var RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
+function BClick(){
+	if (Molpy.Got('Temporal Rift') && Molpy.Boosts['Temporal Rift'].countdown < 5){
+		//Do Nothing to avoid temporal rift
+	}
+	else {
+		Molpy.ClickBeach();
+	}	
+}
 
 function Ninja() {
     if (Molpy.ninjad == 0) {
@@ -48,7 +56,7 @@ function Ninja() {
         else {
             incoming_ONG = 0;
             if (NinjaAutoClickStatus == 1) {
-                Molpy.ClickBeach();
+				BClick();
 				Molpy.Notify('Ninja Auto Click', 1);
 				if (BorderAlertStatus == 1) {
 					$("#beach").css("border","2px solid green");
