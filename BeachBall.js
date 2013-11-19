@@ -160,7 +160,7 @@ function RedundaKitty() {
 				Logicat = 0;
 				start = content.indexOf("Show");
 				content = content.substring(start+16,start+40);
-				Molpy.Noftify(content, 1);
+				Molpy.Notify(content, 1);
 				content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 				len = content.length;
 				RKLevel = content.substring(13,len);
