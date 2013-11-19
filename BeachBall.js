@@ -163,9 +163,9 @@ function RedundaKitty() {
 				content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 				len = content.length;
 				RKLevel = content.substring(13,len);
-				/*if (RKLevel != 0) {
+				if (RKLevel != 0) {
 					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
-				}*/
+				}
 			}
 		}
 		//If RK not visible, LC to 99.
@@ -308,8 +308,8 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick=""> <h4>Blank</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="ExtendRK()"> <h4>Extend RK</h4> </a></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
 DisplayDescription('LCAutoClick', LCAutoClickStatus);
 DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
@@ -331,7 +331,11 @@ function Loop() {
 	setTimeout(MainProgram, refreshRate);
 }
 
-/*function SpawnRK() {
+function SpawnRK() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
-}*/
+}
+
+function ExtendRK() {
+	Molpy.redactedCountup = 1;
+}
 
