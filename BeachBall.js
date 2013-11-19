@@ -158,8 +158,8 @@ function RedundaKitty() {
 			//Otherwise it is an RK
 			else {
 				Logicat = 0;
-				start = content.indexOf("ClickRedacted");
-				content = content.substring(start,start+17);
+				start = content.indexOf("Show");
+				content = content.substring(start+16,start+16+17);
 				content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 				len = content.length;
 				RKLevel = content.substring(13,len);
