@@ -164,10 +164,10 @@ function RedundaKitty() {
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 					Molpy.Notify(content, 1);
 					len = content.length;
-					RKLevel = content.substring(19,len);
-					if (RKLevel != 0) {
+					RKLevel = content.substring(18,len);
+					//if (RKLevel != 0) {
 						Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
-					}
+					//}
 				}
 				else {
 					Molpy.Notify('YouTube Cat', 1);
