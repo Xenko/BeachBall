@@ -1,8 +1,8 @@
 //v1.0 as Starting Point
 //v2.0 Cleaning up code. Setting up Menu Structure and Initial Settings and functions.
 
-var version = '2.1 Beta';
-var SCBversion = '3.03'; //Last SandCastle Builder version tested
+var version = '2.1';
+var SCBversion = '3.05'; //Last SandCastle Builder version tested
 
 //Declare and Initialize Variables
 var incoming_ONG = 0;
@@ -164,17 +164,15 @@ function RedundaKitty() {
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 					len = content.length;
 					RKLevel = content.substring(18,len);
-					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
+					//Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 				}
 				else {
 					start = content.indexOf("iframe src=");
 					content = content.substring(start-40,start-16);
-					Molpy.Notify(content, 1);
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-					Molpy.Notify(content, 1);
 					len = content.length;
 					RKLevel = content.substring(18,len);
-					Molpy.Notify('YT RedundaKitty Level is: ' + RKLevel, 1);
+					//Molpy.Notify('YT RedundaKitty Level is: ' + RKLevel, 1);
 				}
 			}
 		}
@@ -216,7 +214,6 @@ function RedundaKitty() {
 	}	
 	//If no RK active, update title Timer. Reset some variables.
 	else {
-		SpawnRK();
 		document.title = RKTimer;
 		oldRKLocation = -1;
 		RKNew = 1;
@@ -319,8 +316,8 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="ExtendRK()"> <h4>Extend RK</h4> </a></div>');
+//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="ExtendRK()"> <h4>Extend RK</h4> </a></div>');
 DisplayDescription('RKAutoClick', RKAutoClickStatus);
 DisplayDescription('LCAutoClick', LCAutoClickStatus);
 DisplayDescription('NinjaAutoClick', NinjaAutoClickStatus);
@@ -341,7 +338,7 @@ function MainProgram() {
 function Loop() {
 	setTimeout(MainProgram, refreshRate);
 }
-
+/*
 function SpawnRK() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
 }
@@ -349,4 +346,4 @@ function SpawnRK() {
 function ExtendRK() {
 	Molpy.redactedCountup = 1;
 }
-
+*/
