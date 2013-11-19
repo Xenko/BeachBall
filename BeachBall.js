@@ -163,7 +163,7 @@ function RedundaKitty() {
 				Molpy.Notify(content, 1);
 				content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 				len = content.length;
-				RKLevel = content.substring(13,len);
+				RKLevel = content.substring(19,len);
 				if (RKLevel != 0) {
 					Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
 				}
