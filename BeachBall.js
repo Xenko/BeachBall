@@ -168,7 +168,7 @@ function RedundaKitty() {
 				}
 				else {
 					start = content.indexOf("iframe src=");
-					content = content.substring(start-39,start-16);
+					content = content.substring(start-40,start-16);
 					Molpy.Notify(content, 1);
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 					Molpy.Notify(content, 1);
