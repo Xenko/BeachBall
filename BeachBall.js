@@ -348,9 +348,6 @@ function BeachBallLoop() {
 	setTimeout(BeachBallMainProgram, BeachBall.refreshRate);
 }
 
-Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
+//Program Startup
 BeachBallLoop();
-
-
-
-
+Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
