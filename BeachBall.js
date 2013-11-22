@@ -331,7 +331,7 @@ BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
 BeachBall.Loop = function() {
-	setTimeout(BeachBall.MainProgram, BeachBall.refreshRate);
+	setTimeout(BeachBall.MainProgram(), BeachBall.refreshRate);
 }
 
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
