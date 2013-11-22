@@ -291,6 +291,15 @@ BeachBall.SwitchOption = function(option) {
 			if (BeachBall.BeachAutoClickStatus > 2) {BeachBall.BeachAutoClickStatus = 0;}
 			status = BeachBall.BeachAutoClickStatus;
 			break;
+		case 'BeachAutoClickRate':
+			var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', BeachBall.AutoClickCPS));
+			if (newRate < 1 || newRate > 20 || isNaN(newRate)){
+				Molpy.Notify('Invalid Clicking Rate', 1);
+			}
+			else {
+				BeachBall.BeachAutoClickCPS = newRate;
+			}
+			break;
 		case 'BorderAlert':
 			BeachBall.BorderAlertStatus++;
 			if (BeachBall.BorderAlertStatus > 1) {BeachBall.BorderAlertStatus = 0; $("#beach").css("border","1px solid white");}
@@ -331,9 +340,14 @@ BeachBall.DisplayDescription = function(option, status) {
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
 	else if (option == 'BeachAutoClick') {
-		if (status == 0) {description = 'Off';}
+		if (status == 0) {
+			description = 'Off';
+			g('ClickRate').style.visibility = 'hidden';}
 		else if (status == 1) {description = 'Keep Ninja';}
-		else if (status == 2) {description = 'On: ' + BeachBall.BeachAutoClickCPS + ' cps';}
+		else if (status == 2) {
+			description = 'On: ';
+			g('ClickRate').style.visibility = 'visible';
+			g('ClickRate').innerHTML = BeachBall.BeachAutoClickCPS + ' cps';}
 		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
 	}
 	else if (option == 'LCAutoClick') {
@@ -368,7 +382,7 @@ if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
 $('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'LCAutoClick\')"> <h4>Logicat Auto Click</h4> </a> <div id="LCAutoClickDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"><div id="ClickRate" style="display: none;"><a onlick="Beachball.SwitchOption(\'BeachAutoClickRate\')"></a></div></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
