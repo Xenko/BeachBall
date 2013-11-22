@@ -346,8 +346,8 @@ BeachBall.DisplayDescription = function(option, status) {
 		else if (status == 1) {description = 'Keep Ninja';}
 		else if (status == 2) {
 			description = 'On: ';
-			$('#ClickRate').show();
-			//$('#ClickRate').innerHTML = BeachBall.BeachAutoClickCPS + ' cps';}
+			$('#ClickRate').show();}
+			//$('#ClickRate').innerHTML = BeachBall.BeachAutoClickCPS + ' cps';
 		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
 	}
 	else if (option == 'LCAutoClick') {
