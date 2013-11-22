@@ -2,6 +2,11 @@
 
 ## Changelog
 
+### Version 3.1
+
+#### Bug Fixes
+* Beach autoclicker will no longer break ninja streak.
+
 ###Version 3.0
 
 #### New Features

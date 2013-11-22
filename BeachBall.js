@@ -5,8 +5,8 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'badgesav'];
 
 //Version Information
-BeachBall.version = '3.0';
-BeachBall.SCBversion = '3.13'; //Last SandCastle Builder version tested
+BeachBall.version = '3.1';
+BeachBall.SCBversion = '3.14'; //Last SandCastle Builder version tested
 
 //BB Options Variables
 BeachBall.AudioAlertsStatus = 0;
@@ -44,7 +44,7 @@ BeachBall.BeachAutoClick = function() {
 	clicks = 0;
 	wholeClicks = 0;
 	//If the auto clicker is enabled
-	if (BeachBall.BeachAutoClickStatus == 2) {
+	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.ninjad != 0) {
 		//Calculates number of clicks to process this tick
 		clicks = BeachBall.BeachAutoClickCPS*BeachBall.refreshRate/1000 + BeachBall.ClickRemainder;
 		//If > 1, process whole clicks this tick, save the remainder for the next tick.
