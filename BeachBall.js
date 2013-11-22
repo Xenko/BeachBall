@@ -50,6 +50,7 @@ BeachBall.BeachAutoClick = function() {
 			wholeClicks = Math.floor(clicks);
 			BeachBall.ClickRemainder = clicks - wholeClicks;
 			BeachBall.ClickBeach(wholeClicks);
+			Molpy.Notify('Beach Clicked ' + wholeClicks + ' times.', 0);
 		}
 		//If < 1, save for next tick
 		else {
@@ -63,7 +64,6 @@ BeachBall.ClickBeach = function(number) {
 	if (Molpy.Got('Temporal Rift') == 0){
 		for (i = 0; i < number; i++) {
 			Molpy.ClickBeach();
-			Molpy.Notify('Beach Click: ' + i, 1);
 		}
 	}
 	else {
