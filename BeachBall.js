@@ -339,7 +339,7 @@ BeachBall.MainProgram = function() {
 }
 
 BeachBall.Loop = function() {
-	setTimeout(BeachBall.MainProgram(), BeachBall.refreshRate);
+	setTimeout(BeachBall.MainProgram(), 1000);
 }
 
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
