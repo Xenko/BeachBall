@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'badgesav'];
 
 //Version Information
-BeachBall.version = '3.0 Beta';
+BeachBall.version = '3.0';
 BeachBall.SCBversion = '3.13'; //Last SandCastle Builder version tested
 
 //BB Options Variables
@@ -67,7 +67,7 @@ BeachBall.ClickBeach = function(number) {
 		}
 	}
 	else {
-		Molpy.Notify('Temporal Rift Active', 1);
+		Molpy.Notify('Temporal Rift Active, AutoClicking Disabled', 1);
 	}
 }
 
@@ -383,9 +383,9 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Click Beach</h4> </a></div>');
+//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
+//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Click Beach</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
 BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);

@@ -7,6 +7,7 @@
 #### New Features
 * Caged Logicat solver implemented (under the Logicat Auto Clicker option).
 * Logicat only audio alert implemented.
+* Beach Auto Clicker Implemented. Options are "Off", "Keep Ninja" (to only click once per ONG to maintain Ninja streak), and "On" with clicking rate from 1 to 20 CPS (clicks per second).
 
 #### Bug Fixes
 * Fixed ONG only audio alert so it actually works.
