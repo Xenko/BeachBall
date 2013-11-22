@@ -10,7 +10,7 @@ BeachBall.version = '3.0 Beta';
 BeachBall.SCBversion = '3.13'; //Last SandCastle Builder version tested
 
 //BB Options Variables
-BeachBall.AudioAlertsStatus = 3;
+BeachBall.AudioAlertsStatus = 0;
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
 	BeachBall.audio_Bell.volume = 1;
 BeachBall.audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
