@@ -4,6 +4,9 @@
 
 ###Version 3.0
 
+#### New Features
+* Caged Logicat solver implemented (under the Logicat Auto Clicker option).
+
 #### Behind the Scenes
 * Namespaced variables/methods in a BeachBall object to prevent potential JS crossover issues. It's not pretty, but I think it works.
 
