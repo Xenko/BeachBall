@@ -238,7 +238,7 @@ BeachBall.SwitchOption = function(option) {
 	switch (option) {
 		case 'RKAutoClick':
 			//Try me = BeachBall.RKAutoClickStatus++;
-			BeachBall.RKAutoClickStatus = BeachBall.RKAutoClickStatus++;
+			BeachBall.RKAutoClickStatus++;
 			if (BeachBall.RKAutoClickStatus > 2) {BeachBall.RKAutoClickStatus = 0;}
 			status = BeachBall.RKAutoClickStatus;
 			break;
