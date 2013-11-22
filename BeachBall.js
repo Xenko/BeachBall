@@ -328,7 +328,7 @@ BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
-BeachBallMainProgram = function() {
+function BeachBallMainProgram() {
 	Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 	BeachBall.RedundaKitty();
@@ -336,7 +336,7 @@ BeachBallMainProgram = function() {
 	BeachBallLoop();
 }
 
-BeachBallLoop = function() {
+function BeachBallLoop() {
 	setTimeout(BeachBallMainProgram(), 2000);
 }
 
