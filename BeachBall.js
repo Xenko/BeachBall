@@ -299,6 +299,8 @@ BeachBall.SwitchOption = function(option) {
 			else {
 				BeachBall.BeachAutoClickCPS = newRate;
 			}
+			option = 'BeachAutoClick';
+			status = 2;
 			break;
 		case 'BorderAlert':
 			BeachBall.BorderAlertStatus++;
@@ -342,8 +344,7 @@ BeachBall.DisplayDescription = function(option, status) {
 	else if (option == 'BeachAutoClick') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'Keep Ninja';}
-		else if (status == 2) {
-			description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';}
+		else if (status == 2) {description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';}
 		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
 	}
 	else if (option == 'LCAutoClick') {
