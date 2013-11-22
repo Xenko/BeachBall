@@ -63,7 +63,7 @@ BeachBall.BeachAutoClick = function() {
 BeachBall.ClickBeach = function(number) {
 	if (Molpy.Got('Temporal Rift') == 0){
 		for (i = 0; i < number; i++) {
-			Molpy.ClickBeach();
+			setTimeout(Molpy.ClickBeach(), BeachBall.refreshRate/number);
 		}
 	}
 	else {
