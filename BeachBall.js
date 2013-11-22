@@ -340,14 +340,10 @@ BeachBall.DisplayDescription = function(option, status) {
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
 	else if (option == 'BeachAutoClick') {
-		if (status == 0) {
-			description = 'Off';
-			g('ClickRate').style.visibility = 'hidden';}
+		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'Keep Ninja';}
 		else if (status == 2) {
-			description = 'On: ';
-			$('#ClickRate').show();}
-			//$('#ClickRate').innerHTML = BeachBall.BeachAutoClickCPS + ' cps';
+			description = 'On: <a onlick="Beachball.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + '</a>';}
 		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
 	}
 	else if (option == 'LCAutoClick') {
@@ -382,7 +378,7 @@ if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
 $('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'LCAutoClick\')"> <h4>Logicat Auto Click</h4> </a> <div id="LCAutoClickDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"><div id="ClickRate"><a onlick="Beachball.SwitchOption(\'BeachAutoClickRate\')">Test</a></div></div></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
