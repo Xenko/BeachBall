@@ -291,6 +291,7 @@ BeachBall.SwitchOption = function(option) {
 			BeachBall.BeachAutoClickStatus++;
 			if (BeachBall.BeachAutoClickStatus > 2) {BeachBall.BeachAutoClickStatus = 0;}
 			status = BeachBall.BeachAutoClickStatus;
+			Molpy.Notify('Clicked, status: ' + status, 0);
 			break;
 		case 'BorderAlert':
 			BeachBall.BorderAlertStatus++;
