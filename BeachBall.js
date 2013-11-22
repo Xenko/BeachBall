@@ -47,7 +47,6 @@ BeachBall.BeachAutoClick = function() {
 		clicks = BeachBall.BeachAutoClickCPS*BeachBall.refreshRate + BeachBall.ClickRemainder;
 		//If > 1, process whole clicks this tick, save the remainder for the next tick.
 		if (clicks > 1) {
-			Molpy.Notify('Beach Clicked', 0);
 			wholeClicks = Math.floor(clicks);
 			BeachBall.ClickRemainder = clicks - wholeClicks;
 			BeachBall.ClickBeach(wholeClicks);
