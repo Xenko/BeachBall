@@ -359,7 +359,7 @@ BeachBall.SpawnRK = function() {
 }
 
 BeachBall.SpawnRift = function() {
-	Molpy.GiveTempBoost('Temporal Rift', 5);;
+	Molpy.GiveTempBoost('Temporal Rift', 1, 5);;
 }
 
 BeachBall.Temp = function() {
