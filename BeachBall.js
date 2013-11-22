@@ -40,7 +40,7 @@ BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Autoclicks the Beach
-BeachBall.BeachAutoClick = function {
+BeachBall.BeachAutoClick = function() {
 	//If the auto clicker is enabled
 	if (BeachBall.BeachAutoClickStatus = 1) {
 		//Calculates number of clicks to process this tick
