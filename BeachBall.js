@@ -46,7 +46,7 @@ BeachBall.BeachAutoClick = function() {
 	if (BeachBall.BeachAutoClickStatus == 2) {
 		//Calculates number of clicks to process this tick
 		clicks = BeachBall.BeachAutoClickCPS*BeachBall.refreshRate + BeachBall.ClickRemainder;
-		Molpy.Notify('Beach Clicked ' + wholeClicks + ' times.', 0);
+		Molpy.Notify('Beach to be clicked ' + clicks + ' time(s).', 0);
 		/*//If > 1, process whole clicks this tick, save the remainder for the next tick.
 		if (clicks > 1) {
 			wholeClicks = Math.floor(clicks);
@@ -291,7 +291,6 @@ BeachBall.SwitchOption = function(option) {
 			BeachBall.BeachAutoClickStatus++;
 			if (BeachBall.BeachAutoClickStatus > 2) {BeachBall.BeachAutoClickStatus = 0;}
 			status = BeachBall.BeachAutoClickStatus;
-			Molpy.Notify('Clicked, status: ' + status, 0);
 			break;
 		case 'BorderAlert':
 			BeachBall.BorderAlertStatus++;
