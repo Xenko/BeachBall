@@ -39,12 +39,10 @@ BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 BeachBall.ClickBeach = function() {
-	if (Molpy.Got('Temporal Rift') && Molpy.Boosts['Temporal Rift'].countdown < 5){
-		//Do Nothing to avoid temporal rift
-	}
-	else {
+	Molpy.Notify("Temporal Rift Status: ' + Molpy.Got('Temporal Rift'), 1);
+	if (Molpy.Got('Temporal Rift') == 0){
 		Molpy.ClickBeach();
-	}	
+	}
 }
 
 BeachBall.Ninja = function() {
@@ -343,7 +341,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="ExtendRK()"> <h4>Extend RK</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Click Beach</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
 BeachBall.DisplayDescription('NinjaAutoClick', BeachBall.NinjaAutoClickStatus);
@@ -355,8 +353,8 @@ BeachBall.SpawnRK = function() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
 }
 
-BeachBall.ExtendRK = function() {
-	Molpy.redactedCountup = 1;
+BeachBall.Temp = function() {
+	BeachBall.ClickBeach();
 }
 
 function BeachBallMainProgram() {
