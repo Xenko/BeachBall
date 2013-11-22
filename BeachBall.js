@@ -60,14 +60,13 @@ BeachBall.BeachAutoClick = function() {
 }
 
 BeachBall.ClickBeach = function(number) {
-	//Molpy.Notify('Temporal Rift Status: ' + Molpy.Got('Temporal Rift'), 1);
 	if (Molpy.Got('Temporal Rift') == 0){
 		for (i = 0; i < number; i++) {
 			Molpy.ClickBeach();
 		}
 	}
 	else {
-		Molpy.Notify('Temporal Rift Active', 0);
+		Molpy.Notify('Temporal Rift Active', 1);
 	}
 }
 
@@ -403,7 +402,7 @@ function BeachBallMainProgram() {
 	BeachBall.RedundaKitty();
 	BeachBall.Ninja();
 	BeachBall.CagedLogicat();
-	BeachBall.BeachAutoClick();
+	//BeachBall.BeachAutoClick();
 	BeachBallLoop();
 }
 
