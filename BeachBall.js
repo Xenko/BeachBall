@@ -78,7 +78,7 @@ BeachBall.Ninja = function() {
         }
         else {
             BeachBall.incoming_ONG = 0;
-            if (BeachBall.BeachAutoClickStatus == 1) {
+            if (BeachBall.BeachAutoClickStatus > 0) {
 				BeachBall.ClickBeach(1);
 				Molpy.Notify('Ninja Auto Click', 1);
 				if (BeachBall.BorderAlertStatus == 1) {
@@ -292,7 +292,7 @@ BeachBall.SwitchOption = function(option) {
 			status = BeachBall.BeachAutoClickStatus;
 			break;
 		case 'BeachAutoClickRate':
-			var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', BeachBall.AutoClickCPS));
+			var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', BeachBall.BeachAutoClickCPS));
 			if (newRate < 1 || newRate > 20 || isNaN(newRate)){
 				Molpy.Notify('Invalid Clicking Rate', 1);
 			}
