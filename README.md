@@ -2,6 +2,13 @@
 
 ## Changelog
 
+### Version 3.2
+
+#### Bug Fixes
+* Fixed syntax in Bookmark loader (missing semi-colon).
+* Fixed minor error in setting auto click CPS change rate dialogue.
+* Fixed Beach Auto Click so it should keep going after ninja stealth streak.
+
 ### Version 3.1
 
 #### Bug Fixes
