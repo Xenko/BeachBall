@@ -126,10 +126,6 @@ BeachBall.FindRK = function() {
 	BeachBall.oldLC = Molpy.Boosts['Logicat'].power;
 }
 
-BeachBall.ManualRKClick = function() {
-
-}
-
 BeachBall.RedundaKitty = function() {
 	var content = '';
 	//Refresh Timer Variable
@@ -191,7 +187,7 @@ BeachBall.RedundaKitty = function() {
 			BeachBall.ToggleMenus('123');
 		}
 		//Solves LC if AutoClick enabled
-		else if (BeachBall.Logicat == 1 && BeachBall.LCAutoClickStatus == 1) {
+		else if (BeachBall.Logicat == 1 && (BeachBall.LCAutoClickStatus == 1 || BeachBall.LCAutoClickStatus == 3)) {
 			BeachBall.SolveLogicat();
 			BeachBall.RKNew = 1;
 			BeachBall.RKLocation = '123';
@@ -223,6 +219,18 @@ BeachBall.RedundaKitty = function() {
 	}
 }
 
+BeachBall.CagedLogicat = function() {
+	if (Molpy.Boosts['Caged Logicat'].power == 1 && BeachBall.LCAutoClickStatus > 1) {
+		var i = 65;
+		var LCSolution = 'A';
+		do 
+			{LCSolution = String.fromCharCode(i);
+			i++;}
+		while (Molpy.cagedPuzzleTarget != Molpy.cagedSGen.StatementValue(LCSolution));
+		Molpy.ClickCagedPuzzle(LCSolution);
+	}
+}
+
 BeachBall.SolveLogicat = function() {
 	var i = 65;
 	var LCSolution = 'A';
@@ -237,14 +245,13 @@ BeachBall.SwitchOption = function(option) {
 	var status = 0;
 	switch (option) {
 		case 'RKAutoClick':
-			//Try me = BeachBall.RKAutoClickStatus++;
 			BeachBall.RKAutoClickStatus++;
 			if (BeachBall.RKAutoClickStatus > 2) {BeachBall.RKAutoClickStatus = 0;}
 			status = BeachBall.RKAutoClickStatus;
 			break;
 		case 'LCAutoClick':
 			BeachBall.LCAutoClickStatus++;
-			if (BeachBall.LCAutoClickStatus > 1) {BeachBall.LCAutoClickStatus = 0;}
+			if (BeachBall.LCAutoClickStatus > 3) {BeachBall.LCAutoClickStatus = 0;}
 			status = BeachBall.LCAutoClickStatus;
 			break;
 		case 'NinjaAutoClick':
@@ -278,7 +285,7 @@ BeachBall.SwitchOption = function(option) {
 BeachBall.DisplayDescription = function(option, status) {
 	var error = 0;
 	var description = 'error';
-	if (option == 'LCAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
+	if (option == 'NinjaAutoClick' || option == 'BorderAlert') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
 		else {Molpy.Notify('Display Description Error', 1);}
@@ -289,6 +296,13 @@ BeachBall.DisplayDescription = function(option, status) {
 		else if (status == 2) {description = 'ONG Only';}
 		else if (status == 3) {description = 'RK and ONG'; BeachBall.RKPlayAudio = 1;}
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
+	}
+	else if (option == 'LCAutoClick') {
+		if (status == 0) {description = 'Off';}
+		else if (status == 1) {description = 'LC Only';}
+		else if (status == 2) {description = 'Caged LC Only';}
+		else if (status == 3) {description = 'All LCs'}
+		else {Molpy.Notify('Display Description Error - LCAutoClick: ' + status, 1);}
 	}
 	else if (option == 'RKAutoClick') {
 		if (status == 0) {description = 'Off';}
@@ -341,6 +355,7 @@ function BeachBallMainProgram() {
 	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 	BeachBall.RedundaKitty();
 	BeachBall.Ninja();
+	BeachBall.CagedLogicat();
 	BeachBallLoop();
 }
 
