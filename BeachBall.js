@@ -81,8 +81,8 @@ BeachBall.Ninja = function() {
 	}
 }
 
+//Useless change to make git update...
 BeachBall.ToggleMenus = function(wantOpen) {
-	
 	//for (var i in BeachBall.lootBoxes) {
 	//var me = BeachBall.lootBoxes[i];
 	for (i=0, len = BeachBall.lootBoxes.length; i < len; i++) {
