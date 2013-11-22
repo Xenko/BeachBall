@@ -198,15 +198,11 @@ BeachBall.RedundaKitty = function() {
 		else {	
 			document.title = "! kitten !";
 			//If RK Audio Alerts Enabled
-			if (BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 3) {
-				//If proper mNP and hasn't yet played this mNP
-				if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) == 0 && BeachBall.RKPlayAudio == 1) {
-					BeachBall.audio_Bell.play();
-					BeachBall.RKPlayAudio = 0;
-				}
-				else {
-					BeachBall.RKPlayAudio = 1;
-				}
+			if ((BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat = 0) {
+				BeachBall.PlayRKAlert();
+			}	
+			else if ((BeachBall.AudioAlertsStatus == 2 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat = 1) {
+				BeachBall.PlayRKAlert();
 			}
 		}
 	}	
@@ -216,6 +212,18 @@ BeachBall.RedundaKitty = function() {
 		BeachBall.oldRKLocation = -1;
 		BeachBall.RKNew = 1;
 		BeachBall.RKPlayAudio = 0;
+	}
+}
+
+BeachBall.PlayRKAlert = function() {
+	//If proper mNP and hasn't yet played this mNP (can happen if refresh Rate < mNP length)
+	if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) == 0 && BeachBall.RKPlayAudio == 1) {
+		BeachBall.audio_Bell.play();
+		BeachBall.RKPlayAudio = 0;
+	}
+	//Otherwise reset played this mNP
+	else {
+		BeachBall.RKPlayAudio = 1;
 	}
 }
 
@@ -266,7 +274,7 @@ BeachBall.SwitchOption = function(option) {
 			break;
 		case 'AudioAlerts':
 			BeachBall.AudioAlertsStatus++;
-			if (BeachBall.AudioAlertsStatus > 3) {BeachBall.AudioAlertsStatus = 0;}
+			if (BeachBall.AudioAlertsStatus > 4) {BeachBall.AudioAlertsStatus = 0;}
 			status = BeachBall.AudioAlertsStatus;
 			break;
 		case 'RefreshRate':
@@ -293,8 +301,9 @@ BeachBall.DisplayDescription = function(option, status) {
 	else if (option == 'AudioAlerts') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'RK Only'; BeachBall.RKPlayAudio = 1;}
-		else if (status == 2) {description = 'ONG Only';}
-		else if (status == 3) {description = 'RK and ONG'; BeachBall.RKPlayAudio = 1;}
+		else if (status == 2) {description = 'LC Only'; BeachBall.RKPlayAudio = 1;}
+		else if (status == 3) {description = 'ONG Only';}
+		else if (status == 4) {description = 'RK, LC and ONG'; BeachBall.RKPlayAudio = 1;}
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
 	else if (option == 'LCAutoClick') {
