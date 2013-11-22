@@ -2,6 +2,11 @@
 
 ## Changelog
 
+###Version 3.0
+
+#### Behind the Scenes
+* Namespaced variables/methods in a BeachBall object to prevent potential JS crossover issues. It's not pretty, but I think it works.
+
 ### Version 2.1
 
 #### Bug Fixes
