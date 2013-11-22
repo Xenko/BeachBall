@@ -198,10 +198,10 @@ BeachBall.RedundaKitty = function() {
 		else {	
 			document.title = "! kitten !";
 			//If RK Audio Alerts Enabled
-			if ((BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat = 0) {
+			if ((BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat == 0) {
 				BeachBall.PlayRKAlert();
 			}	
-			else if ((BeachBall.AudioAlertsStatus == 2 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat = 1) {
+			else if ((BeachBall.AudioAlertsStatus == 2 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat == 1) {
 				BeachBall.PlayRKAlert();
 			}
 		}
