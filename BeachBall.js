@@ -81,7 +81,6 @@ BeachBall.Ninja = function() {
 	}
 }
 
-//Useless change to make git update...
 BeachBall.ToggleMenus = function(wantOpen) {
 	//for (var i in BeachBall.lootBoxes) {
 	//var me = BeachBall.lootBoxes[i];
@@ -325,15 +324,14 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="ExtendRK()"> <h4>Extend RK</h4> </a></div>');
-DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
-DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
-DisplayDescription('NinjaAutoClick', BeachBall.NinjaAutoClickStatus);
-DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
-DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
-DisplayDescription('RefreshRate', BeachBall.refreshRate);
+BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
+BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
+BeachBall.DisplayDescription('NinjaAutoClick', BeachBall.NinjaAutoClickStatus);
+BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
+BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
+BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
-//Molpy.Notify('You have ' + Molpy.Boosts['Panther Salve'].power + ' Panther Salve Power', 1);
 BeachBall.Loop();
 
 BeachBall.MainProgram = function() {
