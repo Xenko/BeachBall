@@ -185,7 +185,7 @@ BeachBall.RedundaKitty = function() {
 
 		//Clicks RK if AutoClick Enabled
 		if (BeachBall.RKAutoClickStatus == 2 && BeachBall.Logicat == 0 ) {
-			Molpy.ClickRedacted(RKLevel);
+			Molpy.ClickRedacted(BeachBall.RKLevel);
 			BeachBall.RKNew = 1;
 			BeachBall.RKLocation = '123';
 			BeachBall.ToggleMenus('123');
@@ -329,7 +329,7 @@ BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
 function BeachBallMainProgram() {
-	Molpy.Notify('Tick', 0);
+	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 	BeachBall.RedundaKitty();
 	BeachBall.Ninja();
