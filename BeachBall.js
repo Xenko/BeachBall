@@ -278,7 +278,7 @@ BeachBall.SwitchOption = function(option) {
 BeachBall.DisplayDescription = function(option, status) {
 	var error = 0;
 	var description = 'error';
-	//Molpy.Notify(option + status, 1);
+	Molpy.Notify(option + status, 1);
 	if (option == 'LCAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
