@@ -77,7 +77,6 @@ BeachBall.Ninja = function() {
         }  
     }
     else if (BeachBall.BorderAlertStatus == 1) {
-		Molpy.Notify('Border to Green', 1);
         $("#beach").css("border","2px solid green");
 	}
 }
@@ -279,7 +278,6 @@ BeachBall.SwitchOption = function(option) {
 BeachBall.DisplayDescription = function(option, status) {
 	var error = 0;
 	var description = 'error';
-	Molpy.Notify(option + status, 1);
 	if (option == 'LCAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
