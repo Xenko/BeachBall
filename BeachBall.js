@@ -343,7 +343,7 @@ BeachBall.DisplayDescription = function(option, status) {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'Keep Ninja';}
 		else if (status == 2) {
-			description = 'On: <a onlick="Beachball.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + '</a>';}
+			description = 'On: <a onlick="Beachball.SwitchOption(\'BeachBall.BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';}
 		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
 	}
 	else if (option == 'LCAutoClick') {
