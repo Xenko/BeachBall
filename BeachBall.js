@@ -81,7 +81,7 @@ BeachBall.Ninja = function() {
 	}
 }
 
-function BeachBall.ToggleMenus(wantOpen) {
+BeachBall.ToggleMenus = function(wantOpen) {
 	
 	//for (var i in BeachBall.lootBoxes) {
 	//var me = BeachBall.lootBoxes[i];
