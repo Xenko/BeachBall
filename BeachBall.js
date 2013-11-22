@@ -39,7 +39,7 @@ BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 BeachBall.ClickBeach = function() {
-	Molpy.Notify("Temporal Rift Status: ' + Molpy.Got('Temporal Rift'), 1);
+	Molpy.Notify('Temporal Rift Status: ' + Molpy.Got('Temporal Rift'), 1);
 	if (Molpy.Got('Temporal Rift') == 0){
 		Molpy.ClickBeach();
 	}
