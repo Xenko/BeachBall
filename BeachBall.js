@@ -234,7 +234,7 @@ BeachBall.SolveLogicat = function() {
 }
 
 BeachBall.SwitchOption = function(option) {
-	var status = -1;
+	var status = 0;
 	switch (option) {
 		case 'RKAutoClick':
 			//Try me = BeachBall.RKAutoClickStatus++;
@@ -278,6 +278,7 @@ BeachBall.SwitchOption = function(option) {
 BeachBall.DisplayDescription = function(option, status) {
 	var error = 0;
 	var description = 'error';
+	//Molpy.Notify(option + status, 1);
 	if (option == 'LCAutoClick' || option == 'NinjaAutoClick' || option == 'BorderAlert') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
@@ -292,8 +293,8 @@ BeachBall.DisplayDescription = function(option, status) {
 	}
 	else if (option == 'RKAutoClick') {
 		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'Find RK Only'; RKNew = 1;}
-		else if (status == 2) {description = 'On'; RKNew = 1;}
+		else if (status == 1) {description = 'Find RK Only'; BeachBall.RKNew = 1;}
+		else if (status == 2) {description = 'On'; BeachBall.RKNew = 1;}
 		else {Molpy.Notify('Display Description Error - RKAutoClick: ' + status, 1);}
 	}
 	else if (option == 'RefreshRate') {
