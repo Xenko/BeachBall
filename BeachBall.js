@@ -328,7 +328,7 @@ BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
-BeachBall.MainLoop = function() {
+function BeachBallMainProgram() {
 	Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 	BeachBall.RedundaKitty();
@@ -337,7 +337,7 @@ BeachBall.MainLoop = function() {
 }
 
 function BeachBallLoop() {
-	setTimeout(BeachBall.MainLoop, 2000);
+	setTimeout(BeachBallMainProgram, 2000);
 }
 
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
