@@ -330,13 +330,6 @@ BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
-BeachBall.Loop = function() {
-	setTimeout(BeachBall.MainProgram(), BeachBall.refreshRate);
-}
-
-Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
-BeachBall.Loop();
-
 BeachBall.MainProgram = function() {
 	Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
@@ -344,6 +337,13 @@ BeachBall.MainProgram = function() {
 	BeachBall.Ninja();
 	BeachBall.Loop();
 }
+
+BeachBall.Loop = function() {
+	setTimeout(BeachBall.MainProgram(), BeachBall.refreshRate);
+}
+
+Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
+BeachBall.Loop();
 
 /*
 BeachBall.SpawnRK = function() {
