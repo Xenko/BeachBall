@@ -77,6 +77,7 @@ BeachBall.Ninja = function() {
         }  
     }
     else if (BeachBall.BorderAlertStatus == 1) {
+		Molpy.Notify('Border to Green', 1);
         $("#beach").css("border","2px solid green");
 	}
 }
@@ -337,6 +338,7 @@ Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle 
 BeachBall.Loop();
 
 BeachBall.MainProgram = function() {
+	Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 	BeachBall.RedundaKitty();
 	BeachBall.Ninja();
