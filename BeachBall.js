@@ -337,7 +337,7 @@ BeachBall.ExtendRK = function() {
 }
 
 function BeachBallMainProgram() {
-	//Molpy.Notify('Tick', 0);
+	Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
 	BeachBall.RedundaKitty();
 	BeachBall.Ninja();
