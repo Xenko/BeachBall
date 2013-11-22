@@ -1,7 +1,7 @@
 //Declare and Initialize Variables
 var BeachBall = {};
 BeachBall.incoming_ONG = 0;
-BeachBall.NinjaAutoClickStatus = 1;
+BeachBall.NinjaAutoClickStatus = 0;
 BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'badgesav'];
 

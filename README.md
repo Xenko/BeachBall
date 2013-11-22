@@ -6,6 +6,10 @@
 
 #### New Features
 * Caged Logicat solver implemented (under the Logicat Auto Clicker option).
+* Logicat only audio alert implemented.
+
+#### Bug Fixes
+* Fixed ONG only audio alert so it actually works.
 
 #### Behind the Scenes
 * Namespaced variables/methods in a BeachBall object to prevent potential JS crossover issues. It's not pretty, but I think it works.
