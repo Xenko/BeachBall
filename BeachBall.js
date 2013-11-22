@@ -43,6 +43,9 @@ BeachBall.ClickBeach = function() {
 	if (Molpy.Got('Temporal Rift') == 0){
 		Molpy.ClickBeach();
 	}
+	else {
+		Molpy.Notify('Temporal Rift Active', 1);
+	}
 }
 
 BeachBall.Ninja = function() {
@@ -341,6 +344,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Click Beach</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
@@ -349,14 +353,20 @@ BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
+//Developer Functions
 BeachBall.SpawnRK = function() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
+}
+
+BeachBall.SpawnRift = function() {
+	Molpy.Boosts['Temporal Rift'].department = 1;
 }
 
 BeachBall.Temp = function() {
 	BeachBall.ClickBeach();
 }
 
+//Main Program and Loop
 function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
