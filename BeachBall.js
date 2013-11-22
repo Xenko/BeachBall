@@ -41,17 +41,21 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Autoclicks the Beach
 BeachBall.BeachAutoClick = function() {
-	var clicks = 0;
+	clicks = 0;
+	wholeClicks = 0;
 	//If the auto clicker is enabled
 	if (BeachBall.BeachAutoClickStatus == 2) {
 		//Calculates number of clicks to process this tick
 		clicks = BeachBall.BeachAutoClickCPS*BeachBall.refreshRate/1000 + BeachBall.ClickRemainder;
+		Molpy.Notify(clicks*100, 1);
 		//If > 1, process whole clicks this tick, save the remainder for the next tick.
 		if (clicks > 1) {
 			wholeClicks = Math.floor(clicks);
+			Molpy.Notify('Whole Clicks: ' wholeClicks, 1);
 			BeachBall.ClickRemainder = clicks - wholeClicks;
+			Molpy.Notify('Remaining Clicks: ' BeachBall.ClickRemainder, 1);
 			BeachBall.ClickBeach(wholeClicks);
-			Molpy.Notify('Beach clicked ' + wholeClicks + ' time(s).', 0);
+			//Molpy.Notify('Beach clicked ' + wholeClicks + ' time(s).', 0);
 		}
 		//If < 1, save for next tick
 		else {
