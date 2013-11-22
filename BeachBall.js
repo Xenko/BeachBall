@@ -56,7 +56,7 @@ BeachBall.BeachAutoClick = function() {
 		//If < 1, save for next tick
 		else {
 			BeachBall.ClickRemainder = clicks;
-		}*/
+		}
 	}
 }
 
