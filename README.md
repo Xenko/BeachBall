@@ -2,6 +2,11 @@
 
 ## Changelog
 
+### Version 3.2
+
+#### Bug Fixes
+* Fixed syntax in Bookmark loader (missing semi-colon).
+
 ### Version 3.1
 
 #### Bug Fixes
