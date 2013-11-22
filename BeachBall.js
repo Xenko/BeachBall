@@ -240,7 +240,7 @@ BeachBall.SwitchOption = function(option) {
 			//Try me = BeachBall.RKAutoClickStatus++;
 			BeachBall.RKAutoClickStatus = BeachBall.RKAutoClickStatus++;
 			if (BeachBall.RKAutoClickStatus > 2) {RKAutoClickStatus = 0;}
-			status = RKAutoClickStatus;
+			status = BeachBall.RKAutoClickStatus;
 			break;
 		case 'LCAutoClick':
 			BeachBall.LCAutoClickStatus++;
@@ -249,15 +249,12 @@ BeachBall.SwitchOption = function(option) {
 			break;
 		case 'NinjaAutoClick':
 			BeachBall.NinjaAutoClickStatus++;
-			if (BeachBall.NinjaAutoClickStatus > 1) {NinjaAutoClickStatus = 0;}
+			if (BeachBall.NinjaAutoClickStatus > 1) {BeachBall.NinjaAutoClickStatus = 0;}
 			status = BeachBall.NinjaAutoClickStatus;
 			break;
 		case 'BorderAlert':
 			BeachBall.BorderAlertStatus++;
-			if (BeachBall.BorderAlertStatus > 1) {
-				BeachBall.BorderAlertStatus = 0;
-				$("#beach").css("border","1px solid white");
-			}
+			if (BeachBall.BorderAlertStatus > 1) {BeachBall.BorderAlertStatus = 0; $("#beach").css("border","1px solid white");}
 			status = BeachBall.BorderAlertStatus;
 			break;
 		case 'AudioAlerts':
@@ -331,6 +328,10 @@ BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
+BeachBall.Loop = function() {
+	setTimeout(BeachBall.MainProgram, BeachBall.refreshRate);
+}
+
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
 BeachBall.Loop();
 
@@ -341,9 +342,6 @@ BeachBall.MainProgram = function() {
 	BeachBall.Loop();
 }
 
-BeachBall.Loop = function() {
-	setTimeout(BeachBall.MainProgram, BeachBall.refreshRate);
-}
 /*
 BeachBall.SpawnRK = function() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
