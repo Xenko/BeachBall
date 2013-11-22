@@ -303,13 +303,13 @@ BeachBall.DisplayDescription = function(option, status) {
 		else if (status == 1) {description = 'RK Only'; BeachBall.RKPlayAudio = 1;}
 		else if (status == 2) {description = 'LC Only'; BeachBall.RKPlayAudio = 1;}
 		else if (status == 3) {description = 'ONG Only';}
-		else if (status == 4) {description = 'RK, LC and ONG'; BeachBall.RKPlayAudio = 1;}
+		else if (status == 4) {description = 'All Alerts'; BeachBall.RKPlayAudio = 1;}
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
 	else if (option == 'LCAutoClick') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'LC Only';}
-		else if (status == 2) {description = 'Caged LC Only';}
+		else if (status == 2) {description = 'Caged Only';}
 		else if (status == 3) {description = 'All LCs'}
 		else {Molpy.Notify('Display Description Error - LCAutoClick: ' + status, 1);}
 	}
