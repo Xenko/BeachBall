@@ -319,7 +319,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="ExtendRK()"> <h4>Extend RK</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
@@ -327,6 +327,14 @@ BeachBall.DisplayDescription('NinjaAutoClick', BeachBall.NinjaAutoClickStatus);
 BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
+
+BeachBall.SpawnRK = function() {
+	Molpy.redactedCountup = Molpy.redactedToggle - 1;
+}
+
+BeachBall.ExtendRK = function() {
+	Molpy.redactedCountup = 1;
+}
 
 function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
@@ -343,12 +351,6 @@ function BeachBallLoop() {
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
 BeachBallLoop();
 
-/*
-BeachBall.SpawnRK = function() {
-	Molpy.redactedCountup = Molpy.redactedToggle - 1;
-}
 
-BeachBall.ExtendRK = function() {
-	Molpy.redactedCountup = 1;
-}
-*/
+
+
