@@ -140,6 +140,7 @@ BeachBall.FindRK = function() {
 	}
 	else if (Molpy.redactedVisible == 7) {
 		BeachBall.RKLocation = 'discov';
+		Molpy.Notify('Discovery RK FOUND!!!!!', 1);
 	}
 	else if (Molpy.redactedVisible > 3) {
 		BeachBall.RKLocation = Molpy.redactedGr;
@@ -240,6 +241,7 @@ BeachBall.RedundaKitty = function() {
 		BeachBall.oldRKLocation = -1;
 		BeachBall.RKNew = 1;
 		BeachBall.RKPlayAudio = 0;
+		BeachBall.SpawnRK();
 	}
 }
 
@@ -399,7 +401,7 @@ BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 
 //Developer Functions
 BeachBall.SpawnRK = function() {
-	Molpy.redactedCountup = Molpy.redactedToggle - 1;
+	Molpy.redactedCountup = Molpy.redactedToggle;
 }
 
 BeachBall.SpawnRift = function() {
