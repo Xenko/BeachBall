@@ -2,7 +2,7 @@
 
 ## Changelog
 
-### Version 3.2
+### Version 3.3
 
 #### Bug Fixes
 * Redundakitty autoclicker will now work when the redundakitty spawns in the Discoveries and Momuments/Glass Monuments tabs.
