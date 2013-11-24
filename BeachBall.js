@@ -2,7 +2,7 @@
 var BeachBall = {};
 BeachBall.incoming_ONG = 0;
 BeachBall.Time_to_ONG = 1800000;
-BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'discov', 'badgesav'];
+BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
 BeachBall.version = '3.3 beta';
@@ -139,7 +139,7 @@ BeachBall.FindRK = function() {
 		BeachBall.RKLocation = 'badgesav';
 	}
 	else if (Molpy.redactedVisible == 7) {
-		BeachBall.RKLocation = 'discov';
+		BeachBall.RKLocation = 'tagged';
 		Molpy.Notify('Discovery RK FOUND!!!!!', 1);
 	}
 	else if (Molpy.redactedVisible > 3) {
@@ -241,7 +241,7 @@ BeachBall.RedundaKitty = function() {
 		BeachBall.oldRKLocation = -1;
 		BeachBall.RKNew = 1;
 		BeachBall.RKPlayAudio = 0;
-		BeachBall.SpawnRK();
+		//BeachBall.SpawnRK();
 	}
 }
 
