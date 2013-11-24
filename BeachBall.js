@@ -386,7 +386,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Toggle Menus</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Extend RK</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
 BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
@@ -404,7 +404,7 @@ BeachBall.SpawnRift = function() {
 }
 
 BeachBall.Temp = function() {
-	BeachBall.ToggleMenus('123');
+	Molpy.redactedCountup = 0;
 }
 
 //Main Program and Loop
