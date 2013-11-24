@@ -324,7 +324,7 @@ BeachBall.SwitchOption = function(option) {
 			break;
 		case 'ToolFactory':
 			var newRate = parseInt(prompt('Tool Factory Loading:', BeachBall.toolFactory));
-			if (newRate < 1000 || newRate > 12000 || isNaN(newRate) || newRate % 1000 == 0){
+			if (newRate < 1000 || newRate > 12000 || isNaN(newRate) || newRate % 1000 != 0){
 				Molpy.Notify('Invalid Tool Factory Loading', 1);
 			}
 			else {
@@ -408,6 +408,7 @@ BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
 BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
+BeachBall.DisplayDescription('ToolFactory', BeachBall.toolFactory);
 
 //Developer Functions
 BeachBall.SpawnRK = function() {
