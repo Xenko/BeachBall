@@ -130,12 +130,16 @@ BeachBall.FindRK = function() {
 	RV of 4 is Boosts Menus, Hill People Tech, etc.
 	RV of 5 is Badges Earned
 	RV of 6 is Badges Available
+	RV of 7 is Discoveries?
 	*/
 	
 	//Determines RK location
 	BeachBall.RKLocation = '123';
 	if (Molpy.redactedVisible == 6) {
 		BeachBall.RKLocation = 'badgesav';
+	}
+	else if (Molpy.redactedVisible == 7) {
+		BeachBall.RKLocation = 'discov';
 	}
 	else if (Molpy.redactedVisible > 3) {
 		BeachBall.RKLocation = Molpy.redactedGr;
@@ -385,7 +389,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Click Beach</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Click Beach</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
 BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
@@ -403,7 +407,7 @@ BeachBall.SpawnRift = function() {
 }
 
 BeachBall.Temp = function() {
-	BeachBall.ClickBeach();
+	BeachBall.ToggleMenus('123');
 }
 
 //Main Program and Loop
