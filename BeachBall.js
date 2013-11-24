@@ -2,7 +2,7 @@
 var BeachBall = {};
 BeachBall.incoming_ONG = 0;
 BeachBall.Time_to_ONG = 1800000;
-BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'badgesav'];
+BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'discov', 'badgesav'];
 
 //Version Information
 BeachBall.version = '3.3 beta';
