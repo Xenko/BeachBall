@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
-BeachBall.version = '3.3 Release Candidate';
+BeachBall.version = '3.3';
 BeachBall.SCBversion = '3.152'; //Last SandCastle Builder version tested
 
 //BB Options Variables
