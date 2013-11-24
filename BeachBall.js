@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
-BeachBall.version = '3.3';
+BeachBall.version = '4.0 Beta';
 BeachBall.SCBversion = '3.152'; //Last SandCastle Builder version tested
 
 //BB Options Variables
@@ -20,6 +20,7 @@ BeachBall.BorderAlertStatus = 1;
 BeachBall.ClickRemainder = 0;
 BeachBall.description = "Error";
 BeachBall.LCAutoClickStatus = 0;
+BeachBall.toolFactory = 1000;
 BeachBall.refreshRate = 1000;
 BeachBall.RKAlertFrequency = 8;
 BeachBall.RKAutoClickStatus = 1;
@@ -321,6 +322,15 @@ BeachBall.SwitchOption = function(option) {
 				BeachBall.refreshRate = newRate;
 			}
 			break;
+		case 'ToolFactory':
+			var newRate = parseInt(prompt('Tool Factory Loading:', BeachBall.toolFactory));
+			if (newRate < 1000 || newRate > 12000 || isNaN(newRate) || newRate % 1000 == 0){
+				Molpy.Notify('Invalid Tool Factory Loading', 1);
+			}
+			else {
+				BeachBall.toolFactory = newRate;
+			}
+			break;
 	}
 	BeachBall.DisplayDescription(option, status);
 }
@@ -363,6 +373,9 @@ BeachBall.DisplayDescription = function(option, status) {
 	else if (option == 'RefreshRate') {
 		description = BeachBall.refreshRate;
 	}
+	else if (option == 'ToolFactory') {
+		{description = 'Load: <a onclick="Molpy.LoadToolFactory(4000)">' + BeachBall.toolFactory + ' chips</a>';}
+	}
 	else {
 		Molpy.Notify(option + ' is not a valid option.', 1);
 		error = 1;
@@ -383,6 +396,9 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
+if (Molpy.Got('Tool Factory') == 1) {
+	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'ToolFactory\')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
+}
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Extend RK</h4> </a></div>');
