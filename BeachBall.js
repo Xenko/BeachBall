@@ -130,17 +130,12 @@ BeachBall.FindRK = function() {
 	RV of 4 is Boosts Menus, Hill People Tech, etc.
 	RV of 5 is Badges Earned
 	RV of 6 is Badges Available
-	RV of 7 is Discoveries?
 	*/
 	
 	//Determines RK location
 	BeachBall.RKLocation = '123';
 	if (Molpy.redactedVisible == 6) {
 		BeachBall.RKLocation = 'badgesav';
-	}
-	else if (Molpy.redactedVisible == 7) {
-		BeachBall.RKLocation = 'tagged';
-		Molpy.Notify('Discovery RK FOUND!!!!!', 1);
 	}
 	else if (Molpy.redactedVisible > 3) {
 		BeachBall.RKLocation = Molpy.redactedGr;
