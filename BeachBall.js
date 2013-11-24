@@ -141,6 +141,10 @@ BeachBall.FindRK = function() {
 		BeachBall.RKLocation = Molpy.redactedGr;
 	}
 	
+	if (BeachBall.RKLocation == 'discov') {
+		BeachBall.RKAutoClickStatus = 0;
+		Molpy.redactedToggle = 9999;
+	}
 	//Opens RK location
 	BeachBall.ToggleMenus(BeachBall.RKLocation);
 	
