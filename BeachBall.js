@@ -236,7 +236,7 @@ BeachBall.RedundaKitty = function() {
 		BeachBall.oldRKLocation = -1;
 		BeachBall.RKNew = 1;
 		BeachBall.RKPlayAudio = 0;
-		//BeachBall.SpawnRK();
+		BeachBall.SpawnRK();
 	}
 }
 
