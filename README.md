@@ -5,6 +5,12 @@
 ### Version 3.2
 
 #### Bug Fixes
+* Redundakitty autoclicker will now work when the redundakitty spawns in the Discoveries and Momuments/Glass Monuments tabs.
+* Discovery and Monuments menus should now toggle correctly when RK Finder/AutoClicker is enabled.
+
+### Version 3.2
+
+#### Bug Fixes
 * Fixed syntax in Bookmark loader (missing semi-colon).
 * Fixed minor error in setting auto click CPS change rate dialogue.
 * Fixed Beach Auto Click so it should keep going after ninja stealth streak.
