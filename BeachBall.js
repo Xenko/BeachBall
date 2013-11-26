@@ -329,6 +329,7 @@ BeachBall.SwitchOption = function(option) {
 			}
 			else {
 				BeachBall.toolFactory = newRate;
+				status = newRate;
 			}
 			break;
 	}
