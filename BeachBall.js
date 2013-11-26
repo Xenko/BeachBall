@@ -324,7 +324,7 @@ BeachBall.SwitchOption = function(option) {
 			break;
 		case 'ToolFactory':
 			var newRate = parseInt(prompt('Tool Factory Loading:', BeachBall.toolFactory));
-			if (newRate < 1000 || newRate > 12000 || isNaN(newRate)){
+			if (isNaN(newRate)){
 				Molpy.Notify('Invalid Tool Factory Loading', 1);
 				status = BeachBall.toolFactory;
 			}
