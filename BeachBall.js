@@ -374,7 +374,7 @@ BeachBall.DisplayDescription = function(option, status) {
 		description = BeachBall.refreshRate;
 	}
 	else if (option == 'ToolFactory') {
-		{description = 'Load: <a onclick="Molpy.LoadToolFactory(4000)">' + BeachBall.toolFactory + ' chips</a>';}
+		{description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';}
 	}
 	else {
 		Molpy.Notify(option + ' is not a valid option.', 1);
@@ -397,7 +397,7 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 if (Molpy.Got('Tool Factory') == 1) {
-	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'ToolFactory\')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
+	$('#optionsItems').append('<div class="minifloatbox"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
 }
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
