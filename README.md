@@ -8,6 +8,8 @@
 * Fixed syntax in Bookmark loader (missing semi-colon).
 * Fixed minor error in setting auto click CPS change rate dialogue.
 * Fixed Beach Auto Click so it should keep going after ninja stealth streak.
+* Fix RK/LC finding, clicking, and solving for the new layout system
+* Restore the previous state of each loot drawer after finding RK
 
 ### Version 3.1
 
