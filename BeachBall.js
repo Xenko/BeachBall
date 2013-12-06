@@ -2,7 +2,8 @@
 var BeachBall = {};
 BeachBall.incoming_ONG = 0;
 BeachBall.Time_to_ONG = 1800000;
-BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'badgesav'];
+BeachBall.lootBoxes = ['boosts','ninj','cyb','hpt','bean','chron','ceil','drac','badges','badgesav','tagged'];
+BeachBall.lootVis = [false,false,false,false,false,false,false,false,false,false,false];
 
 //Version Information
 BeachBall.version = '3.1';
@@ -44,7 +45,7 @@ BeachBall.BeachAutoClick = function() {
 	clicks = 0;
 	wholeClicks = 0;
 	//If the auto clicker is enabled
-	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5000) {
+	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.ninjad !== 0 && BeachBall.Time_to_ONG >= 5000) {
 		//Calculates number of clicks to process this tick
 		clicks = BeachBall.BeachAutoClickCPS*BeachBall.refreshRate/1000 + BeachBall.ClickRemainder;
 		//If > 1, process whole clicks this tick, save the remainder for the next tick.
@@ -58,10 +59,10 @@ BeachBall.BeachAutoClick = function() {
 			BeachBall.ClickRemainder = clicks;
 		}
 	}
-}
+};
 
 BeachBall.ClickBeach = function(number) {
-	if (Molpy.Got('Temporal Rift') == 0){
+	if (Molpy.Got('Temporal Rift') === 0){
 		for (i = 0; i < number; i++) {
 			Molpy.ClickBeach();
 		}
@@ -69,11 +70,11 @@ BeachBall.ClickBeach = function(number) {
 	else {
 		Molpy.Notify('Temporal Rift Active, AutoClicking Disabled', 1);
 	}
-}
+};
 
 BeachBall.Ninja = function() {
-    if (Molpy.ninjad == 0) {
-        if (Molpy.npbONG == 0 && BeachBall.BorderAlertStatus == 1) {
+    if (Molpy.ninjad === 0) {
+        if (Molpy.npbONG === 0 && BeachBall.BorderAlertStatus == 1) {
 			$("#beach").css("border","4px solid red");
         }
         else {
@@ -95,79 +96,94 @@ BeachBall.Ninja = function() {
 		if (BeachBall.BorderAlertStatus == 1) {
 			$("#beach").css("border","4px solid yellow");
 		}
-        if (BeachBall.incoming_ONG == 0 && (BeachBall.AudioAlertsStatus == 3 || BeachBall.AudioAlertsStatus == 4)) {
+        if (BeachBall.incoming_ONG === 0 && (BeachBall.AudioAlertsStatus == 3 || BeachBall.AudioAlertsStatus == 4)) {
 			BeachBall.audio_Chime.play();
 			BeachBall.incoming_ONG = 1;
-        }  
+        }
     }
     else if (BeachBall.BorderAlertStatus == 1) {
         $("#beach").css("border","2px solid green");
 	}
-}
+};
+
+BeachBall.SaveToggles = function() {
+	for (i=0, len = BeachBall.lootBoxes.length; i < len; i++) {
+		BeachBall.lootVis[i] = Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]];
+	}
+};
 
 BeachBall.ToggleMenus = function(wantOpen) {
 	//for (var i in BeachBall.lootBoxes) {
 	//var me = BeachBall.lootBoxes[i];
-	for (i=0, len = BeachBall.lootBoxes.length; i < len; i++) {
-		if (BeachBall.lootBoxes[i] == wantOpen) {
-			if (Molpy.options.showhide[BeachBall.lootBoxes[i]] != 1) {
-				showhideToggle(BeachBall.lootBoxes[i]);
+	if (wantOpen) {
+		for (i=0, len = BeachBall.lootBoxes.length; i < len; i++) {
+			if (BeachBall.lootBoxes[i] == wantOpen) {
+				// Save current visibility
+				if (!Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]]) {
+					Molpy.ShowhideToggle(BeachBall.lootBoxes[i]);
+				}
 			}
 		}
-		else {
-			if (Molpy.options.showhide[BeachBall.lootBoxes[i]]) {
-				showhideToggle(BeachBall.lootBoxes[i]);
+	} else {
+		for (i=0, len = BeachBall.lootBoxes.length; i < len; i++) {
+			if (Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]] != BeachBall.lootVis[i]) {
+				Molpy.ShowhideToggle(BeachBall.lootBoxes[i]);
 			}
 		}
 	}
-}
-	
+};
+
 BeachBall.FindRK = function() {
 	/*
 	RV of 1 is Sand Tools
 	RV of 2 is Castle Tools
 	RV of 3 is Boosts Main Page
 	RV of 4 is Boosts Menus, Hill People Tech, etc.
-	RV of 5 is Badges Earned
+	RV of 5 is Badges Earned, Discoveries, Monuments, etc.
 	RV of 6 is Badges Available
+	RV of 7 is Tagged
 	*/
-	
+
 	//Determines RK location
 	BeachBall.RKLocation = '123';
-	if (Molpy.redactedVisible == 6) {
+	if (Molpy.redactedVisible == 5) {
+		BeachBall.RKLocation = 'badges';
+	}
+	else if (Molpy.redactedVisible == 6) {
 		BeachBall.RKLocation = 'badgesav';
 	}
 	else if (Molpy.redactedVisible > 3) {
 		BeachBall.RKLocation = Molpy.redactedGr;
 	}
-	
+
 	//Opens RK location
+	BeachBall.SaveToggles();
 	BeachBall.ToggleMenus(BeachBall.RKLocation);
-	
+
 	//Resets old RK variables
 	BeachBall.oldRKLocation = Molpy.redactedVisible;
 	BeachBall.oldRC = Molpy.redactedClicks;
 	BeachBall.oldLC = Molpy.Boosts['Logicat'].power;
-}
+};
 
 BeachBall.RedundaKitty = function() {
 	var content = '';
 	//Refresh Timer Variable
 	BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
-	
+
 	//If a RedundaKitty is active
 	if (Molpy.redactedVisible > 0) {
-	
+
 		//Checks if RK is new
 		if (BeachBall.RKNew == 1 || Molpy.redactedVisible != BeachBall.oldRKLocation || Molpy.redactedClicks > BeachBall.oldRC || Molpy.Boosts['Logicat'].power != BeachBall.oldLC) {
 			BeachBall.RKNewAudio = 1;
 			BeachBall.RKNew = 0;
 			//Finds RK if appropriate BeachBall option enabled
-			if (BeachBall.RKAutoClickStatus > 0) {	
+			if (BeachBall.RKAutoClickStatus > 0) {
 				BeachBall.FindRK();
 			}
 		}
-		
+
 		//Determines if it is an RK or LC
 		//If RK is visible
 		if ($('#redacteditem').length) {
@@ -204,32 +220,32 @@ BeachBall.RedundaKitty = function() {
 		}
 
 		//Clicks RK if AutoClick Enabled
-		if (BeachBall.RKAutoClickStatus == 2 && BeachBall.Logicat == 0 ) {
+		if (BeachBall.RKAutoClickStatus == 2 && BeachBall.Logicat === 0 ) {
 			Molpy.ClickRedacted(BeachBall.RKLevel);
 			BeachBall.RKNew = 1;
 			BeachBall.RKLocation = '123';
-			BeachBall.ToggleMenus('123');
+			BeachBall.ToggleMenus();
 		}
 		//Solves LC if AutoClick enabled
 		else if (BeachBall.Logicat == 1 && (BeachBall.LCAutoClickStatus == 1 || BeachBall.LCAutoClickStatus == 3)) {
 			BeachBall.SolveLogicat();
 			BeachBall.RKNew = 1;
 			BeachBall.RKLocation = '123';
-			BeachBall.ToggleMenus('123');
+			BeachBall.ToggleMenus();
 		}
 
 		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio)
-		else {	
+		else {
 			document.title = "! kitten !";
 			//If RK Audio Alerts Enabled
-			if ((BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat == 0) {
+			if ((BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat === 0) {
 				BeachBall.PlayRKAlert();
-			}	
+			}
 			else if ((BeachBall.AudioAlertsStatus == 2 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat == 1) {
 				BeachBall.PlayRKAlert();
 			}
 		}
-	}	
+	}
 	//If no RK active, update title Timer. Reset some variables.
 	else {
 		document.title = BeachBall.RKTimer;
@@ -237,11 +253,11 @@ BeachBall.RedundaKitty = function() {
 		BeachBall.RKNew = 1;
 		BeachBall.RKPlayAudio = 0;
 	}
-}
+};
 
 BeachBall.PlayRKAlert = function() {
 	//If proper mNP and hasn't yet played this mNP (can happen if refresh Rate < mNP length)
-	if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) == 0 && BeachBall.RKPlayAudio == 1) {
+	if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) === 0 && BeachBall.RKPlayAudio == 1) {
 		BeachBall.audio_Bell.play();
 		BeachBall.RKPlayAudio = 0;
 	}
@@ -249,29 +265,29 @@ BeachBall.PlayRKAlert = function() {
 	else {
 		BeachBall.RKPlayAudio = 1;
 	}
-}
+};
 
 BeachBall.CagedLogicat = function() {
 	if (Molpy.Boosts['Caged Logicat'].power == 1 && BeachBall.LCAutoClickStatus > 1) {
 		var i = 65;
 		var LCSolution = 'A';
-		do 
+		do
 			{LCSolution = String.fromCharCode(i);
 			i++;}
 		while (Molpy.cagedPuzzleTarget != Molpy.cagedSGen.StatementValue(LCSolution));
 		Molpy.ClickCagedPuzzle(LCSolution);
 	}
-}
+};
 
 BeachBall.SolveLogicat = function() {
 	var i = 65;
 	var LCSolution = 'A';
-	do 
+	do
 		{LCSolution = String.fromCharCode(i);
 		i++;}
 	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
 	Molpy.ClickRedactedPuzzle(LCSolution);
-}
+};
 
 BeachBall.SwitchOption = function(option) {
 	var status = 0;
@@ -323,18 +339,18 @@ BeachBall.SwitchOption = function(option) {
 			break;
 	}
 	BeachBall.DisplayDescription(option, status);
-}
+};
 
 BeachBall.DisplayDescription = function(option, status) {
 	var error = 0;
 	var description = 'error';
 	if (option == 'BorderAlert') {
-		if (status == 0) {description = 'Off';}
+		if (status === 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
 		else {Molpy.Notify('Display Description Error', 1);}
 	}
 	else if (option == 'AudioAlerts') {
-		if (status == 0) {description = 'Off';}
+		if (status === 0) {description = 'Off';}
 		else if (status == 1) {description = 'RK Only'; BeachBall.RKPlayAudio = 1;}
 		else if (status == 2) {description = 'LC Only'; BeachBall.RKPlayAudio = 1;}
 		else if (status == 3) {description = 'ONG Only';}
@@ -342,20 +358,20 @@ BeachBall.DisplayDescription = function(option, status) {
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
 	else if (option == 'BeachAutoClick') {
-		if (status == 0) {description = 'Off';}
+		if (status === 0) {description = 'Off';}
 		else if (status == 1) {description = 'Keep Ninja';}
 		else if (status == 2) {description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';}
 		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
 	}
 	else if (option == 'LCAutoClick') {
-		if (status == 0) {description = 'Off';}
+		if (status === 0) {description = 'Off';}
 		else if (status == 1) {description = 'LC Only';}
 		else if (status == 2) {description = 'Caged Only';}
-		else if (status == 3) {description = 'All LCs'}
+		else if (status == 3) {description = 'All LCs';}
 		else {Molpy.Notify('Display Description Error - LCAutoClick: ' + status, 1);}
 	}
 	else if (option == 'RKAutoClick') {
-		if (status == 0) {description = 'Off';}
+		if (status === 0) {description = 'Off';}
 		else if (status == 1) {description = 'Find RK Only'; BeachBall.RKNew = 1;}
 		else if (status == 2) {description = 'On'; BeachBall.RKNew = 1;}
 		else {Molpy.Notify('Display Description Error - RKAutoClick: ' + status, 1);}
@@ -367,9 +383,9 @@ BeachBall.DisplayDescription = function(option, status) {
 		Molpy.Notify(option + ' is not a valid option.', 1);
 		error = 1;
 	}
-		
-	if (error == 0) {g(option + 'Desc').innerHTML = '<br>' + description;}
-}
+
+	if (error === 0) {g(option + 'Desc').innerHTML = '<br>' + description;}
+};
 
 //Beach Ball Startup
 //Set Settings
@@ -396,15 +412,15 @@ BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 //Developer Functions
 BeachBall.SpawnRK = function() {
 	Molpy.redactedCountup = Molpy.redactedToggle - 1;
-}
+};
 
 BeachBall.SpawnRift = function() {
-	Molpy.GiveTempBoost('Temporal Rift', 1, 5);;
-}
+	Molpy.GiveTempBoost('Temporal Rift', 1, 5);
+};
 
 BeachBall.Temp = function() {
 	BeachBall.ClickBeach();
-}
+};
 
 //Main Program and Loop
 function BeachBallMainProgram() {
