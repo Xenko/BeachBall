@@ -409,7 +409,7 @@ function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	BeachBall.RedundaKitty();
-	//BeachBall.CagedLogicat();
+	BeachBall.CagedLogicat();
 	BeachBall.BeachAutoClick();
 	BeachBall.Ninja();
 	BeachBallLoop();
