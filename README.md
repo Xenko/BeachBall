@@ -2,6 +2,11 @@
 
 ## Changelog
 
+### Version 3.4
+
+#### Bug Fixes
+* Removed Border Alerts as this is provided by the Beach Ball boost in game.
+
 ### Version 3.3
 
 #### Bug Fixes
