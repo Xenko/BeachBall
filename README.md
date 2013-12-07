@@ -5,7 +5,7 @@
 ### Version 3.4
 
 #### New Features
-* Tool Factory option to load a user defined amount of glass chips into the tool factory.
+* Tool Factory option to load a user defined amount of glass chips into the tool factory. Click on the number of chips to change. Click Load Tool Factory to load chips.
 
 #### Bug Fixes
 * Removed Border Alerts as this is provided by the Beach Ball boost in game.
