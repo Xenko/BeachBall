@@ -381,7 +381,7 @@ if (Molpy.Got('Tool Factory') == 1) {
 }
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(ninj)"> <h4>Open Ninja Tab</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
 BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
