@@ -74,36 +74,20 @@ BeachBall.ClickBeach = function(number) {
 
 BeachBall.Ninja = function() {
     if (Molpy.ninjad == 0) {
-        if (Molpy.npbONG == 0 && BeachBall.BorderAlertStatus == 1) {
-			$("#beach").css("border","4px solid red");
-        }
-        else {
+        if (Molpy.npbONG != 0) {
             BeachBall.incoming_ONG = 0;
             if (BeachBall.BeachAutoClickStatus > 0) {
 				BeachBall.ClickBeach(1);
 				Molpy.Notify('Ninja Auto Click', 1);
-				if (BeachBall.BorderAlertStatus == 1) {
-					$("#beach").css("border","2px solid green");
-				}
-            }
-            else if (BeachBall.BorderAlertStatus == 1) {
-            $("#beach").css("border","4px solid blue");
-            }
-
+			}
         }
 	}
     else if (BeachBall.Time_to_ONG <= 15000) {
-		if (BeachBall.BorderAlertStatus == 1) {
-			$("#beach").css("border","4px solid yellow");
-		}
         if (BeachBall.incoming_ONG == 0 && (BeachBall.AudioAlertsStatus == 3 || BeachBall.AudioAlertsStatus == 4)) {
 			BeachBall.audio_Chime.play();
 			BeachBall.incoming_ONG = 1;
         }  
     }
-    else if (BeachBall.BorderAlertStatus == 1) {
-        $("#beach").css("border","2px solid green");
-	}
 }
 
 BeachBall.ToggleMenus = function(wantOpen) {
@@ -303,11 +287,6 @@ BeachBall.SwitchOption = function(option) {
 			option = 'BeachAutoClick';
 			status = 2;
 			break;
-		case 'BorderAlert':
-			BeachBall.BorderAlertStatus++;
-			if (BeachBall.BorderAlertStatus > 1) {BeachBall.BorderAlertStatus = 0; $("#beach").css("border","1px solid white");}
-			status = BeachBall.BorderAlertStatus;
-			break;
 		case 'AudioAlerts':
 			BeachBall.AudioAlertsStatus++;
 			if (BeachBall.AudioAlertsStatus > 4) {BeachBall.AudioAlertsStatus = 0;}
@@ -340,12 +319,7 @@ BeachBall.SwitchOption = function(option) {
 BeachBall.DisplayDescription = function(option, status) {
 	var error = 0;
 	var description = 'error';
-	if (option == 'BorderAlert') {
-		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'On';}
-		else {Molpy.Notify('Display Description Error', 1);}
-	}
-	else if (option == 'AudioAlerts') {
+	if (option == 'AudioAlerts') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'RK Only'; BeachBall.RKPlayAudio = 1;}
 		else if (status == 2) {description = 'LC Only'; BeachBall.RKPlayAudio = 1;}
@@ -396,7 +370,6 @@ $('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'LCAutoClick\')"> <h4>Logicat Auto Click</h4> </a> <div id="LCAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BorderAlert\')"> <h4>Ninja Visual Alert</h4> </a> <div id="BorderAlertDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 if (Molpy.Got('Tool Factory') == 1) {
@@ -408,7 +381,6 @@ if (Molpy.Got('Tool Factory') == 1) {
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
 BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
-BeachBall.DisplayDescription('BorderAlert', BeachBall.BorderAlertStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
 BeachBall.DisplayDescription('ToolFactory', BeachBall.toolFactory);
