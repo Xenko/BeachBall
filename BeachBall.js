@@ -45,13 +45,9 @@ BeachBall.BeachAutoClick = function() {
 	clicks = 0;
 	wholeClicks = 0;
 	//If the auto clicker is enabled
-	Molpy.Notify('Status: ' + BeachBall.BeachAutoClickStatus,0);
-	Molpy.Notify('Ninja: ' + Molpy.ninjad,0);
-	Molpy.Notify('Time: ' + BeachBall.Time_to_ONG,0);
 	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5) {
 		//Calculates number of clicks to process this tick
 		clicks = BeachBall.BeachAutoClickCPS*BeachBall.refreshRate/1000 + BeachBall.ClickRemainder;
-		Molpy.Notify('Clicks: ' + clicks, 1);
 		//If > 1, process whole clicks this tick, save the remainder for the next tick.
 		if (clicks >= 1) {
 			wholeClicks = Math.floor(clicks);
