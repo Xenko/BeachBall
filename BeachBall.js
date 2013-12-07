@@ -169,9 +169,9 @@ BeachBall.RedundaKitty = function() {
 			//Otherwise it is an RK
 			else {
 				BeachBall.Logicat = 0;
-				Molpy.Notify('Index of show: ' + content.indexOf("Show"), 1);
-				if (content.indexOf("Show") != -1) {
-					start = content.indexOf("Show");
+				start = content.indexOf("Show");
+				Molpy.Notify('Index of show: ' + start, 1);
+				if (start != -1) {
 					content = content.substring(start+15,start+38);
 					Molpy.Notify(content, 1);
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
