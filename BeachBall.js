@@ -117,7 +117,7 @@ BeachBall.FindRK = function() {
 	RV of 2 is Castle Tools
 	RV of 3 is Boosts Main Page
 	RV of 4 is Boosts Menus, Hill People Tech, etc.
-	RV of 5 is Badges Earned, Discovery, and presumably monuments/gmonuments
+	RV of 5 is Badges Earned, Discovery, Monuments and Glass Monuments
 	RV of 6 is Badges Available
 	*/
 	
@@ -151,7 +151,7 @@ BeachBall.RedundaKitty = function() {
 		if (BeachBall.RKNew == 1 || Molpy.redactedVisible != BeachBall.oldRKLocation || Molpy.redactedClicks > BeachBall.oldRC || Molpy.Boosts['Logicat'].power != BeachBall.oldLC) {
 			BeachBall.RKNewAudio = 1;
 			BeachBall.RKNew = 0;
-			//Finds RK if appropriate BeachBall option enabled
+			//Finds RK if AutoClick Enabled
 			if (BeachBall.RKAutoClickStatus > 0) {	
 				BeachBall.FindRK();
 			}
@@ -379,9 +379,9 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 if (Molpy.Got('Tool Factory') == 1) {
 	$('#optionsItems').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
 }
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
+//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
 BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
@@ -406,7 +406,7 @@ BeachBall.Temp = function() {
 function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
-	//BeachBall.RedundaKitty();
+	BeachBall.RedundaKitty();
 	//BeachBall.CagedLogicat();
 	BeachBall.BeachAutoClick();
 	BeachBall.Ninja();
