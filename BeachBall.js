@@ -170,10 +170,8 @@ BeachBall.RedundaKitty = function() {
 			else {
 				BeachBall.Logicat = 0;
 				start = content.indexOf("Show");
-				Molpy.Notify('Index of show: ' + start, 1);
 				if (start != -1) {
 					content = content.substring(start+15,start+38);
-					Molpy.Notify(content, 1);
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 					len = content.length;
 					BeachBall.RKLevel = content.substring(18,len);
@@ -197,7 +195,7 @@ BeachBall.RedundaKitty = function() {
 		//Clicks RK if AutoClick Enabled
 		if (BeachBall.RKAutoClickStatus == 2 && BeachBall.Logicat == 0 ) {
 			Molpy.ClickRedacted(BeachBall.RKLevel);
-			Molpy.Notify('Level ' + BeachBall.RKLevel + ' RK Clicked in ' + BeachBall.RKLocation + '.', 1);
+			//Molpy.Notify('Level ' + BeachBall.RKLevel + ' RK Clicked in ' + BeachBall.RKLocation + '.', 1);
 			BeachBall.RKNew = 1;
 			BeachBall.RKLocation = '123';
 			BeachBall.ToggleMenus('123');
@@ -205,7 +203,7 @@ BeachBall.RedundaKitty = function() {
 		//Solves LC if AutoClick enabled
 		else if (BeachBall.Logicat == 1 && (BeachBall.LCAutoClickStatus == 1 || BeachBall.LCAutoClickStatus == 3)) {
 			BeachBall.SolveLogicat();
-			Molpy.Notify('LC Clicked in ' + BeachBall.RKLocation + '.', 1);
+			//Molpy.Notify('LC Clicked in ' + BeachBall.RKLocation + '.', 1);
 			BeachBall.RKNew = 1;
 			BeachBall.RKLocation = '123';
 			BeachBall.ToggleMenus('123');

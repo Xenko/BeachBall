@@ -6,6 +6,7 @@
 
 #### Bug Fixes
 * Removed Border Alerts as this is provided by the Beach Ball boost in game.
+* Fixed RedundaKitty and LogiCat AutoClick to work with new layout.
 
 ### Version 3.3
 
