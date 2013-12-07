@@ -2,7 +2,7 @@
 var BeachBall = {};
 BeachBall.incoming_ONG = 0;
 BeachBall.Time_to_ONG = 1800000;
-BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
+BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
 BeachBall.version = '4.0 Beta';
@@ -62,7 +62,6 @@ BeachBall.BeachAutoClick = function() {
 }
 
 BeachBall.ClickBeach = function(number) {
-	Molpy.Notify('Entered ClickBeach',0);
 	if (Molpy.Got('Temporal Rift') == 0){
 		for (i = 0; i < number; i++) {
 			Molpy.ClickBeach();
@@ -95,14 +94,18 @@ BeachBall.ToggleMenus = function(wantOpen) {
 	//for (var i in BeachBall.lootBoxes) {
 	//var me = BeachBall.lootBoxes[i];
 	for (i=0, len = BeachBall.lootBoxes.length; i < len; i++) {
+		//If the current Box should be open
 		if (BeachBall.lootBoxes[i] == wantOpen) {
-			if (Molpy.options.showhide[BeachBall.lootBoxes[i]] != 1) {
-				showhideToggle(BeachBall.lootBoxes[i]);
+			//If it isn't opened, open it.
+			if (!Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]]) {
+				Molpy.ShowhideToggle(BeachBall.lootBoxes[i]);
 			}
 		}
+		//If the current Box should be closed
 		else {
-			if (Molpy.options.showhide[BeachBall.lootBoxes[i]]) {
-				showhideToggle(BeachBall.lootBoxes[i]);
+			//If it is open, then close it
+			if (Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]]) {
+				Molpy.ShowhideToggle(BeachBall.lootBoxes[i]);
 			}
 		}
 	}
@@ -378,7 +381,7 @@ if (Molpy.Got('Tool Factory') == 1) {
 }
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Extend RK</h4> </a></div>');
+$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(ninj)"> <h4>Open Ninja Tab</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('LCAutoClick', BeachBall.LCAutoClickStatus);
 BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
