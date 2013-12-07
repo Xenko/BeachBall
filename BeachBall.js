@@ -86,7 +86,7 @@ BeachBall.Ninja = function() {
 			}
         }
 	}
-    else if (BeachBall.Time_to_ONG <= 15000) {
+    else if (BeachBall.Time_to_ONG <= 15) {
         if (BeachBall.incoming_ONG == 0 && (BeachBall.AudioAlertsStatus == 3 || BeachBall.AudioAlertsStatus == 4)) {
 			BeachBall.audio_Chime.play();
 			BeachBall.incoming_ONG = 1;
@@ -407,9 +407,9 @@ function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	//BeachBall.RedundaKitty();
-	//BeachBall.Ninja();
 	//BeachBall.CagedLogicat();
 	BeachBall.BeachAutoClick();
+	BeachBall.Ninja();
 	BeachBallLoop();
 }
 
