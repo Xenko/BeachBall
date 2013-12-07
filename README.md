@@ -4,6 +4,9 @@
 
 ### Version 3.4
 
+#### New Features
+* Tool Factory option to load a user defined amount of glass chips into the tool factory.
+
 #### Bug Fixes
 * Removed Border Alerts as this is provided by the Beach Ball boost in game.
 * Fixed RedundaKitty and LogiCat AutoClick to work with new layout.
