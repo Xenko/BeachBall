@@ -7,6 +7,7 @@
 #### Bug Fixes
 * Removed Border Alerts as this is provided by the Beach Ball boost in game.
 * Fixed RedundaKitty and LogiCat AutoClick to work with new layout.
+* Changed the LogicCat option item name to more accurately reflect its current ability as it does not AutoClick LC's/Caged LCs, just solves them if available.
 
 ### Version 3.3
 
