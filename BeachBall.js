@@ -162,6 +162,7 @@ BeachBall.RedundaKitty = function() {
 		if ($('#redacteditem').length) {
 			$('#redacteditem').css("border","2px solid red"); //Highlights RK
 			content = $('#redacteditem').html();
+			Molpy.Notify(content, 1);
 			//If RK contains word statement, it is a LC.
 			if (content.indexOf("statement") !== -1) {
 				BeachBall.Logicat = 1;
