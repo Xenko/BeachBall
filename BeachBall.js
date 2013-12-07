@@ -171,9 +171,9 @@ BeachBall.RedundaKitty = function() {
 				BeachBall.Logicat = 0;
 				Molpy.Notify('Index of show: ' + content.indexOf("Show"), 1);
 				if (content.indexOf("Show") != -1) {
-					//Molpy.Notify('Entered If', 1);
 					start = content.indexOf("Show");
 					content = content.substring(start+15,start+38);
+					Molpy.Notify(content, 1);
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 					len = content.length;
 					BeachBall.RKLevel = content.substring(18,len);
@@ -182,7 +182,6 @@ BeachBall.RedundaKitty = function() {
 				else {
 					start = content.indexOf("iframe src=");
 					content = content.substring(start-40,start-16);
-					Molpy.Notify(content, 1);
 					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
 					len = content.length;
 					BeachBall.RKLevel = content.substring(18,len);
