@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
-BeachBall.version = '3.4';
+BeachBall.version = '4.0 Beta';
 BeachBall.SCBversion = '3.211'; //Last SandCastle Builder version tested
 
 //BB Options Variables
@@ -16,7 +16,6 @@ BeachBall.audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
 	BeachBall.audio_Chime.volume = 1;
 BeachBall.BeachAutoClickCPS = 1;
 BeachBall.BeachAutoClickStatus = 1;
-BeachBall.BorderAlertStatus = 1;
 BeachBall.ClickRemainder = 0;
 BeachBall.description = "Error";
 BeachBall.LCAutoClickStatus = 0;
