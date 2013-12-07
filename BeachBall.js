@@ -45,7 +45,7 @@ BeachBall.BeachAutoClick = function() {
 	clicks = 0;
 	wholeClicks = 0;
 	//If the auto clicker is enabled
-	//Molpy.Notify('Time to ONG: ' + BeachBall.Time_to_ONG, 1);
+	Molpy.Notify('Time to ONG: ' + BeachBall.Time_to_ONG, 1);
 	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5000) {
 		//Calculates number of clicks to process this tick
 		clicks = BeachBall.BeachAutoClickCPS*BeachBall.refreshRate/1000 + BeachBall.ClickRemainder;
@@ -402,7 +402,7 @@ BeachBall.Temp = function() {
 //Main Program and Loop
 function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
-	BeachBall.Time_to_ONG = (Molpy.NPlength * 1000) - Molpy.ONGelapsed;
+	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	Molpy.Notify('Molpy Length ' + Molpy.NPlength, 1);
 	Molpy.Notify('ONG Elapsed: ' + Molpy.ONGelapsed, 1);
 	//BeachBall.RedundaKitty();
