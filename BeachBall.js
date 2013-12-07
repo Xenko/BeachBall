@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'badges'
 
 //Version Information
 BeachBall.version = '4.0 Beta';
-BeachBall.SCBversion = '3.152'; //Last SandCastle Builder version tested
+BeachBall.SCBversion = '3.211'; //Last SandCastle Builder version tested
 
 //BB Options Variables
 BeachBall.AudioAlertsStatus = 0;
@@ -46,7 +46,7 @@ BeachBall.BeachAutoClick = function() {
 	wholeClicks = 0;
 	//If the auto clicker is enabled
 	//Molpy.Notify('Status: ' + BeachBall.BeachAutoClickStatus,0);
-	//Molpy.Notify('Ninja: ' + Molpy.ninjad,0);
+	Molpy.Notify('Ninja: ' + Molpy.ninjad,0);
 	//Molpy.Notify('Time: ' + BeachBall.Time_to_ONG,0);
 	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5) {
 		//Calculates number of clicks to process this tick
