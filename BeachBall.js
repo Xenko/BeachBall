@@ -355,8 +355,14 @@ BeachBall.DisplayDescription = function(option, status) {
 		description = BeachBall.refreshRate;
 	}
 	else if (option == 'ToolFactory') {
-		g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + status + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
-		description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';
+		if (Molpy.Got('Tool Factory') == 1) {
+			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + status + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
+			description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';
+		}
+		else {
+			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + status + ')"> <h4>Tool Factory Still Locked</h4> </a> <div id="ToolFactoryDesc"></div>';
+			description = 'You\'re Crazy! <a onlick="BeachBall.DisplayDescription(\'ToolFactory\', BeachBall.toolFactory)">Check Again!!</a>';
+		}
 	}
 	else {
 		Molpy.Notify(option + ' is not a valid option.', 1);
@@ -377,10 +383,10 @@ $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.Swit
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-if (Molpy.Got('Tool Factory') == 1) {
+//if (Molpy.Got('Tool Factory') == 1) {
 	$('#optionsItems').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
 	BeachBall.DisplayDescription('ToolFactory', BeachBall.toolFactory);
-}
+//}
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
@@ -405,7 +411,7 @@ BeachBall.Temp = function() {
 
 //Main Program and Loop
 function BeachBallMainProgram() {
-	Molpy.Notify('Tick', 0);
+	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	BeachBall.RedundaKitty();
 	BeachBall.CagedLogicat();
