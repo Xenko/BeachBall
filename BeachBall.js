@@ -355,14 +355,13 @@ BeachBall.DisplayDescription = function(option, status) {
 		description = BeachBall.refreshRate;
 	}
 	else if (option == 'ToolFactory') {
-		Molpy.Notify('Checking Tool Factory Status...' + Molpy.Got('Tool Factory'),1);
 		if (Molpy.Got('Tool Factory') == 1) {
 			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + status + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
 			description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';
 		}
 		else {
 			g('BBToolFactory').innerHTML = '<h4>Tool Factory Locked</h4><div id="ToolFactoryDesc"></div>';
-			description = 'You Crazy...<a onclick="BeachBall.DisplayDescription(\'ToolFactory\', BeachBall.toolFactory)">Check Again!!</a>';
+			description = '<a onclick="BeachBall.CheckToolFactory()">Check Again!!</a>';
 		}
 	}
 	else {
@@ -373,6 +372,15 @@ BeachBall.DisplayDescription = function(option, status) {
 	if (error == 0) {g(option + 'Desc').innerHTML = '<br>' + description;}
 }
 
+BeachBall.CheckToolFactory = function() {
+	if (Molpy.Got('Tool Factory')) {
+		BeachBall.DisplayDescription('ToolFactory', BeachBall.toolFactory);
+		Molpy.Notify('Tool Factory Option Now Available!', 1);
+	}
+	else {
+		Molpy.Notify('Tool Factory is still unavailable... keep playing!', 1);
+	}
+}
 //Beach Ball Startup
 //Set Settings
 if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
