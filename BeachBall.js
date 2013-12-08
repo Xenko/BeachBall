@@ -361,8 +361,8 @@ BeachBall.DisplayDescription = function(option, status) {
 			description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';
 		}
 		else {
-			g('BBToolFactory').innerHTML = '<h4>Tool Factory Still Locked</h4><div id="ToolFactoryDesc"></div>';
-			description = 'You\'re Crazy <a onclick="BeachBall.DisplayDescription(\'ToolFactory\', BeachBall.toolFactory)">Check Again!!</a>';
+			g('BBToolFactory').innerHTML = '<h4>Tool Factory Locked</h4><div id="ToolFactoryDesc"></div>';
+			description = 'You Crazy...<a onclick="BeachBall.DisplayDescription(\'ToolFactory\', BeachBall.toolFactory)">Check Again!!</a>';
 		}
 	}
 	else {
