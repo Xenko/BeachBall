@@ -362,7 +362,7 @@ BeachBall.DisplayDescription = function(option, status) {
 		}
 		else {
 			g('BBToolFactory').innerHTML = '<h4>Tool Factory Still Locked</h4><div id="ToolFactoryDesc"></div>';
-			description = '<a onlick="BeachBall.DisplayDescription(\'ToolFactory\', BeachBall.toolFactory)">Check Again!!</a>';
+			description = 'You\'re Crazy <a onclick="BeachBall.DisplayDescription(\'ToolFactory\', BeachBall.toolFactory)">Check Again!!</a>';
 		}
 	}
 	else {
