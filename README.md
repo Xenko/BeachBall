@@ -2,6 +2,11 @@
 
 ## Changelog
 
+### Version 3.4.1
+
+#### Bug Fixes
+* Fixed to work for people who have not yet unlocked Tool Factory.
+
 ### Version 3.4
 
 #### New Features
