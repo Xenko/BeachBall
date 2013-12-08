@@ -355,6 +355,7 @@ BeachBall.DisplayDescription = function(option, status) {
 		description = BeachBall.refreshRate;
 	}
 	else if (option == 'ToolFactory') {
+		Molpy.Notify('Checking Tool Factory Status...' + Molpy.Got('Tool Factory'),1);
 		if (Molpy.Got('Tool Factory') == 1) {
 			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + status + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
 			description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';
