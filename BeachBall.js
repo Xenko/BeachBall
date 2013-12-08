@@ -361,8 +361,8 @@ BeachBall.DisplayDescription = function(option, status) {
 			description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';
 		}
 		else {
-			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + status + ')"> <h4>Tool Factory Still Locked</h4> </a> <div id="ToolFactoryDesc"></div>';
-			description = 'You\'re Crazy! <a onlick="BeachBall.DisplayDescription(\'ToolFactory\', BeachBall.toolFactory)">Check Again!!</a>';
+			g('BBToolFactory').innerHTML = '<h4>Tool Factory Still Locked</h4><div id="ToolFactoryDesc"></div>';
+			description = '<a onlick="BeachBall.DisplayDescription(\'ToolFactory\', BeachBall.toolFactory)">Check Again!!</a>';
 		}
 	}
 	else {
