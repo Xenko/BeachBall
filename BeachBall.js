@@ -303,9 +303,19 @@ BeachBall.SwitchOption = function(option) {
 			}
 			break;
 		case 'LCSolver':
-			BeachBall.LCSolverStatus++;
-			if (BeachBall.LCSolverStatus > 3) {BeachBall.LCSolverStatus = 0;}
-			status = BeachBall.LCSolverStatus;
+			if (BeachBall.CagedAutoClickStatus == 0) {
+				BeachBall.LCSolverStatus++;
+				if (BeachBall.LCSolverStatus > 3) {BeachBall.LCSolverStatus = 0;}
+				status = BeachBall.LCSolverStatus;
+			}
+			else {
+				BeachBall.LCSolverStatus++;
+				if (BeachBall.LCSolverStatus > 3) {
+					BeachBall.LCSolverStatus = 2;
+					Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
+				}
+				status = BeachBall.LCSolverStatus;
+			}
 			break;
 		case 'BeachAutoClick':
 			BeachBall.BeachAutoClickStatus++;
