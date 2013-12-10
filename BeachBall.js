@@ -434,19 +434,18 @@ BeachBall.CheckToolFactory = function() {
 if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
 
 //Create Menu
-$('#optionsItems').append('<div id="BeachBall">');
-$('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'CagedAutoClick\')"> <h4>Caged Logicat Auto Click</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'LCSolver\')"> <h4>Logicat Solver</h4> </a> <div id="LCSolverDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-$('#optionsItems').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-//$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
-$('#optionsItems').append('</div>');
+$('#optionsItems').append('<div id="BeachBall"></div>');
+$('#BeachBall').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'CagedAutoClick\')"> <h4>Caged Logicat Auto Click</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'LCSolver\')"> <h4>Logicat Solver</h4> </a> <div id="LCSolverDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
+//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
+//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('CagedAutoClick', BeachBall.CagedAutoClickStatus);
 BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
