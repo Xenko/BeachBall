@@ -272,7 +272,7 @@ BeachBall.SolveLogicat = function() {
 }
 
 BeachBall.SwitchOption = function(option) {
-	var status = 0;
+	var status = 99;
 	switch (option) {
 		case 'RKAutoClick':
 			BeachBall.RKAutoClickStatus++;
@@ -304,6 +304,7 @@ BeachBall.SwitchOption = function(option) {
 				status = BeachBall.LCSolverStatus;
 			}
 			else {
+				status = 1;
 				Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 			}
 			break;
