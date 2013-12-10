@@ -20,7 +20,7 @@ BeachBall.CagedAutoClickStatus = 0;
 BeachBall.ClickRemainder = 0;
 BeachBall.description = "Error";
 BeachBall.LCSolverStatus = 0;
-BeachBall.OldLCSolverStatus = 0;
+BeachBall.OldLCSolverStatus = 1;
 BeachBall.toolFactory = 1000;
 BeachBall.refreshRate = 1000;
 BeachBall.RKAlertFrequency = 8;
@@ -284,37 +284,25 @@ BeachBall.SwitchOption = function(option) {
 			if (BeachBall.CagedAutoClickStatus > 1) {BeachBall.CagedAutoClickStatus = 0;}
 			status = BeachBall.CagedAutoClickStatus;
 			//When AutoClick turned on, checks to make sure that Logicat solver is turned on. If not, it turns it on.
-			if (status == 1) {
-				BeachBall.OldLCSolverStatus = BeachBall.LCSolverStatus;
-				if (BeachBall.LCSolverStatus < 2) {
-					BeachBall.LCSolverStatus = 2;
-					if (BeachBall.OldLCSolverStatus == 1) {
-						BeachBall.LCSolverStatus = 3;
-					}
+			if (status == 1 && BeachBall.LCSolverStatus == 0) {
+					BeachBall.OldLCSolverStatus = BeachBall.LCSolverStatus;
+					BeachBall.LCSolverStatus = 1;
 					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
-				}
 			}
 			//When AutoClick turned off, resets the Logicat solver to the previous value if it was different
-			else {
-				if (BeachBall.OldLCSolverStatus < 2) {
-					BeachBall.LCSolverStatus = BeachBall.OldLCSolverStatus;
-					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
-				}
+			else if (status == 0 && BeachBall.OldLCSolverStatus == 0) {
+				BeachBall.LCSolverStatus = 0;
+				BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
 			}
 			break;
 		case 'LCSolver':
 			if (BeachBall.CagedAutoClickStatus == 0) {
 				BeachBall.LCSolverStatus++;
-				if (BeachBall.LCSolverStatus > 3) {BeachBall.LCSolverStatus = 0;}
+				if (BeachBall.LCSolverStatus > 1) {BeachBall.LCSolverStatus = 0;}
 				status = BeachBall.LCSolverStatus;
 			}
 			else {
-				BeachBall.LCSolverStatus++;
-				if (BeachBall.LCSolverStatus > 3) {
-					BeachBall.LCSolverStatus = 2;
-					Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
-				}
-				status = BeachBall.LCSolverStatus;
+				Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 			}
 			break;
 		case 'BeachAutoClick':
@@ -386,9 +374,7 @@ BeachBall.DisplayDescription = function(option, status) {
 	}
 	else if (option == 'LCSolver') {
 		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'LC Only';}
-		else if (status == 2) {description = 'Caged Only';}
-		else if (status == 3) {description = 'All LCs'}
+		else if (status == 1) {description = 'On';}
 		else {Molpy.Notify('Display Description Error - LCSolver: ' + status, 1);}
 	}
 	else if (option == 'RKAutoClick') {
