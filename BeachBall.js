@@ -211,7 +211,7 @@ BeachBall.RedundaKitty = function() {
 			BeachBall.ToggleMenus('123');
 		}
 		//Solves LC if AutoClick enabled
-		else if (BeachBall.Logicat == 1 && (BeachBall.LCSolverStatus == 1 || BeachBall.LCSolverStatus == 3)) {
+		else if (BeachBall.Logicat == 1 && BeachBall.LCSolverStatus == 1) {
 			BeachBall.SolveLogicat();
 			//Molpy.Notify('LC Clicked in ' + BeachBall.RKLocation + '.', 1);
 			BeachBall.RKNew = 1;
@@ -253,7 +253,7 @@ BeachBall.PlayRKAlert = function() {
 }
 
 BeachBall.CagedLogicat = function() {
-	if (Molpy.Boosts['Caged Logicat'].power == 1 && BeachBall.LCSolverStatus > 1) {
+	if (Molpy.Boosts['Caged Logicat'].power == 1 && BeachBall.LCSolverStatus == 1) {
 		var i = 65;
 		var LCSolution = 'A';
 		do 
