@@ -20,6 +20,7 @@ BeachBall.CagedAutoClickStatus = 0;
 BeachBall.ClickRemainder = 0;
 BeachBall.description = "Error";
 BeachBall.LCSolverStatus = 0;
+BeachBall.OldLCSolverStatus = 0;
 BeachBall.toolFactory = 1000;
 BeachBall.refreshRate = 1000;
 BeachBall.RKAlertFrequency = 8;
@@ -282,8 +283,21 @@ BeachBall.SwitchOption = function(option) {
 			BeachBall.CagedAutoClickStatus++;
 			if (BeachBall.CagedAutoClickStatus > 1) {BeachBall.CagedAutoClickStatus = 0;}
 			status = BeachBall.CagedAutoClickStatus;
-			BeachBall.LCSolverStatus = 2;
-			BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
+			//When AutoClick turned on, checks to make sure that Logicat solver is turned on. If not, it turns it on.
+			if (status == 1) {
+				BeachBall.OldLCSolverStatus = BeachBall.LCSolverStatus;
+				if (BeachBall.LCSolverStatus < 2) {
+					BeachBall.LCSolverStatus = 2;
+					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
+				}
+			}
+			//When AutoClick turned off, resets the Logicat solver to the previous value if it was different
+			else {
+				if (BeachBall.OldLCSolverStatus < 2) {
+					BeachBall.LCSolverStatus = BeachBall.OldLCSolverStatus;
+					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
+				}
+			}
 			break;
 		case 'LCSolver':
 			BeachBall.LCSolverStatus++;
