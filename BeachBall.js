@@ -485,4 +485,4 @@ function BeachBallLoop() {
 //Program Startup
 BeachBallLoop();
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
-//Molpy.Notify('BeachBall Reloaded Successfully',1);
+Molpy.Notify('BeachBall Reloaded Successfully',1);
