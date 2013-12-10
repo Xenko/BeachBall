@@ -7,7 +7,7 @@ function BBLoadScript() {
 }
 
 function BBDoReload() {
-	$('BeachBall.js').remove();
+	$('#BeachBallSource').remove();
 	$('#BeachBall').remove()
     //BBLoadScript();
 }
