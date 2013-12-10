@@ -288,6 +288,9 @@ BeachBall.SwitchOption = function(option) {
 				BeachBall.OldLCSolverStatus = BeachBall.LCSolverStatus;
 				if (BeachBall.LCSolverStatus < 2) {
 					BeachBall.LCSolverStatus = 2;
+					if (BeachBall.OldLCSolverStatus == 1) {
+						BeachBall.LCSolverStatus = 3;
+					}
 					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
 				}
 			}
