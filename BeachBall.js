@@ -81,7 +81,8 @@ BeachBall.CagedAutoClick = function() {
 			//Determines Logicat Cost, and if sufficient blocks available, logicat can be solved.
 			cost = 100 + Molpy.LogiMult(25);
 			if (Molpy.HasGlassBlocks(cost)) {
-				Molpy.Notify('Caged AutoClick Available for ' + cost, 1);
+				BeachBall.CagedLogicat();
+				Molpy.Notify('Caged Solved', 1);
 			}
 		}
 	}
