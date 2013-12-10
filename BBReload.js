@@ -4,7 +4,7 @@ function BBLoadScript() {
             jA.setAttribute('type', 'text/javascript');
             jA.setAttribute('src', 'https://raw.github.com/Xenko/BeachBall/beta/BeachBall.js');
     
-    setTimeout(function() {document.body.appendChild(jA);}, 4000);
+    setTimeout(function() {document.body.appendChild(jA);}, 1000);
 }
 
 function BBDoReload() {
