@@ -81,8 +81,8 @@ BeachBall.CagedAutoClick = function() {
 			//Determines Logicat Cost, and if sufficient blocks available, logicat can be solved.
 			cost = 100 + Molpy.LogiMult(25);
 			if (Molpy.HasGlassBlocks(cost)) {
+				Molpy.MakeCagedPuzzle(cost);
 				BeachBall.CagedLogicat();
-				Molpy.Notify('Caged Solved', 1);
 			}
 		}
 	}
@@ -467,10 +467,10 @@ function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	BeachBall.RedundaKitty();
-	BeachBall.CagedLogicat();
+	BeachBall.CagedAutoClick();
 	BeachBall.BeachAutoClick();
 	BeachBall.Ninja();
-	BeachBall.CagedAutoClick();
+	BeachBall.CagedLogicat();
 	BeachBallLoop();
 }
 
