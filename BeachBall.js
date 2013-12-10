@@ -74,8 +74,9 @@ BeachBall.ClickBeach = function(number) {
 }
 
 BeachBall.CagedAutoClick = function() {
-	if (BeachBall.CagedAutoClickStatus == 1 && Molpy.Got('Caged Logicat') > 1) {
+	if (BeachBall.CagedAutoClickStatus == 1 && Molpy.Got('Caged Logicat') > 1 && !Molpy.redactedVisible) {
 		Molpy.Notify('Caged AutoClick On and Caged Logicat Available', 1);
+		//BeachBall.ToggleMenus
 	}
 }
 
