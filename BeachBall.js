@@ -74,12 +74,17 @@ BeachBall.ClickBeach = function(number) {
 }
 
 BeachBall.CagedAutoClick = function() {
+	//If Caged AutoClick is Enabled, and Caged Logicat is Available
 	if (BeachBall.CagedAutoClickStatus == 1 && Molpy.Got('Caged Logicat') > 1) {
+		//If RKAutoClick is off OR RKAutoClick is on but no RK Available, then caged logicat can be activated and solved
 		if ((BeachBall.RKAutoClickStatus > 0 && !Molpy.redactedVisible) || BeachBall.RKAutoClickStatus == 0) {
-			Molpy.Notify('Caged AutoClick On and Caged Logicat Available', 1);
+			//Determines Logicat Cost, and if sufficient blocks available, logicat can be solved.
+			cost = 100 + Molpy.LogiMult(25);
+			if (Molpy.HasGlassBlocks(cost)) {
+				Molpy.Notify('Caged AutoClick Available', 1);
+			}
 		}
 	}
-		//BeachBall.ToggleMenus
 }
 
 BeachBall.Ninja = function() {
