@@ -434,6 +434,7 @@ BeachBall.CheckToolFactory = function() {
 if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
 
 //Create Menu
+$('#optionsItems').append('<div id="BeachBall">');
 $('#optionsItems').append('<br> <br> <div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'CagedAutoClick\')"> <h4>Caged Logicat Auto Click</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
@@ -445,6 +446,7 @@ $('#optionsItems').append('<div class="minifloatbox" id="BBToolFactory"> <a oncl
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 //$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
+$('#optionsItems').append('</div>');
 BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
 BeachBall.DisplayDescription('CagedAutoClick', BeachBall.CagedAutoClickStatus);
 BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
