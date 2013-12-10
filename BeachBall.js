@@ -80,7 +80,6 @@ BeachBall.CagedAutoClick = function() {
 		}
 	}
 		//BeachBall.ToggleMenus
-	}
 }
 
 BeachBall.Ninja = function() {
