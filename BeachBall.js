@@ -479,7 +479,7 @@ function BeachBallMainProgram() {
 }
 
 function BeachBallLoop() {
-	setTimeout(BeachBallMainProgram, BeachBall.refreshRate);
+	BeachBall.Timeout = setTimeout(BeachBallMainProgram, BeachBall.refreshRate);
 }
 
 //Program Startup

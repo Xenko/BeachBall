@@ -8,6 +8,7 @@ function BBLoadScript() {
 }
 
 function BBDoReload() {
+	clearTimeout(BeachBall.Timeout);
 	$('#BeachBallSource').remove();
 	$('#BeachBall').remove()
     BBLoadScript();
