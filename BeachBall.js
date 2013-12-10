@@ -74,17 +74,22 @@ BeachBall.ClickBeach = function(number) {
 }
 
 BeachBall.CagedAutoClick = function() {
-	//If Caged AutoClick is Enabled, and Caged Logicat is Available
-	if (BeachBall.CagedAutoClickStatus == 1 && Molpy.Got('Caged Logicat') > 1) {
-		//If RKAutoClick is off OR RKAutoClick is on but no RK Available, then caged logicat can be activated and solved
-		if ((BeachBall.RKAutoClickStatus > 0 && !Molpy.redactedVisible) || BeachBall.RKAutoClickStatus == 0) {
-			//Determines Logicat Cost, and if sufficient blocks available, logicat can be solved.
-			cost = 100 + Molpy.LogiMult(25);
-			if (Molpy.HasGlassBlocks(cost)) {
-				Molpy.MakeCagedPuzzle(cost);
-				BeachBall.CagedLogicat();
-			}
+//Purchases Caged Logicat
+	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased
+	if (BeachBall.CagedAutoClickStatus == 1 && Molpy.Got('Caged Logicat') > 1 && Molpy.Boosts['Caged Logicat'].power == 0) {
+		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
+		cost = 100 + Molpy.LogiMult(25);
+		if (Molpy.HasGlassBlocks(cost)) {
+			Molpy.MakeCagedPuzzle(cost);
+			BeachBall.CagedLogicat();
 		}
+	}
+	
+//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
+//Can now define solving conditions other than availability (to maximize Temporal Duplication for instance).
+	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, Solve the Logicat
+	if (Molpy.Boosts['Caged Logicat'].power == 1 && BeachBall.LCSolverStatus == 1) {
+		BeachBall.CagedLogicat();
 	}
 }
 
@@ -259,15 +264,13 @@ BeachBall.PlayRKAlert = function() {
 }
 
 BeachBall.CagedLogicat = function() {
-	if (Molpy.Boosts['Caged Logicat'].power == 1 && BeachBall.LCSolverStatus == 1) {
-		var i = 65;
-		var LCSolution = 'A';
-		do 
-			{LCSolution = String.fromCharCode(i);
-			i++;}
-		while (Molpy.cagedPuzzleTarget != Molpy.cagedSGen.StatementValue(LCSolution));
-		Molpy.ClickCagedPuzzle(LCSolution);
-	}
+	var i = 65;
+	var LCSolution = 'A';
+	do 
+		{LCSolution = String.fromCharCode(i);
+		i++;}
+	while (Molpy.cagedPuzzleTarget != Molpy.cagedSGen.StatementValue(LCSolution));
+	Molpy.ClickCagedPuzzle(LCSolution);
 }
 
 BeachBall.SolveLogicat = function() {
@@ -440,6 +443,7 @@ BeachBall.CheckToolFactory = function() {
 		Molpy.Notify('Tool Factory is still unavailable... keep playing!', 1);
 	}
 }
+
 //Beach Ball Startup
 //Set Settings
 if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
@@ -485,7 +489,6 @@ function BeachBallMainProgram() {
 	BeachBall.CagedAutoClick();
 	BeachBall.BeachAutoClick();
 	BeachBall.Ninja();
-	BeachBall.CagedLogicat();
 	BeachBallLoop();
 }
 
