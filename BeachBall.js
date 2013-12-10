@@ -16,6 +16,7 @@ BeachBall.audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
 	BeachBall.audio_Chime.volume = 1;
 BeachBall.BeachAutoClickCPS = 1;
 BeachBall.BeachAutoClickStatus = 1;
+BeachBall.CagedAutoClickStatus = 0;
 BeachBall.ClickRemainder = 0;
 BeachBall.description = "Error";
 BeachBall.LCSolverStatus = 0;
