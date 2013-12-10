@@ -282,6 +282,8 @@ BeachBall.SwitchOption = function(option) {
 			BeachBall.CagedAutoClickStatus++;
 			if (BeachBall.CagedAutoClickStatus > 1) {BeachBall.CagedAutoClickStatus = 0;}
 			status = BeachBall.CagedAutoClickStatus;
+			BeachBall.LCSolverStatus = 2;
+			BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
 			break;
 		case 'LCSolver':
 			BeachBall.LCSolverStatus++;
