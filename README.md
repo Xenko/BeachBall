@@ -2,6 +2,11 @@
 
 ## Changelog
 
+### Version 4.0
+
+#### New Features
+* Caged Logicat AutoClicker now implemented
+
 ### Version 3.4.1
 
 #### Bug Fixes
