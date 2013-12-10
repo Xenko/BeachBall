@@ -284,6 +284,7 @@ BeachBall.SwitchOption = function(option) {
 			Molpy.Notify('Caged Status: ' + BeachBall.CagedAutoClickStatus, 1);
 			if (BeachBall.CagedAutoClickStatus > 1) {BeachBall.CagedAutoClickStatus = 0; Molpy.Notify('Caged Status: ' + BeachBall.CagedAutoClickStatus, 1);}
 			status = BeachBall.CagedAutoClickStatus;
+			Molpy.Notify('Status: ' + status, 1);
 		case 'LCSolver':
 			BeachBall.LCSolverStatus++;
 			if (BeachBall.LCSolverStatus > 3) {BeachBall.LCSolverStatus = 0;}
