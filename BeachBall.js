@@ -495,7 +495,7 @@ function BeachBallMainProgram() {
 	BeachBall.CagedAutoClick();
 	BeachBall.BeachAutoClick();
 	BeachBall.Ninja();
-	//BeachBall.MontyHaul();
+	BeachBall.MontyHaul();
 	BeachBallLoop();
 }
 
