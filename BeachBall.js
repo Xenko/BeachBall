@@ -120,7 +120,7 @@ BeachBall.DisplayDescription = function(option, status) {
 		else if (status == 2) {description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';}
 		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
 	}
-	else if (option == 'CagedAutoClick' || option = 'LCSolver' || option == 'MHAutoClick') {
+	else if (option == 'CagedAutoClick' || option == 'LCSolver' || option == 'MHAutoClick') {
 		if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'On';}
 		else {Molpy.Notify('Display Description Error - ' + option + ': ' + status, 1);}
