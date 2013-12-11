@@ -397,7 +397,7 @@ BeachBall.SwitchOption = function(option) {
 			
 		case 'MHAutoClick':
 			BeachBall.MHAutoClickStatus++;
-			if (BeachBall.MHAutoClickStatus > 2) {BeachBall.MHAutoClickStatus = 0;}
+			if (BeachBall.MHAutoClickStatus > 1) {BeachBall.MHAutoClickStatus = 0;}
 			status = BeachBall.MHAutoClickStatus;
 			break;
 			
