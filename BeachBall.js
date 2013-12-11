@@ -395,7 +395,7 @@ BeachBall.SwitchOption = function(option) {
 			}
 			break;
 			
-		case 'MontyHaul':
+		case 'MHAutoClick':
 			BeachBall.MHAutoClickStatus++;
 			if (BeachBall.MHAutoClickStatus > 2) {BeachBall.MHAutoClickStatus = 0;}
 			status = BeachBall.MHAutoClickStatus;
