@@ -214,6 +214,9 @@ BeachBall.RedundaKitty = function() {
 
 		//Clicks RK if AutoClick Enabled
 		if (BeachBall.RKAutoClickStatus == 2 && BeachBall.Logicat == 0 ) {
+			if (BeachBall.RKLevel < 9) {
+				BeachBall.RKLevel = 6;
+			}
 			Molpy.ClickRedacted(BeachBall.RKLevel);
 			//Molpy.Notify('Level ' + BeachBall.RKLevel + ' RK Clicked in ' + BeachBall.RKLocation + '.', 1);
 			BeachBall.RKNew = 1;
