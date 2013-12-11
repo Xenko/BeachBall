@@ -7,6 +7,9 @@
 #### New Features
 * Caged Logicat AutoClicker now implemented
 
+#### Feature Changes
+* Simplified Autoclicker and Logicat solver options.
+
 ### Version 3.4.1
 
 #### Bug Fixes

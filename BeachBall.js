@@ -20,6 +20,7 @@ BeachBall.CagedAutoClickStatus = 0;
 BeachBall.ClickRemainder = 0;
 BeachBall.description = "Error";
 BeachBall.LCSolverStatus = 0;
+BeachBall.MHAutoClickStatus = 0;
 BeachBall.toolFactory = 1000;
 BeachBall.refreshRate = 1000;
 BeachBall.RKAlertFrequency = 8;
@@ -61,6 +62,16 @@ BeachBall.BeachAutoClick = function() {
 	}
 }
 
+BeachBall.CagedLogicat = function() {
+	var i = 65;
+	var LCSolution = 'A';
+	do 
+		{LCSolution = String.fromCharCode(i);
+		i++;}
+	while (Molpy.cagedPuzzleTarget != Molpy.cagedSGen.StatementValue(LCSolution));
+	Molpy.ClickCagedPuzzle(LCSolution);
+}
+
 BeachBall.ClickBeach = function(number) {
 	if (Molpy.Got('Temporal Rift') == 0){
 		for (i = 0; i < number; i++) {
@@ -92,45 +103,55 @@ BeachBall.CagedAutoClick = function() {
 	}
 }
 
-BeachBall.Ninja = function() {
-    if (Molpy.ninjad == 0) {
-        if (Molpy.npbONG != 0) {
-            BeachBall.incoming_ONG = 0;
-            if (BeachBall.BeachAutoClickStatus > 0) {
-				BeachBall.ClickBeach(1);
-				Molpy.Notify('Ninja Auto Click', 1);
-			}
-        }
+BeachBall.DisplayDescription = function(option, status) {
+	var error = 0;
+	var description = 'error';
+	if (option == 'AudioAlerts') {
+		if (status == 0) {description = 'Off';}
+		else if (status == 1) {description = 'RK Only'; BeachBall.RKPlayAudio = 1;}
+		else if (status == 2) {description = 'LC Only'; BeachBall.RKPlayAudio = 1;}
+		else if (status == 3) {description = 'ONG Only';}
+		else if (status == 4) {description = 'All Alerts'; BeachBall.RKPlayAudio = 1;}
+		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
-    else if (BeachBall.Time_to_ONG <= 15) {
-        if (BeachBall.incoming_ONG == 0 && (BeachBall.AudioAlertsStatus == 3 || BeachBall.AudioAlertsStatus == 4)) {
-			BeachBall.audio_Chime.play();
-			BeachBall.incoming_ONG = 1;
-        }  
-    }
+	else if (option == 'BeachAutoClick') {
+		if (status == 0) {description = 'Off';}
+		else if (status == 1) {description = 'Keep Ninja';}
+		else if (status == 2) {description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';}
+		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
+	}
+	else if (option == 'CagedAutoClick' || option = 'LCSolver' || option == 'MHAutoClick') {
+		if (status == 0) {description = 'Off';}
+		else if (status == 1) {description = 'On';}
+		else {Molpy.Notify('Display Description Error - ' + option + ': ' + status, 1);}
+	}
+	else if (option == 'RKAutoClick') {
+		if (status == 0) {description = 'Off';}
+		else if (status == 1) {description = 'Find RK Only'; BeachBall.RKNew = 1;}
+		else if (status == 2) {description = 'On'; BeachBall.RKNew = 1;}
+		else {Molpy.Notify('Display Description Error - RKAutoClick: ' + status, 1);}
+	}
+	else if (option == 'RefreshRate') {
+		description = BeachBall.refreshRate;
+	}
+	else if (option == 'ToolFactory') {
+		if (Molpy.Got('Tool Factory') == 1) {
+			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + status + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
+			description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';
+		}
+		else {
+			g('BBToolFactory').innerHTML = '<h4>Tool Factory Locked</h4><div id="ToolFactoryDesc"></div>';
+			description = '<a onclick="BeachBall.CheckToolFactory()">Check Again!!</a>';
+		}
+	}
+	else {
+		Molpy.Notify(option + ' is not a valid option.', 1);
+		error = 1;
+	}
+		
+	if (error == 0) {g(option + 'Desc').innerHTML = '<br>' + description;}
 }
 
-BeachBall.ToggleMenus = function(wantOpen) {
-	//for (var i in BeachBall.lootBoxes) {
-	//var me = BeachBall.lootBoxes[i];
-	for (i=0, len = BeachBall.lootBoxes.length; i < len; i++) {
-		//If the current Box should be open
-		if (BeachBall.lootBoxes[i] == wantOpen) {
-			//If it isn't opened, open it.
-			if (!Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]]) {
-				Molpy.ShowhideToggle(BeachBall.lootBoxes[i]);
-			}
-		}
-		//If the current Box should be closed
-		else {
-			//If it is open, then close it
-			if (Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]]) {
-				Molpy.ShowhideToggle(BeachBall.lootBoxes[i]);
-			}
-		}
-	}
-}
-	
 BeachBall.FindRK = function() {
 	/*
 	RV of 1 is Sand Tools
@@ -157,6 +178,43 @@ BeachBall.FindRK = function() {
 	BeachBall.oldRKLocation = Molpy.redactedVisible;
 	BeachBall.oldRC = Molpy.redactedClicks;
 	BeachBall.oldLC = Molpy.Boosts['Logicat'].power;
+}
+
+BeachBall.MontyHaul = function() {
+	//Buys Choice A from Monty Haul, if available
+	if (Molpy.Got('MHP') && MHAutoClickStatus == 1) {
+		Molpy.Monty('A');
+	}
+}
+
+BeachBall.Ninja = function() {
+    if (Molpy.ninjad == 0) {
+        if (Molpy.npbONG != 0) {
+            BeachBall.incoming_ONG = 0;
+            if (BeachBall.BeachAutoClickStatus > 0) {
+				BeachBall.ClickBeach(1);
+				Molpy.Notify('Ninja Auto Click', 1);
+			}
+        }
+	}
+    else if (BeachBall.Time_to_ONG <= 15) {
+        if (BeachBall.incoming_ONG == 0 && (BeachBall.AudioAlertsStatus == 3 || BeachBall.AudioAlertsStatus == 4)) {
+			BeachBall.audio_Chime.play();
+			BeachBall.incoming_ONG = 1;
+        }  
+    }
+}
+
+BeachBall.PlayRKAlert = function() {
+	//If proper mNP and hasn't yet played this mNP (can happen if refresh Rate < mNP length)
+	if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) == 0 && BeachBall.RKPlayAudio == 1) {
+		BeachBall.audio_Bell.play();
+		BeachBall.RKPlayAudio = 0;
+	}
+	//Otherwise reset played this mNP
+	else {
+		BeachBall.RKPlayAudio = 1;
+	}
 }
 
 BeachBall.RedundaKitty = function() {
@@ -253,28 +311,6 @@ BeachBall.RedundaKitty = function() {
 	}
 }
 
-BeachBall.PlayRKAlert = function() {
-	//If proper mNP and hasn't yet played this mNP (can happen if refresh Rate < mNP length)
-	if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) == 0 && BeachBall.RKPlayAudio == 1) {
-		BeachBall.audio_Bell.play();
-		BeachBall.RKPlayAudio = 0;
-	}
-	//Otherwise reset played this mNP
-	else {
-		BeachBall.RKPlayAudio = 1;
-	}
-}
-
-BeachBall.CagedLogicat = function() {
-	var i = 65;
-	var LCSolution = 'A';
-	do 
-		{LCSolution = String.fromCharCode(i);
-		i++;}
-	while (Molpy.cagedPuzzleTarget != Molpy.cagedSGen.StatementValue(LCSolution));
-	Molpy.ClickCagedPuzzle(LCSolution);
-}
-
 BeachBall.SolveLogicat = function() {
 	var i = 65;
 	var LCSolution = 'A';
@@ -312,6 +348,7 @@ BeachBall.SwitchOption = function(option) {
 				}
 			}
 			break;
+			
 		case 'LCSolver':
 			if (BeachBall.CagedAutoClickStatus == 0) {
 				BeachBall.LCSolverStatus++;
@@ -323,11 +360,13 @@ BeachBall.SwitchOption = function(option) {
 				Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 			}
 			break;
+			
 		case 'BeachAutoClick':
 			BeachBall.BeachAutoClickStatus++;
 			if (BeachBall.BeachAutoClickStatus > 2) {BeachBall.BeachAutoClickStatus = 0;}
 			status = BeachBall.BeachAutoClickStatus;
 			break;
+			
 		case 'BeachAutoClickRate':
 			var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', BeachBall.BeachAutoClickCPS));
 			if (newRate < 1 || newRate > 20 || isNaN(newRate)){
@@ -339,11 +378,13 @@ BeachBall.SwitchOption = function(option) {
 			option = 'BeachAutoClick';
 			status = 2;
 			break;
+			
 		case 'AudioAlerts':
 			BeachBall.AudioAlertsStatus++;
 			if (BeachBall.AudioAlertsStatus > 4) {BeachBall.AudioAlertsStatus = 0;}
 			status = BeachBall.AudioAlertsStatus;
 			break;
+			
 		case 'RefreshRate':
 			var newRate = parseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', BeachBall.refreshRate));
 			if (newRate < 500 || newRate > 3600 || isNaN(newRate)){
@@ -353,6 +394,13 @@ BeachBall.SwitchOption = function(option) {
 				BeachBall.refreshRate = newRate;
 			}
 			break;
+			
+		case 'MontyHaul':
+			BeachBall.MHAutoClickStatus++;
+			if (BeachBall.MHAutoClickStatus > 2) {BeachBall.MHAutoClickStatus = 0;}
+			status = BeachBall.MHAutoClickStatus;
+			break;
+			
 		case 'ToolFactory':
 			var newRate = parseInt(prompt('Tool Factory Loading:', BeachBall.toolFactory));
 			if (isNaN(newRate)){
@@ -368,58 +416,25 @@ BeachBall.SwitchOption = function(option) {
 	BeachBall.DisplayDescription(option, status);
 }
 
-BeachBall.DisplayDescription = function(option, status) {
-	var error = 0;
-	var description = 'error';
-	if (option == 'AudioAlerts') {
-		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'RK Only'; BeachBall.RKPlayAudio = 1;}
-		else if (status == 2) {description = 'LC Only'; BeachBall.RKPlayAudio = 1;}
-		else if (status == 3) {description = 'ONG Only';}
-		else if (status == 4) {description = 'All Alerts'; BeachBall.RKPlayAudio = 1;}
-		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
-	}
-	else if (option == 'BeachAutoClick') {
-		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'Keep Ninja';}
-		else if (status == 2) {description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';}
-		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
-	}
-	else if (option == 'CagedAutoClick') {
-		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'On';}
-		else {Molpy.Notify('Display Description Error - CagedAutoClick: ' + status, 1);}
-	}
-	else if (option == 'LCSolver') {
-		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'On';}
-		else {Molpy.Notify('Display Description Error - LCSolver: ' + status, 1);}
-	}
-	else if (option == 'RKAutoClick') {
-		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'Find RK Only'; BeachBall.RKNew = 1;}
-		else if (status == 2) {description = 'On'; BeachBall.RKNew = 1;}
-		else {Molpy.Notify('Display Description Error - RKAutoClick: ' + status, 1);}
-	}
-	else if (option == 'RefreshRate') {
-		description = BeachBall.refreshRate;
-	}
-	else if (option == 'ToolFactory') {
-		if (Molpy.Got('Tool Factory') == 1) {
-			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + status + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
-			description = 'Load: <a onclick="BeachBall.SwitchOption(\'ToolFactory\')">' + status + ' chips</a>';
+BeachBall.ToggleMenus = function(wantOpen) {
+	//for (var i in BeachBall.lootBoxes) {
+	//var me = BeachBall.lootBoxes[i];
+	for (i=0, len = BeachBall.lootBoxes.length; i < len; i++) {
+		//If the current Box should be open
+		if (BeachBall.lootBoxes[i] == wantOpen) {
+			//If it isn't opened, open it.
+			if (!Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]]) {
+				Molpy.ShowhideToggle(BeachBall.lootBoxes[i]);
+			}
 		}
+		//If the current Box should be closed
 		else {
-			g('BBToolFactory').innerHTML = '<h4>Tool Factory Locked</h4><div id="ToolFactoryDesc"></div>';
-			description = '<a onclick="BeachBall.CheckToolFactory()">Check Again!!</a>';
+			//If it is open, then close it
+			if (Molpy.activeLayout.lootVis[BeachBall.lootBoxes[i]]) {
+				Molpy.ShowhideToggle(BeachBall.lootBoxes[i]);
+			}
 		}
 	}
-	else {
-		Molpy.Notify(option + ' is not a valid option.', 1);
-		error = 1;
-	}
-		
-	if (error == 0) {g(option + 'Desc').innerHTML = '<br>' + description;}
 }
 
 BeachBall.CheckToolFactory = function() {
@@ -446,6 +461,7 @@ $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchO
 $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 $('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox" id="BBMontyHaul"> <a onclick="BeachBall.SwitchOption(\'MHAutoClick\')"> <h4>Monty Haul AutoClick</h4> </a> <div id="MHAutoClickDesc"></div></div>');
 //$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 //$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
@@ -478,6 +494,7 @@ function BeachBallMainProgram() {
 	BeachBall.CagedAutoClick();
 	BeachBall.BeachAutoClick();
 	BeachBall.Ninja();
+	//BeachBall.MontyHaul();
 	BeachBallLoop();
 }
 
