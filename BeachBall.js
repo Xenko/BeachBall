@@ -182,7 +182,7 @@ BeachBall.FindRK = function() {
 
 BeachBall.MontyHaul = function() {
 	//Buys Choice A from Monty Haul, if available
-	if (Molpy.Got('MHP') && MHAutoClickStatus == 1) {
+	if (Molpy.Got('MHP') && BeachBall.MHAutoClickStatus == 1) {
 		Molpy.Monty('A');
 	}
 }
