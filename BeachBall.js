@@ -181,9 +181,21 @@ BeachBall.FindRK = function() {
 }
 
 BeachBall.MontyHaul = function() {
-	//Buys Choice A from Monty Haul, if available
-	if (Molpy.Got('MHP') && BeachBall.MHAutoClickStatus == 1) {
-		Molpy.Monty('A');
+	
+	if (BeachBall.MHAutoClickStatus == 1) {
+		//If Monty Haul Problem is Unlocked
+		if (Molpy.Boosts['MHP'].unlocked) {
+		
+			//If unpurchased, then buy
+			if (!Molpy.Got('MHP')) {
+				Molpy.BoostsByID[31].buy();
+			}
+			
+			//If purchased, open Door A
+			else {
+			Molpy.Monty('A');
+			}
+		}
 	}
 }
 
