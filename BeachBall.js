@@ -471,6 +471,7 @@ BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
 BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
 BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
 BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
+BeachBall.DisplayDescription('MHAutoClick', BeachBall.MHAutoClickStatus);
 BeachBall.DisplayDescription('ToolFactory', BeachBall.toolFactory);
 
 //Developer Functions
