@@ -218,7 +218,7 @@ BeachBall.RedundaKitty = function() {
 				BeachBall.RKLevel = 7;
 			}
 			Molpy.ClickRedacted(BeachBall.RKLevel);
-			Molpy.Notify('Level: ' + BeachBall.RKLevel, 1);
+			//Molpy.Notify('Level: ' + BeachBall.RKLevel, 1);
 			BeachBall.RKNew = 1;
 			BeachBall.RKLocation = '123';
 			BeachBall.ToggleMenus('123');
