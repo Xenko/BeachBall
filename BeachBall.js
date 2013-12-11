@@ -188,7 +188,7 @@ BeachBall.MontyHaul = function() {
 		
 			//If unpurchased, then buy
 			if (!Molpy.Got('MHP')) {
-				Molpy.BoostsByID[31].buy();
+				Molpy.BoostsById[31].buy();
 			}
 			
 			//If purchased, open Door A
