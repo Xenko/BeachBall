@@ -395,7 +395,7 @@ BeachBall.CheckStorage = function() {
 }
 
 BeachBall.SaveToStorage = function(name, setting) {
-	localStorage.name = setting;
+	localStorage.setItem(name, setting);
 }
 
 //Beach Ball Startup
