@@ -17,7 +17,6 @@ BeachBall.audio_Chime = new Audio("http://xenko.comxa.com/Chime.mp3");
 BeachBall.BeachAutoClickCPS = 1;
 BeachBall.BeachAutoClickStatus = 1;
 BeachBall.CagedAutoClickStatus = 0;
-BeachBall.ClickRemainder = 0;
 BeachBall.description = "Error";
 BeachBall.LCSolverStatus = 0;
 BeachBall.MHAutoClickStatus = 0;
@@ -36,6 +35,16 @@ BeachBall.RKLocation = '123';
 BeachBall.RKNew = 1;
 BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
+
+//Testing New Settings Method
+var BeachBall.Options = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts']
+var BeachBall.Settings = {};
+
+//Test Setting Options
+for (i = 0; i < BeachBall.Options.length; i++) {
+		var option = BeachBall.Options[i];
+		BeachBall.Settings[option].status = i;
+}
 
 BeachBall.CagedLogicat = function() {
 	var i = 65;
@@ -380,18 +389,15 @@ BeachBall.CheckToolFactory = function() {
 }
 
 BeachBall.LoadSettings = function() {
-	if(typeof(Storage)!== 'undefined')
-	  {
-	  // Yes! localStorage and sessionStorage support!
-	  BeachBall.storage = 1;
-	  BeachBall.SaveToStorage(BeachBall[1], 952);
-	  }
-	else
-	  {
-	  // Sorry! No web storage support..
-	  BeachBall.storage = 0;
-	  Molpy.Notify('No Local Storage Available. Setting can NOT be saved or loaded.',1);
-	  }
+	if(typeof(Storage)!== 'undefined') {
+		// Yes! localStorage and sessionStorage support!
+		BeachBall.storage = 1;
+	}
+	else {
+		// Sorry! No web storage support..
+		BeachBall.storage = 0;
+		Molpy.Notify('No Local Storage Available. Setting can NOT be saved or loaded.',1);
+	}
 }
 
 BeachBall.ReadFromStorage = function(name) {
@@ -403,9 +409,12 @@ BeachBall.ReadFromStorage = function(name) {
 	}
 }
 
-BeachBall.SaveToStorage = function(name, setting) {
+BeachBall.SaveToStorage = function() {
 	if (BeachBall.storage == 1) {
-		localStorage[name] = setting;
+		for (i = 0; i < BeachBall.Options.length; i++) {
+			var option = BeachBall.Options[i];
+			localStorage[option] = BeachBall.Settings[option].status;
+		}	
 	}
 }
 
@@ -468,4 +477,5 @@ function BeachBallLoop() {
 //Program Startup
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
 BeachBall.LoadSettings();
+BeachBall.SaveToStorage();
 BeachBallLoop();
