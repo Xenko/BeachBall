@@ -380,15 +380,15 @@ BeachBall.CheckToolFactory = function() {
 }
 
 BeachBall.CheckStorage = function() {
-	if(typeof(Storage)!=="undefined")
+	if(supportsLocalStorage())
 	  {
 	  // Yes! localStorage and sessionStorage support!
 	  BeachBall.storage = 1;
-	  BeachBall.SaveToStorage('BeachBall.BeachAutoClickStatus', 98765);
+	  BeachBall.SaveToStorage('BeachBall.BeachAutoClickStatus', 456123);
 	  status = BeachBall.ReadFromStorage('BeachBall.BeachAutoClickStatus');
 	  Molpy.Notify('Exists: ' + status, 1);
 	  status = BeachBall.ReadFromStorage('BeachBall.BeachAutoClickStatus2');
-	  Molpy.Notify('Does not exist' + status, 1);
+	  Molpy.Notify('Does not exist: ' + status, 1);
 	  }
 	else
 	  {
@@ -399,7 +399,7 @@ BeachBall.CheckStorage = function() {
 }
 
 BeachBall.ReadFromStorage = function(name) {
-	if (BeachBall.Storage == 1 && localStorage[name] != null) {
+	if (BeachBall.Storage == 1 && localStorage[name] != "undefined") {
 		return localStorage[name];
 	}
 	else {
