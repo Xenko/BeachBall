@@ -379,6 +379,23 @@ BeachBall.CheckToolFactory = function() {
 	}
 }
 
+BeachBall.CheckStorage = function() {
+	if(typeof(Storage)!=="undefined")
+	  {
+	  // Yes! localStorage and sessionStorage support!
+	  BeachBall.storage = 1;
+	  Molpy.Notify('Local Storage Available. Settings will be saved',1);
+	  }
+	else
+	  {
+	  // Sorry! No web storage support..
+	  BeachBall.storage = 0;
+	  Molpy.Notify('No Local Storage Available. Setting will NOT be saved',1);
+	  }
+}
+
+
+
 //Beach Ball Startup
 //Set Settings
 if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
@@ -436,5 +453,6 @@ function BeachBallLoop() {
 }
 
 //Program Startup
-BeachBallLoop();
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
+BeachBall.CheckStorage();
+BeachBallLoop();
