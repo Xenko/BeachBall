@@ -253,6 +253,99 @@ BeachBall.SolveLogicat = function() {
 	Molpy.ClickRedactedPuzzle(LCSolution);
 }
 
+BeachBall.SwitchOptionNew = function(option) {
+	switch (option) {
+		case 'RKAutoClick':
+			BeachBall.Settings[option].status++;
+			if (BeachBall.RKAutoClickStatus > 2) {BeachBall.RKAutoClickStatus = 0;}
+			status = BeachBall.RKAutoClickStatus;
+			//When AutoClick turned on, checks to make sure that Logicat solver is turned on. If not, it turns it on.
+			if (status == 2) {
+				if (BeachBall.LCSolverStatus == 0) {
+					BeachBall.LCSolverStatus = 1;
+					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
+				}
+			}
+			break;
+		case 'CagedAutoClick':
+			BeachBall.CagedAutoClickStatus++;
+			if (BeachBall.CagedAutoClickStatus > 1) {BeachBall.CagedAutoClickStatus = 0;}
+			status = BeachBall.CagedAutoClickStatus;
+			//When AutoClick turned on, checks to make sure that Logicat solver is turned on. If not, it turns it on.
+			if (status == 1) {
+				if (BeachBall.LCSolverStatus == 0) {
+					BeachBall.LCSolverStatus = 1;
+					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
+				}
+			}
+			break;
+			
+		case 'LCSolver':
+			if (BeachBall.CagedAutoClickStatus == 0) {
+				BeachBall.LCSolverStatus++;
+				if (BeachBall.LCSolverStatus > 1) {BeachBall.LCSolverStatus = 0;}
+				status = BeachBall.LCSolverStatus;
+			}
+			else {
+				status = 1;
+				Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
+			}
+			break;
+			
+		case 'BeachAutoClick':
+			BeachBall.BeachAutoClickStatus++;
+			if (BeachBall.BeachAutoClickStatus > 2) {BeachBall.BeachAutoClickStatus = 0;}
+			status = BeachBall.BeachAutoClickStatus;
+			break;
+			
+		case 'BeachAutoClickRate':
+			var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', BeachBall.BeachAutoClickCPS));
+			if (newRate < 1 || newRate > 20 || isNaN(newRate)){
+				Molpy.Notify('Invalid Clicking Rate', 1);
+			}
+			else {
+				BeachBall.BeachAutoClickCPS = newRate;
+			}
+			option = 'BeachAutoClick';
+			status = 2;
+			break;
+			
+		case 'AudioAlerts':
+			BeachBall.AudioAlertsStatus++;
+			if (BeachBall.AudioAlertsStatus > 4) {BeachBall.AudioAlertsStatus = 0;}
+			status = BeachBall.AudioAlertsStatus;
+			break;
+			
+		case 'RefreshRate':
+			var newRate = parseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', BeachBall.refreshRate));
+			if (newRate < 500 || newRate > 3600 || isNaN(newRate)){
+				Molpy.Notify('Invalid Refresh Rate', 1);
+			}
+			else {
+				BeachBall.refreshRate = newRate;
+			}
+			break;
+			
+		case 'MHAutoClick':
+			BeachBall.MHAutoClickStatus++;
+			if (BeachBall.MHAutoClickStatus > 1) {BeachBall.MHAutoClickStatus = 0;}
+			status = BeachBall.MHAutoClickStatus;
+			break;
+			
+		case 'ToolFactory':
+			var newRate = parseInt(prompt('Tool Factory Loading:', BeachBall.toolFactory));
+			if (isNaN(newRate)){
+				Molpy.Notify('Invalid Tool Factory Loading', 1);
+				status = BeachBall.toolFactory;
+			}
+			else {
+				BeachBall.toolFactory = newRate;
+				status = newRate;
+			}
+			break;
+	}
+}
+
 BeachBall.SwitchOption = function(option) {
 	var status = 99;
 	switch (option) {
@@ -435,7 +528,7 @@ BeachBall.LoadSettings = function() {
 		// Yes! localStorage and sessionStorage support!
 		BeachBall.storage = 1;
 	}
-BeachBall.storage = 0;
+
 	for (i = 0; i < BeachBall.AllOptions.length; i++) {
 		var option = BeachBall.AllOptions[i];
 		BeachBall.Settings[option] = {};
@@ -514,6 +607,8 @@ function BeachBallLoop() {
 
 //Program Startup
 BeachBall.LoadSettings();
+var me = BeachBall.Settings['RKAutoClick'];
+	me.status = 999;
 BeachBall.CreateMenu();
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
 if (BeachBall.storage == 0) {
