@@ -31,10 +31,6 @@ BeachBall.RKPlayAudio = 1;
 BeachBall.start = -1;
 BeachBall.content = "empty";
 BeachBall.len = 0;
-BeachBall.Logicat = 0;
-BeachBall.oldRKLocation = -1;
-BeachBall.oldRC = Molpy.redactedClicks - 1;
-BeachBall.oldLC = Molpy.Boosts['Logicat'].power - 1;
 BeachBall.RKLevel = '-1';
 BeachBall.RKLocation = '123';
 BeachBall.RKNew = 1;
@@ -173,11 +169,6 @@ BeachBall.FindRK = function() {
 
 	//Opens RK location
 	BeachBall.ToggleMenus(BeachBall.RKLocation);
-	
-	//Resets old RK variables
-	//BeachBall.oldRKLocation = Molpy.redactedVisible;
-	//BeachBall.oldRC = Molpy.redactedClicks;
-	//BeachBall.oldLC = Molpy.Boosts['Logicat'].power;
 }
 
 BeachBall.MontyHaul = function() {
@@ -232,16 +223,9 @@ BeachBall.PlayRKAlert = function() {
 BeachBall.RedundaKitty = function() {
 	//If there is an active RK
 	if (Molpy.redactedVisible > 0) {
+		//Update the title, and determine the RK level
 		document.title = "! kitten !";
 		BeachBall.RKLevel = Molpy.redactedDrawType.length - 1;
-		/*if (Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
-			BeachBall.Logicat = 1;
-			//Molpy.Notify('Logicat Found', 1);
-		}
-		else {
-			BeachBall.Logicat = 0;
-			//Molpy.Notify('RedundaKitty Found', 1);
-		}*/
 		
 		//If RKAutoClick is Selected or the Logicat Solver is turned on
 		if (BeachBall.RKAutoClickStatus == 2 || BeachBall.LCSolverStatus == 1) {
@@ -249,7 +233,7 @@ BeachBall.RedundaKitty = function() {
 			if (Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
 				BeachBall.SolveLogicat();
 			}
-			//Otherwise click the Redundakitty if the RK AutoClick is on
+			//Otherwise, if the RK AutoClick is on, click the Redundakitty 
 			else if (BeachBall.RKAutoClickStatus == 2) {
 				Molpy.ClickRedacted(BeachBall.RKLevel);
 			}
@@ -277,100 +261,6 @@ BeachBall.RedundaKitty = function() {
 		BeachBall.RKPlayAudio = 0;
 	}
 }
-
-/*BeachBall.RedundaKitty = function() {
-	var content = '';
-	//Refresh Timer Variable
-	BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
-	
-	//If a RedundaKitty is active
-	if (Molpy.redactedVisible > 0) {
-	
-		//Checks if RK is new
-		if (BeachBall.RKNew == 1 || Molpy.redactedVisible != BeachBall.oldRKLocation || Molpy.redactedClicks > BeachBall.oldRC || Molpy.Boosts['Logicat'].power != BeachBall.oldLC) {
-			BeachBall.RKNewAudio = 1;
-			BeachBall.RKNew = 0;
-			//Finds RK if AutoClick Enabled
-			if (BeachBall.RKAutoClickStatus > 0) {	
-				BeachBall.FindRK();
-			}
-		}
-		
-		//Determines if it is an RK or LC
-		//If RK is visible
-		if ($('#redacteditem').length) {
-			$('#redacteditem').css("border","2px solid red"); //Highlights RK
-			content = $('#redacteditem').html();
-			//If RK contains word statement, it is a LC.
-			if (content.indexOf("statement") !== -1) {
-				BeachBall.Logicat = 1;
-			}
-			//Otherwise it is an RK
-			else {
-				BeachBall.Logicat = 0;
-				start = content.indexOf("Show");
-				if (start != -1) {
-					content = content.substring(start+15,start+38);
-					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-					len = content.length;
-					BeachBall.RKLevel = content.substring(18,len);
-					//Molpy.Notify('RedundaKitty Level is: ' + RKLevel, 1);
-				}
-				else {
-					start = content.indexOf("iframe src=");
-					content = content.substring(start-40,start-16);
-					content = content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
-					len = content.length;
-					BeachBall.RKLevel = content.substring(18,len);
-					//Molpy.Notify('YT RedundaKitty Level is: ' + RKLevel, 1);
-				}
-			}
-		}
-		//If RK not visible, LC to 99.
-		else {
-			BeachBall.Logicat = 99;
-		}
-
-		//Clicks RK if AutoClick Enabled
-		if (BeachBall.RKAutoClickStatus == 2 && BeachBall.Logicat == 0 ) {
-			if (BeachBall.RKLevel > 9) {
-				BeachBall.RKLevel = 7;
-			}
-			Molpy.ClickRedacted(BeachBall.RKLevel);
-			//Molpy.Notify('Level: ' + BeachBall.RKLevel, 1);
-			BeachBall.RKNew = 1;
-			BeachBall.RKLocation = '123';
-			BeachBall.ToggleMenus('123');
-		}
-		//Solves LC if AutoClick enabled
-		else if (BeachBall.Logicat == 1 && BeachBall.LCSolverStatus == 1) {
-			BeachBall.SolveLogicat();
-			//Molpy.Notify('LC Clicked in ' + BeachBall.RKLocation + '.', 1);
-			BeachBall.RKNew = 1;
-			BeachBall.RKLocation = '123';
-			BeachBall.ToggleMenus('123');
-		}
-
-		//Redundakitty Notifications for Manual Clicking (Title Bar, Audio)
-		else {	
-			document.title = "! kitten !";
-			//If RK Audio Alerts Enabled
-			if ((BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat == 0) {
-				BeachBall.PlayRKAlert();
-			}	
-			else if ((BeachBall.AudioAlertsStatus == 2 || BeachBall.AudioAlertsStatus == 4) && BeachBall.Logicat == 1) {
-				BeachBall.PlayRKAlert();
-			}
-		}
-	}	
-	//If no RK active, update title Timer. Reset some variables.
-	else {
-		document.title = BeachBall.RKTimer;
-		BeachBall.oldRKLocation = -1;
-		BeachBall.RKNew = 1;
-		BeachBall.RKPlayAudio = 0;
-	}
-}*/
 
 BeachBall.SolveLogicat = function() {
 	var i = 65;
@@ -515,14 +405,14 @@ if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
 //Create Menu
 $('#optionsItems').append('<div id="BeachBall"></div>');
 $('#BeachBall').append('<div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
-$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty Auto Click</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'CagedAutoClick\')"> <h4>Caged Logicat Auto Click</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty AutoClick</h4> </a> <div id="RKAutoClickDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'CagedAutoClick\')"> <h4>Caged Logicat AutoClick</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
 $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'LCSolver\')"> <h4>Logicat Solver</h4> </a> <div id="LCSolverDesc"></div></div>');
-$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach Auto Click</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach AutoClick</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox" id="BBMontyHaul"> <a onclick="BeachBall.SwitchOption(\'MHAutoClick\')"> <h4>Monty Haul AutoClick</h4> </a> <div id="MHAutoClickDesc"></div></div>');
+$('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
 $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-$('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
-$('#BeachBall').append('<div class="minifloatbox" id="BBMontyHaul"> <a onclick="BeachBall.SwitchOption(\'MHAutoClick\')"> <h4>Monty Haul AutoClick</h4> </a> <div id="MHAutoClickDesc"></div></div>');
 //$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 //$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 //$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');

@@ -9,7 +9,8 @@
 * Monty Haul Problem AutoClicker: AutoBuy if available and Opens Door(s)
 
 #### Feature Changes
-* Simplified Autoclicker and Logicat solver options.
+* Simplified AutoClicker and Logicat solver options.
+* Redundakitty AutoClicker will no longer open menus to click them (unless the Find RK option is enabled).
 
 ### Version 3.4.1
 
