@@ -379,16 +379,12 @@ BeachBall.CheckToolFactory = function() {
 	}
 }
 
-BeachBall.CheckStorage = function() {
+BeachBall.LoadSettings = function() {
 	if(typeof(Storage)!== 'undefined')
 	  {
 	  // Yes! localStorage and sessionStorage support!
 	  BeachBall.storage = 1;
-	  BeachBall.SaveToStorage('BeachBall.BeachAutoClickStatus', 97531);
-	  status = BeachBall.ReadFromStorage('BeachBall.BeachAutoClickStatus');
-	  Molpy.Notify('Exists: ' + status, 1);
-	  status = BeachBall.ReadFromStorage('BeachBall.BeachAutoClickStatus2');
-	  Molpy.Notify('Does not exist: ' + status, 1);
+	  BeachBall.SaveToStorage(BeachBall[1], 952);
 	  }
 	else
 	  {
@@ -471,5 +467,5 @@ function BeachBallLoop() {
 
 //Program Startup
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
-BeachBall.CheckStorage();
+BeachBall.LoadSettings();
 BeachBallLoop();
