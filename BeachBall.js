@@ -43,7 +43,7 @@ BeachBall.Settings = {};
 //Test Setting Options
 for (i = 0; i < BeachBall.AllOptions.length; i++) {
 		var option = BeachBall.AllOptions[i];
-		BeachBall.Settings[option].status = i;
+		BeachBall.Settings[option] = {status: i};
 }
 
 BeachBall.CagedLogicat = function() {
