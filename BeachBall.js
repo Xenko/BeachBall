@@ -44,9 +44,10 @@ BeachBall.Settings = {};
 //Test Setting Options
 for (i = 0; i < BeachBall.AllOptions.length; i++) {
 	var option = BeachBall.AllOptions[i];
+	BeachBall.Settings[option] = {};
 	for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
 		var key = BeachBall.AllOptionsKeys[j];
-		BeachBall.Settings[option].status = option;
+		BeachBall.Settings[option].key = 97;
 	}
 }
 
