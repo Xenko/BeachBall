@@ -384,7 +384,7 @@ BeachBall.CheckStorage = function() {
 	  {
 	  // Yes! localStorage and sessionStorage support!
 	  BeachBall.storage = 1;
-	  BeachBall.SaveToStorage('BeachBall.BeachAutoClickStatus', 456213);
+	  BeachBall.SaveToStorage('BeachBall.BeachAutoClickStatus', 97531);
 	  status = BeachBall.ReadFromStorage('BeachBall.BeachAutoClickStatus');
 	  Molpy.Notify('Exists: ' + status, 1);
 	  status = BeachBall.ReadFromStorage('BeachBall.BeachAutoClickStatus2');
@@ -399,16 +399,11 @@ BeachBall.CheckStorage = function() {
 }
 
 BeachBall.ReadFromStorage = function(name) {
-	if (BeachBall.storage == 1) {
-		if (localStorage[name]) {
+	if (BeachBall.storage == 1 && localStorage[name]) {
 			return localStorage[name];
-		}
-		else {
-			return 'Value Not Found';
-		}
 	}
 	else {
-		return 'Storage Not supported';
+		return -99;
 	}
 }
 
