@@ -42,7 +42,7 @@ BeachBall.AllOptionsKeys = ['status','setting'];
 BeachBall.Settings = {};
 
 //Test Setting Options
-for (i = 0; i < BeachBall.AllOptions.length; i++) {
+/*for (i = 0; i < BeachBall.AllOptions.length; i++) {
 	var option = BeachBall.AllOptions[i];
 	BeachBall.Settings[option] = {};
 	for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
@@ -50,7 +50,7 @@ for (i = 0; i < BeachBall.AllOptions.length; i++) {
 		BeachBall.Settings[option][key] = i + '' + j;
 		localStorage['BB.'+ option + '.' + key] = i + '' + j;
 	}
-}
+}*/
 
 
 BeachBall.CagedLogicat = function() {
@@ -401,6 +401,7 @@ BeachBall.LoadSettings = function() {
 		BeachBall.storage = 1;
 		for (i = 0; i < BeachBall.AllOptions.length; i++) {
 			var option = BeachBall.AllOptions[i];
+			BeachBall.Settings[option] = {};
 			for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
 				var key = BeachBall.AllOptionsKeys[j];
 				if (localStorage['BB.'+ option + '.' + key]) {
