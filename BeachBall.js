@@ -71,7 +71,7 @@ BeachBall.CagedLogicat = function() {
 }
 
 BeachBall.ClickBeach = function(number) {
-	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
+	if (Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
 		Molpy.ClickBeach();
 	}
 	/*else {
@@ -117,7 +117,6 @@ BeachBall.DisplayDescription = function(option, status) {
 		else if (status == 1) {
 			description = 'Keep Ninja';
 			clearInterval(BeachBall.BeachAutoClickTimer);
-			BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 3600);}
 		else if (status == 2) {
 			description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';
 			clearInterval(BeachBall.BeachAutoClickTimer);
