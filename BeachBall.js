@@ -37,7 +37,7 @@ BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Testing New Settings Method
-var BeachBall.Options = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts']
+var BeachBall.Options = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts'];
 var BeachBall.Settings = {};
 
 //Test Setting Options
