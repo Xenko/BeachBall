@@ -394,7 +394,7 @@ BeachBall.CheckToolFactory = function() {
 }
 
 BeachBall.LoadDefaultSetting = function (option) {
-	Molpy.Notify(option, 1);
+	//Molpy.Notify(option, 1);
 	if (option == 'AudioAlerts') {
 		BeachBall.Settings[option] = {status: 0, setting: 0};
 	}
@@ -442,7 +442,7 @@ BeachBall.LoadSettings = function() {
 					BeachBall.Settings[option][key] = localStorage['BB.'+ option + '.' + key];
 				}
 				else {
-					BeachBall.LoadDefaultSetting(BeachBall.Settings[option]);
+					BeachBall.LoadDefaultSetting(option);
 				}
 			}
 		}	
@@ -455,7 +455,7 @@ BeachBall.LoadSettings = function() {
 		for (i = 0; i < BeachBall.AllOptions.length; i++) {
 			var option = BeachBall.AllOptions[i];
 			BeachBall.Settings[option] = {};
-			BeachBall.LoadDefaultSetting(BeachBall.Settings[option][key]);
+			BeachBall.LoadDefaultSetting(option);
 		}
 	}
 }
