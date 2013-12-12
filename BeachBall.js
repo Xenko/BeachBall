@@ -436,6 +436,7 @@ BeachBall.LoadSettings = function() {
 			BeachBall.Settings[option] = {};
 			for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
 				var key = BeachBall.AllOptionsKeys[j];
+				Molpy.Notify('Option: ' + option + ' Key: ' + key, 1);
 				if (localStorage['BB.'+ option + '.' + key]) {
 					BeachBall.Settings[option][key] = localStorage['BB.'+ option + '.' + key];
 				}
