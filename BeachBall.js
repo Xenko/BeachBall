@@ -41,7 +41,7 @@ BeachBall.AllOptions = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClic
 BeachBall.Settings = {};
 
 //Test Setting Options
-for (i = 0; i < BeachBall.Options.length; i++) {
+for (i = 0; i < BeachBall.AllOptions.length; i++) {
 		var option = BeachBall.AllOptions[i];
 		BeachBall.Settings[option].status = i;
 }
