@@ -14,4 +14,4 @@ function BBDoReload() {
     BBLoadScript();
 }
 
-$('#optionsItems').append('<div class="minifloatbox"> <a onclick="BBDoReload()"> <h4>Reload BeachBall</h4> </a></div>');
+$('#optionsItems').append('<br> <div class="minifloatbox"> <a onclick="BBDoReload()"> <h4>Reload BeachBall</h4> </a></div>');

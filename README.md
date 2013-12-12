@@ -6,6 +6,7 @@
 
 #### New Features
 * Caged Logicat AutoClicker now implemented
+* Monty Haul Problem AutoClicker: AutoBuy if available and Opens Door(s)
 
 #### Feature Changes
 * Simplified Autoclicker and Logicat solver options.
