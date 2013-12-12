@@ -411,7 +411,7 @@ BeachBall.ReadFromStorage = function(name) {
 
 BeachBall.SaveToStorage = function() {
 	if (BeachBall.storage == 1) {
-		for (i = 0; i < BeachBall.Options.length; i++) {
+		for (i = 0; i < BeachBall.AllOptions.length; i++) {
 			var option = BeachBall.AllOptions[i];
 			localStorage[option] = BeachBall.Settings[option].status;
 		}	
