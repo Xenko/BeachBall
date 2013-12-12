@@ -399,13 +399,16 @@ BeachBall.CheckStorage = function() {
 }
 
 BeachBall.ReadFromStorage = function(name) {
-	if (BeachBall.Storage = 1) {
+	if (BeachBall.Storage == 1 && localStorage[name]) {
 		return localStorage[name];
+	}
+	else {
+		return 'The element is undefined';
 	}
 }
 
 BeachBall.SaveToStorage = function(name, setting) {
-	if (BeachBall.storage = 1) {
+	if (BeachBall.storage == 1) {
 		localStorage[name] = setting;
 	}
 }
