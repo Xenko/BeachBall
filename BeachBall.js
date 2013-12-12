@@ -71,7 +71,7 @@ BeachBall.CagedLogicat = function() {
 }
 
 BeachBall.ClickBeach = function(number) {
-	if (Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
+	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
 		Molpy.ClickBeach();
 	}
 	/*else {
