@@ -384,7 +384,7 @@ BeachBall.CheckStorage = function() {
 	  {
 	  // Yes! localStorage and sessionStorage support!
 	  BeachBall.storage = 1;
-	  BeachBall.SavetoStorage('BeachBall.BeachAutoClickStatus', 12345);
+	  BeachBall.SaveToStorage('BeachBall.BeachAutoClickStatus', 12345);
 	  }
 	else
 	  {
