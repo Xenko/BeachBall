@@ -384,17 +384,19 @@ BeachBall.CheckStorage = function() {
 	  {
 	  // Yes! localStorage and sessionStorage support!
 	  BeachBall.storage = 1;
-	  Molpy.Notify('Local Storage Available. Settings will be saved',1);
+	  BeachBall.SavetoStorage('BeachBall.BeachAutoClickStatus', 12345);
 	  }
 	else
 	  {
 	  // Sorry! No web storage support..
 	  BeachBall.storage = 0;
-	  Molpy.Notify('No Local Storage Available. Setting will NOT be saved',1);
+	  Molpy.Notify('No Local Storage Available. Setting can NOT be saved or loaded.',1);
 	  }
 }
 
-
+BeachBall.SaveToStorage = function(name, setting) {
+	localStorage.name = setting;
+}
 
 //Beach Ball Startup
 //Set Settings
