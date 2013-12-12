@@ -401,6 +401,7 @@ BeachBall.CheckStorage = function() {
 BeachBall.ReadFromStorage = function(name) {
 	if (BeachBall.Storage = 1) {
 		return localStorage[name];
+	}
 }
 
 BeachBall.SaveToStorage = function(name, setting) {
