@@ -255,7 +255,7 @@ BeachBall.RedundaKitty = function() {
 			}
 		}
 		//Otherwise if Find RK is selected, find the RK
-		else if BeachBall.RKAutoClickStatus == 1) {
+		else if (BeachBall.RKAutoClickStatus == 1) {
 			BeachBall.FindRK();
 		}
 		
