@@ -37,9 +37,7 @@ BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Testing New Settings Method
-BeachBall.AllOptions = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts'];
-BeachBall.AllOptionsKeys = ['status','setting'];
-BeachBall.Settings = {};
+
 
 //Test Setting Options
 /*for (i = 0; i < BeachBall.AllOptions.length; i++) {
@@ -396,6 +394,10 @@ BeachBall.CheckToolFactory = function() {
 }
 
 BeachBall.LoadSettings = function() {
+	BeachBall.AllOptions = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts'];
+	BeachBall.AllOptionsKeys = ['status','setting'];
+	BeachBall.Settings = {};
+	
 	if(typeof(Storage)!== 'undefined') {
 		// Yes! localStorage and sessionStorage support!
 		BeachBall.storage = 1;
@@ -484,5 +486,5 @@ function BeachBallLoop() {
 
 //Program Startup
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
-//BeachBall.LoadSettings();
+BeachBall.LoadSettings();
 BeachBallLoop();
