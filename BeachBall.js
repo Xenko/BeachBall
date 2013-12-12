@@ -116,7 +116,7 @@ BeachBall.DisplayDescription = function(option, status) {
 			clearInterval(BeachBall.BeachAutoClickTimer);}
 		else if (status == 1) {
 			description = 'Keep Ninja';
-			clearInterval(BeachBall.BeachAutoClickTimer);
+			clearInterval(BeachBall.BeachAutoClickTimer);}
 		else if (status == 2) {
 			description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';
 			clearInterval(BeachBall.BeachAutoClickTimer);
