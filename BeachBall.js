@@ -393,8 +393,38 @@ BeachBall.CheckToolFactory = function() {
 	}
 }
 
+BeachBall.LoadDefaultSetting = function (option) {
+	if (option == 'AudioAlerts') {
+		BeachBall.Settings[option] = {status: 0, setting: 0};
+	}
+	else if (option == 'BeachAutoClick') {
+		BeachBall.Settings[option] = {status: 1, setting: 1};
+	}
+	else if (option == 'CagedAutoClick') {
+		BeachBall.Settings[option] = {status: 0, setting: 1};
+	}
+	else if (option == 'LCSolver') {
+		BeachBall.Settings[option] = {status: 0, setting: 1};
+	}
+	else if (option == 'MHAutoClick') {
+		BeachBall.Settings[option] = {status: 0, setting: 1};
+	}
+	else if (option == 'RefreshRate') {
+		BeachBall.Settings[option] = {status: 0, setting: 1000};
+	}
+	else if (option == 'RKAutoClick') {
+		BeachBall.Settings[option] = {status: 0, setting: 1};
+	}
+	else if (option == 'ToolFactory') {
+		BeachBall.Settings[option] = {status: 0, setting: 1000};
+	}
+	else {
+		Molpy.Notify(BeachBall.Settings[option] + ' setting not found. Please contact developer.', 1);
+	}
+}
+
 BeachBall.LoadSettings = function() {
-	BeachBall.AllOptions = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts'];
+	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'Refresh Rate', 'RKAutoClick', 'ToolFactory'];
 	BeachBall.AllOptionsKeys = ['status','setting'];
 	BeachBall.Settings = {};
 	
@@ -410,15 +440,20 @@ BeachBall.LoadSettings = function() {
 					BeachBall.Settings[option][key] = localStorage['BB.'+ option + '.' + key];
 				}
 				else {
-					BeachBall.Settings[option][key] = -99;
+					BeachBall.LoadDefaultSetting(BeachBall.Settings[option]);
 				}
 			}
 		}	
 	}
 	else {
-		// Sorry! No web storage support..
+		//No web storage support.
 		BeachBall.storage = 0;
-		Molpy.Notify('No Local Storage Available. Setting can NOT be saved or loaded.',1);
+		Molpy.Notify('No Local Storage Available. BeachBall setting will NOT be saved.',1);
+		//Load Default Settings
+		for (i = 0; i < BeachBall.AllOptions.length; i++) {
+			var option = BeachBall.AllOptions[i];
+			BeachBall.LoadDefaultSetting(BeachBall.Settings[option]);
+		}
 	}
 }
 
