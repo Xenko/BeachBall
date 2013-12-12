@@ -410,7 +410,7 @@ BeachBall.CheckToolFactory = function() {
 if (Molpy.Got('Kitnip') == 1){BeachBall.RKAlertFrequency = 10;}
 
 //Create Menu
-$('#optionsItems').append('<div id="BeachBall" style="float: left"></div>');
+$('#optionsItems').append('<div id="BeachBall" class="minifloatbox"></div>');
 $('#BeachBall').append('<div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
 $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty AutoClick</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'CagedAutoClick\')"> <h4>Caged Logicat AutoClick</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
