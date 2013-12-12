@@ -11,6 +11,7 @@
 #### Feature Changes
 * Simplified AutoClicker and Logicat solver options.
 * Redundakitty AutoClicker will no longer open menus to click them (unless the Find RK option is enabled).
+* Beach AutoClicker works better (clicks evenly over time, rather than in a large clump every tick).
 
 ### Version 3.4.1
 

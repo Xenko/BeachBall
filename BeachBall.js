@@ -37,29 +37,6 @@ BeachBall.RKNew = 1;
 BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
-//Autoclicks the Beach
-BeachBall.BeachAutoClick = function() {
-	
-	
-	/*clicks = 0;
-	wholeClicks = 0;
-	//If the auto clicker is enabled, Won't Ninja, and Not About to switch NewPix
-	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5) {
-		//Calculates number of clicks to process this tick
-		clicks = BeachBall.BeachAutoClickCPS*BeachBall.refreshRate/1000 + BeachBall.ClickRemainder;
-		//If > 1, process whole clicks this tick, save the remainder for the next tick.
-		if (clicks >= 1) {
-			wholeClicks = Math.floor(clicks);
-			BeachBall.ClickRemainder = clicks - wholeClicks;
-			BeachBall.ClickBeach(wholeClicks);
-		}
-		//If < 1, save for next tick
-		else {
-			BeachBall.ClickRemainder = clicks;
-		}
-	}*/
-}
-
 BeachBall.CagedLogicat = function() {
 	var i = 65;
 	var LCSolution = 'A';
@@ -74,9 +51,6 @@ BeachBall.ClickBeach = function(number) {
 	if (Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
 		Molpy.ClickBeach();
 	}
-	/*else {
-		Molpy.Notify('Temporal Rift Active, AutoClicking Disabled', 0);
-	}*/
 }
 
 BeachBall.CagedAutoClick = function() {
