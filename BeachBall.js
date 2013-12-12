@@ -429,7 +429,7 @@ BeachBall.LoadSettings = function() {
 	BeachBall.AllOptionsKeys = ['status','setting'];
 	BeachBall.Settings = {};
 	
-	if(typeof(Storage)!== 'undefined') {
+	if(typeof(Storage) == 'undefined') {
 		// Yes! localStorage and sessionStorage support!
 		BeachBall.storage = 1;
 		for (i = 0; i < BeachBall.AllOptions.length; i++) {
