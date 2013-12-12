@@ -46,7 +46,7 @@ for (i = 0; i < BeachBall.AllOptions.length; i++) {
 	var option = BeachBall.AllOptions[i];
 	for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
 		var key = BeachBall.AllOptionsKeys[j];
-		BeachBall.Settings[option] = {[key]: 96};
+		BeachBall.Settings[option][key] = 96;
 	}
 }
 
