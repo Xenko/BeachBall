@@ -399,7 +399,7 @@ BeachBall.CheckStorage = function() {
 }
 
 BeachBall.ReadFromStorage = function(name) {
-	if (BeachBall.Storage == 1 && localStorage[name]) {
+	if (BeachBall.Storage == 1 && localStorage[name] != null) {
 		return localStorage[name];
 	}
 	else {
