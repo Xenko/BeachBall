@@ -380,7 +380,7 @@ BeachBall.CheckToolFactory = function() {
 }
 
 BeachBall.CheckStorage = function() {
-	if(typeof(Storage)!== "undefined")
+	if(typeof(Storage)!== 'undefined')
 	  {
 	  // Yes! localStorage and sessionStorage support!
 	  BeachBall.storage = 1;
@@ -400,7 +400,7 @@ BeachBall.CheckStorage = function() {
 
 BeachBall.ReadFromStorage = function(name) {
 	if (BeachBall.storage == 1) {
-		if (localStorage[name] != '') {
+		if (localStorage[name] !== 'undefined') {
 			return localStorage[name];
 		}
 		else {
