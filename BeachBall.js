@@ -435,7 +435,7 @@ BeachBall.LoadSettings = function() {
 		// Yes! localStorage and sessionStorage support!
 		BeachBall.storage = 1;
 	}
-	
+	BeachBall.storage = 0;
 	for (i = 0; i < BeachBall.AllOptions.length; i++) {
 		var option = BeachBall.AllOptions[i];
 		BeachBall.Settings[option] = {};
@@ -451,17 +451,6 @@ BeachBall.LoadSettings = function() {
 		}
 	}	
 }
-	/*else {
-		//No web storage support.
-		BeachBall.storage = 0;
-		//Load Default Settings
-		for (i = 0; i < BeachBall.AllOptions.length; i++) {
-			var option = BeachBall.AllOptions[i];
-			BeachBall.Settings[option] = {};
-			BeachBall.Settings[option][key] = BeachBall.LoadDefaultSetting(option, key);
-		}
-	}
-}*/
 
 BeachBall.SaveToStorage = function() {
 	if (BeachBall.storage == 1) {
