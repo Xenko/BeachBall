@@ -400,7 +400,7 @@ BeachBall.CheckStorage = function() {
 
 BeachBall.ReadFromStorage = function(name) {
 	if (BeachBall.storage == 1) {
-		if (localStorage[name] !== 'undefined') {
+		if (localStorage[name]) {
 			return localStorage[name];
 		}
 		else {
