@@ -37,12 +37,12 @@ BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Testing New Settings Method
-var BeachBall.Options = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts'];
+var BeachBall.AllOptions = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts'];
 var BeachBall.Settings = {};
 
 //Test Setting Options
 for (i = 0; i < BeachBall.Options.length; i++) {
-		var option = BeachBall.Options[i];
+		var option = BeachBall.AllOptions[i];
 		BeachBall.Settings[option].status = i;
 }
 
@@ -412,7 +412,7 @@ BeachBall.ReadFromStorage = function(name) {
 BeachBall.SaveToStorage = function() {
 	if (BeachBall.storage == 1) {
 		for (i = 0; i < BeachBall.Options.length; i++) {
-			var option = BeachBall.Options[i];
+			var option = BeachBall.AllOptions[i];
 			localStorage[option] = BeachBall.Settings[option].status;
 		}	
 	}
