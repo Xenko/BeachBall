@@ -435,7 +435,7 @@ BeachBall.LoadSettings = function() {
 		// Yes! localStorage and sessionStorage support!
 		BeachBall.storage = 1;
 	}
-	BeachBall.storage = 0;
+BeachBall.storage = 0;
 	for (i = 0; i < BeachBall.AllOptions.length; i++) {
 		var option = BeachBall.AllOptions[i];
 		BeachBall.Settings[option] = {};
@@ -516,7 +516,7 @@ function BeachBallLoop() {
 BeachBall.LoadSettings();
 BeachBall.CreateMenu();
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
-if (BeachBall.Storage == 0) {
+if (BeachBall.storage == 0) {
 	Molpy.Notify('No Local Storage Available. BeachBall settings will NOT be saved.',1);
 }
 BeachBallLoop();
