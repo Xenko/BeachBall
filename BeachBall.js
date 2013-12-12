@@ -265,7 +265,7 @@ BeachBall.RedundaKitty = function() {
 		}
 		
 		//If RK Audio Alert Enabled, Play Alert
-		if ((BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 4){
+		if (BeachBall.AudioAlertsStatus == 1 || BeachBall.AudioAlertsStatus == 4){
 			BeachBall.PlayRKAlert();
 		}
 	}
