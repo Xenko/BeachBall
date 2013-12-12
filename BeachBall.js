@@ -46,12 +46,7 @@ for (i = 0; i < BeachBall.AllOptions.length; i++) {
 	var option = BeachBall.AllOptions[i];
 	for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
 		var key = BeachBall.AllOptionsKeys[j];
-		if (localStorage['BB.'+ option + '.' + key]) {
-			BeachBall.Settings[option].key = i + ' ' + j;
-		}
-		else {
-			BeachBall.Settings[option].key = -99;
-		}
+		BeachBall.Settings[option].key = i + ' ' + j;
 	}
 }
 
