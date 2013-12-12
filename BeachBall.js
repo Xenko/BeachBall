@@ -428,7 +428,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 
 BeachBall.LoadSettings = function() {
 	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory'];
-	BeachBall.AllOptionsKeys = ['status', /*'maxStatus',*/ 'setting'];
+	BeachBall.AllOptionsKeys = ['status', 'maxStatus', 'setting'];
 	BeachBall.Settings = {};
 	
 	if(typeof(Storage) !== 'undefined') {
