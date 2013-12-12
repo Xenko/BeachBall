@@ -24,7 +24,7 @@ BeachBall.MHAutoClickStatus = 0;
 BeachBall.toolFactory = 1000;
 BeachBall.refreshRate = 1000;
 BeachBall.RKAlertFrequency = 8;
-BeachBall.RKAutoClickStatus = 1;
+BeachBall.RKAutoClickStatus = 0;
 BeachBall.RKPlayAudio = 1;
 
 //RK Variables
