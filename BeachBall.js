@@ -394,6 +394,7 @@ BeachBall.CheckToolFactory = function() {
 }
 
 BeachBall.LoadDefaultSetting = function (option) {
+	Molpy.Notify(option, 1);
 	if (option == 'AudioAlerts') {
 		BeachBall.Settings[option] = {status: 0, setting: 0};
 	}
@@ -424,7 +425,7 @@ BeachBall.LoadDefaultSetting = function (option) {
 }
 
 BeachBall.LoadSettings = function() {
-	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'Refresh Rate', 'RKAutoClick', 'ToolFactory'];
+	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory'];
 	BeachBall.AllOptionsKeys = ['status','setting'];
 	BeachBall.Settings = {};
 	
@@ -436,7 +437,7 @@ BeachBall.LoadSettings = function() {
 			BeachBall.Settings[option] = {};
 			for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
 				var key = BeachBall.AllOptionsKeys[j];
-				Molpy.Notify('Option: ' + option + ' Key: ' + key, 1);
+				//Molpy.Notify('Option: ' + option + ' Key: ' + key, 1);
 				if (localStorage['BB.'+ option + '.' + key]) {
 					BeachBall.Settings[option][key] = localStorage['BB.'+ option + '.' + key];
 				}
@@ -453,7 +454,8 @@ BeachBall.LoadSettings = function() {
 		//Load Default Settings
 		for (i = 0; i < BeachBall.AllOptions.length; i++) {
 			var option = BeachBall.AllOptions[i];
-			BeachBall.LoadDefaultSetting(BeachBall.Settings[option]);
+			BeachBall.Settings[option] = {};
+			BeachBall.LoadDefaultSetting(BeachBall.Settings[option][key]);
 		}
 	}
 }
