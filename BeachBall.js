@@ -39,7 +39,9 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Autoclicks the Beach
 BeachBall.BeachAutoClick = function() {
-	clicks = 0;
+	
+	
+	/*clicks = 0;
 	wholeClicks = 0;
 	//If the auto clicker is enabled, Won't Ninja, and Not About to switch NewPix
 	if (BeachBall.BeachAutoClickStatus == 2 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5) {
@@ -55,7 +57,7 @@ BeachBall.BeachAutoClick = function() {
 		else {
 			BeachBall.ClickRemainder = clicks;
 		}
-	}
+	}*/
 }
 
 BeachBall.CagedLogicat = function() {
@@ -69,14 +71,12 @@ BeachBall.CagedLogicat = function() {
 }
 
 BeachBall.ClickBeach = function(number) {
-	if (Molpy.Got('Temporal Rift') == 0){
-		for (i = 0; i < number; i++) {
-			setTimeout(Molpy.ClickBeach(), i*BeachBall.refreshRate/number);
-		}
+	if (Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
+		Molpy.ClickBeach();
 	}
-	else {
-		Molpy.Notify('Temporal Rift Active, AutoClicking Disabled', 1);
-	}
+	/*else {
+		Molpy.Notify('Temporal Rift Active, AutoClicking Disabled', 0);
+	}*/
 }
 
 BeachBall.CagedAutoClick = function() {
@@ -111,9 +111,17 @@ BeachBall.DisplayDescription = function(option, status) {
 		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
 	}
 	else if (option == 'BeachAutoClick') {
-		if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'Keep Ninja';}
-		else if (status == 2) {description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';}
+		if (status == 0) {
+			description = 'Off';
+			clearInterval(BeachBall.BeachAutoClickTimer);}
+		else if (status == 1) {
+			description = 'Keep Ninja';
+			clearInterval(BeachBall.BeachAutoClickTimer);
+			BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 3600);}
+		else if (status == 2) {
+			description = 'On: <a onclick="BeachBall.SwitchOption(\'BeachAutoClickRate\')">' + BeachBall.BeachAutoClickCPS + ' cps</a>';
+			clearInterval(BeachBall.BeachAutoClickTimer);
+			BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 1000/BeachBall.BeachAutoClickCPS);}
 		else {Molpy.Notify('Display Description Error - BeachAutoClick: ' + status, 1);}
 	}
 	else if (option == 'CagedAutoClick' || option == 'LCSolver' || option == 'MHAutoClick') {
@@ -194,8 +202,8 @@ BeachBall.Ninja = function() {
     if (Molpy.ninjad == 0) {
         if (Molpy.npbONG != 0) {
             BeachBall.incoming_ONG = 0;
-            if (BeachBall.BeachAutoClickStatus > 0) {
-				BeachBall.ClickBeach(1);
+            if (BeachBall.BeachAutoClickStatus > 0 && Molpy.Got('Temporal Rift') == 0) {
+				Molpy.ClickBeach();
 				Molpy.Notify('Ninja Auto Click', 1);
 			}
         }
@@ -441,10 +449,10 @@ BeachBall.Temp = function() {
 //Main Program and Loop
 function BeachBallMainProgram() {
 	//Molpy.Notify(BeachBall.refreshRate, 0);
+	//BeachBall.BeachAutoClick();
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	BeachBall.RedundaKitty();
 	BeachBall.CagedAutoClick();
-	BeachBall.BeachAutoClick();
 	BeachBall.Ninja();
 	BeachBall.MontyHaul();
 	BeachBallLoop();
