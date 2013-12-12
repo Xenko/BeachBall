@@ -38,12 +38,21 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Testing New Settings Method
 BeachBall.AllOptions = ['BeachAutoClick', 'LCSolver', 'MHAutoClick', 'RKAutoClick', 'AudioAlerts'];
+BeachBall.AllOptionsKeys = ['status','setting'];
 BeachBall.Settings = {};
 
 //Test Setting Options
 for (i = 0; i < BeachBall.AllOptions.length; i++) {
-		var option = BeachBall.AllOptions[i];
-		BeachBall.Settings[option] = {status: i};
+	var option = BeachBall.AllOptions[i];
+	for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
+		var key = BeachBall.AllOptionsKeys[j];
+		if (localStorage['BB.'+ option + '.' + key]) {
+			BeachBall.Settings[option].key = i + ' ' + j;
+		}
+		else {
+			BeachBall.Settings[option].key = -99;
+		}
+	}
 }
 
 BeachBall.CagedLogicat = function() {
@@ -392,6 +401,18 @@ BeachBall.LoadSettings = function() {
 	if(typeof(Storage)!== 'undefined') {
 		// Yes! localStorage and sessionStorage support!
 		BeachBall.storage = 1;
+		for (i = 0; i < BeachBall.AllOptions.length; i++) {
+			var option = BeachBall.AllOptions[i];
+			for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
+				var key = BeachBall.AllOptionsKeys[j];
+				if (localStorage['BB.'+ option + '.' + key]) {
+					BeachBall.Settings[option].key = localStorage['BB.'+ option + '.' + key];
+				}
+				else {
+					BeachBall.Settings[option].key = -99;
+				}
+			}
+		}	
 	}
 	else {
 		// Sorry! No web storage support..
@@ -400,21 +421,9 @@ BeachBall.LoadSettings = function() {
 	}
 }
 
-BeachBall.ReadFromStorage = function(name) {
-	if (BeachBall.storage == 1 && localStorage[name]) {
-			return localStorage[name];
-	}
-	else {
-		return -99;
-	}
-}
-
 BeachBall.SaveToStorage = function() {
 	if (BeachBall.storage == 1) {
-		for (i = 0; i < BeachBall.AllOptions.length; i++) {
-			var option = BeachBall.AllOptions[i];
-			localStorage[option] = BeachBall.Settings[option].status;
-		}	
+
 	}
 }
 
@@ -476,6 +485,5 @@ function BeachBallLoop() {
 
 //Program Startup
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
-BeachBall.LoadSettings();
-BeachBall.SaveToStorage();
+//BeachBall.LoadSettings();
 BeachBallLoop();
