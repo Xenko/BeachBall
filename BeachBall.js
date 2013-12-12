@@ -47,9 +47,11 @@ for (i = 0; i < BeachBall.AllOptions.length; i++) {
 	BeachBall.Settings[option] = {};
 	for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
 		var key = BeachBall.AllOptionsKeys[j];
-		BeachBall.Settings[option][key] = i + ' ' + j;
+		BeachBall.Settings[option][key] = i + '' + j;
+		localStorage['BB.'+ option + '.' + key] = i + '' + j;
 	}
 }
+
 
 BeachBall.CagedLogicat = function() {
 	var i = 65;
@@ -402,10 +404,10 @@ BeachBall.LoadSettings = function() {
 			for (j=0; j < BeachBall.AllOptionsKeys.length; j++){
 				var key = BeachBall.AllOptionsKeys[j];
 				if (localStorage['BB.'+ option + '.' + key]) {
-					BeachBall.Settings[option].key = localStorage['BB.'+ option + '.' + key];
+					BeachBall.Settings[option][key] = localStorage['BB.'+ option + '.' + key];
 				}
 				else {
-					BeachBall.Settings[option].key = -99;
+					BeachBall.Settings[option][key] = -99;
 				}
 			}
 		}	
