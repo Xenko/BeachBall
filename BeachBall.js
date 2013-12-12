@@ -70,8 +70,9 @@ BeachBall.CagedLogicat = function() {
 
 BeachBall.ClickBeach = function(number) {
 	if (Molpy.Got('Temporal Rift') == 0){
-		for (i = 1; i < number; i++) {
-			setTimeout(Molpy.ClickBeach(), i*BeachBall.refreshRate/number);
+		for (i = 1; i < number + 1; i++) {
+			BBinc = i*BeachBall.refreshRate/number
+			setTimeout(Molpy.Notify('Click: ' + BBinc, 0), i*BeachBall.refreshRate/number);
 		}
 	}
 	else {
