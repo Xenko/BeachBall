@@ -123,6 +123,7 @@ BeachBall.Ninja = function() {
 BeachBall.PlayRKAlert = function() {
 	//If proper mNP and hasn't yet played this mNP (can happen if refresh Rate < mNP length)
 	if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) == 0 && BeachBall.RKPlayAudio == 1) {
+		Molpy.Notify('Alert Played', 0);
 		BeachBall.audio_Bell.play();
 		BeachBall.RKPlayAudio = 0;
 	}
