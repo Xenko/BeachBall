@@ -248,14 +248,6 @@ BeachBall.CreateMenu = function() {
 		var option = BeachBall.AllOptions[i];
 		BeachBall.DisplayDescription(option);
 	}
-	/*BeachBall.DisplayDescription('RKAutoClick');
-	BeachBall.DisplayDescription('CagedAutoClick');
-	BeachBall.DisplayDescription('LCSolver');
-	BeachBall.DisplayDescription('BeachAutoClick');
-	BeachBall.DisplayDescription('AudioAlerts');
-	BeachBall.DisplayDescription('RefreshRate');
-	BeachBall.DisplayDescription('MHAutoClick');
-	BeachBall.DisplayDescription('ToolFactory');*/
 
 	//Developer Functions
 	BeachBall.SpawnRK = function() {
@@ -422,7 +414,9 @@ BeachBall.SwitchStatus = function(option) {
 		me.status = 1;
 		Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 	}
-	
+	if (BeachBall.Storage == 1) {
+		localStorage['BB.'+ option + '.' + key] = me.status;
+	}
 	BeachBall.DisplayDescription(option, me.status);
 }
 
