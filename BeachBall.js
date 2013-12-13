@@ -387,6 +387,9 @@ BeachBall.SwitchSetting = function(option) {
 	}
 	else {
 		me.setting = newRate;
+		if (BeachBall.storage == 1) {
+			localStorage['BB.'+ option + '.ssetting'] = me.setting;
+		}
 		me.desc = BeachBall.LoadDefaultSetting(option, 'desc');
 		BeachBall.DisplayDescription(option);
 	}
@@ -409,7 +412,7 @@ BeachBall.SwitchStatus = function(option) {
 		Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 	}
 	if (BeachBall.storage == 1) {
-		localStorage['BB.'+ option + '.' + key] = me.status;
+		localStorage['BB.'+ option + '.status'] = me.status;
 	}
 	BeachBall.DisplayDescription(option, me.status);
 }
