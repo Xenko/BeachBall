@@ -379,12 +379,6 @@ BeachBall.LoadSettings = function() {
 	}	
 }
 
-BeachBall.SaveToStorage = function() {
-	if (BeachBall.storage == 1) {
-
-	}
-}
-
 BeachBall.SwitchSetting = function(option) {
 	var me = BeachBall.Settings[option];
 	var newRate = parseInt(prompt(me.msg, me.setting));
@@ -414,7 +408,7 @@ BeachBall.SwitchStatus = function(option) {
 		me.status = 1;
 		Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 	}
-	if (BeachBall.Storage == 1) {
+	if (BeachBall.storage == 1) {
 		localStorage['BB.'+ option + '.' + key] = me.status;
 	}
 	BeachBall.DisplayDescription(option, me.status);
