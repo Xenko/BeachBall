@@ -7,6 +7,7 @@
 #### New Features
 * Caged Logicat AutoClicker now implemented
 * Monty Haul Problem AutoClicker: AutoBuy if available and Opens Door(s)
+* Settings are now saved between sessions if HTML5 local storage is available.
 
 #### Feature Changes
 * Simplified AutoClicker and Logicat solver options.
