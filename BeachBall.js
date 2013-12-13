@@ -74,12 +74,10 @@ BeachBall.CagedAutoClick = function() {
 }
 
 BeachBall.DisplayDescription = function(option) {
-	var description = 'error';
-	var me = BeachBall.Settings[option]
+	var me = BeachBall.Settings[option];
 	description = me.desc[me.status];
 	
 	if (option == 'BeachAutoClick') {
-		Molpy.Notify('Clearing BeachAutoClickTimer', 1);
 		clearInterval(BeachBall.BeachAutoClickTimer);
 		if (me.status == 2) {
 			BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 1000/me.setting);
@@ -285,6 +283,7 @@ BeachBall.SwitchSetting = function(option) {
 	}
 	else {
 		me.setting = newRate;
+		me.desc = LoadDefaultSetting(option, desc);
 		BeachBall.DisplayDescription(option);
 	}
 }
