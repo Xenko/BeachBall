@@ -303,14 +303,14 @@ BeachBall.SwitchSetting = function(option) {
 
 BeachBall.SwitchStatus = function(option) {
 	var me = BeachBall.Settings[option];
-		Molpy.Notify('Switching: ' + option, 1);
-		Molpy.Notify('Current Status: ' + me.status, 1);
+		//Molpy.Notify('Switching: ' + option, 1);
+		//Molpy.Notify('Current Status: ' + me.status, 1);
 		me.status++;
-		Molpy.Notify('Status + 1: ' + me.status, 1);
+		//Molpy.Notify('Status + 1: ' + me.status, 1);
 		if (me.status > me.maxStatus) {
 			me.status = 0;
 		}
-		Molpy.Notify('Corrected Status: ' + me.status, 1);
+		//Molpy.Notify('Corrected Status: ' + me.status, 1);
 		
 	if ((option == 'RKAutoClick' && me.status == 2) || (option == 'CagedAutoClick' && me.status == 1)) {
 		BeachBall.Settings['LCSolver'].status = 1;
@@ -318,12 +318,11 @@ BeachBall.SwitchStatus = function(option) {
 		BeachBall.DisplayDescription('LCSolver', 1);
 	}
 	
-	else if (option = 'LCSolver' && me.status == 0 && BeachBall.Settings['CagedAutoClick'].status == 1) {
+	else if (option == 'LCSolver' && me.status == 0 && BeachBall.Settings['CagedAutoClick'].status == 1) {
 		me.status = 1;
 		Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 	}
 	
-	Molpy.Notify(option, 1);
 	BeachBall.DisplayDescription(option, me.status);
 }
 
