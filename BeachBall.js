@@ -283,7 +283,7 @@ BeachBall.SwitchSetting = function(option) {
 	}
 	else {
 		me.setting = newRate;
-		me.desc = LoadDefaultSetting(option, desc);
+		me.desc = LoadDefaultSetting(option, 'desc');
 		BeachBall.DisplayDescription(option);
 	}
 }
