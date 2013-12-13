@@ -314,6 +314,7 @@ BeachBall.SwitchStatus = function(option) {
 		
 	if ((option == 'RKAutoClick' && me.status == 2) || (option == 'CagedAutoClick' && me.status == 1)) {
 		BeachBall.Settings['LCSolver'].status = 1;
+		Molpy.Notify('Switching: LCSolver', 1);
 		BeachBall.DisplayDescription('LCSolver', 1);
 	}
 	
