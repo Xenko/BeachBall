@@ -244,14 +244,18 @@ BeachBall.CreateMenu = function() {
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
 	
 	//Replace with Loop!
-	BeachBall.DisplayDescription('RKAutoClick');
+	for (var i = 0; i < BeachBall.AllOptions.length; i++) {
+		var option = BeachBall.AllOptions[i];
+		BeachBall.DesiplayDescription(option);
+	}
+	/*BeachBall.DisplayDescription('RKAutoClick');
 	BeachBall.DisplayDescription('CagedAutoClick');
 	BeachBall.DisplayDescription('LCSolver');
 	BeachBall.DisplayDescription('BeachAutoClick');
 	BeachBall.DisplayDescription('AudioAlerts');
 	BeachBall.DisplayDescription('RefreshRate');
 	BeachBall.DisplayDescription('MHAutoClick');
-	BeachBall.DisplayDescription('ToolFactory');
+	BeachBall.DisplayDescription('ToolFactory');*/
 
 	//Developer Functions
 	BeachBall.SpawnRK = function() {
