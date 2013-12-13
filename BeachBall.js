@@ -404,6 +404,9 @@ BeachBall.SwitchStatus = function(option) {
 		
 	if ((option == 'RKAutoClick' && me.status == 2) || (option == 'CagedAutoClick' && me.status == 1)) {
 		BeachBall.Settings['LCSolver'].status = 1;
+		if (BeachBall.storage == 1) {
+			localStorage['BB.LCSolver.status'] = 1;
+		}
 		BeachBall.DisplayDescription('LCSolver', 1);
 	}
 	
