@@ -73,17 +73,23 @@ BeachBall.CagedAutoClick = function() {
 	}
 }
 
+BeachBall.DisplayDescriptionNew = function(option) {
+	
+}
+
 BeachBall.DisplayDescription = function(option, status) {
 	Molpy.Notify('Display option: ' + option + ' status: ' + status, 1);
 	var error = 0;
 	var description = 'error';
+	var me = BeachBall.Settings[option]
 	if (option == 'AudioAlerts') {
-		if (status == 0) {description = 'Off';}
+		description = me.desc[me.status];
+		/*if (status == 0) {description = 'Off';}
 		else if (status == 1) {description = 'RK Only'; BeachBall.RKPlayAudio = 1;}
 		else if (status == 2) {description = 'LC Only'; BeachBall.RKPlayAudio = 1;}
 		else if (status == 3) {description = 'ONG Only';}
 		else if (status == 4) {description = 'All Alerts'; BeachBall.RKPlayAudio = 1;}
-		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}
+		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}*/
 	}
 	else if (option == 'BeachAutoClick') {
 		if (status == 0) {
@@ -262,55 +268,16 @@ BeachBall.SwitchSetting = function(option) {
 	}
 	else {
 		me.setting = newRate;
-		BeachBall.DisplayDescription(option, me.status);
+		BeachBall.DisplayDescription(option);
 	}
-	
-	/*if (option == 'BeachAutoClick') {
-		var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', me.setting));
-		if (newRate < 1 || newRate > 20 || isNaN(newRate)){
-			Molpy.Notify('Invalid Clicking Rate', 1);
-		}
-		else {
-			me.setting = newRate;
-			BeachBall.DisplayDescription(option);
-		}
-	}
-	
-	else if (option == RefreshRate) {
-		var newRate = parseInt(prompt('Please enter your desired refresh rate in milliseconds (500 - 3600):', me.setting));
-		if (newRate < 500 || newRate > 3600 || isNaN(newRate)){
-			Molpy.Notify('Invalid Refresh Rate', 1);
-		}
-		else {
-			me.setting = newRate;
-			BeachBall.DisplayDescription(option);
-		}
-	}
-	
-	//Change This
-	else if (option == 'ToolFactory') {
-		var newRate = parseInt(prompt('Tool Factory Loading:', me.setting));
-		if (isNaN(newRate)){
-			Molpy.Notify('Invalid Tool Factory Loading', 1);
-			status = BeachBall.toolFactory;
-		}
-		else {
-			BeachBall.toolFactory = newRate;
-			status = newRate;
-		}
-		break;*/
 }
 
 BeachBall.SwitchStatus = function(option) {
 	var me = BeachBall.Settings[option];
-		//Molpy.Notify('Switching: ' + option, 1);
-		//Molpy.Notify('Current Status: ' + me.status, 1);
 		me.status++;
-		//Molpy.Notify('Status + 1: ' + me.status, 1);
 		if (me.status > me.maxStatus) {
 			me.status = 0;
 		}
-		//Molpy.Notify('Corrected Status: ' + me.status, 1);
 		
 	if ((option == 'RKAutoClick' && me.status == 2) || (option == 'CagedAutoClick' && me.status == 1)) {
 		BeachBall.Settings['LCSolver'].status = 1;
@@ -324,101 +291,6 @@ BeachBall.SwitchStatus = function(option) {
 	}
 	
 	BeachBall.DisplayDescription(option, me.status);
-}
-
-BeachBall.SwitchOption = function(option) {
-	var status = 99;
-	switch (option) {
-		case 'RKAutoClick':
-			BeachBall.RKAutoClickStatus++;
-			if (BeachBall.RKAutoClickStatus > 2) {BeachBall.RKAutoClickStatus = 0;}
-			status = BeachBall.RKAutoClickStatus;
-			//When AutoClick turned on, checks to make sure that Logicat solver is turned on. If not, it turns it on.
-			if (status == 2) {
-				if (BeachBall.LCSolverStatus == 0) {
-					BeachBall.LCSolverStatus = 1;
-					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
-				}
-			}
-			break;
-		case 'CagedAutoClick':
-			BeachBall.CagedAutoClickStatus++;
-			if (BeachBall.CagedAutoClickStatus > 1) {BeachBall.CagedAutoClickStatus = 0;}
-			status = BeachBall.CagedAutoClickStatus;
-			//When AutoClick turned on, checks to make sure that Logicat solver is turned on. If not, it turns it on.
-			if (status == 1) {
-				if (BeachBall.LCSolverStatus == 0) {
-					BeachBall.LCSolverStatus = 1;
-					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
-				}
-			}
-			break;
-			
-		case 'LCSolver':
-			if (BeachBall.CagedAutoClickStatus == 0) {
-				BeachBall.LCSolverStatus++;
-				if (BeachBall.LCSolverStatus > 1) {BeachBall.LCSolverStatus = 0;}
-				status = BeachBall.LCSolverStatus;
-			}
-			else {
-				status = 1;
-				Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
-			}
-			break;
-			
-		case 'BeachAutoClick':
-			BeachBall.BeachAutoClickStatus++;
-			if (BeachBall.BeachAutoClickStatus > 2) {BeachBall.BeachAutoClickStatus = 0;}
-			status = BeachBall.BeachAutoClickStatus;
-			break;
-			
-		case 'BeachAutoClickRate':
-			var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', BeachBall.BeachAutoClickCPS));
-			if (newRate < 1 || newRate > 20 || isNaN(newRate)){
-				Molpy.Notify('Invalid Clicking Rate', 1);
-			}
-			else {
-				BeachBall.BeachAutoClickCPS = newRate;
-			}
-			option = 'BeachAutoClick';
-			status = 2;
-			break;
-			
-		case 'AudioAlerts':
-			BeachBall.AudioAlertsStatus++;
-			if (BeachBall.AudioAlertsStatus > 4) {BeachBall.AudioAlertsStatus = 0;}
-			status = BeachBall.AudioAlertsStatus;
-			break;
-			
-		case 'RefreshRate':
-			var newRate = parseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', BeachBall.refreshRate));
-			if (newRate < 500 || newRate > 3600 || isNaN(newRate)){
-				Molpy.Notify('Invalid Refresh Rate', 1);
-			}
-			else {
-				BeachBall.refreshRate = newRate;
-			}
-			break;
-			
-		case 'MHAutoClick':
-			BeachBall.MHAutoClickStatus++;
-			if (BeachBall.MHAutoClickStatus > 1) {BeachBall.MHAutoClickStatus = 0;}
-			status = BeachBall.MHAutoClickStatus;
-			break;
-			
-		case 'ToolFactory':
-			var newRate = parseInt(prompt('Tool Factory Loading:', BeachBall.toolFactory));
-			if (isNaN(newRate)){
-				Molpy.Notify('Invalid Tool Factory Loading', 1);
-				status = BeachBall.toolFactory;
-			}
-			else {
-				BeachBall.toolFactory = newRate;
-				status = newRate;
-			}
-			break;
-	}
-	BeachBall.DisplayDescription(option, status);
 }
 
 BeachBall.ToggleMenus = function(wantOpen) {
@@ -456,6 +328,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 	if (option == 'AudioAlerts') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 4;}
+		if (key == 'desc')		{return ['Off', 'RK Only', 'LC Only', 'ONG Only', 'All Alerts'];}
 		if (key == 'setting')	{return 0;}
 	}
 	else if (option == 'BeachAutoClick') {
