@@ -106,7 +106,10 @@ BeachBall.MontyHaul = function() {
 }
 
 BeachBall.Ninja = function() {
-    if (Molpy.ninjad == 0) {
+    //Molpy.ninjad is 0 when you can't click, and stays 0 until you extend streak, when it turns to 1
+	//Molpy.npbONG is 0 when you can't click, and 1 when you can click
+
+	if (Molpy.ninjad == 0) {
         if (Molpy.npbONG != 0) {
             BeachBall.incoming_ONG = 0;
             if (BeachBall.Settings['BeachAutoClick'].status > 0 && Molpy.Got('Temporal Rift') == 0) {
