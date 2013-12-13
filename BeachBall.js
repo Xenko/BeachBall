@@ -73,24 +73,37 @@ BeachBall.CagedAutoClick = function() {
 	}
 }
 
-BeachBall.DisplayDescriptionNew = function(option) {
+BeachBall.DisplayDescription = function(option) {
+	var description = 'error';
+	var me = BeachBall.Settings[option]
+	description = me.desc[me.status];
 	
+	if (option == 'BeachAutoClick' && me.status == 2) {
+		clearInterval(BeachBall.BeachAutoClickTimer);
+		BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 1000/me.setting);
+	}
+	
+	if (option == 'ToolFactory') {
+		if (Molpy.Got('Tool Factory') == 1) {
+			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + me.setting + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
+			description = 'Load: <a onclick="BeachBall.SwitchSetting(\'ToolFactory\')">' + me.setting + ' chips</a>';
+		}
+		else {
+			g('BBToolFactory').innerHTML = '<h4>Tool Factory Locked</h4><div id="ToolFactoryDesc"></div>';
+			description = '<a onclick="BeachBall.CheckToolFactory()">Check Again!!</a>';
+		}
+	}
+	
+	g(option + 'Desc').innerHTML = '<br>' + description;
 }
 
-BeachBall.DisplayDescription = function(option, status) {
+BeachBall.DisplayDescriptionOld = function(option, status) {
 	//Molpy.Notify('Display option: ' + option + ' status: ' + status, 1);
 	var error = 0;
 	var description = 'error';
 	var me = BeachBall.Settings[option]
-	if (option == 'AudioAlerts') {
-		description = me.desc[me.status];
-		/*if (status == 0) {description = 'Off';}
-		else if (status == 1) {description = 'RK Only'; BeachBall.RKPlayAudio = 1;}
-		else if (status == 2) {description = 'LC Only'; BeachBall.RKPlayAudio = 1;}
-		else if (status == 3) {description = 'ONG Only';}
-		else if (status == 4) {description = 'All Alerts'; BeachBall.RKPlayAudio = 1;}
-		else {Molpy.Notify('Display Description Error - Audio Alerts: ' + status, 1);}*/
-	}
+	description = me.desc[me.status];
+	
 	else if (option == 'BeachAutoClick') {
 		if (status == 0) {
 			description = 'Off';
@@ -327,8 +340,8 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 	if (option == 'AudioAlerts') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 4;}
-		if (key == 'desc')		{return ['Off', 'RK Only', 'LC Only', 'ONG Only', 'All Alerts'];}
 		if (key == 'setting')	{return 0;}
+		if (key == 'desc')		{return ['Off', 'RK Only', 'LC Only', 'ONG Only', 'All Alerts'];}
 	}
 	else if (option == 'BeachAutoClick') {
 		if (key == 'status') 	{return 1;}
@@ -337,21 +350,25 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'minSetting'){return 1;}
 		if (key == 'maxSetting'){return 20;}
 		if (key == 'msg')		{return 'Please enter your desired clicking rate per second (1 - 20):';}
+		if (key == 'desc')		{return ['Off', 'Keep Ninja', 'On: <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')">' + BeachBall.Settings[option].setting + ' cps</a>'];}
 	}
 	else if (option == 'CagedAutoClick') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
+		if (key == 'desc')		{return ['Off', 'On'];}
 	}
 	else if (option == 'LCSolver') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
+		if (key == 'desc')		{return ['Off', 'On'];}
 	}
 	else if (option == 'MHAutoClick') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
+		if (key == 'desc')		{return ['Off', 'On'];}
 	}
 	else if (option == 'RefreshRate') {
 		if (key == 'status') 	{return 0;}
@@ -360,11 +377,13 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'minSetting'){return 500;}
 		if (key == 'maxSetting'){return Molpy.NPlength;}
 		if (key == 'msg')		{return 'Please enter your desired refresh rate in milliseconds (500 - 3600):';}
+		if (key == 'desc')		{return ['Off', BeachBall.Settings[option].setting];}
 	}
 	else if (option == 'RKAutoClick') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 2;}
 		if (key == 'setting')	{return 0;}
+		if (key == 'desc')		{return ['Off', 'Find RK', 'On'];}
 	}
 	else if (option == 'ToolFactory') {
 		if (key == 'status') 	{return 0;}
@@ -373,6 +392,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'minSetting'){return 1;}
 		if (key == 'maxSetting'){return Infinity;}
 		if (key == 'msg')		{return 'Tool Factory Loading:';}
+		if (key == 'desc')		{return ['Off', BeachBall.Settings[option].setting];}
 	}
 	else {
 		Molpy.Notify(BeachBall.Settings[option] + ' setting not found. Please contact developer.', 1);
@@ -382,7 +402,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 
 BeachBall.LoadSettings = function() {
 	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory'];
-	BeachBall.AllOptionsKeys = ['status', 'maxStatus', 'desc', 'setting', 'minSetting', 'maxSetting', 'msg'];
+	BeachBall.AllOptionsKeys = ['status', 'maxStatus', 'setting', 'minSetting', 'maxSetting', 'msg', 'desc'];
 	BeachBall.SavedOptionsKeys = ['status', 'setting'];
 	BeachBall.Settings = {};
 	
