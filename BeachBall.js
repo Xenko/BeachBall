@@ -164,7 +164,7 @@ BeachBall.RedundaKitty = function() {
 			$('#redacteditem').css("border","2px solid red");
 		}
 		
-		//If RK Audio Alert Enabled, Play Alert <-- Not Playing
+		//If RK Audio Alert Enabled, Play Alert
 		if (BeachBall.Settings['AudioAlerts'].status == 1 || BeachBall.Settings['AudioAlerts'].status == 4){
 			Molpy.Notify('Play RK Alert Called', 1);
 			BeachBall.PlayRKAlert();
