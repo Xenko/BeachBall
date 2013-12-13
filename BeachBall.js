@@ -261,7 +261,7 @@ BeachBall.SwitchSetting = function(option) {
 	}
 	else {
 		me.setting = newRate;
-		BeachBall.DisplayDescription(option);
+		BeachBall.DisplayDescription(option, me.status);
 	}
 	
 	/*if (option == 'BeachAutoClick') {
@@ -317,7 +317,7 @@ BeachBall.SwitchStatus = function(option) {
 		Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 	}
 	
-	BeachBall.DisplayDescription(option);
+	BeachBall.DisplayDescription(option, me.status);
 }
 
 BeachBall.SwitchOption = function(option) {
