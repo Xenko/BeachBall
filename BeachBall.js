@@ -2,7 +2,7 @@
 var BeachBall = {};
 BeachBall.incoming_ONG = 0;
 BeachBall.Time_to_ONG = 1800000;
-BeachBall.lootBoxes = ['boosts', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
+BeachBall.lootBoxes = ['boosts', 'stuff', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
 BeachBall.version = '4.0 Beta';
@@ -65,7 +65,7 @@ BeachBall.CagedAutoClick = function() {
 BeachBall.FindRK = function() {
 /*	RV of 1 is Sand Tools
 	RV of 2 is Castle Tools
-	RV of 3 is Boosts Main Page
+	RV of 3 is Shop
 	RV of 4 is Boosts Menus, Hill People Tech, etc.
 	RV of 5 is Badges Earned, Discovery, Monuments and Glass Monuments
 	RV of 6 is Badges Available */
