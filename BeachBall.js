@@ -78,7 +78,7 @@ BeachBall.DisplayDescriptionNew = function(option) {
 }
 
 BeachBall.DisplayDescription = function(option, status) {
-	Molpy.Notify('Display option: ' + option + ' status: ' + status, 1);
+	//Molpy.Notify('Display option: ' + option + ' status: ' + status, 1);
 	var error = 0;
 	var description = 'error';
 	var me = BeachBall.Settings[option]
@@ -281,7 +281,6 @@ BeachBall.SwitchStatus = function(option) {
 		
 	if ((option == 'RKAutoClick' && me.status == 2) || (option == 'CagedAutoClick' && me.status == 1)) {
 		BeachBall.Settings['LCSolver'].status = 1;
-		Molpy.Notify('Switching: LCSolver', 1);
 		BeachBall.DisplayDescription('LCSolver', 1);
 	}
 	
@@ -383,7 +382,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 
 BeachBall.LoadSettings = function() {
 	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory'];
-	BeachBall.AllOptionsKeys = ['status', 'maxStatus', 'setting', 'minSetting', 'maxSetting', 'msg'];
+	BeachBall.AllOptionsKeys = ['status', 'maxStatus', 'desc', 'setting', 'minSetting', 'maxSetting', 'msg'];
 	BeachBall.SavedOptionsKeys = ['status', 'setting'];
 	BeachBall.Settings = {};
 	
