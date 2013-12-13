@@ -376,12 +376,12 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 	}
 	else if (option == 'RefreshRate') {
 		if (key == 'status') 	{return 0;}
-		if (key == 'maxStatus') {return 1;}
+		if (key == 'maxStatus') {return 0;}
 		if (key == 'setting')	{return 1000;}
 		if (key == 'minSetting'){return 500;}
 		if (key == 'maxSetting'){return Molpy.NPlength;}
 		if (key == 'msg')		{return 'Please enter your desired refresh rate in milliseconds (500 - 3600):';}
-		if (key == 'desc')		{return ['Off', BeachBall.Settings[option].setting];}
+		if (key == 'desc')		{return [BeachBall.Settings[option].setting];}
 	}
 	else if (option == 'RKAutoClick') {
 		if (key == 'status') 	{return 0;}
