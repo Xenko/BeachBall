@@ -136,6 +136,7 @@ BeachBall.PlayRKAlert = function() {
 BeachBall.RedundaKitty = function() {
 	var meRK = BeachBall.Settings['RKAutoClick'];
 	var meLC = BeachBall.Settings['LCSolver'];
+	BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 	//If there is an active RK
 	if (Molpy.redactedVisible > 0) {
 		//Update the title, and determine the RK level
@@ -172,7 +173,6 @@ BeachBall.RedundaKitty = function() {
 	
 	//If no RK active, update title Timer. Reset audio alert variable.
 	else {
-		BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 		document.title = BeachBall.RKTimer;
 		BeachBall.RKPlayAudio = 0;
 	}
