@@ -246,7 +246,7 @@ BeachBall.CreateMenu = function() {
 	//Replace with Loop!
 	for (var i = 0; i < BeachBall.AllOptions.length; i++) {
 		var option = BeachBall.AllOptions[i];
-		BeachBall.DesiplayDescription(option);
+		BeachBall.DisplayDescription(option);
 	}
 	/*BeachBall.DisplayDescription('RKAutoClick');
 	BeachBall.DisplayDescription('CagedAutoClick');
