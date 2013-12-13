@@ -147,7 +147,8 @@ BeachBall.DisplayDescriptionOld = function(option, status) {
 	}
 		
 	if (error == 0) {g(option + 'Desc').innerHTML = '<br>' + description;}
-}*/
+*/
+}
 
 BeachBall.FindRK = function() {
 	/*
