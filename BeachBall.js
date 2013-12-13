@@ -417,8 +417,7 @@ BeachBall.SwitchStatus = function(option) {
 
 //Main Program and Loop
 function BeachBallMainProgram() {
-	//Molpy.Notify(BeachBall.refreshRate, 0);
-	//BeachBall.BeachAutoClick();
+	Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	BeachBall.RedundaKitty();
 	BeachBall.CagedAutoClick();
