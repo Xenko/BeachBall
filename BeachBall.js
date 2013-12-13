@@ -99,7 +99,7 @@ BeachBall.DisplayDescription = function(option) {
 
 BeachBall.DisplayDescriptionOld = function(option, status) {
 	//Molpy.Notify('Display option: ' + option + ' status: ' + status, 1);
-	var error = 0;
+	/*var error = 0;
 	var description = 'error';
 	var me = BeachBall.Settings[option]
 	description = me.desc[me.status];
@@ -147,7 +147,7 @@ BeachBall.DisplayDescriptionOld = function(option, status) {
 	}
 		
 	if (error == 0) {g(option + 'Desc').innerHTML = '<br>' + description;}
-}
+}*/
 
 BeachBall.FindRK = function() {
 	/*
@@ -448,14 +448,16 @@ BeachBall.CreateMenu = function() {
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
-	BeachBall.DisplayDescription('RKAutoClick', BeachBall.RKAutoClickStatus);
-	BeachBall.DisplayDescription('CagedAutoClick', BeachBall.CagedAutoClickStatus);
-	BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
-	BeachBall.DisplayDescription('BeachAutoClick', BeachBall.BeachAutoClickStatus);
-	BeachBall.DisplayDescription('AudioAlerts', BeachBall.AudioAlertsStatus);
-	BeachBall.DisplayDescription('RefreshRate', BeachBall.refreshRate);
-	BeachBall.DisplayDescription('MHAutoClick', BeachBall.MHAutoClickStatus);
-	BeachBall.DisplayDescription('ToolFactory', BeachBall.toolFactory);
+	
+	//Replace with Loop!
+	BeachBall.DisplayDescription('RKAutoClick');
+	BeachBall.DisplayDescription('CagedAutoClick');
+	BeachBall.DisplayDescription('LCSolver');
+	BeachBall.DisplayDescription('BeachAutoClick');
+	BeachBall.DisplayDescription('AudioAlerts');
+	BeachBall.DisplayDescription('RefreshRate');
+	BeachBall.DisplayDescription('MHAutoClick');
+	BeachBall.DisplayDescription('ToolFactory');
 
 	//Developer Functions
 	BeachBall.SpawnRK = function() {
