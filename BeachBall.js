@@ -79,6 +79,7 @@ BeachBall.DisplayDescription = function(option) {
 	description = me.desc[me.status];
 	
 	if (option == 'BeachAutoClick') {
+		Molpy.Notify('Clearing BeachAutoClickTimer', 1);
 		clearInterval(BeachBall.BeachAutoClickTimer);
 		if (me.status == 2) {
 			BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 1000/me.setting);
