@@ -458,7 +458,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'setting')	{return 1;}
 		if (key == 'minSetting'){return 1;}
 		if (key == 'maxSetting'){return 20;}
-		if (ket == 'msg')		{return 'Please enter your desired clicking rate per second (1 - 20):';}
+		if (key == 'msg')		{return 'Please enter your desired clicking rate per second (1 - 20):';}
 	}
 	else if (option == 'CagedAutoClick') {
 		if (key == 'status') 	{return 0;}
@@ -481,7 +481,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'setting')	{return 1000;}
 		if (key == 'minSetting'){return 500;}
 		if (key == 'maxSetting'){return Molpy.NPlength;}
-		if (ket == 'msg')		{return 'Please enter your desired refresh rate in milliseconds (500 - 3600):';}
+		if (key == 'msg')		{return 'Please enter your desired refresh rate in milliseconds (500 - 3600):';}
 	}
 	else if (option == 'RKAutoClick') {
 		if (key == 'status') 	{return 0;}
@@ -494,7 +494,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'setting')	{return 1000;}
 		if (key == 'minSetting'){return 1;}
 		if (key == 'maxSetting'){return Infinity;}
-		if (ket == 'msg')		{return 'Tool Factory Loading:';}
+		if (key == 'msg')		{return 'Tool Factory Loading:';}
 	}
 	else {
 		Molpy.Notify(BeachBall.Settings[option] + ' setting not found. Please contact developer.', 1);
