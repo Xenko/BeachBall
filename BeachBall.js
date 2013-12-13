@@ -253,97 +253,71 @@ BeachBall.SolveLogicat = function() {
 	Molpy.ClickRedactedPuzzle(LCSolution);
 }
 
-BeachBall.SwitchOptionNew = function(option) {
-	switch (option) {
-		case 'RKAutoClick':
-			BeachBall.Settings[option].status++;
-			if (BeachBall.RKAutoClickStatus > 2) {BeachBall.RKAutoClickStatus = 0;}
-			status = BeachBall.RKAutoClickStatus;
-			//When AutoClick turned on, checks to make sure that Logicat solver is turned on. If not, it turns it on.
-			if (status == 2) {
-				if (BeachBall.LCSolverStatus == 0) {
-					BeachBall.LCSolverStatus = 1;
-					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
-				}
-			}
-			break;
-		case 'CagedAutoClick':
-			BeachBall.CagedAutoClickStatus++;
-			if (BeachBall.CagedAutoClickStatus > 1) {BeachBall.CagedAutoClickStatus = 0;}
-			status = BeachBall.CagedAutoClickStatus;
-			//When AutoClick turned on, checks to make sure that Logicat solver is turned on. If not, it turns it on.
-			if (status == 1) {
-				if (BeachBall.LCSolverStatus == 0) {
-					BeachBall.LCSolverStatus = 1;
-					BeachBall.DisplayDescription('LCSolver', BeachBall.LCSolverStatus);
-				}
-			}
-			break;
-			
-		case 'LCSolver':
-			if (BeachBall.CagedAutoClickStatus == 0) {
-				BeachBall.LCSolverStatus++;
-				if (BeachBall.LCSolverStatus > 1) {BeachBall.LCSolverStatus = 0;}
-				status = BeachBall.LCSolverStatus;
-			}
-			else {
-				status = 1;
-				Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
-			}
-			break;
-			
-		case 'BeachAutoClick':
-			BeachBall.BeachAutoClickStatus++;
-			if (BeachBall.BeachAutoClickStatus > 2) {BeachBall.BeachAutoClickStatus = 0;}
-			status = BeachBall.BeachAutoClickStatus;
-			break;
-			
-		case 'BeachAutoClickRate':
-			var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', BeachBall.BeachAutoClickCPS));
-			if (newRate < 1 || newRate > 20 || isNaN(newRate)){
-				Molpy.Notify('Invalid Clicking Rate', 1);
-			}
-			else {
-				BeachBall.BeachAutoClickCPS = newRate;
-			}
-			option = 'BeachAutoClick';
-			status = 2;
-			break;
-			
-		case 'AudioAlerts':
-			BeachBall.AudioAlertsStatus++;
-			if (BeachBall.AudioAlertsStatus > 4) {BeachBall.AudioAlertsStatus = 0;}
-			status = BeachBall.AudioAlertsStatus;
-			break;
-			
-		case 'RefreshRate':
-			var newRate = parseInt(prompt('Please enter your desired BeachBall refresh rate in milliseconds (500 - 3600):', BeachBall.refreshRate));
-			if (newRate < 500 || newRate > 3600 || isNaN(newRate)){
-				Molpy.Notify('Invalid Refresh Rate', 1);
-			}
-			else {
-				BeachBall.refreshRate = newRate;
-			}
-			break;
-			
-		case 'MHAutoClick':
-			BeachBall.MHAutoClickStatus++;
-			if (BeachBall.MHAutoClickStatus > 1) {BeachBall.MHAutoClickStatus = 0;}
-			status = BeachBall.MHAutoClickStatus;
-			break;
-			
-		case 'ToolFactory':
-			var newRate = parseInt(prompt('Tool Factory Loading:', BeachBall.toolFactory));
-			if (isNaN(newRate)){
-				Molpy.Notify('Invalid Tool Factory Loading', 1);
-				status = BeachBall.toolFactory;
-			}
-			else {
-				BeachBall.toolFactory = newRate;
-				status = newRate;
-			}
-			break;
+BeachBall.SwitchSetting = function(option) {
+	var me = BeachBall.Settings[option];
+	var newRate = parseInt(prompt(me.msg, me.setting));
+	if (newRate < me.minSetting || newRate > me.maxSetting || isNaN(newRate)) {
+		Molpy.Notify('Invalid Entry.');
 	}
+	else {
+		me.setting = newRate;
+		BeachBall.DisplayDescription(option);
+	}
+	
+	/*if (option == 'BeachAutoClick') {
+		var newRate = parseInt(prompt('Please enter your desired clicking rate per second (1 - 20):', me.setting));
+		if (newRate < 1 || newRate > 20 || isNaN(newRate)){
+			Molpy.Notify('Invalid Clicking Rate', 1);
+		}
+		else {
+			me.setting = newRate;
+			BeachBall.DisplayDescription(option);
+		}
+	}
+	
+	else if (option == RefreshRate) {
+		var newRate = parseInt(prompt('Please enter your desired refresh rate in milliseconds (500 - 3600):', me.setting));
+		if (newRate < 500 || newRate > 3600 || isNaN(newRate)){
+			Molpy.Notify('Invalid Refresh Rate', 1);
+		}
+		else {
+			me.setting = newRate;
+			BeachBall.DisplayDescription(option);
+		}
+	}
+	
+	//Change This
+	else if (option == 'ToolFactory') {
+		var newRate = parseInt(prompt('Tool Factory Loading:', me.setting));
+		if (isNaN(newRate)){
+			Molpy.Notify('Invalid Tool Factory Loading', 1);
+			status = BeachBall.toolFactory;
+		}
+		else {
+			BeachBall.toolFactory = newRate;
+			status = newRate;
+		}
+		break;*/
+}
+
+BeachBall.SwitchStatus = function(option) {
+	var me = BeachBall.Settings[option]
+		me.status++;
+		if (me.status > me.maxStatus) {
+			me.status = 0;
+		}
+		
+	if ((option == 'RKAutoClick' && me.status == 2) || (option == 'CagedAutoClick' && me.status == 1)) {
+		BeachBall.Settings['LCSolver'].status = 1;
+		BeachBall.DisplayDescription('LCSolver');
+	}
+	
+	else if (option = 'LCSolver' && me.status == 0 && BeachBall.Settings['CagedAutoClick'].status == 1) {
+		me.status = 1;
+		Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
+	}
+	
+	BeachBall.DisplayDescription(option);
 }
 
 BeachBall.SwitchOption = function(option) {
@@ -482,6 +456,9 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'status') 	{return 1;}
 		if (key == 'maxStatus') {return 2;}
 		if (key == 'setting')	{return 1;}
+		if (key == 'minSetting'){return 1;}
+		if (key == 'maxSetting'){return 20;}
+		if (ket == 'msg')		{return 'Please enter your desired clicking rate per second (1 - 20):';}
 	}
 	else if (option == 'CagedAutoClick') {
 		if (key == 'status') 	{return 0;}
@@ -502,6 +479,9 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 1000;}
+		if (key == 'minSetting'){return 500;}
+		if (key == 'maxSetting'){return Molpy.NPlength;}
+		if (ket == 'msg')		{return 'Please enter your desired refresh rate in milliseconds (500 - 3600):';}
 	}
 	else if (option == 'RKAutoClick') {
 		if (key == 'status') 	{return 0;}
@@ -512,6 +492,9 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 1000;}
+		if (key == 'minSetting'){return 1;}
+		if (key == 'maxSetting'){return Infinity;}
+		if (ket == 'msg')		{return 'Tool Factory Loading:';}
 	}
 	else {
 		Molpy.Notify(BeachBall.Settings[option] + ' setting not found. Please contact developer.', 1);
@@ -521,7 +504,8 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 
 BeachBall.LoadSettings = function() {
 	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory'];
-	BeachBall.AllOptionsKeys = ['status', 'maxStatus', 'setting'];
+	BeachBall.AllOptionsKeys = ['status', 'maxStatus', 'setting', 'minSetting', 'maxSetting', 'msg'];
+	BeachBall.SavedOptionsKeys = ['status', 'setting'];
 	BeachBall.Settings = {};
 	
 	if(typeof(Storage) !== 'undefined') {
@@ -555,14 +539,14 @@ BeachBall.CreateMenu = function() {
 	//Create Menu
 	$('#optionsItems').append('<div id="BeachBall"></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RKAutoClick\')"> <h4>Redundakitty AutoClick</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'CagedAutoClick\')"> <h4>Caged Logicat AutoClick</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'LCSolver\')"> <h4>Logicat Solver</h4> </a> <div id="LCSolverDesc"></div></div>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'BeachAutoClick\')"> <h4>Beach AutoClick</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
-	$('#BeachBall').append('<div class="minifloatbox" id="BBMontyHaul"> <a onclick="BeachBall.SwitchOption(\'MHAutoClick\')"> <h4>Monty Haul AutoClick</h4> </a> <div id="MHAutoClickDesc"></div></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'RKAutoClick\')"> <h4>Redundakitty AutoClick</h4> </a> <div id="RKAutoClickDesc"></div></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'CagedAutoClick\')"> <h4>Caged Logicat AutoClick</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'LCSolver\')"> <h4>Logicat Solver</h4> </a> <div id="LCSolverDesc"></div></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')"> <h4>Beach AutoClick</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
+	$('#BeachBall').append('<div class="minifloatbox" id="BBMontyHaul"> <a onclick="BeachBall.SwitchSetting(\'MHAutoClick\')"> <h4>Monty Haul AutoClick</h4> </a> <div id="MHAutoClickDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchOption(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
@@ -607,8 +591,6 @@ function BeachBallLoop() {
 
 //Program Startup
 BeachBall.LoadSettings();
-var me = BeachBall.Settings['RKAutoClick'];
-	me.status = 999;
 BeachBall.CreateMenu();
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
 if (BeachBall.storage == 0) {
