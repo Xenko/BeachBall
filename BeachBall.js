@@ -74,6 +74,7 @@ BeachBall.CagedAutoClick = function() {
 }
 
 BeachBall.DisplayDescription = function(option, status) {
+	Molpy.Notify('Display option: ' + option + ' status: ' + status, 1);
 	var error = 0;
 	var description = 'error';
 	if (option == 'AudioAlerts') {
