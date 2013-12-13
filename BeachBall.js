@@ -48,7 +48,7 @@ BeachBall.CagedAutoClick = function() {
 	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Got('Caged Logicat') > 1 && Molpy.Boosts['Caged Logicat'].power == 0) {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
 		cost = 100 + Molpy.LogiMult(25);
-		if (Molpy.Has('GlassBlocks', cost)) { //HasGlassBlocks no longer Exists?
+		if (Molpy.Has('GlassBlocks', cost)) {
 			Molpy.MakeCagedPuzzle(cost);
 			BeachBall.CagedLogicat();
 		}
@@ -88,10 +88,13 @@ BeachBall.MontyHaul = function() {
 	if (BeachBall.Settings['MHAutoClick'].status == 1) {
 		//If Monty Haul Problem is Unlocked
 		if (Molpy.Boosts['MHP'].unlocked) {
-		
-			//If unpurchased, then buy
+			//If unpurchased and can afford, then buy
 			if (!Molpy.Got('MHP')) {
-				Molpy.BoostsById[31].buy();
+				var sp = Math.floor(Molpy.priceFactor * EvalMaybeFunction(Molpy.Boosts['MHP'].sandPrice, Molpy.Boosts['MHP'], 1));
+				var gp = Math.floor(Molpy.priceFactor * EvalMaybeFunction(Molpy.Boosts['MHP'].glassPrice, Molpy.Boosts['MHP'], 1));
+				if (Molpy.Has('GlassBlocks', gp) && Molpy.Has('Sand', sp)) {
+					Molpy.BoostsById[31].buy();
+				}
 			}
 			
 			//If purchased, open Door A
