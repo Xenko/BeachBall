@@ -48,7 +48,7 @@ BeachBall.CagedAutoClick = function() {
 	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Got('Caged Logicat') > 1 && Molpy.Boosts['Caged Logicat'].power == 0) {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
 		cost = 100 + Molpy.LogiMult(25);
-		if (Molpy.HasGlassBlocks(cost)) {
+		if (Molpy.HasGlassBlocks(cost)) { //HasGlassBlocks no longer Exists?
 			Molpy.MakeCagedPuzzle(cost);
 			BeachBall.CagedLogicat();
 		}
@@ -84,6 +84,7 @@ BeachBall.FindRK = function() {
 }
 
 BeachBall.MontyHaul = function() {
+	//Check if can afford to prevent possible issues.
 	if (BeachBall.Settings['MHAutoClick'].status == 1) {
 		//If Monty Haul Problem is Unlocked
 		if (Molpy.Boosts['MHP'].unlocked) {
@@ -161,7 +162,7 @@ BeachBall.RedundaKitty = function() {
 			$('#redacteditem').css("border","2px solid red");
 		}
 		
-		//If RK Audio Alert Enabled, Play Alert
+		//If RK Audio Alert Enabled, Play Alert <-- Not Playing
 		if (BeachBall.Settings['AudioAlerts'].status == 1 || BeachBall.Settings['AudioAlerts'].status == 4){
 			BeachBall.PlayRKAlert();
 		}
@@ -427,7 +428,7 @@ function BeachBallMainProgram() {
 }
 
 function BeachBallLoop() {
-	BeachBall.Timeout = setTimeout(BeachBallMainProgram, BeachBall.refreshRate);
+	BeachBall.Timeout = setTimeout(BeachBallMainProgram, BeachBall.Settings['RefreshRate'].setting);
 }
 
 //Program Startup
