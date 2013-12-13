@@ -303,7 +303,7 @@ BeachBall.SwitchSetting = function(option) {
 
 BeachBall.SwitchStatus = function(option) {
 	var me = BeachBall.Settings[option];
-		Molpy.Notify('Switching :' option, 1);
+		Molpy.Notify('Switching: ' + option, 1);
 		Molpy.Notify('Current Status: ' + me.status, 1);
 		me.status++;
 		Molpy.Notify('Status + 1: ' + me.status, 1);
