@@ -388,7 +388,7 @@ BeachBall.SwitchSetting = function(option) {
 	else {
 		me.setting = newRate;
 		if (BeachBall.storage == 1) {
-			localStorage['BB.'+ option + '.ssetting'] = me.setting;
+			localStorage['BB.'+ option + '.setting'] = me.setting;
 		}
 		me.desc = BeachBall.LoadDefaultSetting(option, 'desc');
 		BeachBall.DisplayDescription(option);
