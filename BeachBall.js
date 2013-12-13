@@ -78,9 +78,11 @@ BeachBall.DisplayDescription = function(option) {
 	var me = BeachBall.Settings[option]
 	description = me.desc[me.status];
 	
-	if (option == 'BeachAutoClick' && me.status == 2) {
+	if (option == 'BeachAutoClick') {
 		clearInterval(BeachBall.BeachAutoClickTimer);
-		BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 1000/me.setting);
+		if (me.status == 2) {
+			BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 1000/me.setting);
+		}
 	}
 	
 	if (option == 'ToolFactory') {
