@@ -5,8 +5,8 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'stuff', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
-BeachBall.version = '4.0';
-BeachBall.SCBversion = '3.251'; //Last SandCastle Builder version tested
+BeachBall.version = '4.01';
+BeachBall.SCBversion = '3.261'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -55,12 +55,8 @@ BeachBall.CagedAutoClick = function() {
 	}
 
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
-	//Can now define solving conditions other than availability (to maximize Temporal Duplication for instance).
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, Solve the Logicat
-	if (Molpy.cagedPuzzleTarget) {
-		Molpy.Notify('Caged Puzzle Available');
-	}
-	if (Molpy.cagedPuzzleTarget != "" && BeachBall.Settings['LCSolver'].status == 1) {
+	if (Molpy.cagedPuzzleTarget && BeachBall.Settings['LCSolver'].status == 1) {
 		BeachBall.CagedLogicat();
 	}
 }
