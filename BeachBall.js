@@ -56,7 +56,7 @@ BeachBall.CagedAutoClick = function() {
 
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, Solve the Logicat
-	if (Molpy.cagedPuzzleTarget && BeachBall.Settings['LCSolver'].status == 1) {
+	if (Molpy.cagedPuzzleTarget != "" && BeachBall.Settings['LCSolver'].status == 1) {
 		BeachBall.CagedLogicat();
 	}
 }
@@ -96,9 +96,11 @@ BeachBall.MontyHaul = function() {
 				}
 			}
 			
-			//If purchased, open Door A
+			//If purchased
 			else {
-			Molpy.Monty('A');
+				if (Molpy.Got('Beret Guy')) {
+					if (Molpy.Boosts['MHP'].goat != 0)
+					Molpy.Monty('A');
 			}
 		}
 	}
