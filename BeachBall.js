@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'stuff', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
-BeachBall.version = '4.0.2.1';
+BeachBall.version = '4.0.2.2';
 BeachBall.SCBversion = '3.261'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -56,7 +56,7 @@ BeachBall.CagedAutoClick = function() {
 
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, Solve the Logicat
-	if ((Molpy.cagedPuzzleTarget != undefined || Molpy.cagedPuzzleTarget != "") && BeachBall.Settings['LCSolver'].status == 1) {
+	if (typeof Molpy.cagedPuzzleTarget == "boolean" && BeachBall.Settings['LCSolver'].status == 1) {
 		BeachBall.CagedLogicat();
 	}
 }
