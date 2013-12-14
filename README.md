@@ -5,6 +5,11 @@
 ### To Do
 * Make MHP go for chips or goats.
 
+###Version 4.0.2
+
+####Bug Fixes
+* Caged Logicat solver is really fully working this time!
+
 ###Version 4.0.1
 
 ####Bug Fixes
