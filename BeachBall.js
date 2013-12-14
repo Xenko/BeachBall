@@ -57,7 +57,7 @@ BeachBall.CagedAutoClick = function() {
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
 	//Can now define solving conditions other than availability (to maximize Temporal Duplication for instance).
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, Solve the Logicat
-	if (Molpy.Boosts['Caged Logicat'].power == 1 && BeachBall.Settings['LCSolver'].status == 1) {
+	if (Molpy.cagedPuzzleTarget != "" && BeachBall.Settings['LCSolver'].status == 1) {
 		BeachBall.CagedLogicat();
 	}
 }
