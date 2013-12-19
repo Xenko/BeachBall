@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'stuff', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
-BeachBall.version = '4.0.2';
+BeachBall.version = '4.0.3';
 BeachBall.SCBversion = '3.261'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -128,7 +128,6 @@ BeachBall.Ninja = function() {
 BeachBall.PlayRKAlert = function() {
 	//If proper mNP and hasn't yet played this mNP (can happen if refresh Rate < mNP length)
 	if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) == 0 && BeachBall.RKPlayAudio == 1) {
-		Molpy.Notify('Alert Played', 0);
 		BeachBall.audio_Bell.play();
 		BeachBall.RKPlayAudio = 0;
 	}
@@ -171,7 +170,6 @@ BeachBall.RedundaKitty = function() {
 		
 		//If RK Audio Alert Enabled, Play Alert
 		if (BeachBall.Settings['AudioAlerts'].status == 1 || BeachBall.Settings['AudioAlerts'].status == 4){
-			Molpy.Notify('Play RK Alert Called', 1);
 			BeachBall.PlayRKAlert();
 		}
 	}

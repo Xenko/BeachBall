@@ -5,6 +5,11 @@
 ### To Do
 * Make MHP go for chips or goats.
 
+###Version 4.0.3
+
+####Bug Fixes
+* Removed some debugging notifications that were accidentally left in.
+
 ###Version 4.0.2
 
 ####Bug Fixes
