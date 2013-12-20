@@ -9,6 +9,7 @@
 
 ####Bug Fixes
 * Fixed Caged Logicat Autoclicker.
+* Fixed Tool Factory helper.
 
 ###Version 4.0.3
 

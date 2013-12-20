@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'stuff', 'ninj', 'cyb', 'hpt', 'bean', 'chron',
 
 //Version Information
 BeachBall.version = '4.0.4';
-BeachBall.SCBversion = '3.261'; //Last SandCastle Builder version tested
+BeachBall.SCBversion = '3.28'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
