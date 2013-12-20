@@ -45,7 +45,7 @@ BeachBall.ClickBeach = function(number) {
 BeachBall.CagedAutoClick = function() {
 	//Purchases Caged Logicat
 	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased
-	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Boosts['LogiQuestion'].Level > 0 && typeof Molpy.cagedPuzzleTarget == "undefined" || typeof Molpy.cagedPuzzleTarget == "string") {
+	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Boosts['LogiQuestion'].Level > 0 && typeof Molpy.cagedPuzzleTarget != "boolean") {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
 		cost = 100 + Molpy.LogiMult(25);
 		if (Molpy.Has('GlassBlocks', cost)) {
