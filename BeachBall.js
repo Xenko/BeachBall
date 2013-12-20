@@ -47,7 +47,6 @@ BeachBall.CagedAutoClick = function() {
 	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased
 	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Boosts['LogiQuestion'].Level > 0 && typeof Molpy.cagedPuzzleTarget != "boolean") {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
-		Molpy.Notify('Caged to Purchase', 0);
 		cost = 100 + Molpy.LogiMult(25);
 		if (Molpy.Has('GlassBlocks', cost)) {
 			Molpy.MakeCagedPuzzle(cost);
@@ -215,7 +214,7 @@ BeachBall.ToggleMenus = function(wantOpen) {
 
 //Menus and Settings
 BeachBall.CheckToolFactory = function() {
-	if (Molpy.Got('Tool Factory')) {
+	if (Molpy.Boosts['TF'].bought) {
 		BeachBall.DisplayDescription('ToolFactory');
 		Molpy.Notify('Tool Factory Option Now Available!', 1);
 	}
@@ -272,7 +271,7 @@ BeachBall.DisplayDescription = function(option) {
 	}
 	
 	if (option == 'ToolFactory') {
-		if (Molpy.Got('Tool Factory') == 1) {
+		if (Molpy.Boosts['TF'].bought == 1) {
 			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + me.setting + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
 			description = 'Load: <a onclick="BeachBall.SwitchSetting(\'ToolFactory\')">' + me.setting + ' chips</a>';
 		}
