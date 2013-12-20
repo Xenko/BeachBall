@@ -5,6 +5,11 @@
 ### To Do
 * Make MHP go for chips or goats.
 
+###Version 4.0.4
+
+####Bug Fixes
+* Fixed Caged Logicat Autoclicker.
+
 ###Version 4.0.3
 
 ####Bug Fixes
