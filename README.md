@@ -2,9 +2,6 @@
 
 ## Changelog
 
-### To Do
-* Make MHP go for chips or goats.
-
 ###Version 4.1
 
 #### New Features
