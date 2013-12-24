@@ -5,6 +5,22 @@
 ### To Do
 * Make MHP go for chips or goats.
 
+###Version 4.0.4
+
+####Bug Fixes
+* Fixed Caged Logicat Autoclicker.
+* Fixed Tool Factory helper.
+
+###Version 4.0.3
+
+####Bug Fixes
+* Removed some debugging notifications that were accidentally left in.
+
+###Version 4.0.2
+
+####Bug Fixes
+* Caged Logicat solver is really fully working this time!
+
 ###Version 4.0.1
 
 ####Bug Fixes

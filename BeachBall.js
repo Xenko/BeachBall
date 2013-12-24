@@ -5,8 +5,8 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'stuff', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
-BeachBall.version = '4.0.1';
-BeachBall.SCBversion = '3.261'; //Last SandCastle Builder version tested
+BeachBall.version = '4.0.4';
+BeachBall.SCBversion = '3.28'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -45,18 +45,17 @@ BeachBall.ClickBeach = function(number) {
 BeachBall.CagedAutoClick = function() {
 	//Purchases Caged Logicat
 	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased
-	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Got('Caged Logicat') > 1 && Molpy.Boosts['Caged Logicat'].power == 0) {
+	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Boosts['LogiQuestion'].Level > 0 && typeof Molpy.cagedPuzzleTarget != "boolean") {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
 		cost = 100 + Molpy.LogiMult(25);
 		if (Molpy.Has('GlassBlocks', cost)) {
 			Molpy.MakeCagedPuzzle(cost);
-			BeachBall.CagedLogicat();
 		}
 	}
 
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, Solve the Logicat
-	if (Molpy.cagedPuzzleTarget != "" && BeachBall.Settings['LCSolver'].status == 1) {
+	if (typeof Molpy.cagedPuzzleTarget == "boolean" && BeachBall.Settings['LCSolver'].status == 1) {
 		BeachBall.CagedLogicat();
 	}
 }
@@ -130,7 +129,6 @@ BeachBall.Ninja = function() {
 BeachBall.PlayRKAlert = function() {
 	//If proper mNP and hasn't yet played this mNP (can happen if refresh Rate < mNP length)
 	if (Math.floor(BeachBall.RKTimer % BeachBall.RKAlertFrequency) == 0 && BeachBall.RKPlayAudio == 1) {
-		Molpy.Notify('Alert Played', 0);
 		BeachBall.audio_Bell.play();
 		BeachBall.RKPlayAudio = 0;
 	}
@@ -173,7 +171,6 @@ BeachBall.RedundaKitty = function() {
 		
 		//If RK Audio Alert Enabled, Play Alert
 		if (BeachBall.Settings['AudioAlerts'].status == 1 || BeachBall.Settings['AudioAlerts'].status == 4){
-			Molpy.Notify('Play RK Alert Called', 1);
 			BeachBall.PlayRKAlert();
 		}
 	}
@@ -219,7 +216,7 @@ BeachBall.ToggleMenus = function(wantOpen) {
 
 //Menus and Settings
 BeachBall.CheckToolFactory = function() {
-	if (Molpy.Got('Tool Factory')) {
+	if (Molpy.Boosts['TF'].bought) {
 		BeachBall.DisplayDescription('ToolFactory');
 		Molpy.Notify('Tool Factory Option Now Available!', 1);
 	}
@@ -276,7 +273,7 @@ BeachBall.DisplayDescription = function(option) {
 	}
 	
 	if (option == 'ToolFactory') {
-		if (Molpy.Got('Tool Factory') == 1) {
+		if (Molpy.Boosts['TF'].bought == 1) {
 			g('BBToolFactory').innerHTML = '<a onclick="Molpy.LoadToolFactory(' + me.setting + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div>';
 			description = 'Load: <a onclick="BeachBall.SwitchSetting(\'ToolFactory\')">' + me.setting + ' chips</a>';
 		}
