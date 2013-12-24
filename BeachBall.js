@@ -105,7 +105,8 @@ BeachBall.MontyHaul = function() {
 					}
 					//Otherwise stay with the same door
 					else {
-						Molpy.Monty('A')
+						Molpy.Monty('A');
+						Molpy.Notify('Opened Door A', 1);
 					}
 				}
 				//Otherwise switch doors to try for a prize.
@@ -113,10 +114,12 @@ BeachBall.MontyHaul = function() {
 					//If the Goat is behind C, choose B
 					if (Molpy.Boosts['MHP'].goat == 'C') {
 						Molpy.Monty('B');
+						Molpy.Notify('Opened Door B', 1);
 					}
 					//Otherwise choose C
 					else {
 						Molpy.Monty('C');
+						Molpy.Notify('Opened Door C', 1);
 					}
 				}
 			}
