@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean', 'ceil', 'drac', 'stuff', 'land', 'prize', 'discov', 'monums', 'monumg', 'tagged', 'badgesav'];
 
 //Version Information
-BeachBall.version = '4.1 Beta 3';
+BeachBall.version = '4.1 Beta 4';
 BeachBall.SCBversion = '3.289'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -105,6 +105,7 @@ BeachBall.MontyHaul = function() {
 					//If User Has Beret Guy, then Get Goat
 					if (Molpy.Got('Beret Guy')) {
 						Molpy.Monty(Molpy.Boosts['MHP'].goat);
+						Molyp.Notify('Beret Guy Option', 1);
 					}
 					//Otherwise stay with the same door
 					else {
