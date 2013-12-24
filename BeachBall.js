@@ -5,8 +5,8 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'stuff', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
 
 //Version Information
-BeachBall.version = '4.0.4';
-BeachBall.SCBversion = '3.28'; //Last SandCastle Builder version tested
+BeachBall.version = '4.1 Beta';
+BeachBall.SCBversion = '3.289'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -86,20 +86,39 @@ BeachBall.MontyHaul = function() {
 	if (BeachBall.Settings['MHAutoClick'].status == 1) {
 		//If Monty Haul Problem is Unlocked
 		if (Molpy.Boosts['MHP'].unlocked) {
-			//If unpurchased and can afford, then buy
+			//If unpurchased and can afford, then buy and open Door A
 			if (!Molpy.Got('MHP')) {
 				var sp = Math.floor(Molpy.priceFactor * EvalMaybeFunction(Molpy.Boosts['MHP'].sandPrice, Molpy.Boosts['MHP'], 1));
 				var gp = Math.floor(Molpy.priceFactor * EvalMaybeFunction(Molpy.Boosts['MHP'].glassPrice, Molpy.Boosts['MHP'], 1));
 				if (Molpy.Has('GlassBlocks', gp) && Molpy.Has('Sand', sp)) {
 					Molpy.BoostsById[31].buy();
+					Molpy.Monty('A');
 				}
 			}
-			
-			//If purchased
+			//Else If MHP already purchased
 			else {
-				if (Molpy.Got('Beret Guy')) {
-					if (Molpy.Boosts['MHP'].goat != 0)
-					Molpy.Monty('A');
+				//If User Wants a Goat
+				if (BeachBall.Settings['MHAutoClick'].status == 2) {
+					//If User Has Beret Guy, then Get Goat
+					if (Molpy.Got('Beret Guy')) {
+						Molpy.Monty(Molpy.Boosts['MHP'].goat);
+					}
+					//Otherwise stay with the same door
+					else {
+						Molpy.Monty('A')
+					}
+				}
+				//Otherwise switch doors to try for a prize.
+				else {
+					//If the Goat is behind C, choose B
+					if (Molpy.Boosts['MHP'].goat == 'C') {
+						Molpy.Monty('B');
+					}
+					//Otherwise choose C
+					else {
+						Molpy.Monty('C');
+					}
+				}
 			}
 		}
 	}
@@ -316,9 +335,9 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 	}
 	else if (option == 'MHAutoClick') {
 		if (key == 'status') 	{return 0;}
-		if (key == 'maxStatus') {return 1;}
+		if (key == 'maxStatus') {return 2;}
 		if (key == 'setting')	{return 0;}
-		if (key == 'desc')		{return ['Off', 'On'];}
+		if (key == 'desc')		{return ['Off', 'On - Prize', 'On - Goat'];}
 	}
 	else if (option == 'RefreshRate') {
 		if (key == 'status') 	{return 0;}
