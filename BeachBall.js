@@ -2,10 +2,10 @@
 var BeachBall = {};
 BeachBall.incoming_ONG = 0;
 BeachBall.Time_to_ONG = 1800000;
-BeachBall.lootBoxes = ['boosts', 'stuff', 'ninj', 'cyb', 'hpt', 'bean', 'chron', 'ceil', 'drac', 'badges', 'discov', 'badgesav', 'monums', 'monumg', 'tagged'];
+BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean', 'ceil', 'drac', 'stuff', 'land', 'prize', 'discov', 'monums', 'monumg', 'tagged', 'badgesav'];
 
 //Version Information
-BeachBall.version = '4.1 Beta 1';
+BeachBall.version = '4.1 Beta 2';
 BeachBall.SCBversion = '3.289'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -88,8 +88,11 @@ BeachBall.MontyHaul = function() {
 		if (Molpy.Boosts['MHP'].unlocked) {
 			//If unpurchased and can afford, then buy and open Door A
 			if (!Molpy.Got('MHP')) {
-				var sp = Math.floor(Molpy.priceFactor * EvalMaybeFunction(Molpy.Boosts['MHP'].sandPrice, Molpy.Boosts['MHP'], 1));
-				var gp = Math.floor(Molpy.priceFactor * EvalMaybeFunction(Molpy.Boosts['MHP'].glassPrice, Molpy.Boosts['MHP'], 1));
+				var sp = Math.floor(Molpy.priceFactor * 100 * Math.pow(2, Math.max(1, Molpy.Boosts['MHP'].power - 9)), 1));
+				var gp = 0;
+				if (Molpy.IsEnabled('HoM')) {
+					gp = Math.floor(Molpy.priceFactor * 100 * Math.pow(2, Math.max(1, Molpy.Boosts['MHP'].power - 15)), 1));
+				}
 				if (Molpy.Has('GlassBlocks', gp) && Molpy.Has('Sand', sp)) {
 					Molpy.BoostsById[31].buy();
 					Molpy.Monty('A');
