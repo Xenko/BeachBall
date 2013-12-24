@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean', 'ceil', 'drac', 'stuff', 'land', 'prize', 'discov', 'monums', 'monumg', 'tagged', 'badgesav'];
 
 //Version Information
-BeachBall.version = '4.1 Beta 4';
+BeachBall.version = '4.1 Beta 5';
 BeachBall.SCBversion = '3.289'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -107,7 +107,7 @@ BeachBall.MontyHaul = function() {
 						Molpy.Monty(Molpy.Boosts['MHP'].goat);
 						Molyp.Notify('Beret Guy Option', 1);
 					}
-					//Otherwise stay with the same door
+					//Otherwise open Door A
 					else {
 						Molpy.Monty('A');
 						Molpy.Notify('Opened Door A', 1);
@@ -121,9 +121,13 @@ BeachBall.MontyHaul = function() {
 						Molpy.Notify('Opened Door B', 1);
 					}
 					//Otherwise choose C
-					else {
+					else if (Molpy.Boosts['MHP'].goat == 'B') {
 						Molpy.Monty('C');
 						Molpy.Notify('Opened Door C', 1);
+					}
+					else {
+						Molpy.Monty('A');
+						Molpy.Notify('Opened Door A1', 1);
 					}
 				}
 			}
