@@ -82,8 +82,8 @@ BeachBall.FindRK = function() {
 }
 
 BeachBall.MontyHaul = function() {
-	//Check if can afford to prevent possible issues.
-	if (BeachBall.Settings['MHAutoClick'].status == 1) {
+	//If MHP Auto Click is Enabled
+	if (BeachBall.Settings['MHAutoClick'].status != 0) {
 		//If Monty Haul Problem is Unlocked
 		if (Molpy.Boosts['MHP'].unlocked) {
 			//If unpurchased and can afford, then buy and open Door A
