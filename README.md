@@ -7,6 +7,14 @@
 
 ###Version 4.0.4
 
+#### New Features
+* Can now choose whether you want Monty Haul Problem AutoClicker to try and find a Goat or a Prize (and works with Beret Guy).
+
+####Bug Fixes
+* Updated list of Redundakitty locations.
+
+###Version 4.0.4
+
 ####Bug Fixes
 * Fixed Caged Logicat Autoclicker.
 * Fixed Tool Factory helper.
