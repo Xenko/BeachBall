@@ -5,10 +5,10 @@
 ### To Do
 * Make MHP go for chips or goats.
 
-###Version 4.0.4
+###Version 4.1
 
 #### New Features
-* Can now choose whether you want Monty Haul Problem AutoClicker to try and find a Goat or a Prize (and works with Beret Guy).
+* Can now choose whether you want Monty Haul Problem AutoClicker to try and find a Goat or a Prize (and works with Beret Guy if unlocked).
 
 ####Bug Fixes
 * Updated list of Redundakitty locations.

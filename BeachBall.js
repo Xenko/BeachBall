@@ -5,8 +5,8 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean', 'ceil', 'drac', 'stuff', 'land', 'prize', 'discov', 'monums', 'monumg', 'tagged', 'badgesav'];
 
 //Version Information
-BeachBall.version = '4.1 Beta 6';
-BeachBall.SCBversion = '3.289'; //Last SandCastle Builder version tested
+BeachBall.version = '4.1';
+BeachBall.SCBversion = '3.29'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -105,12 +105,10 @@ BeachBall.MontyHaul = function() {
 					//If User Has Beret Guy, then Get Goat
 					if (Molpy.Got('Beret Guy')) {
 						Molpy.Monty(Molpy.Boosts['MHP'].goat);
-						Molpy.Notify('Beret Guy Option', 1);
 					}
 					//Otherwise open Door A
 					else {
 						Molpy.Monty('A');
-						Molpy.Notify('Opened Door A', 1);
 					}
 				}
 				//Otherwise switch doors to try for a prize.
@@ -118,16 +116,13 @@ BeachBall.MontyHaul = function() {
 					//If the Goat is behind C, choose B
 					if (Molpy.Boosts['MHP'].goat == 'C') {
 						Molpy.Monty('B');
-						Molpy.Notify('Opened Door B', 1);
 					}
 					//Otherwise choose C
 					else if (Molpy.Boosts['MHP'].goat == 'B') {
 						Molpy.Monty('C');
-						Molpy.Notify('Opened Door C', 1);
 					}
 					else {
 						Molpy.Monty('A');
-						Molpy.Notify('Opened Door A1', 1);
 					}
 				}
 			}
