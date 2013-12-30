@@ -5,7 +5,7 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean', 'ceil', 'drac', 'stuff', 'land', 'prize', 'discov', 'monums', 'monumg', 'tagged', 'badgesav'];
 
 //Version Information
-BeachBall.version = '4.2 Beta';
+BeachBall.version = '4.2 Beta 1';
 BeachBall.SCBversion = '3.29'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -144,12 +144,12 @@ BeachBall.Ninja = function() {
 			 *the autoclicker needs to be paused to allow temporal rift to end to process the click, then resumed*/
 			else if (Molpy.Got('Temporal Rift') == 1 && BeachBall.Settings['CagedAutoClick'].status == 1) {
 				//Turn Off Caged AutoClicker
-				BeachBall.Settings['CagedAutoClick'] = 0;
+				BeachBall.Settings['CagedAutoClick'].status = 0;
 				//While Temporal Rift Active, Do Nothing (waiting until it finishes).
 				while (Molpy.Got('Temporal Rift') == 1){};
 				//When Temporal Rift Finishes, click beach, and then resume Caged AutoClicker.
 				Molpy.ClickBeach();
-				BeachBall.Settings['CagedAutoClick'] = 1;
+				BeachBall.Settings['CagedAutoClick'].status = 1;
 			}
         }
 	}
