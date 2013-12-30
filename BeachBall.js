@@ -36,7 +36,6 @@ BeachBall.CagedLogicat = function() {
 }
 
 BeachBall.ClickBeach = function(number) {
-	//Check Ninja Streak check for a failed streak
 	if (Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
 		Molpy.ClickBeach();
 	}
@@ -140,6 +139,17 @@ BeachBall.Ninja = function() {
             if (BeachBall.Settings['BeachAutoClick'].status > 0 && Molpy.Got('Temporal Rift') == 0) {
 				Molpy.ClickBeach();
 				Molpy.Notify('Ninja Auto Click', 1);
+			}
+			/*If the Caged Logicats are essentially infinite in number (thus Temporal Rift is always active)
+			 *the autoclicker needs to be paused to allow temporal rift to end to process the click, then resumed*/
+			else if (Molpy.Got('Temporal Rift') == 1 && BeachBall.Settings['CagedAutoClick'].status == 1) {
+				//Turn Off Caged AutoClicker
+				BeachBall.Settings['CagedAutoClick'] = 0;
+				//While Temporal Rift Active, Do Nothing (waiting until it finishes).
+				while (Molpy.Got('Temporal Rift') == 1){};
+				//When Temporal Rift Finishes, click beach, and then resume Caged AutoClicker.
+				Molpy.ClickBeach();
+				BeachBall.Settings['CagedAutoClick'] = 1;
 			}
         }
 	}

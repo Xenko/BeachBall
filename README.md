@@ -2,6 +2,10 @@
 
 ## Changelog
 
+###Version 4.2
+
+####Bug Fixes
+
 ###Version 4.1
 
 #### New Features
