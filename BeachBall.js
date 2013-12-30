@@ -3,6 +3,7 @@ var BeachBall = {};
 BeachBall.incoming_ONG = 0;
 BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean', 'ceil', 'drac', 'stuff', 'land', 'prize', 'discov', 'monums', 'monumg', 'tagged', 'badgesav'];
+BeachBall.resetCaged = 0;
 
 //Version Information
 BeachBall.version = '4.2 Beta 2';
@@ -139,6 +140,10 @@ BeachBall.Ninja = function() {
             if (BeachBall.Settings['BeachAutoClick'].status > 0 && Molpy.Got('Temporal Rift') == 0) {
 				Molpy.ClickBeach();
 				Molpy.Notify('Ninja Auto Click', 1);
+				if (BeachBall.resetCaged == 1) {
+					BeachBall.Settings['CagedAutoClick'].status = 1;
+					BeachBall.resetCaged = 0;
+				}
 			}
 			/*If the Caged Logicats are essentially infinite in number (thus Temporal Rift is always active)
 			 *the autoclicker needs to be paused to allow temporal rift to end to process the click, then resumed*/
@@ -146,16 +151,7 @@ BeachBall.Ninja = function() {
 				//Turn Off Caged AutoClicker
 				console.log('Waiting for TR to end');
 				BeachBall.Settings['CagedAutoClick'].status = 0;
-				//While Temporal Rift Active and CagedAutoClick Off (in case user changes the setting manually), then Do Nothing
-				//until TR finishes.
-				while (Molpy.Got('Temporal Rift') == 1 && BeachBall.Settings['CagedAutoClick'].status == 0){};
-				//When Temporal Rift Finishes, check to ensure BeachAutoClick enabled and Temporal Rift off, then click beach
-				//and resume Caged AutoClicker.
-				if (BeachBall.Settings['BeachAutoClick'].status > 0 && Molpy.Got('Temporal Rift') == 0) {
-					Molpy.ClickBeach();
-					Molpy.Notify('Ninja Auto Click', 1);
-					console.log('TR Ended, Click Processed, CagedAutoClick Enabled');
-				}
+				BeachBall.resetCaged = 1;
 			}
         }
 	}
