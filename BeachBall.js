@@ -144,12 +144,16 @@ BeachBall.Ninja = function() {
 			 *the autoclicker needs to be paused to allow temporal rift to end to process the click, then resumed*/
 			else if (Molpy.Got('Temporal Rift') == 1 && BeachBall.Settings['CagedAutoClick'].status == 1) {
 				//Turn Off Caged AutoClicker
+				console.log('Waiting for TR to end');
 				BeachBall.Settings['CagedAutoClick'].status = 0;
 				//While Temporal Rift Active, Do Nothing (waiting until it finishes).
-				while (Molpy.Got('Temporal Rift') == 1){};
+				while (Molpy.Got('Temporal Rift') == 1 && BeachBall.Settings['CagedAutoClick'].status == 0){};
 				//When Temporal Rift Finishes, click beach, and then resume Caged AutoClicker.
-				Molpy.ClickBeach();
-				BeachBall.Settings['CagedAutoClick'].status = 1;
+				if (BeachBall.Settings['BeachAutoClick'].status > 0 && Molpy.Got('Temporal Rift') == 0) {
+					Molpy.ClickBeach();
+					Molpy.Notify('Ninja Auto Click', 1);
+					console.log('TR Ended, Click Processed, CagedAutoClick Enabled');
+				}
 			}
         }
 	}
