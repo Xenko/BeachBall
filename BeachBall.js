@@ -147,9 +147,8 @@ BeachBall.Ninja = function() {
 			}
 			/*If the Caged Logicats are essentially infinite in number (thus Temporal Rift is always active)
 			 *the autoclicker needs to be paused to allow temporal rift to end to process the click, then resumed*/
-			else if (Molpy.Got('Temporal Rift') == 1 && BeachBall.Settings['CagedAutoClick'].status == 1) {
-				//Turn Off Caged AutoClicker
-				console.log('Waiting for TR to end');
+			else if (BeachBall.Settings['BeachAutoClick'].status > 0 && Molpy.Got('Temporal Rift') == 1 && BeachBall.Settings['CagedAutoClick'].status == 1) {
+				//Turn Off Caged AutoClicker, and set variable to reset it after click.
 				BeachBall.Settings['CagedAutoClick'].status = 0;
 				BeachBall.resetCaged = 1;
 			}

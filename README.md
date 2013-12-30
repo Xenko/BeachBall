@@ -5,6 +5,7 @@
 ###Version 4.2
 
 ####Bug Fixes
+* With high logicat/AC, temporal rift is essentially permanent, preventing Keep Ninja AutoClick from processing. Caged Logicat Autoclicker will now pause to process the click (allow Temporal Rift to expire), then resume.
 
 ###Version 4.1
 
