@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '4.2.9 Beta 8';
+BeachBall.version = '4.2.9 Beta 9';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -212,6 +212,10 @@ BeachBall.RedundaKitty = function() {
 		
 		//If RK Audio Alert Enabled, Play Alert
 		if (BeachBall.Settings['AudioAlerts'].status == 1 || BeachBall.Settings['AudioAlerts'].status == 4){
+			BeachBall.PlayRKAlert();
+		}
+		// If LC Audio Alert Enabled and LC is available, Play Alert
+		else if (BeachBall.Settings['AudioAlerts'].status == 2 && Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
 			BeachBall.PlayRKAlert();
 		}
 	}
