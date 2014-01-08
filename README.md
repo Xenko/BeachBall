@@ -2,6 +2,16 @@
 
 ## Changelog
 
+###Version 4.2.9
+
+####Temporary Bug Fixes/Workarounds
+* Due to massive changes in v3.292 of Sandcastle builder, several features have been disabled in this build to allow it to function until a proper patch can be issued.
+* Caged Logicat AutoSolver has been Disabled
+* LC Solver will now Auto-Hide Logicats if they spawn.
+
+####Bug Fixes
+* LC audio alert fixed.
+
 ###Version 4.2
 
 ####Bug Fixes
