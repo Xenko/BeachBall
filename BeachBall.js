@@ -189,7 +189,7 @@ BeachBall.RedundaKitty = function() {
 			//If it is a Logicat
 			if (Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
 				//This if must be inside the first to prevent auto-hiding.
-				if meLC.status == 1 {
+				if (meLC.status == 1) {
 					//BeachBall.SolveLogicat();
 					BeachBall.ClickRedacted(Math.max(0, BeachBall.RKLevel - 1));
 					Molpy.Notify('LC Solved, RKLevel was: ' + BeachBall.RKLevel, 1);
