@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '4.2.9 Beta 5';
+BeachBall.version = '4.2.9 Beta 6';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -185,13 +185,15 @@ BeachBall.RedundaKitty = function() {
 		BeachBall.RKLevel = Molpy.redactedDrawType.length - 1;
 		
 		//If RKAutoClick is Selected or the Logicat Solver is turned on
-		if (meRK.status == 2 || meLC == 1) {
-			//If it is a Logicat, then solve it.
-			if (meLC == 1 && Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
-				//BeachBall.SolveLogicat();
-				BeachBall.ClickRedacted(Math.max(0, BeachBall.RKLevel - 1));
-				Molpy.Notify('LC Solved, RKLevel was: ' + BeachBall.RKLevel, 1);
-				
+		if (meRK.status == 2 || meLC.status == 1) {
+			//If it is a Logicat
+			if (Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
+				//This if must be inside the first to prevent auto-hiding.
+				if meLC.status == 1 {
+					//BeachBall.SolveLogicat();
+					BeachBall.ClickRedacted(Math.max(0, BeachBall.RKLevel - 1));
+					Molpy.Notify('LC Solved, RKLevel was: ' + BeachBall.RKLevel, 1);
+				}
 			}
 			//Otherwise, if the RK AutoClick is on, click the Redundakitty 
 			else if (meRK.status == 2) {
