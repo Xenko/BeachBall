@@ -6,8 +6,8 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '4.2 Beta 2';
-BeachBall.SCBversion = '3.29'; //Last SandCastle Builder version tested
+BeachBall.version = '4.2.9 Beta 1';
+BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -188,7 +188,7 @@ BeachBall.RedundaKitty = function() {
 		if (meRK.status == 2 || meLC == 1) {
 			//If it is a Logicat, then solve it.
 			if (Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
-				BeachBall.SolveLogicat();
+				//BeachBall.SolveLogicat();
 			}
 			//Otherwise, if the RK AutoClick is on, click the Redundakitty 
 			else if (meRK.status == 2) {
@@ -460,7 +460,7 @@ function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	BeachBall.RedundaKitty();
-	BeachBall.CagedAutoClick();
+	//BeachBall.CagedAutoClick();
 	BeachBall.Ninja();
 	BeachBall.MontyHaul();
 	BeachBallLoop();
