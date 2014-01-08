@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '4.2.9 Beta 6';
+BeachBall.version = '4.2.9 Beta 7';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -191,7 +191,7 @@ BeachBall.RedundaKitty = function() {
 				//This if must be inside the first to prevent auto-hiding.
 				if (meLC.status == 1) {
 					//BeachBall.SolveLogicat();
-					BeachBall.ClickRedacted(Math.max(0, BeachBall.RKLevel - 1));
+					Molpy.ClickRedacted(Math.max(0, BeachBall.RKLevel - 1));
 					Molpy.Notify('LC Solved, RKLevel was: ' + BeachBall.RKLevel, 1);
 				}
 			}
