@@ -187,8 +187,11 @@ BeachBall.RedundaKitty = function() {
 		//If RKAutoClick is Selected or the Logicat Solver is turned on
 		if (meRK.status == 2 || meLC == 1) {
 			//If it is a Logicat, then solve it.
-			if (Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
+			if (meLC == 1 && Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
 				//BeachBall.SolveLogicat();
+				BeachBall.ClickRedacted(Math.Max(0, BeachBall.RKLevel - 1));
+				Molpy.Notify('LC Solved, RKLevel was: ' + BeachBall.RKLevel, 1);
+				
 			}
 			//Otherwise, if the RK AutoClick is on, click the Redundakitty 
 			else if (meRK.status == 2) {
@@ -342,13 +345,15 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
-		if (key == 'desc')		{return ['Off', 'On'];}
+		if (key == 'desc')		{return ['Disabled', 'Disabled'];}
+		//if (key == 'desc')		{return ['Off', 'On'];}
 	}
 	else if (option == 'LCSolver') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
-		if (key == 'desc')		{return ['Off', 'On'];}
+		if (key == 'desc')		{return ['Off', 'Auto-Hide'];}
+		//if (key == 'desc')		{return ['Off', 'On'];}
 	}
 	else if (option == 'MHAutoClick') {
 		if (key == 'status') 	{return 0;}
