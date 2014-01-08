@@ -2,7 +2,7 @@
 
 ## Changelog
 
-###Version 4.2.9
+###Version 4.9.9
 
 ####Temporary Bug Fixes/Workarounds
 * Due to massive changes in v3.292 of Sandcastle builder, several features have been disabled in this build to allow it to function until a proper patch can be issued.
