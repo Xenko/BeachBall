@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '4.2.9 Beta 4';
+BeachBall.version = '4.2.9 Beta 5';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -441,7 +441,7 @@ BeachBall.SwitchStatus = function(option) {
 			me.status = 0;
 		}
 		
-	if ((option == 'RKAutoClick' && me.status == 2) ) { // || (option == 'CagedAutoClick' && me.status == 1)) {
+	/*if ((option == 'RKAutoClick' && me.status == 2) ) { // || (option == 'CagedAutoClick' && me.status == 1)) {
 		BeachBall.Settings['LCSolver'].status = 1;
 		if (BeachBall.storage == 1) {
 			localStorage['BB.LCSolver.status'] = 1;
@@ -449,7 +449,7 @@ BeachBall.SwitchStatus = function(option) {
 		BeachBall.DisplayDescription('LCSolver', 1);
 	}
 	
-	/*else if (option == 'LCSolver' && me.status == 0 && BeachBall.Settings['CagedAutoClick'].status == 1) {
+	else if (option == 'LCSolver' && me.status == 0 && BeachBall.Settings['CagedAutoClick'].status == 1) {
 		me.status = 1;
 		Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
 	}*/
