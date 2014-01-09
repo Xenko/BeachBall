@@ -37,9 +37,9 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.answers = [];
 	
 	this.PopulateStatements = function() {
-		this.statement[0].name = "A";
-		this.statement[0].claim[0] = "A is true";
-		this.statement[0].claim[1] = "B is true";
+		this.statement.push = "A";
+		//this.statement[0].claim[0] = "A is true";
+		//this.statement[0].claim[1] = "B is true";
 	}
 }
 
