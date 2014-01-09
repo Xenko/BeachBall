@@ -71,9 +71,10 @@ BeachBall.PuzzleConstructor = function(name) {
 			// Creates claims array
 			newStatement.claim = [];
 			
-			//Parses statement text to extract all claims to claims array
+			// Parses statement text to extract all claims to claims array
 			var text = newStatement.statementText;
-			var q = 0;
+			// Sets claim counter to 0 before entering loop
+			var p = 0;
 			
 			// Does loop at least once, and repeats until AND or OR not present.
 			do {
@@ -81,7 +82,6 @@ BeachBall.PuzzleConstructor = function(name) {
 				// Determines if more than one statement if AND or OR present
 				l = text.indexOf("and");
 				m = text.indexOf("or");
-				p = text.length - 1;
 				
 				// Sets statement condition (AND/OR) and index of claim end (n)
 				if (l != -1) {
@@ -96,12 +96,12 @@ BeachBall.PuzzleConstructor = function(name) {
 				}
 				
 				// Parses and assigns values to claims array
-				newStatement.claim[q] = this.ParseClaim(claimText);
+				newStatement.claim[p] = this.ParseClaim(claimText);
 
 				// Updates variables and claim text for next loop
-				text = text.substring(n, p);
-				q++;
-			} while (l > 0 && m > 0);
+				text = text.substring(n, text.length);
+				p++;
+			} while (l > 0 || m > 0);
 			
 			// Sets statement value to default of Unknown
 			newStatement.value = "Unknown";
