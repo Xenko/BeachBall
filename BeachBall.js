@@ -34,19 +34,21 @@ BeachBall.SolveLogic = function(name) {
 		BeachBall.Puzzle[name] = this;
 		this.size = Molpy.PuzzleGens[name].guess.length;
 		this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
-		this.statements = [];
+		this.statement = [];
 		
 		this.answers = [];
 		
-		this.PopulateStatement = function(length) {
-		
+		this.PopulateStatements = function() {
+			this.statement[0].name = "A";
+			this.statement[0].claim[0] = "A is true";
+			this.statement[0].claim[1] = "B is true";
 		}
 	}
 	
 	BeachBall.PuzzleConstructor("caged");
-	console.log("Size is: " + BeachBall.Puzzle["caged"].size);
-	
-	
+	var me = BeachBall.Puzzle["caged"];
+	me.PopulateStatements();
+	console.log(me.statement[0].name + me.statement[0].claim[0]);
 }
 
 BeachBall.CagedLogicat = function() {
