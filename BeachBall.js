@@ -85,12 +85,12 @@ BeachBall.PuzzleConstructor = function(name) {
 				p = text.length - 1;
 				
 				// Sets statement condition (AND/OR) and index of claim end (n)
-				if (l) {
+				if (l != -1) {
 					claimText = text.substring(0, l);
 					n = l + 4;
 					newStatement.condition = "and";
 				}
-				else if (m) {
+				else if (m != -1) {
 					claimText = text.substring(0, m);
 					n = m + 3;
 					newStatement.condition = "or";
@@ -116,11 +116,14 @@ BeachBall.PuzzleConstructor = function(name) {
 
 //Game Functions
 BeachBall.SolveLogic = function(name) {
-	// Create the puzzle
-	BeachBall.PuzzleConstructor("caged");
-	var me = BeachBall.Puzzle["caged"];
-	me.PopulateStatements();
-	//console.log(me.statement[0].name);
+	// Checks if puzzle is active
+	if (Molpy.PuzzleGens[name].active) {
+		// Parses the Puzzle
+		BeachBall.PuzzleConstructor("caged");
+		var me = BeachBall.Puzzle["caged"];
+		me.PopulateStatements();
+		//console.log(me.statement[0].name);
+	}
 }
 
 BeachBall.CagedLogicat = function() {
