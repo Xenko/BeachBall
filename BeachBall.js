@@ -192,7 +192,7 @@ BeachBall.PuzzleConstructor = function(name) {
 							//If the statement doesn't match the calculated claim, restart and change first guess or OR guess.
 							else if (this.statement[index].value != bool) {
 								// If orGuess was made, reset and change orGuess
-								if (orGuess)
+								if (orGuess) {
 									for (k in this.statement) {
 										this.statement[k].value = "unknown";
 									}
