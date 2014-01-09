@@ -156,7 +156,7 @@ BeachBall.PuzzleConstructor = function(name) {
 								this.statement[num].value == this.statement[i].value;
 							}
 							else if (this.statement[num].value != this.statement[i].value) {
-								if var guess = false {
+								if (guess = false) {
 									console.log("Error in solver");
 									return 99;
 								}
