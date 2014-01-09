@@ -141,8 +141,8 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.EvaluateStatements = function() {
 		// Evaluates all dependent statements
 		var guess = true;
+		var first = true;
 		for (i in this.statement) {
-			var first = true;
 			if (this.statement[i].dependent) {
 				// If this is the first statement, assign a guess of true
 				if (first) {
