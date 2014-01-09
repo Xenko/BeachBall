@@ -120,7 +120,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			
 			//Searches through claims until all claims examined
 			for (j in this.statement) {
-				for (k in this.statement[i].claim)
+				for (k in this.statement[i].claim) {
 					if (this.statement[i].name == this.statement[j].claim[k].name) {
 						dependent = true;
 					}
