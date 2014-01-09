@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '4.9.9';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -26,6 +26,11 @@ BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Game Functions
+BeachBall.SolveLogic = function(name) {
+	BeachBall.puzzleString = Molpy.PuzzleGens['name'].StringifyStatements();
+	console.log(BeachBall.puzzleString);
+}
+
 BeachBall.CagedLogicat = function() {
 	var i = 65;
 	var LCSolution = 'A';
