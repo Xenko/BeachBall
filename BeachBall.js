@@ -77,7 +77,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			n = newStatement.statementText.length - 1;
 			if (l) {
 				var claimText = newStatement.statementText.substring(0, l);
-				newStatement.claim[1] = ParseClaim(claimText);
+				newStatement.claim[1] = this.ParseClaim(claimText);
 				claimText = newStatement.statementText.substring(l + 4, n)
 				newStatement.condition = "and";
 			}
