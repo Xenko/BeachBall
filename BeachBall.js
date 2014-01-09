@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -142,6 +142,7 @@ BeachBall.SolveLogic = function(name) {
 		BeachBall.PuzzleConstructor("caged");
 		var me = BeachBall.Puzzle["caged"];
 		me.PopulateStatements();
+		me.EvaluateStatements();
 		//console.log(me.statement[0].name);
 	}
 }
