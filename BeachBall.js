@@ -38,11 +38,14 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	this.PopulateStatements = function() {
 		var i = 0;
+		var n = 0;
+		var puzzleText = this.puzzleString;
 		do {
 			var newStatement = {};
 			this.statement[i] = newStatement;
-			newStatement.name = i * 2;
+			newStatement.name = puzzleText.substring(n, n + 5);
 			newStatement.value = true;
+			n = puzzleText.indexOf("<br><br>", n) + 8;
 			i++;
 		} while (i < this.size);
 	}
