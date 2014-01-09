@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -47,6 +47,12 @@ BeachBall.PuzzleConstructor = function(name) {
 		else
 			claim.value = false;
 		return claim;
+	}
+	
+	this.FindStatement = function (name) {
+		for (i in this.statement) {
+			if (this.statement[i] = name) return i;
+		}
 	}
 	
 	this.PopulateStatements = function() {
@@ -104,7 +110,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			} while (l > 0 || m > 0);
 			
 			// Sets statement value to default of Unknown
-			newStatement.value = "Unknown";
+			newStatement.value = "unknown";
 			
 			// Updates j to the start of the next statement
 			j = this.puzzleString.indexOf("<br><br>", k) + 8;
@@ -112,7 +118,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		} while (i < this.size);
 	}
 	
-	this.EvaluateStatements = function() {
+	this.EvaluateStatementDependence = function() {
 		// Cycles through every statement to evaluate dependence
 		for (i in this.statement) {
 			// Sets dependent default to false
@@ -131,6 +137,42 @@ BeachBall.PuzzleConstructor = function(name) {
 			this.statement[i].dependent = dependent;
 		}
 	}
+	
+	this.EvaluateStatements = function() {
+		// Evaluates all dependent statements
+		var guess = true;
+		for (i in this.statement) {
+			var first = true;
+			if (this.statement[i].dependent) {
+				// If this is the first statement, assign a guess of true
+				if (first) {
+					this.statement[i].value = guess;
+					first = false;
+					
+					if (typeof this.statement[i].condition != "string" || this.statement[i].condition = "and") {
+						for (j in this.statement[i].claim) {
+							var num = this.FindStatement(statement[i].claim[j].name)
+							if (this.statement[num].value == "unknown") {
+								this.statement[num].value == this.statement[i].value;
+							}
+							else if (this.statement[num].value != this.statement[i].value) {
+								if var guess = false {
+									console.log("Error in solver");
+									return 99;
+								}
+								else {
+									guess = false;
+									first = true;
+									i = 0;
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 //Game Functions
@@ -141,8 +183,9 @@ BeachBall.SolveLogic = function(name) {
 		BeachBall.PuzzleConstructor("caged");
 		var me = BeachBall.Puzzle["caged"];
 		me.PopulateStatements();
-		me.EvaluateStatements();
-		//console.log(me.statement[0].name);
+		me.EvaluateStatementDependence();
+		var result = me.EvaluateStatements();
+		console.log(result);
 	}
 }
 
