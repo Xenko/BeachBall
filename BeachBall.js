@@ -38,10 +38,10 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	this.PopulateStatements = function() {
 		var i = 0;
+		var n = 0;
+		var m = 0;
 		var puzzleText = this.puzzleString;
 		do {
-			var n = 0;
-			var m = 0;
 			// Creates a newStatement, and assigns it to the array
 			var newStatement = {};
 			this.statement[i] = newStatement;
