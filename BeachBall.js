@@ -200,7 +200,7 @@ BeachBall.PuzzleConstructor = function(name) {
 									i = 0;
 								}
 								// If not orGuess (or orGuess already changed), then change guess
-								else if (guess)
+								else if (guess) {
 									for (k in this.statement) {
 										this.statement[k].value = "unknown";
 									}
