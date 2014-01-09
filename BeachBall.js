@@ -42,7 +42,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		var i = claimText.indexOf("true");
 		var j = claimText.indexOf("false");
 		var k = claimText.indexOf("not");
-		if (i > 0 || j * k > 0)
+		if ((i > 0 && k < 0) || j * k > 0)
 			claim.value = true;
 		else
 			claim.value = false;
