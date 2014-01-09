@@ -129,23 +129,22 @@ BeachBall.PuzzleConstructor = function(name) {
 				for (k in this.statement[j].claim) {
 					if (this.statement[i].name == this.statement[j].claim[k].name) {
 						dependent = true;
+						this.EvaluateStatementRelevance(i);
 					}
 				}
 			}
-			
 			//Assigns dependency
 			this.statement[i].dependent = dependent;
 		}
 	}
 	
-	this.EvaluateStatementRelevance = function() {
-		for (i in this.statement) {
-			this.statement[i].relevance = false;
-			for (j in this.statement[i].claim) {
-				if (this.statement[i].claim[j].name != this.statement[i].name) {
-					this.statement[i].relevance = true;
-					break;
-				}
+	this.EvaluateStatementRelevance = function(index) {
+		this.statement[index].relevance = false;
+		var i;
+		for (i in this.statement[index].claim) {
+			if (this.statement[index].claim[i].name != this.statement[index].name) {
+				this.statement[index].relevance = true;
+				break;
 			}
 		}
 	}
