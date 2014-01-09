@@ -27,8 +27,26 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Game Functions
 BeachBall.SolveLogic = function(name) {
-	BeachBall.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
-	console.log(BeachBall.puzzleString);
+	// Define a Puzzle Object
+	BeachBall.Puzzle = {};
+	BeachBall.PuzzleConstructor = function(name) {
+		this.name = name;
+		BeachBall.Puzzle[name] = this;
+		this.size = Molpy.PuzzleGens[name].guess.length;
+		this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
+		this.statements = [];
+		
+		this.answers = [];
+		
+		this.PopulateStatement = function(length) {
+		
+		}
+	}
+	
+	BeachBall.PuzzleConstructor("caged");
+	console.log("Size is: " + BeachBall.Puzzle["caged"].size);
+	
+	
 }
 
 BeachBall.CagedLogicat = function() {
