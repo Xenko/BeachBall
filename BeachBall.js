@@ -149,7 +149,7 @@ BeachBall.PuzzleConstructor = function(name) {
 					this.statement[i].value = guess;
 					first = false;
 					
-					if (typeof this.statement[i].condition != "string" || this.statement[i].condition = "and") {
+					if (typeof this.statement[i].condition == "undefined" || this.statement[i].condition == "and") {
 						for (j in this.statement[i].claim) {
 							var num = this.FindStatement(statement[i].claim[j].name)
 							if (this.statement[num].value == "unknown") {
