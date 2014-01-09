@@ -38,13 +38,25 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	this.PopulateStatements = function() {
 		var i = 0;
-		var n = 0;
 		var puzzleText = this.puzzleString;
 		do {
+			var n = 0;
+			var m = 0;
+			// Creates a newStatement, and assigns it to the array
 			var newStatement = {};
 			this.statement[i] = newStatement;
-			newStatement.name = puzzleText.substring(n, n + 5);
-			newStatement.value = true;
+			
+			// Extracts the statement name from the text,
+			newStatement.name = puzzleText.substring(n, n + 1);
+			
+			// Finds end index of claim(s), and saves that substring
+			m = puzzleText.indexOf("<br>", n);
+			newStatement.claimText = puzzleText.substring(n + 3, m);
+			
+			// Sets statement value to default of Unknown
+			newStatement.value = "Unknown";
+			
+			// Updates n to the start of the next statement
 			n = puzzleText.indexOf("<br><br>", n) + 8;
 			i++;
 		} while (i < this.size);
