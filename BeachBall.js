@@ -138,7 +138,18 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	this.EvaluateStatements = function() {
+	this.EvaluateStatementRelevance = function() {
+		for (i in this.statement) {
+			this.statement[i].relevance = false;
+			for (j in this.statement[i].claim) {
+				if (this.statement[i].claim[j].name != this.statement[i].name) {
+					this.statement[i].relevance = true;
+					break;
+				}
+			}
+		}
+	}
+	this.EvaluateStatementsOld = function() {
 		// Evaluates all dependent statements
 		var guess = true;
 		var first = true;
@@ -232,8 +243,9 @@ BeachBall.SolveLogic = function(name) {
 		var me = BeachBall.Puzzle["caged"];
 		me.PopulateStatements();
 		me.EvaluateStatementDependence();
-		var result = me.EvaluateStatements();
-		console.log(result);
+		me.EvaluateStatementRelevance();
+		//var result = me.EvaluateStatements();
+		//console.log(result);
 	}
 }
 
