@@ -27,7 +27,7 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 //Game Functions
 BeachBall.SolveLogic = function(name) {
-	BeachBall.puzzleString = Molpy.PuzzleGens['name'].StringifyStatements();
+	BeachBall.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
 	console.log(BeachBall.puzzleString);
 }
 
