@@ -242,7 +242,6 @@ BeachBall.SolveLogic = function(name) {
 		var me = BeachBall.Puzzle["caged"];
 		me.PopulateStatements();
 		me.EvaluateStatementDependence();
-		me.EvaluateStatementRelevance();
 		//var result = me.EvaluateStatements();
 		//console.log(result);
 	}
