@@ -167,8 +167,9 @@ BeachBall.PuzzleConstructor = function(name) {
 						else {
 							orClaim = 1	
 						}
-						orIndex = this.FindStatement(this.statement[i].claim[orClaim].name);
-						this.statement[orIndex] == this.statement[i].claim[orClaim].value;
+						var a = this.statement[i].claim[orClaim].name;
+						orIndex = this.FindStatement(a);
+						this.statement[orIndex].value == this.statement[i].claim[orClaim].value;
 					}
 				}
 				
