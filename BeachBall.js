@@ -38,8 +38,10 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	this.PopulateStatements = function() {
 		var i = 0;
-		var n = 0;
-		var m = 0;
+		var j = 0;
+		var k = 0;
+		var l = 0;
+		var m = 0
 		var puzzleText = this.puzzleString;
 		do {
 			// Creates a newStatement, and assigns it to the array
@@ -47,17 +49,35 @@ BeachBall.PuzzleConstructor = function(name) {
 			this.statement[i] = newStatement;
 			
 			// Extracts the statement name from the text,
-			newStatement.name = puzzleText.substring(n, n + 1);
+			newStatement.name = puzzleText.substring(j, j + 1);
 			
 			// Finds end index of claim(s), and saves that substring
-			m = puzzleText.indexOf("<br>", n);
-			newStatement.claimText = puzzleText.substring(n + 3, m);
+			m = puzzleText.indexOf("<br>", j);
+			newStatement.claimText = puzzleText.substring(j + 3, k);
+			
+			// Creates claims array
+			newStatement.claim = [];
+			var newClaim = {};
+			
+			//Creates first claim
+			newStatement.claim[0] = newClaim;
+			newClaim.name = "X";
+			newClaim.value = "test";
+			
+			//Tests for second claim
+			var l = newStatement.claimText.indexOf("and");
+			var m = newStatement.claimText.indexOf("or");
+			if (l || m) {
+				newStatement.claim[1] = newClaim
+				newClaim.name = "Y";
+				newClaim.value = "Not Test";
+			}
 			
 			// Sets statement value to default of Unknown
 			newStatement.value = "Unknown";
 			
 			// Updates n to the start of the next statement
-			n = puzzleText.indexOf("<br><br>", m) + 8;
+			n = puzzleText.indexOf("<br><br>", k) + 8;
 			i++;
 		} while (i < this.size);
 	}
