@@ -25,30 +25,31 @@ BeachBall.RKNew = 1;
 BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
+BeachBall.Puzzle = {};
+
+BeachBall.PuzzleConstructor = function(name) {
+	this.name = name;
+	BeachBall.Puzzle[name] = this;
+	this.size = Molpy.PuzzleGens[name].guess.length;
+	this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
+	this.statement = [];
+	
+	this.answers = [];
+	
+	this.PopulateStatements = function() {
+		this.statement[0].name = "A";
+		this.statement[0].claim[0] = "A is true";
+		this.statement[0].claim[1] = "B is true";
+	}
+}
+
 //Game Functions
 BeachBall.SolveLogic = function(name) {
-	// Define a Puzzle Object
-	BeachBall.Puzzle = {};
-	BeachBall.PuzzleConstructor = function(name) {
-		this.name = name;
-		BeachBall.Puzzle[name] = this;
-		this.size = Molpy.PuzzleGens[name].guess.length;
-		this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
-		this.statement = [];
-		
-		this.answers = [];
-		
-		this.PopulateStatements = function() {
-			this.statement[0].name = "A";
-			this.statement[0].claim[0] = "A is true";
-			this.statement[0].claim[1] = "B is true";
-		}
-	}
-	
+	// Create the puzzle
 	BeachBall.PuzzleConstructor("caged");
-	var me = BeachBall.Puzzle["caged"];
-	me.PopulateStatements();
-	console.log(me.statement[0].name + me.statement[0].claim[0]);
+	//var me = BeachBall.Puzzle["caged"];
+	//me.PopulateStatements();
+	//console.log(me.statement[0].name + me.statement[0].claim[0]);
 }
 
 BeachBall.CagedLogicat = function() {
