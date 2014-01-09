@@ -40,7 +40,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		var i = 0;
 		do {
 			var newStatement = {};
-			this.statement[0] = newStatement;
+			this.statement[i] = newStatement;
 			newStatement.name = i * 2;
 			newStatement.value = true;
 			i++;
