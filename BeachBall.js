@@ -52,9 +52,9 @@ BeachBall.PuzzleConstructor = function(name) {
 BeachBall.SolveLogic = function(name) {
 	// Create the puzzle
 	BeachBall.PuzzleConstructor("caged");
-	//var me = BeachBall.Puzzle["caged"];
-	//me.PopulateStatements();
-	//console.log(me.statement[0].name + me.statement[0].claim[0]);
+	var me = BeachBall.Puzzle["caged"];
+	me.PopulateStatements();
+	console.log(me.statement[0].name);
 }
 
 BeachBall.CagedLogicat = function() {
