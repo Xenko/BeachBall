@@ -185,7 +185,7 @@ BeachBall.PuzzleConstructor = function(name) {
 							index = this.FindStatement(this.statement[i].claim[j].name);
 							var bool = this.statement[i].value * this.statement[i].claim[j].value
 							//If the statement doesn't have a value, assign it based on claim
-							if (this.statement[index].value == "unknown" {
+							if (this.statement[index].value == "unknown") {
 								this.statement[index].value == bool;
 							}
 							
