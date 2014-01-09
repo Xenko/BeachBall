@@ -111,6 +111,27 @@ BeachBall.PuzzleConstructor = function(name) {
 			i++;
 		} while (i < this.size);
 	}
+	
+	this.EvaluateStatements = function() {
+		var i;
+		// Cycles through every statement to evaluate dependence
+		for (i in this.statement[i]) {
+			// Sets dependent defaul to false
+			var dependent = false;
+			
+			//Searches through claims until dependent is true OR all claims examined
+			do {
+				for (j in this.statement[j].claim[k]) {
+					if (this.statement[i].name == this.statement[j].claim[k].name) {
+						dependent = true;
+					}
+				}
+			} while (dependent == false || j < this.statement.length);
+			
+			//Assigns dependency
+			this.statement[i].dependent = dependent;
+		}
+	}
 }
 
 //Game Functions
