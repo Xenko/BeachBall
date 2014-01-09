@@ -37,10 +37,13 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.answers = [];
 	
 	this.PopulateStatements = function() {
-		var newStatement = {};
-		this.statement[0] = newStatement;
-		newStatement.name = "A";
-		newStatement.value = true;
+		var i = 0;
+		do {
+			var newStatement = {};
+			this.statement[0] = newStatement;
+			newStatement.name = i * 2;
+			newStatement.value = true;
+		} while (i < this.size);
 	}
 }
 
