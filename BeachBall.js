@@ -142,6 +142,10 @@ BeachBall.PuzzleConstructor = function(name) {
 		// Evaluates all dependent statements
 		var guess = true;
 		var first = true;
+		var orGuess = false;
+		var orIndex;
+		var orClaim;
+		var index;
 		for (i in this.statement) {
 			if (this.statement[i].dependent) {
 				// If this is the first statement, assign a guess of true
@@ -151,25 +155,28 @@ BeachBall.PuzzleConstructor = function(name) {
 					
 					if (typeof this.statement[i].condition == "undefined" || this.statement[i].condition == "and") {
 						for (j in this.statement[i].claim) {
-							var num = this.FindStatement(statement[i].claim[j].name)
-							if (this.statement[num].value == "unknown") {
-								this.statement[num].value == this.statement[i].value;
-							}
-							else if (this.statement[num].value != this.statement[i].value) {
-								if (guess = false) {
-									console.log("Error in solver");
-									return 99;
-								}
-								else {
-									guess = false;
-									first = true;
-									i = 0;
-									break;
-								}
-							}
+							index = this.FindStatement(this.statement[i].claim[j].name);
+								this.statement[num].value == this.statement[i].claim[j].value;
 						}
 					}
+					else {
+						if (!orGuess) {
+							orGuess = true;
+							orClaim = 0;
+						}
+						else {
+							orClaim = 1	
+						}
+						orIndex = this.FindStatement(this.statement[i].claim[orClaim].name);
+						this.statement[orIndex] == this.statement[i].claim[orClaim].value;
+					}
 				}
+				
+				//If not first assignment
+				else
+					for (j in this.statement[i].claim) {
+						
+					}
 			}
 		}
 	}
