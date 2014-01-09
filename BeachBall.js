@@ -38,7 +38,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	//Parses a single claim to extract name and value
 	this.ParseClaim = function (claimText) {
 		var claim = {};
-		claim.name = newStatement.claimText.substring(0,1);
+		claim.name = claimText.substring(0,1);
 		var i = claimText.indexOf("true");
 		var j = claimText.indexOf("false");
 		var k = claimText.indexOf("not");
@@ -77,7 +77,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			n = newStatement.statementText.length - 1;
 			if (l) {
 				var claimText = newStatement.statementText.substring(0, l);
-				newStatement.claim[1] = this.ParseClaim(claimText);
+				newStatement.claim[0] = this.ParseClaim(claimText);
 				claimText = newStatement.statementText.substring(l + 4, n)
 				newStatement.condition = "and";
 			}
