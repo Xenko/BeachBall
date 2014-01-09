@@ -68,6 +68,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			var l = newStatement.claimText.indexOf("and");
 			var m = newStatement.claimText.indexOf("or");
 			if (l || m) {
+				var newClaim = {};
 				newStatement.claim[1] = newClaim
 				newClaim.name = "Y";
 				newClaim.value = "Not Test";
@@ -89,7 +90,7 @@ BeachBall.SolveLogic = function(name) {
 	BeachBall.PuzzleConstructor("caged");
 	var me = BeachBall.Puzzle["caged"];
 	me.PopulateStatements();
-	console.log(me.statement[0].name);
+	//console.log(me.statement[0].name);
 }
 
 BeachBall.CagedLogicat = function() {
