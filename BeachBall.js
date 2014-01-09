@@ -33,8 +33,21 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.size = Molpy.PuzzleGens[name].guess.length;
 	this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
 	this.statement = [];
-	
 	this.answers = [];
+	
+	//Parses a single claim to extract name and value
+	this.ParseClaim = function (claimText) {
+		var claim = {};
+		claim.name = newStatement.claimText.substring(0,1);
+		var i = claimText.indexOf("true");
+		var j = claimText.indexOf("false");
+		var k = claimText.indexOf("not");
+		if (i || j * k)
+			claim.value = true;
+		else
+			claim.value = false;
+		return claim;
+	}
 	
 	this.PopulateStatements = function() {
 		var i = 0;
@@ -53,29 +66,20 @@ BeachBall.PuzzleConstructor = function(name) {
 			
 			// Finds end index of claim(s), and saves that substring
 			k = puzzleText.indexOf("<br>", j);
-			newStatement.claimText = puzzleText.substring(j + 3, k);
+			newStatement.statementText = puzzleText.substring(j + 3, k);
 			
 			// Creates claims array
 			newStatement.claim = [];
-			var newClaim = {};
 			
-			//Creates first claim
-			newStatement.claim[0] = newClaim;
-			newClaim.name = "X";
-			newClaim.value = "test";
-			
-			//Tests for second claim
-			var l = newStatement.claimText.indexOf("and");
-			var m = newStatement.claimText.indexOf("or");
-			if (l || m) {
-				var newClaim = {};
-				newStatement.claim[1] = newClaim
-				newClaim.name = "Y";
-				newClaim.value = "Not Test";
-				if (l)
-					newClaim.condition = "and";
-				else
-					newClaim.condition = "or"
+			//Parses statement text to extract all claims to claims array
+			l = newStatement.statementText.indexOf("and");
+			m = newStatement.statementText.indexOf("or");
+			n = newStatement.statementText.length - 1;
+			if (l) {
+				var claimText = newStatement.statementText.substring(0, l);
+				newStatement.claim[1] = ParseClaim(claimText);
+				claimText = newStatement.statementText.substring(l + 4, n)
+				newStatement.condition = "and";
 			}
 			
 			// Sets statement value to default of Unknown
