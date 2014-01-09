@@ -57,7 +57,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			newStatement.value = "Unknown";
 			
 			// Updates n to the start of the next statement
-			n = puzzleText.indexOf("<br><br>", n) + 8;
+			n = puzzleText.indexOf("<br><br>", m) + 8;
 			i++;
 		} while (i < this.size);
 	}
