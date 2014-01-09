@@ -52,7 +52,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			newStatement.name = puzzleText.substring(j, j + 1);
 			
 			// Finds end index of claim(s), and saves that substring
-			m = puzzleText.indexOf("<br>", j);
+			k = puzzleText.indexOf("<br>", j);
 			newStatement.claimText = puzzleText.substring(j + 3, k);
 			
 			// Creates claims array
@@ -72,6 +72,10 @@ BeachBall.PuzzleConstructor = function(name) {
 				newStatement.claim[1] = newClaim
 				newClaim.name = "Y";
 				newClaim.value = "Not Test";
+				if (l)
+					newClaim.condition = "and";
+				else
+					newClaim.condition = "or"
 			}
 			
 			// Sets statement value to default of Unknown
