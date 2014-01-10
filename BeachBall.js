@@ -33,6 +33,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.size = Molpy.PuzzleGens[name].guess.length;
 	this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
 	this.statement = [];
+	this.error = false;
 	this.answers = [];
 	this.answered = [];
 	this.unanswered = [];
@@ -208,7 +209,19 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	this.EvaluateKnownClaims = function() {
+	this.CheckAssignment = function(index, bool) {
+		if (this.statement[index].value == "unknown") {
+			this.statement[index].value = bool;
+			var remove = this.unanswered.indexOf(index);
+			this.unanswered.splice(remove,1);
+			this.answered.push(index);
+		}
+		if (this.statement[index].value != bool) {
+			this.error = true;
+		}
+	}
+	
+	this.EvaluateClaims = function() {
 		// Change tracks if something has changed and is a return value
 		// If a change is made, this function should be re-run to check for more evaluations.
 		var change = false;
@@ -225,15 +238,14 @@ BeachBall.PuzzleConstructor = function(name) {
 					if (me.claim[k].name == this.statement[index].name) {
 						if (typeof me.condition == "undefined"){
 							if (me.claim[k].value == this.statement[index].value) {
-								me.value = true;
+								this.CheckAssignment(j, true);
 							}
 							else {
-								me.value = false;
+								this.CheckAssignment(j, false);
 							}
-							var remove = this.unanswered.indexOf(j);
-							this.unanswered.splice(remove,1);
-							this.answered.push(j);
-							change = true;
+							if (!this.error) {
+								change = true;
+							}
 						}
 						else {
 							//Set claim evaluation result
@@ -251,15 +263,14 @@ BeachBall.PuzzleConstructor = function(name) {
 							// Otherwise evaluate statements
 							else if (me.condition == "and") {
 								if (me.claim[0].result && me.claim[1].result) {
-									me.value = true;
+									this.CheckAssignment(j, true);
 								}
 								else {
-									me.value = false;
+									this.CheckAssignment(j, false);
 								}
-								var remove = this.unanswered.indexOf(j);
-								this.unanswered.splice(remove,1);
-								this.answered.push(j);
-								change = true;
+								if (!this.error) {
+									change = true;
+								}
 							}
 							// Evaluate OR statement
 							else {
@@ -269,10 +280,9 @@ BeachBall.PuzzleConstructor = function(name) {
 								else {
 									me.value = false;
 								}
-								var remove = this.unanswered.indexOf(j);
-								this.unanswered.splice(remove,1);
-								this.answered.push(j);
-								change = true;
+								if (!this.error) {
+									change = true;
+								}
 							}
 						}
 					}
@@ -418,10 +428,20 @@ BeachBall.SolveLogic = function(name) {
 		var change = false;
 		var i = 0;
 		do {
-			change = me.EvaluateKnownClaims();
+			change = me.EvaluateClaims();
 			i++;
 		} while (i < 10 && change);
-		me.GuessClaim();
+		
+		//If none answered, guess a value
+		if (me.answered.length == 0) {
+			me.GuessClaim();
+			change = false;
+			i = 0;
+			do {
+				change = me.EvaluateClaims();
+				i++;
+			} while (i < 10 && change);
+		}
 	}
 }
 
