@@ -342,10 +342,10 @@ BeachBall.PuzzleConstructor = function(name) {
 				}
 			}
 		}
-		this.statement[this.guess].value = true;
-		var remove = this.unanswered.indexOf(this.guess);
-		this.unanswered.splice(remove,1);
-		this.answered.push(this.guess);
+		
+		//Set guess value
+		this.CheckAssignment(this.guess, true);
+		this.AssignGuessClaim();
 	}
 	
 	this.CheckAnswers = function() {
@@ -390,7 +390,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	this.ChangeGuess = function () {
+	this.ChangeGuess = function() {
 		this.unanswered = [];
 		for (i in this.statement) {
 			var me = this.statement[i];
@@ -405,7 +405,16 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.answered = [];
 		this.error = false;
 		this.CheckAssignment(this.guess, false);
+		this.AssignGuessClaim();
 		console.log("Change guess to false");
+	}
+	
+	this.AssignGuessClaim = function() {
+		var me = this.statement[this.guess];
+		if (typeof me.condition == "undefined") {
+			var i = this.FindStatement(me.claim[0].name);
+			this.CheckAssignment(i, me.claim[0].value);
+		}
 	}
 	
 	this.PrintAnswers = function() {
