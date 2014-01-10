@@ -406,6 +406,12 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.CheckAssignment(this.guess, false);
 	}
 	
+	this.PrintAnswers = fucntioin() {
+		for (i in this.statement) {
+			console.log(this.statement[i].name + " is " + this.statement[i].value);
+		}
+	}
+	
 }
 
 //Game Functions
@@ -446,9 +452,11 @@ BeachBall.SolveLogic = function(name) {
 				change = me.EvaluateClaims();
 				i++;
 			} while (i < 10 && change);
+			
+			me.CheckAnswers();
 		}
 		
-		me.CheckAnswers();
+		me.PrintAnswers();
 	}
 }
 
