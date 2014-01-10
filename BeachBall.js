@@ -353,12 +353,17 @@ BeachBall.PuzzleConstructor = function(name) {
 		for (i in this.statement) {
 			for (j in this.statement[i].claim) {
 				var me = this.statement[i].claim[j]
-				var index = this.FindStatement(me.name);
-				if (me.value == this.statement[index].value) {
-					me.result = true;
+				if (typeof me != "undefined") {
+					var index = this.FindStatement(me.name);
+					if (me.value == this.statement[index].value) {
+						me.result = true;
+					}
+					else {
+						me.result = false;
+					}
 				}
 				else {
-					me.result = false;
+					console.log("Error with i: " + i + " and j: " + j);
 				}
 			}
 		}
