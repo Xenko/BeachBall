@@ -282,6 +282,41 @@ BeachBall.PuzzleConstructor = function(name) {
 		return change;
 	}
 	
+	this.GuessClaim = function() {
+		var found = false;
+		for (i in this.statement) {
+			var me = this.statement[i];
+			if (me.dependent && typeof me.condition = "undefined") {
+				this.guess = i;
+				found = true;
+			}
+		}
+		
+		if (!found) {
+			for (i in this.statement) {
+				var me = this.statement[i];
+				if (me.dependent && me.condition = "and") {
+					this.guess = i;
+					found = true;
+				}
+			}
+		}
+		
+		if (!found) {
+			for (i in this.statement) {
+				var me = this.statement[i];
+				if (me.dependent) {
+					this.guess = i;
+					found = true;
+				}
+			}
+		}
+		this.statement[this.guess].value = true;
+		var remove = this.unanswered.indexOf(this.guess);
+		this.unanswered.splice(remove,1);
+		this.answered.push(this.guess);
+	}
+	
 	this.EvaluateStatementsOld = function() {
 		// Evaluates all dependent statements
 		var guess = true;
@@ -383,6 +418,7 @@ BeachBall.SolveLogic = function(name) {
 			change = me.EvaluateKnownClaims();
 			i++;
 		} while (i < 10 && change);
+		me.GuessClaim();
 	}
 }
 
