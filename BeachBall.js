@@ -382,9 +382,7 @@ BeachBall.SolveLogic = function(name) {
 		do {
 			change = me.EvaluateKnownClaims();
 			i++;
-		} while (i < 10 || !change);
-		//var result = me.EvaluateStatements();
-		//console.log(result);
+		} while (i < 10 && change);
 	}
 }
 
