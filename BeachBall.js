@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 3';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -257,9 +257,25 @@ BeachBall.PuzzleConstructor = function(name) {
 								me.claim[k].result = false;
 							}
 							
-							// If one claim is unknown, do nothing
-							if (me.claim[0].result == "unknown" || me.claim[1].result == "unknown") {
-								// Do Nothing
+							// Figure out which claim is k
+							var m = 0;
+							if (k = 0) {
+								m = 1;
+							}
+							
+							// If one claim is unknown and the other is self-referential, then evaluate if possible
+							if (typeof me.claim[k].result == "boolean" && me.claim[m].name == me.name) {
+								if (me.condition == "or" && me.claim[k].result == true) {
+										me.claim[m].value = true;
+										this.CheckAssignment(index2, true);
+									}
+								else if (me.condition == "and" && me.claim[k].result == false) {
+										me.claim[m].value = false;
+										this.CheckAssignment(index2, false);
+									}
+								if (!this.error) {
+									change = true;
+								}
 							}
 							// Otherwise evaluate statements
 							else if (me.condition == "and") {
