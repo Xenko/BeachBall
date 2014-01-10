@@ -474,7 +474,6 @@ BeachBall.SolveLogic = function(name) {
 		var GuessCounter = 0;
 		if (me.answered.length == 0) {
 			me.GuessClaim(GuessCounter);
-			console.log("After Guess");
 			me.PrintAnswers();
 			change = false;
 			i = 0;
@@ -486,6 +485,7 @@ BeachBall.SolveLogic = function(name) {
 						if (me.statement[i].value = "unknown") {
 							GuessCounter = GuessCounter + 1;
 							me.GuessClaim(GuessCounter);
+							break;
 						}
 						else {
 							me.CheckAnswers();
