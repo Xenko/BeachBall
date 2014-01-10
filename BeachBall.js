@@ -347,6 +347,40 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.answered.push(this.guess);
 	}
 	
+	this.CheckAnswers = function() {
+		var error = false;
+		// Set all claim results
+		for (i in this.statement) {
+			for (j in this.statement[i].claim) {
+				var me = this.statement[i].claim[j]
+				var index = this.statement.indexOf(me.name);
+				if (me.value == this.statement[index].value) {
+					me.result = true;
+				}
+				else {
+					me.result = false;
+				}
+			}
+		}
+		
+		// Evaluate all claims in statement (with condition) and checks answer against statement value
+		for (i in this.statement)
+			var me = this.statement[i]
+			if (typeof me.condition == "undefined" && me.claim[0].result != me.value) {
+					error = true;
+			}
+			else if ((me.condition == "or") && ((me.claim[0].result || me.claim[1].result) != me.result)) {
+					error = true;
+				}
+			else if ((me.condition == "and") && ((me.claim[0].result && me.claim[1].result) != me.result)) {
+					error = true;
+				}
+		
+		if (error) {
+			this.error = true;
+			console.log("Logic error found");
+		}
+	}
 }
 
 //Game Functions
