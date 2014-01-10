@@ -483,7 +483,7 @@ BeachBall.SolveLogic = function(name) {
 				i++;
 				if (!change) {
 					for (i in me.statement) {
-						if (me.statement[i].value = "unknown") {
+						if (me.statement[i].value == "unknown") {
 							GuessCounter = GuessCounter + 1;
 							me.GuessClaim(GuessCounter);
 							break;
