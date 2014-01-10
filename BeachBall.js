@@ -361,12 +361,14 @@ BeachBall.PuzzleConstructor = function(name) {
 					else {
 						me.result = false;
 					}
+					console.log("Processed correctly i: " + i + " and j: " + j);
 				}
 				else {
 					console.log("Error with i: " + i + " and j: " + j);
 				}
 			}
 		}
+		console.log("Finished cycle");
 		
 		// Evaluate all claims in statement (with condition) and checks answer against statement value
 		for (i in this.statement)
