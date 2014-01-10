@@ -486,16 +486,20 @@ BeachBall.SolveLogic = function(name) {
 						if (me.statement[i].value == "unknown") {
 							GuessCounter = GuessCounter + 1;
 							me.GuessClaim(GuessCounter);
+							change = true;
 							break;
 						}
 						else {
 							me.CheckAnswers();
 							if (me.error == true) {
-								me.ChangeGuess(GuessCounter);
-								GuessCounter--;
-								if (GuessCounter < 0) {
+								if (GuessCounter < -1) {
+									change = false;
 									break;
 								}
+								me.ChangeGuess(GuessCounter);
+								GuessCounter--;
+								change = true;
+								break;
 							}
 						}
 					}
@@ -503,7 +507,7 @@ BeachBall.SolveLogic = function(name) {
 			} while (i < 50 && change);
 		}
 		
-		me.EvaluateClaims();
+		//me.EvaluateClaims();
 		me.CheckAnswers();
 		me.PrintAnswers();
 		
