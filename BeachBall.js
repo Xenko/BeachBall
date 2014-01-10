@@ -289,6 +289,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			if (me.dependent && typeof me.condition == "undefined") {
 				this.guess = i;
 				found = true;
+				break;
 			}
 		}
 		
@@ -298,6 +299,7 @@ BeachBall.PuzzleConstructor = function(name) {
 				if (me.dependent && me.condition == "and") {
 					this.guess = i;
 					found = true;
+					break;
 				}
 			}
 		}
@@ -308,6 +310,7 @@ BeachBall.PuzzleConstructor = function(name) {
 				if (me.dependent) {
 					this.guess = i;
 					found = true;
+					break;
 				}
 			}
 		}
