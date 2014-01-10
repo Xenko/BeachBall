@@ -34,12 +34,15 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.size = Molpy.PuzzleGens[name].guess.length;
 	this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
 	this.statement = [];
+	this.guess = [];
+	this.guessTimes = [];
 	this.error = false;
 	this.answers = [];
 	this.answered = [];
 	this.unanswered = [];
 	for (var i = 0; i < this.size; i++) {
 		this.unanswered.push(i);
+		this.guessTimes.push(0);
 	}
 	
 	//Parses a single claim to extract name and value
@@ -310,12 +313,12 @@ BeachBall.PuzzleConstructor = function(name) {
 		return change;
 	}
 	
-	this.GuessClaim = function() {
+	this.GuessClaim = function(number) {
 		var found = false;
 		for (i in this.statement) {
 			var me = this.statement[i];
-			if (me.dependent && typeof me.condition == "undefined") {
-				this.guess = parseInt(i);
+			if (me.dependent && typeof me.condition == "undefined" && me.value == "unknown") {
+				this.guess[number] = parseInt(i);
 				found = true;
 				break;
 			}
@@ -324,8 +327,8 @@ BeachBall.PuzzleConstructor = function(name) {
 		if (!found) {
 			for (i in this.statement) {
 				var me = this.statement[i];
-				if (me.dependent && me.condition == "and") {
-					this.guess = parseInt(i);
+				if (me.dependent && me.condition == "and" && me.value == "unknown") {
+					this.guess[number] = parseInt(i);
 					found = true;
 					break;
 				}
@@ -335,8 +338,8 @@ BeachBall.PuzzleConstructor = function(name) {
 		if (!found) {
 			for (i in this.statement) {
 				var me = this.statement[i];
-				if (me.dependent) {
-					this.guess = parseInt(i);
+				if (me.dependent && me.value == "unknown") {
+					this.guess[number] = parseInt(i);
 					found = true;
 					break;
 				}
@@ -344,8 +347,8 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 		
 		//Set guess value
-		this.CheckAssignment(this.guess, true);
-		this.AssignGuessClaim();
+		this.CheckAssignment(this.guess[number], true);
+		this.AssignGuessClaim(number);
 	}
 	
 	this.CheckAnswers = function() {
@@ -390,7 +393,8 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	this.ChangeGuess = function() {
+	//Takes in the guess array index of the guess to be changed
+	this.ChangeGuess = function(number) {
 		this.unanswered = [];
 		for (i in this.statement) {
 			var me = this.statement[i];
@@ -404,13 +408,37 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 		this.answered = [];
 		this.error = false;
-		this.CheckAssignment(this.guess, false);
-		this.AssignGuessClaim();
-		console.log("Change guess to false");
+		
+		for (k = 0; k < this.guess.length; k++) {
+			var me = this.guess[k];
+			// If the guess hasn't been changed before
+			if (k == this.guess.length - 1 && this.guessTimes[me] == 0) {
+				this.guessTimes[me] = 1;
+				this.CheckAssignment(me, false);
+				this.AssignGuessClaim();
+				console.log("Change guess " + this.statement[me].name + " to false");
+			}
+			else if (this.guessTimes[me] == 0) {
+				this.CheckAssignment(me, true);
+			}
+			else {
+				this.guessTimes[me] = 0;
+				this.guess.pop();
+				if (number == 0) {
+					console.log("No solution found");
+					this.error = true;
+					break;
+				}
+				else {
+					number--;
+					this.ChangeGuess(number);
+				}
+			}
+		}
 	}
 	
-	this.AssignGuessClaim = function() {
-		var me = this.statement[this.guess];
+	this.AssignGuessClaim = function(number) {
+		var me = this.statement[this.guess[number]];
 		if (typeof me.condition == "undefined") {
 			var i = this.FindStatement(me.claim[0].name);
 			this.CheckAssignment(i, me.claim[0].value);
@@ -443,8 +471,9 @@ BeachBall.SolveLogic = function(name) {
 		} while (i < 10 && change);*/
 		
 		//If none answered, guess a value
+		var GuessCounter = 0;
 		if (me.answered.length == 0) {
-			me.GuessClaim();
+			me.GuessClaim(GuessCounter);
 			console.log("After Guess");
 			me.PrintAnswers();
 			change = false;
@@ -452,15 +481,32 @@ BeachBall.SolveLogic = function(name) {
 			do {
 				change = me.EvaluateClaims();
 				i++;
-			} while (i < 10 && change);
+				if (!change) {
+					for (i in me.statement) {
+						if (me.statement[i].value = "unknown") {
+							GuessCounter = GuessCounter + 1;
+							me.GuessClaim(GuessCounter);
+						}
+						else {
+							me.CheckAnswers();
+							if (me.error == true) {
+								me.ChangeGuess(GuessCounter);
+								GuessCounter--;
+								if (GuessCounter < 0) {
+									break;
+								}
+							}
+						}
+				}
+			} while (i < 20 && change);
 		}
 		
 		me.PrintAnswers();
 		me.CheckAnswers();
 		
-		if (me.error = true) {
+		/*if (me.error = true) {
 			console.log(me.guess);
-			me.ChangeGuess();
+			me.ChangeGuess(GuessCounter);
 			change = false;
 			i = 0;
 			do {
@@ -469,9 +515,7 @@ BeachBall.SolveLogic = function(name) {
 			} while (i < 10 && change);
 			
 			me.CheckAnswers();
-		}
-		
-		me.PrintAnswers();
+		}*/
 	}
 }
 
