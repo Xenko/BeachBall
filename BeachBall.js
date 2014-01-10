@@ -405,6 +405,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.answered = [];
 		this.error = false;
 		this.CheckAssignment(this.guess, false);
+		console.log("Change guess to false");
 	}
 	
 	this.PrintAnswers = function() {
