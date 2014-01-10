@@ -215,6 +215,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	}
 	
 	this.CheckAssignment = function(index, bool) {
+		index = parseInt(index);
 		if (this.statement[index].value == "unknown") {
 			this.statement[index].value = bool;
 			var remove = this.unanswered.indexOf(index);
