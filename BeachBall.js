@@ -369,10 +369,10 @@ BeachBall.PuzzleConstructor = function(name) {
 			if (typeof me.condition == "undefined" && me.claim[0].result != me.value) {
 					error = true;
 			}
-			else if ((me.condition == "or") && ((me.claim[0].result || me.claim[1].result) != me.result)) {
+			else if ((me.condition == "or") && ((me.claim[0].result || me.claim[1].result) != me.value)) {
 					error = true;
 				}
-			else if ((me.condition == "and") && ((me.claim[0].result && me.claim[1].result) != me.result)) {
+			else if ((me.condition == "and") && ((me.claim[0].result && me.claim[1].result) != me.value)) {
 					error = true;
 				}
 		
