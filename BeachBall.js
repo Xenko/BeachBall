@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 3';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -383,6 +383,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	}
 	
 	this.ChangeGuess = function () {
+		this.unanswered = [];
 		for (i in this.statement) {
 			var me = this.statement[i];
 			// Reset all claim results to unknown
@@ -391,8 +392,10 @@ BeachBall.PuzzleConstructor = function(name) {
 			}
 			//Reset all statement values to unknown
 			me.value = "unknown";
+			this.unanswered.push(parseInt(i));
 		}
-		this.statement[this.guess].value = false;
+		this.answered = [];
+		this.CheckAssignment(this.guess, false);
 	}
 	
 }
