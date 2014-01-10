@@ -216,7 +216,7 @@ BeachBall.PuzzleConstructor = function(name) {
 				var me = this.statement[j];
 				for (k in this.statement[i]) {
 					//If a claim name matches an answered statement
-					if (me.claim[k].name == this.statement[index]) {
+					if (me.claim[k].name == this.statement[index].name) {
 						if (typeof me.condition == "undefined"){
 							if (me.claim[k].value == this.statement[index].value) {
 								me.value = true;
