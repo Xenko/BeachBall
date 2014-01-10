@@ -456,6 +456,7 @@ BeachBall.SolveLogic = function(name) {
 		me.CheckAnswers();
 		
 		if (me.error = true) {
+			console.log(me.guess);
 			me.ChangeGuess();
 			change = false;
 			i = 0;
