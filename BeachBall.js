@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 1';
+BeachBall.version = '5.0 Beta 2';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -49,6 +49,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		return claim;
 	}
 	
+	//Returns the index of a given statement name
 	this.FindStatement = function (searchTerm) {
 		for (i in this.statement) {
 			if (this.statement[i].name == searchTerm) return i;
@@ -111,6 +112,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			
 			// Sets statement value to default of Unknown
 			newStatement.value = "unknown";
+			newStatement.self = "unknown";
 			
 			// Updates j to the start of the next statement
 			j = this.puzzleString.indexOf("<br><br>", k) + 8;
@@ -148,6 +150,25 @@ BeachBall.PuzzleConstructor = function(name) {
 			}
 		}
 	}
+	
+	this.EvaluateStatementReference = function() {
+		//Find statements which are only self-referential
+		for (i in this.statement) {
+			var selfRef = 0;
+			for (j in this.statement[i].claim) {
+				if (this.statement[i].name == this.statement[i].claim[j].name) {
+					selfRef++;
+				}
+			}
+			if (selfRef == this.statement[i].claim.length) {
+				this.statement[i].self = true;
+			}
+			else {
+				this.statement[i].self = false;
+			}
+		}
+	}
+	
 	this.EvaluateStatementsOld = function() {
 		// Evaluates all dependent statements
 		var guess = true;
@@ -242,6 +263,7 @@ BeachBall.SolveLogic = function(name) {
 		var me = BeachBall.Puzzle["caged"];
 		me.PopulateStatements();
 		me.EvaluateStatementDependence();
+		me.EvaluateStatementReference();
 		//var result = me.EvaluateStatements();
 		//console.log(result);
 	}
