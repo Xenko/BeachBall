@@ -35,6 +35,10 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.statement = [];
 	this.answers = [];
 	this.answered = [];
+	this.unanswered = [];
+	for (var i = 0; i < this.size; i++) {
+		this.unanswered.push(i);
+	}
 	
 	//Parses a single claim to extract name and value
 	this.ParseClaim = function (claimText) {
@@ -197,7 +201,8 @@ BeachBall.PuzzleConstructor = function(name) {
 						this.statement[i].value = true;
 					}
 				}
-				
+				var remove = this.unanswered.indexOf(i);
+				this.unanswered.splice(remove,1);
 				this.answered.push(i);
 			}
 		}
@@ -212,8 +217,9 @@ BeachBall.PuzzleConstructor = function(name) {
 			var index = this.answered[i];
 			
 			// Go through entire puzzle
-			for (j in this.statement) {
-				var me = this.statement[j];
+			for (j in this.unanswered) {
+				var index = this.unanswered[j];
+				var me = this.statement[index];
 				for (k in this.statement[i].claim) {
 					//If a claim name matches an answered statement
 					if (me.claim[k].name == this.statement[index].name) {
@@ -224,6 +230,8 @@ BeachBall.PuzzleConstructor = function(name) {
 							else {
 								me.value = false;
 							}
+							var remove = this.unanswered.indexOf(j);
+							this.unanswered.splice(remove,1);
 							this.answered.push(j);
 							change = true;
 						}
@@ -248,6 +256,8 @@ BeachBall.PuzzleConstructor = function(name) {
 								else {
 									me.value = false;
 								}
+								var remove = this.unanswered.indexOf(j);
+								this.unanswered.splice(remove,1);
 								this.answered.push(j);
 								change = true;
 							}
@@ -259,6 +269,8 @@ BeachBall.PuzzleConstructor = function(name) {
 								else {
 									me.value = false;
 								}
+								var remove = this.unanswered.indexOf(j);
+								this.unanswered.splice(remove,1);
 								this.answered.push(j);
 								change = true;
 							}
