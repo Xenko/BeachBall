@@ -476,7 +476,6 @@ BeachBall.SolveLogic = function(name) {
 		var change = false;
 		if (me.answered.length == 0) {
 			me.GuessClaim(GuessCounter);
-			me.PrintAnswers();
 			i = 0;
 			do {
 				change = me.EvaluateClaims();
@@ -506,8 +505,7 @@ BeachBall.SolveLogic = function(name) {
 				}
 			} while (i < 50 && change);
 		}
-		
-		//me.EvaluateClaims();
+		console.log("Exited Loop");
 		me.CheckAnswers();
 		me.PrintAnswers();
 		
