@@ -434,7 +434,7 @@ BeachBall.SolveLogic = function(name) {
 		var me = BeachBall.Puzzle[name];
 		me.PopulateStatements();
 		me.EvaluateStatementDependence();
-		me.EvaluateStatementReference();
+		//me.EvaluateStatementReference();
 		/*var change = false;
 		var i = 0;
 		do {
