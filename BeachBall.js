@@ -229,19 +229,19 @@ BeachBall.PuzzleConstructor = function(name) {
 		for (i in this.answered) {
 			var index = this.answered[i];
 			
-			// Go through entire puzzle
+			// Go through unanswered statements
 			for (j in this.unanswered) {
-				var index = this.unanswered[j];
-				var me = this.statement[index];
-				for (k in this.statement[i].claim) {
-					//If a claim name matches an answered statement
+				var index2 = this.unanswered[j];
+				var me = this.statement[index2];
+				for (k in me.claim) {
+					//If a claim name matches answered statement
 					if (me.claim[k].name == this.statement[index].name) {
 						if (typeof me.condition == "undefined"){
 							if (me.claim[k].value == this.statement[index].value) {
-								this.CheckAssignment(j, true);
+								this.CheckAssignment(index2, true);
 							}
 							else {
-								this.CheckAssignment(j, false);
+								this.CheckAssignment(index2, false);
 							}
 							if (!this.error) {
 								change = true;
@@ -263,10 +263,10 @@ BeachBall.PuzzleConstructor = function(name) {
 							// Otherwise evaluate statements
 							else if (me.condition == "and") {
 								if (me.claim[0].result && me.claim[1].result) {
-									this.CheckAssignment(j, true);
+									this.CheckAssignment(index2, true);
 								}
 								else {
-									this.CheckAssignment(j, false);
+									this.CheckAssignment(index2, false);
 								}
 								if (!this.error) {
 									change = true;
@@ -275,10 +275,10 @@ BeachBall.PuzzleConstructor = function(name) {
 							// Evaluate OR statement
 							else {
 								if (me.claim[0].result || me.claim[1].result) {
-									me.value = true;
+									this.CheckAssignment(index2, true);
 								}
 								else {
-									me.value = false;
+									this.CheckAssignment(index2, false);
 								}
 								if (!this.error) {
 									change = true;
