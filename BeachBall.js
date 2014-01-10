@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -29,6 +29,7 @@ BeachBall.Puzzle = {};
 
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
+	BeachBall.Puzzle[name] = {}; // Creates empty object to ensure no conflicts with other versions
 	BeachBall.Puzzle[name] = this;
 	this.size = Molpy.PuzzleGens[name].guess.length;
 	this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
@@ -419,8 +420,8 @@ BeachBall.SolveLogic = function(name) {
 	// Checks if puzzle is active
 	if (Molpy.PuzzleGens[name].active) {
 		// Parses the Puzzle
-		BeachBall.PuzzleConstructor("caged");
-		var me = BeachBall.Puzzle["caged"];
+		BeachBall.PuzzleConstructor(name);
+		var me = BeachBall.Puzzle[name];
 		me.PopulateStatements();
 		me.EvaluateStatementDependence();
 		me.EvaluateStatementReference();
