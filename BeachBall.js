@@ -297,7 +297,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		for (i in this.statement) {
 			var me = this.statement[i];
 			if (me.dependent && typeof me.condition == "undefined") {
-				this.guess = i;
+				this.guess = parseInt(i);
 				found = true;
 				break;
 			}
@@ -307,7 +307,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			for (i in this.statement) {
 				var me = this.statement[i];
 				if (me.dependent && me.condition == "and") {
-					this.guess = i;
+					this.guess = parseInt(i);
 					found = true;
 					break;
 				}
@@ -318,7 +318,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			for (i in this.statement) {
 				var me = this.statement[i];
 				if (me.dependent) {
-					this.guess = i;
+					this.guess = parseInt(i);
 					found = true;
 					break;
 				}
