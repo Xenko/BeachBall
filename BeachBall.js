@@ -453,6 +453,7 @@ BeachBall.SolveLogic = function(name) {
 			} while (i < 10 && change);
 		}
 		
+		me.PrintAnswers();
 		me.CheckAnswers();
 		
 		if (me.error = true) {
