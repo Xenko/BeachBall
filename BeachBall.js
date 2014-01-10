@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -330,89 +330,6 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.answered.push(this.guess);
 	}
 	
-	this.EvaluateStatementsOld = function() {
-		// Evaluates all dependent statements
-		var guess = true;
-		var first = true;
-		var orGuess = false;
-		var orIndex;
-		var orClaim;
-		var index;
-		for (i in this.statement) {
-			if (this.statement[i].dependent) {
-				// If this is the first statement, assign a guess of true
-				if (first) {
-					this.statement[i].value = guess;
-					first = false;
-					
-					//If it is a simple or AND statement
-					if (typeof this.statement[i].condition == "undefined" || this.statement[i].condition == "and") {
-						for (j in this.statement[i].claim) {
-							index = this.FindStatement(this.statement[i].claim[j].name);
-								this.statement[num].value == this.statement[i].claim[j].value;
-						}
-					}
-					
-					//If it is and OR statement
-					else {
-						if (!orGuess) {
-							orGuess = true;
-							orClaim = 0;
-						}
-						else {
-							orClaim = 1	
-						}
-						var a = this.statement[i].claim[orClaim].name;
-						orIndex = this.FindStatement(a);
-						this.statement[orIndex].value == this.statement[i].claim[orClaim].value;
-					}
-				}
-				
-				//If not first assignment
-				else if (this.statement[i].value != "unknown") {
-					for (j in this.statement[i].claim) {
-						// If it is a simple claim or AND
-						if (typeof this.statement[i].condition == "undefined" || this.statement[i].condition == "and") {
-							//Find the index of the statement in the claim 
-							index = this.FindStatement(this.statement[i].claim[j].name);
-							var bool = this.statement[i].value * this.statement[i].claim[j].value
-							//If the statement doesn't have a value, assign it based on claim
-							if (this.statement[index].value == "unknown") {
-								this.statement[index].value == bool;
-							}
-							
-							//If the statement doesn't match the calculated claim, restart and change first guess or OR guess.
-							else if (this.statement[index].value != bool) {
-								// If orGuess was made, reset and change orGuess
-								if (orGuess) {
-									for (k in this.statement) {
-										this.statement[k].value = "unknown";
-									}
-									first = true;
-									i = 0;
-								}
-								// If not orGuess (or orGuess already changed), then change guess
-								else if (guess) {
-									for (k in this.statement) {
-										this.statement[k].value = "unknown";
-									}
-									first = true;
-									orGuess = false;
-									guess = false;
-								}
-								// Otherwise there is a logic error and exit.
-								else {
-									return "Error";
-								}
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-		return "done";
-	}
 }
 
 //Game Functions
