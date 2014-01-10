@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -152,7 +152,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	}
 	
 	this.EvaluateStatementReference = function() {
-		//Find statements which are only self-referential
+		// Find statements which are only self-referential
 		for (i in this.statement) {
 			var selfRef = 0;
 			for (j in this.statement[i].claim) {
@@ -165,6 +165,37 @@ BeachBall.PuzzleConstructor = function(name) {
 			}
 			else {
 				this.statement[i].self = false;
+			}
+		}
+		
+		// Evaluates self-referential statements as their values can be known explicitly
+		for (i in this.statement) {
+			if (this.statement[i].self == true) {
+			
+				// If a single claim, the statement must be the value of the claim
+				if (typeof this.statement[i].condition == "undefined") {
+					this.statement[i].value = this.statement[i].claim[0].value;
+				}
+				
+				// If two claims AND
+				else if (this.statement[i].condition == "and") {
+					if (this.statement[i].claim[0].value == this.statement[i].claim[1].value) {
+						this.statement[i].value = this.statement[i].claim[0].value;
+					}
+					else {
+						this.statement[i].value = false;
+					}
+				}
+				
+				//If two claims OR
+				else {
+					if (this.statement[i].claim[0].value == this.statement[i].claim[1].value) {
+						this.statement[i].value = this.statement[i].claim[0].value;
+					}
+					else {
+						this.statement[i].value = true;
+					}
+				}
 			}
 		}
 	}
