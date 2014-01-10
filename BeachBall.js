@@ -445,6 +445,8 @@ BeachBall.SolveLogic = function(name) {
 		//If none answered, guess a value
 		if (me.answered.length == 0) {
 			me.GuessClaim();
+			console.log("After Guess");
+			me.PrintAnswers();
 			change = false;
 			i = 0;
 			do {
