@@ -472,10 +472,10 @@ BeachBall.SolveLogic = function(name) {
 		
 		//If none answered, guess a value
 		var GuessCounter = 0;
+		var change = false;
 		if (me.answered.length == 0) {
 			me.GuessClaim(GuessCounter);
 			me.PrintAnswers();
-			change = false;
 			i = 0;
 			do {
 				change = me.EvaluateClaims();
