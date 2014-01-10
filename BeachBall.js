@@ -350,7 +350,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.CheckAnswers = function() {
 		var error = false;
 		// Set all claim results
-		for (i in this.statement) {
+		for (var i = 0; i < this.statement.length; i++) {
 			for (j in this.statement[i].claim) {
 				var me = this.statement[i].claim[j]
 				if (typeof me != "undefined") {
