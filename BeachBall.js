@@ -497,25 +497,13 @@ BeachBall.SolveLogic = function(name) {
 								}
 							}
 						}
+					}
 				}
 			} while (i < 20 && change);
 		}
 		
 		me.PrintAnswers();
 		me.CheckAnswers();
-		
-		/*if (me.error = true) {
-			console.log(me.guess);
-			me.ChangeGuess(GuessCounter);
-			change = false;
-			i = 0;
-			do {
-				change = me.EvaluateClaims();
-				i++;
-			} while (i < 10 && change);
-			
-			me.CheckAnswers();
-		}*/
 	}
 }
 
