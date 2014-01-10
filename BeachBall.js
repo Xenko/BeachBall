@@ -361,7 +361,7 @@ BeachBall.PuzzleConstructor = function(name) {
 					else {
 						me.result = false;
 					}
-					console.log("Processed correctly i: " + i + " and j: " + j);
+					console.log("Processed statement + " this.statement[i].name + " i: " + i + " and j: " + j);
 				}
 				else {
 					console.log("Error with i: " + i + " and j: " + j);
