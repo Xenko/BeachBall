@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 1';
+BeachBall.version = '5.0 Beta 2';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -34,6 +34,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
 	this.statement = [];
 	this.answers = [];
+	this.answered = [];
 	
 	//Parses a single claim to extract name and value
 	this.ParseClaim = function (claimText) {
@@ -196,8 +197,77 @@ BeachBall.PuzzleConstructor = function(name) {
 						this.statement[i].value = true;
 					}
 				}
+				
+				this.answered.push(i);
 			}
 		}
+	}
+	
+	this.EvaluateKnownClaims = function() {
+		// Change tracks if something has changed and is a return value
+		// If a change is made, this function should be re-run to check for more evaluations.
+		var change = false;
+		// Go through each answered statement
+		for (i in this.answered) {
+			var index = this.answered[i];
+			
+			// Go through entire puzzle
+			for (j in this.statement) {
+				var me = this.statement[j];
+				for (k in this.statement[i] {
+					//If a claim name matches an answered statement
+					if (me.claim[k].name == this.statement[index]) {
+						if (typeof me.condition == "undefined"){
+							if (me.claim[k].value == this.statement[index].value) {
+								me.value = true;
+							}
+							else {
+								me.value = false;
+							}
+							this.answered.push(j);
+							change = true;
+						}
+						else {
+							//Set claim evaluation result
+							if (me.claim[k].value == this.statement[index].value) {
+								me.claim[k].result = true;
+							}
+							else {
+								me.claim[k].result = false;
+							}
+							
+							// If one claim is unknown, do nothing
+							if (me.claim[0].result == "unknown" || me.claim[1].result == "unknown") {
+								// Do Nothing
+							}
+							// Otherwise evaluate statements
+							else if (me.condition == "and") {
+								if (me.claim[0].result && me.claim[1].result) {
+									me.value = true;
+								}
+								else {
+									me.value = false;
+								}
+								this.answered.push(j);
+								change = true;
+							}
+							// Evaluate OR statement
+							else {
+								if (me.claim[0].result || me.claim[1].result) {
+									me.value = true;
+								}
+								else {
+									me.value = false;
+								}
+								this.answered.push(j);
+								change = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		return change;
 	}
 	
 	this.EvaluateStatementsOld = function() {
@@ -295,6 +365,12 @@ BeachBall.SolveLogic = function(name) {
 		me.PopulateStatements();
 		me.EvaluateStatementDependence();
 		me.EvaluateStatementReference();
+		var change = false;
+		var i = 0;
+		do {
+			change = me.EvaluateKnownClaims();
+			i++;
+		} while (i < 10 || !change);
 		//var result = me.EvaluateStatements();
 		//console.log(result);
 	}
