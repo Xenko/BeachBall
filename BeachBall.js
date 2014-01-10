@@ -500,7 +500,7 @@ BeachBall.SolveLogic = function(name) {
 						}
 					}
 				}
-			} while (i < 20 && change);
+			} while (i < 50 && change);
 		}
 		
 		me.PrintAnswers();
