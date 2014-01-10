@@ -503,8 +503,10 @@ BeachBall.SolveLogic = function(name) {
 			} while (i < 50 && change);
 		}
 		
-		me.PrintAnswers();
+		me.EvaluateClaims();
 		me.CheckAnswers();
+		me.PrintAnswers();
+		
 	}
 }
 
