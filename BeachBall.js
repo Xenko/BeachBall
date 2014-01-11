@@ -282,7 +282,7 @@ BeachBall.PuzzleConstructor = function(name) {
 									change = true;
 								}
 							}
-							// Otherwise evaluate AND statements
+							// Otherwise evaluate AND statements in both results are known
 							else if (me.claim[m].result != "unknown" && me.condition == "and") {
 								if (me.claim[0].result && me.claim[1].result) {
 									this.CheckAssignment(index2, true);
@@ -294,7 +294,7 @@ BeachBall.PuzzleConstructor = function(name) {
 									change = true;
 								}
 							}
-							// Evaluate OR statement
+							// Evaluate OR statements if both results are known
 							else if (me.claim[m].result != "unknown") {
 								if (me.claim[0].result || me.claim[1].result) {
 									this.CheckAssignment(index2, true);
@@ -512,20 +512,30 @@ BeachBall.SolveLogic = function(name) {
 				change = me.EvaluateClaims();
 				i++;
 				if (!change) {
-					for (i in me.statement) {
-						if (me.statement[i].value == "unknown") {
-							me.GuessClaim(me.guess.length + 1);
-							change = true;
-							break;
+					if (me.error) {
+						me.ChangeGuess();
+						change = true;
+						if (me.error) {
+							change = false;
 						}
-						else {
-							me.CheckAnswers();
-							if (me.error == true) {
-								me.ChangeGuess();
-								if (me.error) {
-									change = false;
-								}
+					}
+					else {
+						for (i in me.statement) {
+							if (me.statement[i].value == "unknown") {
+								me.GuessClaim(me.guess.length + 1);
+								change = true;
 								break;
+							}
+							else {
+								me.CheckAnswers();
+								if (me.error == true) {
+									me.ChangeGuess();
+									change = true;
+									if (me.error) {
+										change = false;
+									}
+									break;
+								}
 							}
 						}
 					}
