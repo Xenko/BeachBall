@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 1';
+BeachBall.version = '5.0 Beta 3';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -421,7 +421,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		number = this.guess.length - 1;
 		
 		// Checks if it guess needs to roll back 1
-		if (this.guessTimes[number] == 1) {
+		if (this.guessTimes[this.guess[number]] == 1) {
 			number--;
 			// If number is now less than 0, no solution will be found by the program.
 			if (number < 0) {
@@ -445,7 +445,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			if (k == number) {
 				this.guessTimes[me] = 1;
 				this.CheckAssignment(me, false);
-				this.AssignGuessClaim(me);
+				this.AssignGuessClaim(number);
 				console.log("Change guess " + this.statement[me].name + " to false");
 			}
 			// Otherwise set the earlier guesses back to true
@@ -521,7 +521,7 @@ BeachBall.SolveLogic = function(name) {
 					}
 					else if (me.answered.length == me.size) {
 						me.CheckAnswers();
-						if (me.error == true) {
+						if (me.error) {
 							me.ChangeGuess();
 							change = true;
 							if (me.error) {
@@ -530,15 +530,10 @@ BeachBall.SolveLogic = function(name) {
 							break;
 						}
 					}
-					else {
-						for (j in me.statement) {
-							if (me.statement[j].value == "unknown") {
-								me.GuessClaim(me.guess.length);
-								change = true;
-								break;
-							}
-							
-						}
+					else if (me.unanswered.length > 0) {
+						me.GuessClaim(me.guess.length);
+						change = true;
+						break;
 					}
 				}
 			} while (i < 50 && change);
