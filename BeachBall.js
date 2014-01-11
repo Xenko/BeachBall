@@ -432,6 +432,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		// Checks if it guess needs to roll back 1
 		if (this.guessTimes[this.guess[number]] == 1) {
 			number--;
+			previousGuesses.pop();
 			// If number is now less than 0, no solution will be found by the program.
 			if (number < 0) {
 				this.error = true;
