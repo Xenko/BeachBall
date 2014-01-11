@@ -376,8 +376,8 @@ BeachBall.PuzzleConstructor = function(name) {
 		//console.log("Finished cycle");
 		
 		// Evaluate all claims in statement (with condition) and checks answer against statement value
-		for (i in this.statement)
-			var me = this.statement[i]
+		for (k in this.statement)
+			var me = this.statement[k]
 			if (typeof me.condition == "undefined" && me.claim[0].result != me.value) {
 					error = true;
 			}
