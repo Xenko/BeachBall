@@ -422,12 +422,12 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 		
 		// If the guess number isn't the last in the array, then removes that part of the array
-		// and resets the guess times to 0 for those sections.
+		// and resets the guess times to 0 for those guesses.
 		if (number + 1 < this.guess.length) {
-			this.guess = this.guess.slice(0, number + 1);
-			for (var k = 0; k < this.guessTimes.length; k++) {
-				this.guessTimes[k] = 0;
+			for (var k = number + 1; k < this.guess.length; k++) {
+				this.guessTimes[this.guess[k]] = 0;
 			}
+			this.guess = this.guess.slice(0, number + 1);
 		}
 		
 		// Goes through the remaining Guess Array
@@ -437,11 +437,11 @@ BeachBall.PuzzleConstructor = function(name) {
 			if (k == number) {
 				this.guessTimes[me] = 1;
 				this.CheckAssignment(me, false);
-				this.AssignGuessClaim();
+				this.AssignGuessClaim(me);
 				console.log("Change guess " + this.statement[me].name + " to false");
 			}
 			// Otherwise set the earlier guesses back to true
-			else if (this.guessTimes[me] == 0) {
+			else {
 				this.CheckAssignment(me, true);
 			}
 			
