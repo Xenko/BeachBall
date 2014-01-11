@@ -31,6 +31,7 @@ BeachBall.Puzzle = {};
 //Switch GuessClaim from looking through all of this.statement to just looking at this.unanswered indices
 //This should also simplify if statements.
 //Fix dependence for statements that are only self-dependent
+//Molpy.Got("LogiPuzzle") for autoclicker check
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
 	BeachBall.Puzzle[name] = {}; // Creates empty object to ensure no conflicts with other versions
