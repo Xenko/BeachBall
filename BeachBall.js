@@ -407,7 +407,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		for (i in this.guess) {
 			var num = parseInt(i);
 			var bool = this.statement[this.guess[i]].value;
-			PreviousGuesses[i] = bool;
+			previousGuesses[i] = bool;
 		}
 		
 		// Resets all claim results and statement values to defaults
@@ -457,7 +457,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			}
 			// Otherwise set the earlier guesses back to true
 			else {
-				var bool = PreviousGuesses[parseInt(k)];
+				var bool = previousGuesses[parseInt(k)];
 				this.CheckAssignment(me, bool);
 				this.AssignGuessClaim(parseInt(k));
 			}
