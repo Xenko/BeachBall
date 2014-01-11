@@ -890,7 +890,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
 		//if (key == 'desc')		{return ['Off', 'On'];}
-		if (key == 'desc')		{return ['Disabled', '<a onclick="BeachBall.SolveLogic("caged")">Click to Solve</a>'];}
+		if (key == 'desc')		{return ['Disabled', '<a onclick="BeachBall.SolveLogic(\"caged\")">Click to Solve</a>'];}
 	}
 	else if (option == 'LCSolver') {
 		if (key == 'status') 	{return 0;}
