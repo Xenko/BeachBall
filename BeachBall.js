@@ -27,8 +27,10 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 BeachBall.Puzzle = {};
 
+//TO DO
 //Switch GuessClaim from looking through all of this.statement to just looking at this.unanswered indices
 //This should also simplify if statements.
+//Fix dependence for statements that are only self-dependent
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
 	BeachBall.Puzzle[name] = {}; // Creates empty object to ensure no conflicts with other versions
@@ -142,7 +144,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			//Searches through claims until all claims examined
 			for (j in this.statement) {
 				for (k in this.statement[j].claim) {
-					if (this.statement[i].name == this.statement[j].claim[k].name) {
+					if (i != j && this.statement[i].name == this.statement[j].claim[k].name) {
 						dependent = true;
 						break;
 					}
