@@ -283,7 +283,7 @@ BeachBall.PuzzleConstructor = function(name) {
 								}
 							}
 							// Otherwise evaluate statements
-							else if (me.condition == "and") {
+							else if (me.claim[m].value != "unknown" && me.condition == "and") {
 								if (me.claim[0].result && me.claim[1].result) {
 									this.CheckAssignment(index2, true);
 								}
@@ -295,7 +295,7 @@ BeachBall.PuzzleConstructor = function(name) {
 								}
 							}
 							// Evaluate OR statement
-							else {
+							else if (me.claim[m].value != "unknown") {
 								if (me.claim[0].result || me.claim[1].result) {
 									this.CheckAssignment(index2, true);
 								}
