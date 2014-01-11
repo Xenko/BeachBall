@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 3';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -494,6 +494,23 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
+	this.LoadAnswers = function() {
+		for (i = 0; i < this.size; i++) {
+			var choice = 0;
+			var text = "";
+			if (this.statement[i].value == true) {
+				choice = 1;
+				text = "True";
+			}
+			else if (this.statement[i].value == false) {
+				choice = 2;
+				text = "False";
+			}
+			$('#selectGuess' + i).prop('selectedIndex', choice);
+			Molpy.PuzzleGens["caged"].guess[i] = text;
+		}
+	}
+	
 }
 
 //Game Functions
@@ -546,9 +563,9 @@ BeachBall.SolveLogic = function(name) {
 				}
 			} while (i < 50 && change);
 		}
-		console.log("Exited Loop");
 		me.CheckAnswers();
 		me.PrintAnswers();
+		me.LoadAnswers();
 		
 	}
 }
