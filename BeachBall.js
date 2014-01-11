@@ -378,16 +378,22 @@ BeachBall.PuzzleConstructor = function(name) {
 		// Evaluate all claims in statement (with condition) and checks answer against statement value
 		for (k in this.statement)
 			var me = this.statement[k]
+			var bool;
 			if (typeof me.condition == "undefined" && me.claim[0].result != me.value) {
 					error = true;
 			}
-			else if ((me.condition == "or") && ((me.claim[0].result || me.claim[1].result) != me.value)) {
+			else if (me.condition == "or") {
+				bool = me.claim[0].result || me.claim[1].result;
+				if (bool != me.value) {
 					error = true;
 				}
-			else if ((me.condition == "and") && ((me.claim[0].result && me.claim[1].result) != me.value)) {
+			}
+			else if (me.condition == "and") {
+				bool = me.claim[0].result && me.claim[1].result
+				if (bool != me.value) {
 					error = true;
 				}
-		
+			}
 		if (error) {
 			this.error = true;
 			console.log("Logic error found");
