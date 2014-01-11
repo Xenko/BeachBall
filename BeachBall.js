@@ -396,6 +396,8 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	//Takes in the guess array index of the guess to be changed
 	this.ChangeGuess = function(number) {
+		// Resets all claim results and statement values to defaults
+		// Repopulates unanswered array
 		this.unanswered = [];
 		for (i in this.statement) {
 			var me = this.statement[i];
@@ -410,19 +412,41 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.answered = [];
 		this.error = false;
 		
+		// Checks if it guess needs to roll back 1
+		if (this.guessTimes[number] == 1) {
+			number--;
+			// If number is now less than 0, no solution will be found by the program.
+			if (number < 0) {
+				this.error = true;
+			}
+		}
+		
+		// If the guess number isn't the last in the array, then removes that part of the array
+		// and resets the guess times to 0 for those sections.
+		if (number + 1 < this.guess.length) {
+			this.guess = this.guess.slice(0, number + 1);
+			for (var k = 0; k < this.guessTimes.length; k++) {
+				this.guessTimes[k] = 0;
+			}
+		}
+		
+		// Goes through the remaining Guess Array
 		for (k = 0; k < this.guess.length; k++) {
 			var me = this.guess[k];
-			// If the guess hasn't been changed before
-			if (k == this.guess.length - 1 && this.guessTimes[me] == 0) {
+			// If this is the guess to change, change it to false
+			if (k == number) {
 				this.guessTimes[me] = 1;
 				this.CheckAssignment(me, false);
 				this.AssignGuessClaim();
 				console.log("Change guess " + this.statement[me].name + " to false");
 			}
+			// Otherwise set the earlier guesses back to true
 			else if (this.guessTimes[me] == 0) {
 				this.CheckAssignment(me, true);
 			}
-			else {
+			
+			//Deprecated Code Below
+			/*else {
 				this.guessTimes[me] = 0;
 				this.guess.pop();
 				if (number == 0) {
@@ -434,7 +458,7 @@ BeachBall.PuzzleConstructor = function(name) {
 					number--;
 					this.ChangeGuess(number);
 				}
-			}
+			}*/
 		}
 	}
 	
