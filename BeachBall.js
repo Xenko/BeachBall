@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 3';
+BeachBall.version = '5.0 Beta 4';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -432,6 +432,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		// Checks if it guess needs to roll back 1
 		if (this.guessTimes[this.guess[number]] == 1) {
 			number--;
+			this.guess.pop();
 			previousGuesses.pop();
 			// If number is now less than 0, no solution will be found by the program.
 			if (number < 0) {
