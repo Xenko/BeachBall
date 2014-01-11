@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 1';
+BeachBall.version = '5.0 Beta 2';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -27,6 +27,8 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 
 BeachBall.Puzzle = {};
 
+//Switch GuessClaim from looking through all of this.statement to just looking at this.unanswered indices
+//This should also simplify if statements.
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
 	BeachBall.Puzzle[name] = {}; // Creates empty object to ensure no conflicts with other versions
@@ -771,16 +773,6 @@ BeachBall.RedundaKitty = function() {
 		document.title = BeachBall.RKTimer;
 		BeachBall.RKPlayAudio = 0;
 	}
-}
-
-BeachBall.SolveLogicat = function() {
-	var i = 65;
-	var LCSolution = 'A';
-	do 
-		{LCSolution = String.fromCharCode(i);
-		i++;}
-	while (Molpy.redactedPuzzleTarget != Molpy.redactedSGen.StatementValue(LCSolution));
-	Molpy.ClickRedactedPuzzle(LCSolution);
 }
 
 BeachBall.ToggleMenus = function(wantOpen) {
