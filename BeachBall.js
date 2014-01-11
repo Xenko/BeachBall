@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -820,9 +820,9 @@ BeachBall.CreateMenu = function() {
 	$('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.ToggleMenus(\'ninj\')"> <h4>Open Ninja Tab</h4> </a></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp(\'ninj\')"> <h4>Extend RK</h4> </a></div>');
 	
 	//Replace with Loop!
 	for (var i = 0; i < BeachBall.AllOptions.length; i++) {
@@ -840,7 +840,7 @@ BeachBall.CreateMenu = function() {
 	}
 
 	BeachBall.Temp = function() {
-		Molpy.redactedCountup = 0;
+		Molpy.redactedCountup = 600;
 	}
 }
 
@@ -889,15 +889,15 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
-		if (key == 'desc')		{return ['Disabled', 'Disabled'];}
 		//if (key == 'desc')		{return ['Off', 'On'];}
+		if (key == 'desc')		{return ['Disabled', '<a onclick="BeachBall.SolveLogic("caged")">Click to Solve</a>'];}
 	}
 	else if (option == 'LCSolver') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
-		if (key == 'desc')		{return ['Off', 'Auto-Hide'];}
 		//if (key == 'desc')		{return ['Off', 'On'];}
+		if (key == 'desc')		{return ['Off', 'Auto-Hide'];}
 	}
 	else if (option == 'MHAutoClick') {
 		if (key == 'status') 	{return 0;}
