@@ -164,7 +164,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	this.EvaluateStatementReference = function() {
+	/*this.EvaluateStatementReference = function() {
 		// Find statements which are only self-referential
 		for (i in this.statement) {
 			var selfRef = 0;
@@ -214,7 +214,7 @@ BeachBall.PuzzleConstructor = function(name) {
 				this.answered.push(i);
 			}
 		}
-	}
+	}*/
 	
 	this.CheckAssignment = function(index, bool) {
 		index = parseInt(index);
@@ -255,7 +255,7 @@ BeachBall.PuzzleConstructor = function(name) {
 								change = true;
 							}
 						}
-						else {
+						else if (me.claim[k].resut == "unknown") {
 							//Set claim evaluation result
 							if (me.claim[k].value == this.statement[index].value) {
 								me.claim[k].result = true;
@@ -463,21 +463,6 @@ BeachBall.PuzzleConstructor = function(name) {
 				this.CheckAssignment(me, bool);
 				this.AssignGuessClaim(parseInt(k));
 			}
-			
-			//Deprecated Code Below
-			/*else {
-				this.guessTimes[me] = 0;
-				this.guess.pop();
-				if (number == 0) {
-					console.log("No solution found");
-					this.error = true;
-					break;
-				}
-				else {
-					number--;
-					this.ChangeGuess(number);
-				}
-			}*/
 		}
 	}
 	
@@ -527,13 +512,6 @@ BeachBall.SolveLogic = function(name) {
 		var me = BeachBall.Puzzle[name];
 		me.PopulateStatements();
 		me.EvaluateStatementDependence();
-		//me.EvaluateStatementReference();
-		/*var change = false;
-		var i = 0;
-		do {
-			change = me.EvaluateClaims();
-			i++;
-		} while (i < 10 && change);*/
 		
 		//If none answered, guess a value
 		var change = false;
@@ -569,7 +547,7 @@ BeachBall.SolveLogic = function(name) {
 			} while (i < 50 && change);
 		}
 		me.CheckAnswers();
-		me.PrintAnswers();
+		//me.PrintAnswers();
 		me.LoadAnswers();
 		
 	}
