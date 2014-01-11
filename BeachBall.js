@@ -475,6 +475,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		var me = this.statement[this.guess[number]];
 		if (typeof me.condition == "undefined") {
 			var i = this.FindStatement(me.claim[0].name);
+			var bool = me.claim[0].value && me.value;
 			this.CheckAssignment(i, me.claim[0].value);
 		}
 	}
