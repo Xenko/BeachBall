@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 1';
+BeachBall.version = '5.0 Beta 2';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -403,6 +403,13 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	//Takes in the guess array index of the guess to be changed
 	this.ChangeGuess = function() {
+		var previousGuesses = [];
+		for (i in this.guess) {
+			var num = parseInt(i);
+			var bool = this.statement[this.guess[i]].value;
+			PreviousGuesses[i] = bool;
+		}
+		
 		// Resets all claim results and statement values to defaults
 		// Repopulates unanswered array
 		this.unanswered = [];
@@ -450,7 +457,8 @@ BeachBall.PuzzleConstructor = function(name) {
 			}
 			// Otherwise set the earlier guesses back to true
 			else {
-				this.CheckAssignment(me, true);
+				var bool = PreviousGuesses[parseInt(k)];
+				this.CheckAssignment(me, bool);
 				this.AssignGuessClaim(parseInt(k));
 			}
 			
