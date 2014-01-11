@@ -264,7 +264,7 @@ BeachBall.PuzzleConstructor = function(name) {
 							
 							// Figure out which claim is k
 							var m = 0;
-							if (k = 0) {
+							if (k == 0) {
 								m = 1;
 							}
 							
