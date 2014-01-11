@@ -402,7 +402,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	}
 	
 	//Takes in the guess array index of the guess to be changed
-	this.ChangeGuess = function(number) {
+	this.ChangeGuess = function() {
 		// Resets all claim results and statement values to defaults
 		// Repopulates unanswered array
 		this.unanswered = [];
@@ -418,6 +418,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 		this.answered = [];
 		this.error = false;
+		number = this.guess.length - 1;
 		
 		// Checks if it guess needs to roll back 1
 		if (this.guessTimes[number] == 1) {
@@ -503,10 +504,9 @@ BeachBall.SolveLogic = function(name) {
 		} while (i < 10 && change);*/
 		
 		//If none answered, guess a value
-		var GuessCounter = 0;
 		var change = false;
 		if (me.answered.length == 0) {
-			me.GuessClaim(GuessCounter);
+			me.GuessClaim(0);
 			i = 0;
 			do {
 				change = me.EvaluateClaims();
@@ -514,21 +514,17 @@ BeachBall.SolveLogic = function(name) {
 				if (!change) {
 					for (i in me.statement) {
 						if (me.statement[i].value == "unknown") {
-							GuessCounter = GuessCounter + 1;
-							me.GuessClaim(GuessCounter);
+							me.GuessClaim(me.guess.length + 1);
 							change = true;
 							break;
 						}
 						else {
 							me.CheckAnswers();
 							if (me.error == true) {
-								if (GuessCounter < -1) {
+								me.ChangeGuess();
+								if (me.error) {
 									change = false;
-									break;
 								}
-								me.ChangeGuess(GuessCounter);
-								GuessCounter--;
-								change = true;
 								break;
 							}
 						}
