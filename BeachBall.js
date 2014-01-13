@@ -34,9 +34,6 @@ BeachBall.Puzzle = {};
 //TO DO
 //Switch GuessClaim from looking through all of this.statement to just looking at this.unanswered indices
 //This should also simplify if statements.
-//Molpy.Got("LogiPuzzle") for autoclicker check
-
-//Remove Deprecated Code
 
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
@@ -46,7 +43,6 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
 	this.statement = [];
 	this.guess = [];
-	//this.guessTimes = []; Deprecated
 	this.error = false;
 	this.answers = [];
 	this.known = [];
@@ -54,7 +50,6 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.unanswered = [];
 	for (var i = 0; i < this.size; i++) {
 		this.unanswered.push(i);
-		//this.guessTimes.push(0); Deprecated
 	}
 	
 	//Parses a single claim to extract name and value
@@ -263,11 +258,9 @@ BeachBall.PuzzleConstructor = function(name) {
 							// If one claim is unknown and the other is self-referential, then evaluate if possible
 							if (typeof me.claim[k].result == "boolean" && me.claim[m].name == me.name) {
 								if (me.condition == "or" && me.claim[k].result == true) {
-										//me.claim[m].result = true; Deprecated
 										this.CheckAssignment(index2, true);
 									}
 								else if (me.condition == "and" && me.claim[k].result == false) {
-										//me.claim[m].result = false; Deprecated
 										this.CheckAssignment(index2, false);
 									}
 								if (!this.error) {
@@ -308,20 +301,23 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	this.GuessClaim = function(number) {
 		var found = false;
-		for (i in this.statement) {
-			var me = this.statement[i];
-			if (me.dependent && typeof me.condition == "undefined" && me.value == "unknown") {
-				this.guess[number] = parseInt(i);
+		var index;
+		for (i in this.unanswered) {
+			index = parseInt(this.unanswered[i]);
+			var me = this.statement[index];
+			if (me.dependent && typeof me.condition == "undefined") {
+				this.guess[number] = index;
 				found = true;
 				break;
 			}
 		}
 		
 		if (!found) {
-			for (i in this.statement) {
-				var me = this.statement[i];
-				if (me.dependent && me.condition == "and" && me.value == "unknown") {
-					this.guess[number] = parseInt(i);
+			for (i in this.unanswered) {
+				index = parseInt(this.unanswered[i]);
+				var me = this.statement[index];
+				if (me.dependent && me.condition == "and") {
+					this.guess[number] = index;
 					found = true;
 					break;
 				}
@@ -329,10 +325,11 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 		
 		if (!found) {
-			for (i in this.statement) {
-				var me = this.statement[i];
+			for (i in this.unanswered) {
+				index = parseInt(this.unanswered[i]);
+				var me = this.statement[index];
 				if (me.dependent && me.value == "unknown") {
-					this.guess[number] = parseInt(i);
+					this.guess[number] = index;
 					found = true;
 					break;
 				}
@@ -433,24 +430,11 @@ BeachBall.PuzzleConstructor = function(name) {
 			}
 		} 
 		
-		// If the guess number isn't the last in the array, then removes that part of the array
-		// and resets the guess times to 0 for those guesses.
-		if (number + 1 < this.guess.length) {
-			// I think this code block is deprecated by the previous loop.
-			Molpy.Notify("Not Deprecated Check 123", 1);
-			Console.Log("Not Deprecated Check 123");
-			/*for (var k = number + 1; k < this.guess.length; k++) {
-				this.guessTimes[this.guess[k]] = 0;
-			}
-			this.guess = this.guess.slice(0, number + 1);*/
-		}
-		
 		// Goes through the remaining Guess Array
 		for (k = 0; k < this.guess.length; k++) {
 			var me = this.guess[k];
 			// If this is the guess to change, change it to false
 			if (k == number) {
-				//this.guessTimes[me] = 1; Deprecated??
 				bool = false;
 				console.log("Change guess " + this.statement[me].name + " to " + bool);
 			}
@@ -607,8 +591,11 @@ BeachBall.CagedAutoClick = function() {
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, and it hasn't been solved, Solve the Logicat
 	if (Molpy.PuzzleGens["caged"].active && BeachBall.Settings['LCSolver'].status == 1 && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
 		BeachBall.SolveLogic("caged");
-		BeachBall.cagedTimeout = true;
-		BeachBall.cagedTimer = setTimeout(function(){BeachBall.cagedTimeout = false;}, BeachBall.cagedTimeoutLength);
+		// If there are more puzzles remaining, set the timeout to 5 seconds (prevents Notify spam/lag).
+		if (Molpy.Got("LogiPuzzle") == 1) {
+			BeachBall.cagedTimeout = true;
+			BeachBall.cagedTimer = setTimeout(function(){BeachBall.cagedTimeout = false;}, BeachBall.cagedTimeoutLength);
+		}
 	}
 }
 
