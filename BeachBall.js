@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 3';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -609,7 +609,7 @@ BeachBall.CagedAutoClick = function() {
 		if (!BeachBall.cagedTimeout) {
 			BeachBall.SolveLogic("caged");
 			BeachBall.cagedTimeout = true;
-			BeachBall.cagedTimer = setTimeout(BeachBall.cagedTimeout = false, BeachBall.cagedTimeoutLength);
+			BeachBall.cagedTimer = setTimeout(function(){BeachBall.cagedTimeout = false;}, BeachBall.cagedTimeoutLength);
 		}
 	}
 }
