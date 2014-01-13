@@ -869,8 +869,8 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
-		//if (key == 'desc')		{return ['Off', 'On'];}
-		if (key == 'desc')		{return ['Disabled', '<a onclick="BeachBall.SolveLogic(\'caged\')">Click to Solve</a>'];}
+		if (key == 'desc')		{return ['Off', 'On'];}
+		//if (key == 'desc')		{return ['Disabled', '<a onclick="BeachBall.SolveLogic(\'caged\')">Click to Solve</a>'];}
 	}
 	else if (option == 'LCSolver') {
 		if (key == 'status') 	{return 0;}
@@ -990,7 +990,7 @@ function BeachBallMainProgram() {
 	//Molpy.Notify('Tick', 0);
 	BeachBall.Time_to_ONG = Molpy.NPlength - Molpy.ONGelapsed/1000;
 	BeachBall.RedundaKitty();
-	//BeachBall.CagedAutoClick();
+	BeachBall.CagedAutoClick();
 	BeachBall.Ninja();
 	BeachBall.MontyHaul();
 	BeachBallLoop();
