@@ -592,7 +592,7 @@ BeachBall.CagedAutoClick = function() {
 	if (Molpy.PuzzleGens["caged"].active && BeachBall.Settings['LCSolver'].status == 1 && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
 		BeachBall.SolveLogic("caged");
 		// If there are more puzzles remaining, set the timeout to 5 seconds (prevents Notify spam/lag).
-		if (Molpy.Got("LogiPuzzle") == 1) {
+		if (Molpy.Got("LogiPuzzle") > 1) {
 			BeachBall.cagedTimeout = true;
 			BeachBall.cagedTimer = setTimeout(function(){BeachBall.cagedTimeout = false;}, BeachBall.cagedTimeoutLength);
 		}
