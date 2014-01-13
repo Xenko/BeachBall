@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 10';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -494,6 +494,7 @@ BeachBall.PuzzleConstructor = function(name) {
 				$('#selectGuess' + i).prop('selectedIndex', choice);
 				Molpy.PuzzleGens["caged"].guess[i] = text;
 			}
+			Molpy.PuzzleGens["caged"].Submit();
 		}
 		else {
 			Molpy.Notify('Program Error, No Solution Found', 0);
@@ -551,18 +552,7 @@ BeachBall.SolveLogic = function(name) {
 		me.CheckAnswers();
 		//me.PrintAnswers();
 		me.LoadAnswers();
-		
 	}
-}
-
-BeachBall.CagedLogicat = function() {
-	var i = 65;
-	var LCSolution = 'A';
-	do 
-		{LCSolution = String.fromCharCode(i);
-		i++;}
-	while (Molpy.cagedPuzzleTarget != Molpy.cagedSGen.StatementValue(LCSolution));
-	Molpy.ClickCagedPuzzle(LCSolution);
 }
 
 BeachBall.ClickBeach = function(number) {
@@ -574,18 +564,20 @@ BeachBall.ClickBeach = function(number) {
 BeachBall.CagedAutoClick = function() {
 	//Purchases Caged Logicat
 	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased
-	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Boosts['LogiQuestion'].Level > 0 && typeof Molpy.cagedPuzzleTarget != "boolean") {
+	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Got("LogiPuzzle") > 1 && !Molpy.PuzzleGens["caged"].active) {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
-		cost = 100 + Molpy.LogiMult(25);
+		var tens = Math.floor((Molpy.Boosts["LogiPuzzle"].Level - 1) / 10) * 10;
+		var costSingle = 100 + Molpy.LogiMult(25);
+		var costMulti = costSingle * tens;
 		if (Molpy.Has('GlassBlocks', cost)) {
 			Molpy.MakeCagedPuzzle(cost);
 		}
 	}
 
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
-	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, Solve the Logicat
-	if (typeof Molpy.cagedPuzzleTarget == "boolean" && BeachBall.Settings['LCSolver'].status == 1) {
-		BeachBall.CagedLogicat();
+	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, and it hasn't been solved, Solve the Logicat
+	if (Molpy.PuzzleGens["caged"].active && BeachBall.Settings['LCSolver'].status == 1 && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
+		BeachBall.SolveLogic("caged");
 	}
 }
 
