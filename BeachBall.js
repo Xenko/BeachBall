@@ -256,7 +256,7 @@ BeachBall.PuzzleConstructor = function(name) {
 							
 							// If one claim is unknown and the other is self-referential, then evaluate if possible
 							if (typeof me.claim[k].result == "boolean" && me.claim[m].name == me.name) {
-								if (me.condition == "or" && me.claim[k].result == true {
+								if (me.condition == "or" && me.claim[k].result == true) {
 										me.claim[m].value = true;
 										this.CheckAssignment(index2, true);
 									}
