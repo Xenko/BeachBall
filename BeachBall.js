@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 Beta 3';
 BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -498,7 +498,9 @@ BeachBall.PuzzleConstructor = function(name) {
 				$('#selectGuess' + i).prop('selectedIndex', choice);
 				Molpy.PuzzleGens["caged"].guess[i] = text;
 			}
-			Molpy.PuzzleGens["caged"].Submit();
+			if (BeachBall.Settings['CagedAutoClick'].status == 1) {
+				Molpy.PuzzleGens["caged"].Submit();
+			}
 		}
 		else {
 			Molpy.Notify('Program Error, No Solution Found', 0);
