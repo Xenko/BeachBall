@@ -423,7 +423,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.EvaluateKnownStatements();
 		
 		// Checks if it guess needs to roll back 1
-		if (previousGuesses[number] == false) {
+		while  (previousGuesses[number] == false) {
 			number--;
 			this.guess.pop();
 			previousGuesses.pop();
@@ -431,7 +431,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			if (number < 0) {
 				this.error = true;
 			}
-		}
+		} 
 		
 		// If the guess number isn't the last in the array, then removes that part of the array
 		// and resets the guess times to 0 for those guesses.
