@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 1';
+BeachBall.version = '5.0 Beta 2';
 BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -337,8 +337,10 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 		
 		//Set guess value
-		this.CheckAssignment(this.guess[number], true);
-		this.AssignClaim(this.guess[number]);
+		if (found) {
+			this.CheckAssignment(this.guess[number], true);
+			this.AssignClaim(this.guess[number]);
+		}
 	}
 	
 	this.CheckAnswers = function() {
@@ -447,7 +449,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	// Assigns statement values for claim of guessed and known statements
+	// Assigns statement values for claims of guessed statements
 	this.AssignClaim = function(index) {
 		var me = this.statement[index];
 		var i;
@@ -466,19 +468,6 @@ BeachBall.PuzzleConstructor = function(name) {
 			//Assign statement
 			this.CheckAssignment(i, bool);
 		}
-		/*if (me.condition == "and" && me.value) {
-			// Finds non-self referencing claim (k)
-			k = 1;
-			if (me.claim[1].name = me.name) {
-				k = 0;
-			}
-			//Find statement named in claim
-			i = this.FindStatement(me.claim[k].name);
-			// Determine value of statement
-			bool = me.claim[k].value;
-			// Assign Statement
-			this.CheckAssignment(i, bool);
-		}*/
 	}
 	
 	this.PrintAnswers = function() {
@@ -530,7 +519,6 @@ BeachBall.SolveLogic = function(name) {
 		//Guess a value for an unanswered dependent statement.
 		me.GuessClaim(0);
 		
-		var change = false;
 		var i = 0;
 		do {
 			change = me.EvaluateClaims();
@@ -561,7 +549,6 @@ BeachBall.SolveLogic = function(name) {
 		} while (i < 50 && change);
 
 		me.CheckAnswers();
-		//me.PrintAnswers();
 		me.LoadAnswers();
 	}
 }
