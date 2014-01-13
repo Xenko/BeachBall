@@ -28,8 +28,7 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 //Caged Logicat Variables
 BeachBall.cagedTimeout = false;
 BeachBall.cagedTimeoutLength = 5000;
-
-//BeachBall.Puzzle = {};
+BeachBall.Puzzle = {};
 
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
