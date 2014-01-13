@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 8';
+BeachBall.version = '5.0 Beta 9';
 BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -32,6 +32,8 @@ BeachBall.Puzzle = {};
 //This should also simplify if statements.
 //Molpy.Got("LogiPuzzle") for autoclicker check
 
+//Remove Deprecated Code
+
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
 	BeachBall.Puzzle[name] = {}; // Creates empty object to ensure no conflicts with other versions
@@ -40,7 +42,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.puzzleString = Molpy.PuzzleGens[name].StringifyStatements();
 	this.statement = [];
 	this.guess = [];
-	this.guessTimes = [];
+	//this.guessTimes = []; Deprecated
 	this.error = false;
 	this.answers = [];
 	this.known = [];
@@ -48,7 +50,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.unanswered = [];
 	for (var i = 0; i < this.size; i++) {
 		this.unanswered.push(i);
-		this.guessTimes.push(0);
+		//this.guessTimes.push(0); Deprecated
 	}
 	
 	//Parses a single claim to extract name and value
@@ -417,7 +419,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.EvaluateKnownStatements();
 		
 		// Checks if it guess needs to roll back 1
-		if (this.guessTimes[this.guess[number]] == 1) {
+		if (previousGuesses[number] == false) {
 			number--;
 			this.guess.pop();
 			previousGuesses.pop();
@@ -430,10 +432,13 @@ BeachBall.PuzzleConstructor = function(name) {
 		// If the guess number isn't the last in the array, then removes that part of the array
 		// and resets the guess times to 0 for those guesses.
 		if (number + 1 < this.guess.length) {
-			for (var k = number + 1; k < this.guess.length; k++) {
+			// I think this code block is deprecated by the previous loop.
+			Molpy.Notify("Not Deprecated Check 123", 1);
+			Console.Log("Not Deprecated Check 123");
+			/*for (var k = number + 1; k < this.guess.length; k++) {
 				this.guessTimes[this.guess[k]] = 0;
 			}
-			this.guess = this.guess.slice(0, number + 1);
+			this.guess = this.guess.slice(0, number + 1);*/
 		}
 		
 		// Goes through the remaining Guess Array
@@ -441,7 +446,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			var me = this.guess[k];
 			// If this is the guess to change, change it to false
 			if (k == number) {
-				this.guessTimes[me] = 1;
+				//this.guessTimes[me] = 1; Deprecated??
 				bool = false;
 				console.log("Change guess " + this.statement[me].name + " to " + bool);
 			}
