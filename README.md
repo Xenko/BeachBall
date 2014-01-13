@@ -2,6 +2,14 @@
 
 ## Changelog
 
+###Version 5.0
+
+####New Features
+* Caged Logicat Autosolver implemented as Full Auto and re-enabled.
+
+####Temporary Bug Fixes/Workarounds
+* Logicats in a redundakitty chain are still set to auto-hide.
+
 ###Version 4.9.9
 
 ####Temporary Bug Fixes/Workarounds
