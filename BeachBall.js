@@ -463,17 +463,38 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	// If statement A is simple (1 claim) and its value is known, assigns a value to A's claim.
+	// Assigns statement values for claim of guessed and known statements
 	this.AssignClaim = function(index) {
 		var me = this.statement[index];
+		var i;
+		var k = 0;
+		var bool;
+		
+		// If simple claim
 		if (typeof me.condition == "undefined") {
-			var i = this.FindStatement(me.claim[0].name);
-			var bool = me.claim[0].value
+			// Find statement named in claim
+			i = this.FindStatement(me.claim[k].name);
+			// Determine value of statement
+			bool = me.claim[k].value
 			if (!me.value) {
 				bool = !bool;
 			}
+			//Assign statement
 			this.CheckAssignment(i, bool);
 		}
+		/*if (me.condition == "and" && me.value) {
+			// Finds non-self referencing claim (k)
+			k = 1;
+			if (me.claim[1].name = me.name) {
+				k = 0;
+			}
+			//Find statement named in claim
+			i = this.FindStatement(me.claim[k].name);
+			// Determine value of statement
+			bool = me.claim[k].value;
+			// Assign Statement
+			this.CheckAssignment(i, bool);
+		}*/
 	}
 	
 	this.PrintAnswers = function() {
