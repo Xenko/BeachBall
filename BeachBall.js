@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 1';
+BeachBall.version = '5.0 Beta 2';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -47,6 +47,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	this.guessTimes = [];
 	this.error = false;
 	this.answers = [];
+	this.known = [];
 	this.answered = [];
 	this.unanswered = [];
 	for (var i = 0; i < this.size; i++) {
@@ -132,7 +133,6 @@ BeachBall.PuzzleConstructor = function(name) {
 			
 			// Sets statement value to default of Unknown
 			newStatement.value = "unknown";
-			newStatement.self = "unknown";
 			
 			// Updates j to the start of the next statement
 			j = this.puzzleString.indexOf("<br><br>", k) + 8;
@@ -171,57 +171,34 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	/*this.EvaluateStatementReference = function() {
-		// Find statements which are only self-referential
+	this.EvaluateKnownStatements = function() {
 		for (i in this.statement) {
-			var selfRef = 0;
-			for (j in this.statement[i].claim) {
-				if (this.statement[i].name == this.statement[i].claim[j].name) {
-					selfRef++;
-				}
-			}
-			if (selfRef == this.statement[i].claim.length) {
-				this.statement[i].self = true;
-			}
-			else {
-				this.statement[i].self = false;
-			}
-		}
-		
-		// Evaluates self-referential statements as their values can be known explicitly
-		for (i in this.statement) {
-			if (this.statement[i].self == true) {
+			var me = this.statement[i];
 			
-				// If a single claim, the statement must be the value of the claim
-				if (typeof this.statement[i].condition == "undefined") {
-					this.statement[i].value = this.statement[i].claim[0].value;
-				}
-				
-				// If two claims AND
-				else if (this.statement[i].condition == "and") {
-					if (this.statement[i].claim[0].value == this.statement[i].claim[1].value) {
-						this.statement[i].value = this.statement[i].claim[0].value;
-					}
-					else {
-						this.statement[i].value = false;
+			// A: A is false OR claim 2; A must be true.
+			if (me.condition == "or") {
+				for (j in me.claim) {
+					if (me.claim[j].name == me.name && me.claim[j].value == false) {
+						this.CheckAssignment(i, true);
+						this.known.push(parseInt(i));
+						break;
 					}
 				}
-				
-				//If two claims OR
-				else {
-					if (this.statement[i].claim[0].value == this.statement[i].claim[1].value) {
-						this.statement[i].value = this.statement[i].claim[0].value;
-					}
-					else {
-						this.statement[i].value = true;
-					}
-				}
-				var remove = this.unanswered.indexOf(i);
-				this.unanswered.splice(remove,1);
-				this.answered.push(i);
+			}
+			
+			// A: A is true AND A is false; A must be false.
+			else if (me.condition == "and" && me.claim[0].name == me.name && me.claim[1] == me.name && me.claim[0].value != me.claim[1].value {
+				this.CheckAssignment(i, false);
+				this.known.push(parseInt(i));
+			}
+			
+			// A: A is true OR A is false; A must be true.
+			else if (me.condition == "and" && me.claim[0].name == me.name && me.claim[1] == me.name && me.claim[0].value != me.claim[1].value {
+				this.CheckAssignment(i, true);
+				this.known.push(parseInt(i));
 			}
 		}
-	}*/
+	}
 	
 	this.CheckAssignment = function(index, bool) {
 		index = parseInt(index);
@@ -279,7 +256,7 @@ BeachBall.PuzzleConstructor = function(name) {
 							
 							// If one claim is unknown and the other is self-referential, then evaluate if possible
 							if (typeof me.claim[k].result == "boolean" && me.claim[m].name == me.name) {
-								if (me.condition == "or" && me.claim[k].result == true) {
+								if (me.condition == "or" && me.claim[k].result == true {
 										me.claim[m].value = true;
 										this.CheckAssignment(index2, true);
 									}
@@ -358,7 +335,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		
 		//Set guess value
 		this.CheckAssignment(this.guess[number], true);
-		this.AssignGuessClaim(number);
+		this.AssignClaim(this.guess[number]);
 	}
 	
 	this.CheckAnswers = function() {
@@ -411,10 +388,11 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	//Takes in the guess array index of the guess to be changed
 	this.ChangeGuess = function() {
+		var bool;
 		var previousGuesses = [];
 		for (i in this.guess) {
 			var num = parseInt(i);
-			var bool = this.statement[this.guess[i]].value;
+			bool = this.statement[this.guess[i]].value;
 			previousGuesses[i] = bool;
 		}
 		
@@ -434,6 +412,9 @@ BeachBall.PuzzleConstructor = function(name) {
 		this.answered = [];
 		this.error = false;
 		number = this.guess.length - 1;
+		
+		//Re-evaluates known statements
+		this.EvaluateKnownStatements();
 		
 		// Checks if it guess needs to roll back 1
 		if (this.guessTimes[this.guess[number]] == 1) {
@@ -461,21 +442,21 @@ BeachBall.PuzzleConstructor = function(name) {
 			// If this is the guess to change, change it to false
 			if (k == number) {
 				this.guessTimes[me] = 1;
-				this.CheckAssignment(me, false);
-				this.AssignGuessClaim(number);
-				console.log("Change guess " + this.statement[me].name + " to false");
+				bool = false;
+				console.log("Change guess " + this.statement[me].name + " to " + bool);
 			}
 			// Otherwise set the earlier guesses back to true
 			else {
 				var bool = previousGuesses[parseInt(k)];
-				this.CheckAssignment(me, bool);
-				this.AssignGuessClaim(parseInt(k));
 			}
+			this.CheckAssignment(me, bool);
+			this.AssignClaim(this.guess[parseInt(k)]);
 		}
 	}
 	
-	this.AssignGuessClaim = function(number) {
-		var me = this.statement[this.guess[number]];
+	// If statement A is simple (1 claim) and its value is known, assigns a value to A's claim.
+	this.AssignClaim = function(index) {
+		var me = this.statement[index];
 		if (typeof me.condition == "undefined") {
 			var i = this.FindStatement(me.claim[0].name);
 			var bool = me.claim[0].value
@@ -521,15 +502,29 @@ BeachBall.SolveLogic = function(name) {
 		me.PopulateStatements();
 		me.EvaluateStatementDependence();
 		
-		//If none answered, guess a value
-		var change = false;
+		//Searches for Statements that MUST have a given value (no guessing needed)
+		me.EvaluateKnownStatements();
+		
+		//If no Known Statements present, guess a value for a dependent statement.
 		if (me.answered.length == 0) {
 			me.GuessClaim(0);
-			i = 0;
-			do {
-				change = me.EvaluateClaims();
-				i++;
-				if (!change) {
+		}
+		
+		var change = false;
+		var i = 0;
+		do {
+			change = me.EvaluateClaims();
+			i++;
+			if (!change) {
+				if (me.error) {
+					me.ChangeGuess();
+					change = true;
+					if (me.error) {
+						change = false;
+					}
+				}
+				else if (me.answered.length == me.size) {
+					me.CheckAnswers();
 					if (me.error) {
 						me.ChangeGuess();
 						change = true;
@@ -537,23 +532,14 @@ BeachBall.SolveLogic = function(name) {
 							change = false;
 						}
 					}
-					else if (me.answered.length == me.size) {
-						me.CheckAnswers();
-						if (me.error) {
-							me.ChangeGuess();
-							change = true;
-							if (me.error) {
-								change = false;
-							}
-						}
-					}
-					else if (me.unanswered.length > 0) {
-						me.GuessClaim(me.guess.length);
-						change = true;
-					}
 				}
-			} while (i < 50 && change);
-		}
+				else if (me.unanswered.length > 0) {
+					me.GuessClaim(me.guess.length);
+					change = true;
+				}
+			}
+		} while (i < 50 && change);
+
 		me.CheckAnswers();
 		//me.PrintAnswers();
 		me.LoadAnswers();
