@@ -30,12 +30,8 @@ BeachBall.Puzzle = {};
 //TO DO
 //Switch GuessClaim from looking through all of this.statement to just looking at this.unanswered indices
 //This should also simplify if statements.
-//Fix dependence for statements that are only self-dependent
 //Molpy.Got("LogiPuzzle") for autoclicker check
 
-//Self-Evident Statements:
-// A: A is false OR claim 2 - A must be true
-// A: A is false AND A is true - A must be false
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
 	BeachBall.Puzzle[name] = {}; // Creates empty object to ensure no conflicts with other versions
@@ -146,12 +142,16 @@ BeachBall.PuzzleConstructor = function(name) {
 			// Sets dependent default to false
 			var dependent = false;
 			
-			//Searches through claims until all claims examined
+			// Goes through all claims in all statements except itself
 			for (j in this.statement) {
-				for (k in this.statement[j].claim) {
-					if (i != j && this.statement[i].name == this.statement[j].claim[k].name) {
-						dependent = true;
-						break;
+				if (this.statement[i].name != this.statement[j].name) {
+					for (k in this.statement[j].claim) {
+					
+						// If the claim name matches the examined statement's name, then it is a dependent statement.
+						if (this.statement[i].name == this.statement[j].claim[k].name) {
+							dependent = true;
+							break;
+						}
 					}
 				}
 			}
