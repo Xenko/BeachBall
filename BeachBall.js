@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 4';
+BeachBall.version = '5.0 Beta 1';
 BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -32,6 +32,10 @@ BeachBall.Puzzle = {};
 //This should also simplify if statements.
 //Fix dependence for statements that are only self-dependent
 //Molpy.Got("LogiPuzzle") for autoclicker check
+
+//Self-Evident Statements:
+// A: A is false OR claim 2 - A must be true
+// A: A is false AND A is true - A must be false
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
 	BeachBall.Puzzle[name] = {}; // Creates empty object to ensure no conflicts with other versions
@@ -378,7 +382,6 @@ BeachBall.PuzzleConstructor = function(name) {
 				}
 			}
 		}
-		//console.log("Finished cycle");
 		
 		// Evaluate all claims in statement (with condition) and checks answer against statement value
 		for (k in this.statement) {
@@ -394,7 +397,7 @@ BeachBall.PuzzleConstructor = function(name) {
 				}
 			}
 			else if (me.condition == "and") {
-				bool = me.claim[0].result && me.claim[1].result
+				bool = me.claim[0].result && me.claim[1].result;
 				if (bool != me.value) {
 					error = true;
 				}
@@ -402,7 +405,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 		if (error) {
 			this.error = true;
-			console.log("Logic error found");
+			console.log("Check Answer: Logic error found");
 		}
 	}
 	
