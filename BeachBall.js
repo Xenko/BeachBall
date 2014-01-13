@@ -590,8 +590,8 @@ BeachBall.ClickBeach = function(number) {
 
 BeachBall.CagedAutoClick = function() {
 	//Purchases Caged Logicat
-	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased
-	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Got("LogiPuzzle") > 1 && !Molpy.PuzzleGens["caged"].active) {
+	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased, and timeout not active
+	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Got("LogiPuzzle") > 1 && !Molpy.PuzzleGens["caged"].active && !BeachBall.cagedTimeout) {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
 		var tens = Math.floor((Molpy.Boosts["LogiPuzzle"].Level - 1) / 10) * 10;
 		var costSingle = 100 + Molpy.LogiMult(25);
@@ -606,11 +606,9 @@ BeachBall.CagedAutoClick = function() {
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, and it hasn't been solved, Solve the Logicat
 	if (Molpy.PuzzleGens["caged"].active && BeachBall.Settings['LCSolver'].status == 1 && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
-		if (!BeachBall.cagedTimeout) {
-			BeachBall.SolveLogic("caged");
-			BeachBall.cagedTimeout = true;
-			BeachBall.cagedTimer = setTimeout(function(){BeachBall.cagedTimeout = false;}, BeachBall.cagedTimeoutLength);
-		}
+		BeachBall.SolveLogic("caged");
+		BeachBall.cagedTimeout = true;
+		BeachBall.cagedTimer = setTimeout(function(){BeachBall.cagedTimeout = false;}, BeachBall.cagedTimeoutLength);
 	}
 }
 
