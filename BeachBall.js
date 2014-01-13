@@ -263,18 +263,18 @@ BeachBall.PuzzleConstructor = function(name) {
 							// If one claim is unknown and the other is self-referential, then evaluate if possible
 							if (typeof me.claim[k].result == "boolean" && me.claim[m].name == me.name) {
 								if (me.condition == "or" && me.claim[k].result == true) {
-										me.claim[m].value = true;
+										//me.claim[m].result = true; Deprecated
 										this.CheckAssignment(index2, true);
 									}
 								else if (me.condition == "and" && me.claim[k].result == false) {
-										me.claim[m].value = false;
+										//me.claim[m].result = false; Deprecated
 										this.CheckAssignment(index2, false);
 									}
 								if (!this.error) {
 									change = true;
 								}
 							}
-							// Otherwise evaluate AND statements in both results are known
+							// Otherwise evaluate AND statements if both results are known
 							else if (me.claim[m].result != "unknown" && me.condition == "and") {
 								if (me.claim[0].result && me.claim[1].result) {
 									this.CheckAssignment(index2, true);
