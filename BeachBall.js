@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 7';
+BeachBall.version = '5.0 Beta 8';
 BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -510,10 +510,8 @@ BeachBall.SolveLogic = function(name) {
 		//Searches for Statements that MUST have a given value (no guessing needed)
 		me.EvaluateKnownStatements();
 		
-		//If no Known Statements present, guess a value for a dependent statement.
-		if (me.answered.length == 0) {
-			me.GuessClaim(0);
-		}
+		//Guess a value for an unanswered dependent statement.
+		me.GuessClaim(0);
 		
 		var change = false;
 		var i = 0;
