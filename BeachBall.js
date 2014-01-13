@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 2';
+BeachBall.version = '5.0 RC 1';
 BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -29,11 +29,7 @@ BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 BeachBall.cagedTimeout = false;
 BeachBall.cagedTimeoutLength = 5000;
 
-BeachBall.Puzzle = {};
-
-//TO DO
-//Switch GuessClaim from looking through all of this.statement to just looking at this.unanswered indices
-//This should also simplify if statements.
+//BeachBall.Puzzle = {};
 
 BeachBall.PuzzleConstructor = function(name) {
 	this.name = name;
@@ -797,9 +793,9 @@ BeachBall.CreateMenu = function() {
 	$('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
+	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp(\'ninj\')"> <h4>Extend RK</h4> </a></div>');
+	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp(\'ninj\')"> <h4>Extend RK</h4> </a></div>');
 	
 	//Replace with Loop!
 	for (var i = 0; i < BeachBall.AllOptions.length; i++) {
@@ -873,8 +869,8 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
-		//if (key == 'desc')		{return ['Off', 'On'];}
-		if (key == 'desc')		{return ['Off', 'Auto-Hide'];}
+		if (key == 'desc')		{return ['Off', 'On'];}
+		//if (key == 'desc')		{return ['Off', 'RK - Auto-Hide'];}
 	}
 	else if (option == 'MHAutoClick') {
 		if (key == 'status') 	{return 0;}
@@ -962,7 +958,7 @@ BeachBall.SwitchStatus = function(option) {
 			me.status = 0;
 		}
 		
-	if ((option == 'RKAutoClick' && me.status == 2) ) { // || (option == 'CagedAutoClick' && me.status == 1)) {
+	if ((option == 'RKAutoClick' && me.status == 2) || (option == 'CagedAutoClick' && me.status == 1)) {
 		BeachBall.Settings['LCSolver'].status = 1;
 		if (BeachBall.storage == 1) {
 			localStorage['BB.LCSolver.status'] = 1;
@@ -970,10 +966,10 @@ BeachBall.SwitchStatus = function(option) {
 		BeachBall.DisplayDescription('LCSolver', 1);
 	}
 	
-	/*else if (option == 'LCSolver' && me.status == 0 && BeachBall.Settings['CagedAutoClick'].status == 1) {
+	else if (option == 'LCSolver' && me.status == 0 && BeachBall.Settings['CagedAutoClick'].status == 1) {
 		me.status = 1;
 		Molpy.Notify('Logicat solver must stay on while Logicat AutoClicker enabled', 0);
-	}*/
+	}
 	
 	if (BeachBall.storage == 1) {
 		localStorage['BB.'+ option + '.status'] = me.status;
