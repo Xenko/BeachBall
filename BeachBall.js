@@ -187,13 +187,13 @@ BeachBall.PuzzleConstructor = function(name) {
 			}
 			
 			// A: A is true AND A is false; A must be false.
-			else if (me.condition == "and" && me.claim[0].name == me.name && me.claim[1] == me.name && me.claim[0].value != me.claim[1].value {
+			else if (me.condition == "and" && me.claim[0].name == me.name && me.claim[1] == me.name && me.claim[0].value != me.claim[1].value) {
 				this.CheckAssignment(i, false);
 				this.known.push(parseInt(i));
 			}
 			
 			// A: A is true OR A is false; A must be true.
-			else if (me.condition == "and" && me.claim[0].name == me.name && me.claim[1] == me.name && me.claim[0].value != me.claim[1].value {
+			else if (me.condition == "and" && me.claim[0].name == me.name && me.claim[1] == me.name && me.claim[0].value != me.claim[1].value) {
 				this.CheckAssignment(i, true);
 				this.known.push(parseInt(i));
 			}
