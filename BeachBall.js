@@ -6,8 +6,8 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 4';
-BeachBall.SCBversion = '3.292'; //Last SandCastle Builder version tested
+BeachBall.version = '5.0 Beta 6';
+BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -474,19 +474,24 @@ BeachBall.PuzzleConstructor = function(name) {
 	}
 	
 	this.LoadAnswers = function() {
-		for (i = 0; i < this.size; i++) {
-			var choice = 0;
-			var text = "";
-			if (this.statement[i].value == true) {
-				choice = 1;
-				text = "True";
+		if (!me.error) {
+			for (i = 0; i < this.size; i++) {
+				var choice = 0;
+				var text = "";
+				if (this.statement[i].value == true) {
+					choice = 1;
+					text = "True";
+				}
+				else if (this.statement[i].value == false) {
+					choice = 2;
+					text = "False";
+				}
+				$('#selectGuess' + i).prop('selectedIndex', choice);
+				Molpy.PuzzleGens["caged"].guess[i] = text;
 			}
-			else if (this.statement[i].value == false) {
-				choice = 2;
-				text = "False";
-			}
-			$('#selectGuess' + i).prop('selectedIndex', choice);
-			Molpy.PuzzleGens["caged"].guess[i] = text;
+		}
+		else {
+			Molpy.Notify('Program Error, No Solution Found', 0);
 		}
 	}
 	
@@ -542,9 +547,7 @@ BeachBall.SolveLogic = function(name) {
 
 		me.CheckAnswers();
 		//me.PrintAnswers();
-		if (!me.error) {
-			me.LoadAnswers();
-		}
+		me.LoadAnswers();
 		
 	}
 }
