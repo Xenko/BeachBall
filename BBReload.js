@@ -10,6 +10,7 @@ function BBLoadScript() {
 function BBDoReload() {
 	clearTimeout(BeachBall.Timeout);
 	clearInterval(BeachBall.BeachAutoClickTimer);
+	clearTimeout(BeachBall.cagedTimer);
 	$('#BeachBallSource').remove();
 	$('#BeachBall').remove()
     BBLoadScript();

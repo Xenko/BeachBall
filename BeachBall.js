@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.0 Beta 1';
+BeachBall.version = '5.0 Beta 2';
 BeachBall.SCBversion = '3.299'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -24,6 +24,10 @@ BeachBall.RKLocation = '123';
 BeachBall.RKNew = 1;
 BeachBall.RKNewAudio = 1;
 BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
+
+//Caged Logicat Variables
+BeachBall.cagedTimeout = false;
+BeachBall.cagedTimeoutLength = 5000;
 
 BeachBall.Puzzle = {};
 
@@ -577,7 +581,11 @@ BeachBall.CagedAutoClick = function() {
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, and it hasn't been solved, Solve the Logicat
 	if (Molpy.PuzzleGens["caged"].active && BeachBall.Settings['LCSolver'].status == 1 && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
-		BeachBall.SolveLogic("caged");
+		if (!BeachBall.cagedTimeout) {
+			BeachBall.SolveLogic("caged");
+			BeachBall.cagedTimeout = true;
+			BeachBall.cagedTimer = setTimeout(BeachBall.cagedTimeout = false, BeachBall.cagedTimeoutLength);
+		}
 	}
 }
 
