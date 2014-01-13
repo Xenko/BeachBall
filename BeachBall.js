@@ -573,8 +573,10 @@ BeachBall.CagedAutoClick = function() {
 		var tens = Math.floor((Molpy.Boosts["LogiPuzzle"].Level - 1) / 10) * 10;
 		var costSingle = 100 + Molpy.LogiMult(25);
 		var costMulti = costSingle * tens;
-		if (Molpy.Has('GlassBlocks', cost)) {
-			Molpy.MakeCagedPuzzle(cost);
+		if (Molpy.Has('GlassBlocks', costSingle)) {
+			Molpy.MakeCagedPuzzle(costSingle);
+			
+			// Multi Buy is (cost, tens)
 		}
 	}
 
