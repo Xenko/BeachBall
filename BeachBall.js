@@ -711,7 +711,7 @@ BeachBall.RedundaKitty = function() {
 		if (meRK.status == 2) {
 			//If it is a Logicat, Solve and Submit
 			if (Molpy.PuzzleGens["redacted"].active) {
-				BeachBall.SolveLogicat("redacted");
+				BeachBall.SolveLogic("redacted");
 			}
 			//Otherwise, click the Redundakitty 
 			else {
