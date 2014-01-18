@@ -471,7 +471,7 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 	}
 	
-	this.LoadAnswers = function() {
+	this.LoadAnswers = function(puzzleType) {
 		if (!this.error) {
 			for (i = 0; i < this.size; i++) {
 				var choice = 0;
@@ -485,10 +485,13 @@ BeachBall.PuzzleConstructor = function(name) {
 					text = "False";
 				}
 				$('#selectGuess' + i).prop('selectedIndex', choice);
-				Molpy.PuzzleGens["caged"].guess[i] = text;
+				Molpy.PuzzleGens[puzzleType].guess[i] = text;
 			}
-			if (BeachBall.Settings['CagedAutoClick'].status == 1) {
-				Molpy.PuzzleGens["caged"].Submit();
+			if (BeachBall.Settings['CagedAutoClick'].status == 1 & puzzleType = "caged") {
+				Molpy.PuzzleGens[puzzleType].Submit();
+			}
+			else {
+				Molpy.PuzzleGens[puzzleType].Submit();
 			}
 		}
 		else {
@@ -544,7 +547,7 @@ BeachBall.SolveLogic = function(name) {
 		} while (i < 50 && change);
 
 		me.CheckAnswers();
-		me.LoadAnswers();
+		me.LoadAnswers(name);
 	}
 }
 
