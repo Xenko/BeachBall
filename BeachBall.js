@@ -715,7 +715,8 @@ BeachBall.RedundaKitty = function() {
 				//This if must be inside the first to prevent auto-hiding.
 				if (meLC.status == 1) {
 					//BeachBall.SolveLogicat();
-					Molpy.ClickRedacted(BeachBall.RKLevel);
+					//Molpy.ClickRedacted(BeachBall.RKLevel);
+					BeachBall.FindRK();
 				}
 			}
 			//Otherwise, if the RK AutoClick is on, click the Redundakitty 
