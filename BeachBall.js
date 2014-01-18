@@ -558,7 +558,7 @@ BeachBall.CagedAutoClick = function() {
 	//Purchases Caged Logicat
 	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased, and timeout not active
 	var me = BeachBall.Settings['CagedAutoClick'];
-	var meLC = BeachBall.Settubgs['LCSolver'];
+	var meLC = BeachBall.Settings['LCSolver'];
 	if (me.status > 0 && Molpy.Got("LogiPuzzle") > 1 && !Molpy.PuzzleGens["caged"].active && !BeachBall.cagedTimeout) {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
 		var tens = Math.floor((Molpy.Boosts["LogiPuzzle"].Level - 1) / 10) * 10;
