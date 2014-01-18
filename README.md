@@ -2,6 +2,11 @@
 
 ## Changelog
 
+###Version 5.1.1
+
+####New Features
+* Re-implementing Pure Logicat Solver
+
 ###Version 5.1
 
 ####New Features
