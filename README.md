@@ -2,6 +2,14 @@
 
 ## Changelog
 
+###Version 5.1
+
+####New Features
+* Logicats in a redundakitty chain are being solved.
+* Caged AutoClicker can solve single puzzles (1 per 5 seconds)
+* Caged AutoClicker can solve maximum puzzles (using this setting without having ZooKeeper may cause problems)
+* Caged AutoClicker can trade 100+ logicats for bonemeal (must have Shadow Dragon unlocked)
+
 ###Version 5.0
 
 ####New Features
