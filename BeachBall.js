@@ -352,7 +352,6 @@ BeachBall.PuzzleConstructor = function(name) {
 					else {
 						me.result = false;
 					}
-					//console.log("Processed statement " + this.statement[i].name + " i: " + i + " and j: " + j);
 				}
 				else {
 					console.log("Error with " + this.statement[i].name + " i: " + i + " and j: " + j);
@@ -382,7 +381,6 @@ BeachBall.PuzzleConstructor = function(name) {
 		}
 		if (error) {
 			this.error = true;
-			console.log("Check Answer: Logic error found");
 		}
 	}
 	
@@ -433,7 +431,6 @@ BeachBall.PuzzleConstructor = function(name) {
 			// If this is the guess to change, change it to false
 			if (k == number) {
 				bool = false;
-				console.log("Change guess " + this.statement[me].name + " to " + bool);
 			}
 			// Otherwise set the earlier guesses back to true
 			else {
@@ -560,15 +557,27 @@ BeachBall.ClickBeach = function(number) {
 BeachBall.CagedAutoClick = function() {
 	//Purchases Caged Logicat
 	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased, and timeout not active
-	if (BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.Got("LogiPuzzle") > 1 && !Molpy.PuzzleGens["caged"].active && !BeachBall.cagedTimeout) {
+	var me = BeachBall.Settings['CagedAutoClick'];
+	if (me.status > 0 && Molpy.Got("LogiPuzzle") > 1 && !Molpy.PuzzleGens["caged"].active && !BeachBall.cagedTimeout) {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
 		var tens = Math.floor((Molpy.Boosts["LogiPuzzle"].Level - 1) / 10) * 10;
 		var costSingle = 100 + Molpy.LogiMult(25);
 		var costMulti = costSingle * tens;
-		if (Molpy.Has('GlassBlocks', costSingle)) {
+		// Buy Single Puzzles
+		if (me.status == 1 && Molpy.Has('GlassBlocks', costSingle)) {
 			Molpy.MakeCagedPuzzle(costSingle);
-			
-			// Multi Buy is (cost, tens)
+		// Buy Maximum Puzzles, or Singles if Max is less than 10
+		else if (me.status == 2) {
+			if (Molpy.PokeBar() > 11 && Molpy.Level('LogiPuzzle') >= Molpy.PokeBar() && tens) {
+				Molpy.MakeCagedPuzzle(costMulti, tens);
+			}
+			else {
+				Molpy.MakeCagedPuzzle(costSingle);
+			}
+		}
+		// Trade Logicats for Bonemeal
+		else if (me.status == 3 && Molpy.Got('ShadwDrgn') && Molpy.Level('LogiPuzzle') >= 100) {
+			Molpy.ShadowStrike(1);
 		}
 	}
 
@@ -857,10 +866,9 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 	}
 	else if (option == 'CagedAutoClick') {
 		if (key == 'status') 	{return 0;}
-		if (key == 'maxStatus') {return 1;}
+		if (key == 'maxStatus') {return 3;}
 		if (key == 'setting')	{return 0;}
-		if (key == 'desc')		{return ['Off', 'On'];}
-		//if (key == 'desc')		{return ['Disabled', '<a onclick="BeachBall.SolveLogic(\'caged\')">Click to Solve</a>'];}
+		if (key == 'desc')		{return ['Off', 'Solve Single', 'Solve Max', 'Get Bonemeal'];}
 	}
 	/*else if (option == 'LCSolver') {
 		if (key == 'status') 	{return 0;}
