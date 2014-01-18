@@ -558,6 +558,7 @@ BeachBall.CagedAutoClick = function() {
 	//Purchases Caged Logicat
 	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased, and timeout not active
 	var me = BeachBall.Settings['CagedAutoClick'];
+	var meLC = BeachBall.Settubgs['LCSolver'];
 	if (me.status > 0 && Molpy.Got("LogiPuzzle") > 1 && !Molpy.PuzzleGens["caged"].active && !BeachBall.cagedTimeout) {
 		//Determines Logicat Cost, and if sufficient blocks available, caged logicat is purchased.
 		var tens = Math.floor((Molpy.Boosts["LogiPuzzle"].Level - 1) / 10) * 10;
@@ -584,7 +585,7 @@ BeachBall.CagedAutoClick = function() {
 
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, and it hasn't been solved, Solve the Logicat
-	if (Molpy.PuzzleGens["caged"].active && (me.status == 1 || me.status == 2) && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
+	if (Molpy.PuzzleGens["caged"].active && (me.status == 1 || me.status == 2 || meLC.status == 1) && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
 		BeachBall.SolveLogic("caged");
 		// If there are more puzzles remaining, set the timeout to 5 seconds (prevents Notify spam/lag).
 		if (Molpy.Got("LogiPuzzle") > 1) {
@@ -710,6 +711,7 @@ BeachBall.PlayRKAlert = function() {
 
 BeachBall.RedundaKitty = function() {
 	var meRK = BeachBall.Settings['RKAutoClick'];
+	var meLC = BeachBall.Settings['LCSolver'];
 	BeachBall.RKTimer = Molpy.redactedToggle - Molpy.redactedCountup;
 	//If there is an active RK
 	if (Molpy.redactedVisible > 0) {
@@ -731,6 +733,10 @@ BeachBall.RedundaKitty = function() {
 		//Otherwise if Find RK is selected, find the RK
 		else if (meRK.status == 1) {
 			BeachBall.FindRK();
+		}
+		
+		else if (meLC.status == 1) {
+			BeachBall.SolveLogic("redacted");
 		}
 		
 		//If the RK is visible, then highlight it
@@ -794,7 +800,7 @@ BeachBall.CreateMenu = function() {
 	$('#BeachBall').append('<div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'RKAutoClick\')"> <h4>Redundakitty AutoClick</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'CagedAutoClick\')"> <h4>Caged Logicat AutoClick</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
-	//Deprecated $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'LCSolver\')"> <h4>Logicat Solver</h4> </a> <div id="LCSolverDesc"></div></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'LCSolver\')"> <h4>Logicat Solver</h4> </a> <div id="LCSolverDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'BeachAutoClick\')"> <h4>Beach AutoClick</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox" id="BBMontyHaul"> <a onclick="BeachBall.SwitchStatus(\'MHAutoClick\')"> <h4>Monty Haul AutoClick</h4> </a> <div id="MHAutoClickDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
@@ -871,13 +877,13 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'setting')	{return 0;}
 		if (key == 'desc')		{return ['Off', 'Solve Single', 'Solve Max', 'Get Bonemeal'];}
 	}
-	/*else if (option == 'LCSolver') {
+	else if (option == 'LCSolver') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 1;}
 		if (key == 'setting')	{return 0;}
 		if (key == 'desc')		{return ['Off', 'On'];}
-		//if (key == 'desc')		{return ['Off', 'RK - Auto-Hide'];}
-	}Deprecated */
+	}
+	
 	else if (option == 'MHAutoClick') {
 		if (key == 'status') 	{return 0;}
 		if (key == 'maxStatus') {return 2;}
@@ -915,7 +921,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 }
 
 BeachBall.LoadSettings = function() {
-	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', /*'LCSolver',Deprecated*/ 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory'];
+	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory'];
 	BeachBall.AllOptionsKeys = ['status', 'maxStatus', 'setting', 'minSetting', 'maxSetting', 'msg', 'desc'];
 	BeachBall.SavedOptionsKeys = ['status', 'setting'];
 	BeachBall.Settings = {};
@@ -924,10 +930,10 @@ BeachBall.LoadSettings = function() {
 		// Yes! localStorage and sessionStorage support!
 		BeachBall.storage = 1;
 		
-		//Remove deprecated storage key if found
+		/*Remove deprecated storage keys if found
 		if (typeof localStorage['BB.LCSolver.status'] == 'string') {
 			localStorage.removeItem('BB.LCSolver.status');
-		}
+		}*/
 	}
 
 	for (i = 0; i < BeachBall.AllOptions.length; i++) {
