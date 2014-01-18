@@ -914,6 +914,11 @@ BeachBall.LoadSettings = function() {
 	if(typeof(Storage) !== 'undefined') {
 		// Yes! localStorage and sessionStorage support!
 		BeachBall.storage = 1;
+		
+		//Remove deprecated storage key if found
+		if (typeof localStorage['BB.LCSolver.status'] == 'string') {
+			localStorage.removeItem('BB.LCSolver.status');
+		}
 	}
 
 	for (i = 0; i < BeachBall.AllOptions.length; i++) {
