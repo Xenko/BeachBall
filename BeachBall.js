@@ -584,7 +584,7 @@ BeachBall.CagedAutoClick = function() {
 
 	//Caged Logicat Solver is always called, as this ensures both manually purchased and autoclick purchased will be solved
 	//If a Caged Logicat Problem is Available, and the Logicat Solver is Enabled, and it hasn't been solved, Solve the Logicat
-	if (Molpy.PuzzleGens["caged"].active && BeachBall.Settings['CagedAutoClick'].status == 1 && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
+	if (Molpy.PuzzleGens["caged"].active && (me.status == 1 || me.status == 2) && Molpy.PuzzleGens["caged"].guess[0] == "No Guess") {
 		BeachBall.SolveLogic("caged");
 		// If there are more puzzles remaining, set the timeout to 5 seconds (prevents Notify spam/lag).
 		if (Molpy.Got("LogiPuzzle") > 1) {
