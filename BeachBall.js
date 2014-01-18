@@ -487,7 +487,7 @@ BeachBall.PuzzleConstructor = function(name) {
 				$('#selectGuess' + i).prop('selectedIndex', choice);
 				Molpy.PuzzleGens[puzzleType].guess[i] = text;
 			}
-			if (BeachBall.Settings['CagedAutoClick'].status == 1 & puzzleType = "caged") {
+			if (BeachBall.Settings['CagedAutoClick'].status == 1 & puzzleType == "caged") {
 				Molpy.PuzzleGens[puzzleType].Submit();
 			}
 			else {
