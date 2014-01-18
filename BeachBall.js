@@ -566,9 +566,10 @@ BeachBall.CagedAutoClick = function() {
 		// Buy Single Puzzles
 		if (me.status == 1 && Molpy.Has('GlassBlocks', costSingle)) {
 			Molpy.MakeCagedPuzzle(costSingle);
+		}
 		// Buy Maximum Puzzles, or Singles if Max is less than 10
 		else if (me.status == 2) {
-			if (Molpy.PokeBar() > 11 && Molpy.Level('LogiPuzzle') >= Molpy.PokeBar() && tens) {
+			if (Molpy.PokeBar() > 11 && Molpy.Level('LogiPuzzle') >= Molpy.PokeBar() && tens && Molpy.Has('GlassBlocks', costMulti)) {
 				Molpy.MakeCagedPuzzle(costMulti, tens);
 			}
 			else {
