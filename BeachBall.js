@@ -794,7 +794,7 @@ BeachBall.CreateMenu = function() {
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
-	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp(\'ninj\')"> <h4>Extend RK</h4> </a></div>');
+	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Extend RK</h4> </a></div>');
 	
 	//Replace with Loop!
 	for (var i = 0; i < BeachBall.AllOptions.length; i++) {
@@ -812,7 +812,7 @@ BeachBall.CreateMenu = function() {
 	}
 
 	BeachBall.Temp = function() {
-		Molpy.redactedCountup = 600;
+		Molpy.redactedToggle = 600;
 	}
 }
 
