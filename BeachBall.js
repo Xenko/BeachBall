@@ -5,6 +5,9 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean', 'ceil', 'drac', 'stuff', 'land', 'prize', 'discov', 'monums', 'monumg', 'tagged', 'badgesav'];
 BeachBall.resetCaged = 0;
 
+//Add code from NodalW
+
+
 //Version Information
 BeachBall.version = '5.1.1';
 BeachBall.SCBversion = '3.3'; //Last SandCastle Builder version tested
@@ -64,7 +67,7 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	//Returns the index of a given statement name
 	this.FindStatement = function (searchTerm) {
-		for (i in this.statement) {
+		for (var i in this.statement) {
 			if (this.statement[i].name == searchTerm) return i;
 		}
 	}
