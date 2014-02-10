@@ -9,8 +9,8 @@ BeachBall.resetCaged = 0;
 
 
 //Version Information
-BeachBall.version = '5.1.1';
-BeachBall.SCBversion = '3.3'; //Last SandCastle Builder version tested
+BeachBall.version = '5.1.2';
+BeachBall.SCBversion = '3.3.1'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
