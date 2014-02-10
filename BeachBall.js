@@ -125,7 +125,7 @@ BeachBall.PuzzleConstructor = function(name) {
 				newStatement.claim[p] = this.ParseClaim(claimText);
 
 				// Updates variables and claim text for next loop
-				text = text.substring(text.indexOf("</table>") + 12, text.length);
+				text = text.substring(n, text.length);
 				p++;
 			} while (l > 0 || m > 0);
 			
@@ -133,7 +133,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			newStatement.value = "unknown";
 			
 			// Updates j to the start of the next statement
-			j = this.puzzleString.indexOf("<br><br>", k) + 8;
+			j = this.puzzleString.indexOf("</table>", k) + 12;
 			i++;
 		} while (i < this.size);
 	}
