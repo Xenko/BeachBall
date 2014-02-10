@@ -67,8 +67,11 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	//Returns the index of a given statement name
 	this.FindStatement = function (searchTerm) {
-		for (var i in this.statement) {
-			if (this.statement[i].name == searchTerm) return i;
+		for (var i = 0; i < this.statement.length; i++) {
+			if (this.statement[i].name == searchTerm)
+			{
+				return i;
+			}
 		}
 	}
 	
