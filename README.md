@@ -2,6 +2,11 @@
 
 ## Changelog
 
+###Version 5.1.3
+
+####Bug Fixes
+* Fixed Logicat solver to work with latest SCB changes.
+
 ###Version 5.1.2
 
 ####Bug Fixes
