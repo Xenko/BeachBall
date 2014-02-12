@@ -133,7 +133,7 @@ BeachBall.PuzzleConstructor = function(name) {
 			newStatement.value = "unknown";
 			
 			// Updates j to the start of the next statement
-			j = this.puzzleString.indexOf("</table>", k) + 12;
+			j = this.puzzleString.indexOf("</div>", k) + 10;
 			i++;
 		} while (i < this.size);
 	}
