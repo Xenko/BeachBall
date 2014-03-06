@@ -9,8 +9,8 @@ BeachBall.resetCaged = 0;
 
 
 //Version Information
-BeachBall.version = '5.1.3';
-BeachBall.SCBversion = '3.3331'; //Last SandCastle Builder version tested
+BeachBall.version = '5.1.4';
+BeachBall.SCBversion = '3.3333'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -802,7 +802,7 @@ BeachBall.CheckToolFactory = function() {
 
 BeachBall.CreateMenu = function() {
 	//Create Menu
-	$('#optionsItems').append('<div id="BeachBall"></div>');
+	$('#sectionOptions').append('<div id="BeachBall"></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'RKAutoClick\')"> <h4>Redundakitty AutoClick</h4> </a> <div id="RKAutoClickDesc"></div></div>');
 	$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'CagedAutoClick\')"> <h4>Caged Logicat AutoClick</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
