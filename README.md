@@ -5,6 +5,12 @@
 ###Version 5.1.3
 
 ####Bug Fixes
+* Fixed Logicat countdown and clicker not working with Redacted object rewrited in 3.33331
+* Fixed option menu rewriten in same update
+
+###Version 5.1.3
+
+####Bug Fixes
 * Fixed Logicat solver to work with latest SCB changes.
 
 ###Version 5.1.2
