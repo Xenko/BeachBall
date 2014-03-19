@@ -805,8 +805,11 @@ BeachBall.LoadToolFactory = function() {
 }
 
 BeachBall.CreateMenu = function() {
-
-	Molpy.OptionsById[Molpy.OptionsById.length-1].breakafter = true;
+	for (var i = Molpy.OptionsById.length-1; i >= 0; i--)
+		if (EvalMaybeFunction(Molpy.OptionsById[i].visability) > 0) {
+			Molpy.OptionsById[i].breakafter = true;
+			break;
+		}
 	
 	new Molpy.Option({
 		name: 'BB.title',
