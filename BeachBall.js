@@ -9,7 +9,7 @@ BeachBall.resetCaged = 0;
 
 
 //Version Information
-BeachBall.version = '5.1.4';
+BeachBall.version = '5.1.4.1';
 BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -755,7 +755,7 @@ BeachBall.RedundaKitty = function() {
 			BeachBall.PlayRKAlert();
 		}
 		// If LC Audio Alert Enabled and LC is available, Play Alert
-		else if (BeachBall.Settings['AudioAlerts'].status == 2 && Molpy.redactedDrawType[Molpy.redactedDrawType.length-1] == 'hide2') {
+		else if (BeachBall.Settings['AudioAlerts'].status == 2 && Molpy.Redacted.DrawType[Molpy.Redacted.DrawType.length-1] == 'hide2') {
 			BeachBall.PlayRKAlert();
 		}
 	}
@@ -817,10 +817,10 @@ BeachBall.CreateMenu = function() {
 		breakafter : true,
 		text: function() { return '<h4 style"font-size:75%">v ' + BeachBall.version + '</div>' },
 	});
+	
 	//Replace with Loop!
 	for (var i = 0; i < BeachBall.AllOptions.length; i++) {
 		var option = BeachBall.AllOptions[i];
-		console.log(option);
 		var me = BeachBall.Settings[option];
 		new Molpy.Option({
 			name: 'BB.'+option,
@@ -833,24 +833,10 @@ BeachBall.CreateMenu = function() {
 	
 	Molpy.RefreshOptions();
 	
-	
-	//Create Menu
-	// $('#sectionOptions').append('<div id="BeachBall"></div>');
-	// $('#BeachBall').append('<div class="minifloatbox"> <h3 style="font-size:150%; color:red">BeachBall Settings</h3> <h4 style"font-size:75%">v ' + BeachBall.version + '</div> <br>');
-	// $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'RKAutoClick\')"> <h4>Redundakitty AutoClick</h4> </a> <div id="RKAutoClickDesc"></div></div>');
-	// $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'CagedAutoClick\')"> <h4>Caged Logicat AutoClick</h4> </a> <div id="CagedAutoClickDesc"></div></div>');
-	// $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'LCSolver\')"> <h4>Logicat Solver</h4> </a> <div id="LCSolverDesc"></div></div>');
-	// $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'BeachAutoClick\')"> <h4>Beach AutoClick</h4> </a> <div id="BeachAutoClickDesc"></div></div>');
-	// $('#BeachBall').append('<div class="minifloatbox" id="BBMontyHaul"> <a onclick="BeachBall.SwitchStatus(\'MHAutoClick\')"> <h4>Monty Haul AutoClick</h4> </a> <div id="MHAutoClickDesc"></div></div>');
-	// $('#BeachBall').append('<div class="minifloatbox" id="BBToolFactory"> <a onclick="Molpy.LoadToolFactory(' + BeachBall.toolFactory + ')"> <h4>Load Tool Factory</h4> </a> <div id="ToolFactoryDesc"></div></div>');
-	// $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchStatus(\'AudioAlerts\')"> <h4>Audio Alerts</h4> </a> <div id="AudioAlertsDesc"></div></div>');
-	// $('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SwitchSetting(\'RefreshRate\')"> <h4>Refresh Rate</h4> </a> <div id="RefreshRateDesc"></div></div>');
-	
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRK()"> <h4>Spawn RK</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.SpawnRift()"> <h4>Spawn Rift</h4> </a></div>');
 	//$('#BeachBall').append('<div class="minifloatbox"> <a onclick="BeachBall.Temp()"> <h4>Extend RK</h4> </a></div>');
 	
-
 	//Developer Functions
 	BeachBall.SpawnRK = function() {
 		Molpy.redactedCountup = Molpy.redactedToggle;
