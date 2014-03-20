@@ -9,7 +9,7 @@ BeachBall.resetCaged = 0;
 
 
 //Version Information
-BeachBall.version = '5.1.4';
+BeachBall.version = '5.1.4.1';
 BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
