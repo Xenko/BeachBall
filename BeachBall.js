@@ -9,7 +9,7 @@ BeachBall.resetCaged = 0;
 
 
 //Version Information
-BeachBall.version = '5.1.4.1';
+BeachBall.version = '5.1.4.2';
 BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -805,6 +805,12 @@ BeachBall.LoadToolFactory = function() {
 }
 
 BeachBall.CreateMenu = function() {
+
+	if ((window.location.pathname == "/classic.html") && (g('sectionOptions') != null)) { // patch for option height in classic
+		g('sectionOptions').style['height'] = '236px';
+		g('sectionOptions').style['overflow-y'] = 'scroll';
+		
+	}
 	for (var i = Molpy.OptionsById.length-1; i >= 0; i--)
 		if (EvalMaybeFunction(Molpy.OptionsById[i].visability) > 0) {
 			Molpy.OptionsById[i].breakafter = true;

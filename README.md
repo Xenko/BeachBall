@@ -3,10 +3,14 @@
 ## Changelog
 
 ###Version 5.1.4
+###Version 5.1.4.1
+###Version 5.1.4.2
 
 ####Bug Fixes
 * Fixed Logicat countdown and clicker not working with Redacted object rewrited in 3.33331
 * Fixed option menu rewriten in same update
+* .1 : Fixed Logicat bug with audio alert
+* .2 : Fixed display problem with classic layout
 
 ###Version 5.1.3
 
