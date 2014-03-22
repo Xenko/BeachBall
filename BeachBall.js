@@ -676,6 +676,10 @@ BeachBall.Ninja = function() {
 	//Molpy.npbONG is 0 when you can't click, and 1 when you can click
 
 	if (Molpy.ninjad == 0) {
+		if ((BeachBall.Settings['BeachAutoClick'].status == 3) && (Molpy.Got('Temporal Rift') == 0)) {
+			Molpy.ClickBeach();
+			Molpy.Notify('Ninja Ritual Auto Click', 1);
+		}
         if (Molpy.npbONG != 0) {
             BeachBall.incoming_ONG = 0;
             if (BeachBall.Settings['BeachAutoClick'].status > 0 && Molpy.Got('Temporal Rift') == 0) {
@@ -804,6 +808,36 @@ BeachBall.ChooseAutoclick = function () {
 		Molpy.Notify('This favorite has no button to click !', 0);
 		return;
 	}
+	
+	
+	// cps and click per second handling
+	var speed = prompt('How shouw it be clicked ?\nType "X cps" or "Xcps" for X click per second.\nType "X s" or "Xs" for 1 click every X second.');
+	if (speed === null) { // unasign the fav
+		if (BeachBall.FavsAutoclick[selectedFave] && BeachBall.FavsAutoclick[selectedFave].timer)
+			BeachBall.ToggleAutoclickFav(selectedFave,false); // we turn it off first
+		BeachBall.FavsAutoclick[selectedFave] = null;
+		Molpy.Notify('Favorite asignation for '+Molpy.activeLayout.faves[selectedFave].boost.name+' has been removed', 1);
+		BeachBall.SaveAutoclickFav();
+		return;
+	}
+	var speed_el = speed.replace(/\s/,"").replace(/,/,".").match(/^(\d+)(\w+)$/i);
+	
+	// kicking out the bad inputs
+	if ((!speed_el) || (speed_el.length != 3)) {
+		Molpy.Notify('No assignation done : time format was not valid', 0);
+		return;
+	}
+	speed_el[1] = parseFloat(speed_el[1]);
+	if (isNaN(speed_el[1]) || speed_el[1] == 0){
+		Molpy.Notify('No assignation done : time value was not valid', 0);
+		return;
+	}
+	
+	var period = speed_el[2] == "s" ?
+		speed_el[1]*1000
+		: 1000/speed_el[1];
+	
+	
 	if (buttons.length > 1) {
 		// preparing the prompt to choose for the right favorite button
 		var promptText = "There is multiple buttons on this favorite :\n";
@@ -831,25 +865,6 @@ BeachBall.ChooseAutoclick = function () {
 		var choice = 0; // only 1 choice
 	}
 	
-	// cps and click per second handling
-	var speed = prompt('How shouw it be clicked ?\nType "X cps" or "Xcps" for X click per second.\nType "X s" or "Xs" for 1 click every X second.') || "1s";
-	var speed_el = speed.replace(/\s/,"").replace(/,/,".").match(/^(\d+)(\w+)$/i);
-	
-	// kicking out the bad inputs
-	if ((!speed_el) || (speed_el.length != 3)) {
-		Molpy.Notify('No assignation done : time format was not valid', 0);
-		return;
-	}
-	speed_el[1] = parseFloat(speed_el[1]);
-	if (isNaN(speed_el[1]) || speed_el[1] == 0){
-		Molpy.Notify('No assignation done : time value was not valid', 0);
-		return;
-	}
-	
-	var period = speed_el[2] == "s" ?
-		speed_el[1]*1000
-		: 1000/speed_el[1];
-	
 	if (BeachBall.FavsAutoclick[selectedFave] && BeachBall.FavsAutoclick[selectedFave].timer)
 		window.clearInterval(BeachBall.FavsAutoclick[selectedFave].timer);
 		
@@ -862,8 +877,9 @@ BeachBall.ChooseAutoclick = function () {
 	}
 	
 	BeachBall.ToggleAutoclickFav(selectedFave,false);
-	Molpy.Notify('AutoclickFav created for '+selectedFave+' at '+speed, 1);
+	Molpy.Notify('AutoclickFav created for '+Molpy.activeLayout.faves[selectedFave].boost.name+' at '+speed, 1);
 	Molpy.Notify('Click on its timer in the Favorite to disable.', 1);
+	BeachBall.SaveAutoclickFav();
 }
 
 BeachBall.ToggleAutoclickFav = function(fav,shown) {
@@ -875,8 +891,7 @@ BeachBall.ToggleAutoclickFav = function(fav,shown) {
 		me.timer = window.setInterval(BeachBall.getAutoClickFav(fav),me.period)
 	}
 	if (shown)
-		Molpy.Notify('Autoclick Favorite '+fav+' toggled : '+(me.timer ? 'activated, '+me.speed : 'disabled'), 1);
-	
+		Molpy.Notify('Autoclick Favorite '+Molpy.activeLayout.faves[fav].boost.name+' toggled : '+(me.timer ? 'activated, '+me.speed : 'disabled'), 1);
 }
 
 BeachBall.getAutoClickFav = function (fav_to_auto) {
@@ -895,12 +910,28 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 BeachBall.ImplantAutoclickFavButtons = function () {
 	for (fav in BeachBall.FavsAutoclick) {
 		var me = BeachBall.FavsAutoclick[fav];
-		if (me.period && $$("#faveHeader"+fav+" h1") && ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0))
-			$$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<span class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</span>";
-		// console.log(fav);
+		if (me && me.period && $$("#faveHeader"+fav+" h1")) 
+			if ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
+				$$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
+			} else {
+				$($$("#faveHeader"+fav+" h1 .BB_autoclick")[0]).first().css('text-decoration',me.timer ? '' : 'line-through');
+			}
 	}
 }
 
+BeachBall.LoadAutoclickFav = function() {
+	BeachBall.FavsAutoclick = localStorage['BB.FavsAutoclick'] ? JSON.parse(localStorage['BB.FavsAutoclick']) : {};
+	for (fav in BeachBall.FavsAutoclick) {
+		var me = BeachBall.FavsAutoclick[fav];
+		if (me) {
+			me.timer = 0;
+			BeachBall.ToggleAutoclickFav(fav,false);
+		}
+	}
+}
+BeachBall.SaveAutoclickFav = function() {
+	localStorage['BB.FavsAutoclick'] = JSON.stringify(BeachBall.FavsAutoclick);
+}
 
 //Menus and Settings
 BeachBall.CheckToolFactory = function() {
@@ -980,7 +1011,7 @@ BeachBall.DisplayDescription = function(option,type) {
 	
 	if (option == 'BeachAutoClick') {
 		clearInterval(BeachBall.BeachAutoClickTimer);
-		if (me.status == 2) {
+		if (me.status >= 2) {
 			BeachBall.BeachAutoClickTimer = setInterval(BeachBall.ClickBeach, 1000/me.setting);
 		}
 	}
@@ -1016,12 +1047,12 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 	else if (option == 'BeachAutoClick') {
 		if (key == 'title')		{return 'Beach AutoClick';}
 		if (key == 'status') 	{return 1;}
-		if (key == 'maxStatus') {return 2;}
+		if (key == 'maxStatus') {return 3;}
 		if (key == 'setting')	{return 1;}
 		if (key == 'minSetting'){return 1;}
 		if (key == 'maxSetting'){return 20;}
 		if (key == 'msg')		{return 'Please enter your desired clicking rate per second (1 - 20):';}
-		if (key == 'desc')		{return ['Off', 'Keep Ninja', 'On: <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')">' + BeachBall.Settings[option].setting + ' cps</a>'];}
+		if (key == 'desc')		{return ['Off', 'Keep Ninja', 'On: <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')">' + BeachBall.Settings[option].setting + ' cps</a>','On: <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')">' + BeachBall.Settings[option].setting + ' cps</a> (with ninja ritual)'];}
 	}
 	else if (option == 'CagedAutoClick') {
 		if (key == 'title')		{return 'Caged Logicat AutoClick';}
@@ -1072,6 +1103,13 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'msg')		{return 'Tool Factory Loading:';}
 		if (key == 'desc')		{return ['Off', BeachBall.Settings[option].setting];}
 	}
+	else if (option == 'RiftAutoClick') {
+		if (key == 'title')		{return 'Rift Autoclick';}
+		if (key == 'status') 	{return 0;}
+		if (key == 'maxStatus') {return 2;}
+		if (key == 'setting')	{return 0;}
+		if (key == 'desc')		{return ['Off', 'On - Flux Cristal', 'On - ONG'];}
+	}
 	else {
 		Molpy.Notify(BeachBall.Settings[option] + ' setting not found. Please contact developer.', 1);
 		return -1;
@@ -1079,7 +1117,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 }
 
 BeachBall.LoadSettings = function() {
-	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory'];
+	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory','RiftAutoClick'];
 	BeachBall.AllOptionsKeys = ['title', 'status', 'maxStatus', 'setting', 'minSetting', 'maxSetting', 'msg', 'desc'];
 	BeachBall.SavedOptionsKeys = ['status', 'setting'];
 	BeachBall.Settings = {};
@@ -1185,6 +1223,7 @@ BeachBall.StartLoop = function () {
 
 //Program Startup
 BeachBall.LoadSettings();
+BeachBall.LoadAutoclickFav();
 BeachBall.CreateMenu();
 BeachBall.SpyRefresh();
 Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
