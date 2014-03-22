@@ -9,7 +9,7 @@ BeachBall.resetCaged = 0;
 
 
 //Version Information
-BeachBall.version = '5.2.0.0 Beta';
+BeachBall.version = '5.2.0.Beta2';
 BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -1052,7 +1052,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'minSetting'){return 1;}
 		if (key == 'maxSetting'){return 20;}
 		if (key == 'msg')		{return 'Please enter your desired clicking rate per second (1 - 20):';}
-		if (key == 'desc')		{return ['Off', 'Keep Ninja', 'On: <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')">' + BeachBall.Settings[option].setting + ' cps</a>','On: <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')">' + BeachBall.Settings[option].setting + ' cps</a> (with ninja ritual)'];}
+		if (key == 'desc')		{return ['Off', 'Keep Ninja', 'On: <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')">' + BeachBall.Settings[option].setting + ' cps</a>','On: <a onclick="BeachBall.SwitchSetting(\'BeachAutoClick\')">' + BeachBall.Settings[option].setting + ' cps</a><br/>(with ninja ritual)'];}
 	}
 	else if (option == 'CagedAutoClick') {
 		if (key == 'title')		{return 'Caged Logicat AutoClick';}
