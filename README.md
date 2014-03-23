@@ -1,10 +1,32 @@
 # BeachBall
 
+## Features
+
+* Kitties have a timer on top of the screen, to tell you when there is a kitty.
+* you can activate Autoclick on kitties, or just an auto-focus on the kitty
+* You can put audio alerts on common events
+* You can add autoclick on the picture (1 click for keeping ninja, or multiple click per second)
+* Logicats can be solved automaticaly
+* Tool factory can be loaded faster
+* Caged logicat can be automated to solve every logicat one by one, the max at once for QQ, or get bonemeal.
+
+## How to use this script ?
+
+Start by installing this script (instructions here :http://xenko.github.io/BeachBall/)
+Go in the Option panel of the game, and you will find every option to enable at the bottom of the panel.
+
 ## Changelog
 
-###Version 5.1.4
-###Version 5.1.4.1
-###Version 5.1.4.2
+###Version 5.2.0
+
+####Features
+* NEW : Favorite autoclick - In the Favorite pannel, you can now assign an autoclick to any set favorite. Doing so will ask you for a timer, and may ask you to choose a button to click if there are multiples. If you proceed so, you will have a timer that you can click for activating and de-activating the timer. You can remove it completely by starting assignation of a new timer and canceling it. This can be used to trigger Question Qubes over time, or improving sand industry regularly after a molping down, reducing repetitive spaming activities in just a few clicks.
+* Improving Beach Autoclick by adding an "ninja ritual" setting, that will ninja every NP, gathering goats.
+* NEW : Rift Autoclick - 2 settings. "Gather Flux Cristals" will use rifts after they close until you have no more Time Lord rift available, and waiting for the NPB to have been ninja'd. "ONG" will use rifts to create a maximum of ONGs. It will always wait for the game to have sand (for building from blackprints) and will wait for the NPB to have been ninjad.
+
+
+
+###Version 5.1.4.0 - .2
 
 ####Bug Fixes
 * Fixed Logicat countdown and clicker not working with Redacted object rewrited in 3.33331

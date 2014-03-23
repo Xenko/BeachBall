@@ -5,11 +5,8 @@ BeachBall.Time_to_ONG = 1800000;
 BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean', 'ceil', 'drac', 'stuff', 'land', 'prize', 'discov', 'monums', 'monumg', 'tagged', 'badgesav'];
 BeachBall.resetCaged = 0;
 
-//Add code from NodalW
-
-
 //Version Information
-BeachBall.version = '5.2.0.Beta2';
+BeachBall.version = '5.2.0';
 BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -554,12 +551,6 @@ BeachBall.SolveLogic = function(name) {
 	}
 }
 
-BeachBall.ClickBeach = function(number) {
-	if (Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
-		Molpy.ClickBeach();
-	}
-}
-
 BeachBall.CagedAutoClick = function() {
 	//Purchases Caged Logicat
 	//If Caged AutoClick is Enabled, and Caged Logicat isn't Sleeping and Caged Logicat isn't already purchased, and timeout not active
@@ -669,6 +660,47 @@ BeachBall.MontyHaul = function() {
 			}
 		}
 	}
+}
+
+BeachBall.ClickBeach = function(number) {
+	if (Molpy.Got('Temporal Rift') == 0 && Molpy.ninjad != 0 && BeachBall.Time_to_ONG >= 5){
+		Molpy.ClickBeach();
+	}
+}
+
+BeachBall.RiftAutoClick = function () {
+	if (BeachBall.Settings['RiftAutoClick'].status == 0)
+		return;
+		
+	switch (parseInt(BeachBall.Settings['RiftAutoClick'].status)) {
+	
+		case 1 : // farm crystals
+			// check TL
+			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
+				return;
+			var buttons =  $$('#logItems input[onclick="Molpy.RiftJump()"]'); // buttons to jump in the log
+			if (buttons.length && !Molpy.Got('Temporal Rift'))
+				Molpy.RiftJump();
+			break;
+			
+		case 2 : // rift to ONG
+			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
+				return;
+			if (Molpy.Got('Temporal Rift') && Molpy.Boosts['Sand'].Has(1) && (BeachBall.GetBeachState() == 'beachsafe')) // ninja click has passed, rift occuring, sand in stock
+				Molpy.RiftJump();
+			break;
+	}
+}
+
+BeachBall.GetBeachState = function () {
+	var stateClass = 'beachsafe';
+	if(!Molpy.ninjad) {
+		if(Molpy.npbONG)
+			stateClass = 'beachstreakextend';
+		else
+			stateClass = 'beachninjawarning';
+	}
+	return stateClass;
 }
 
 BeachBall.Ninja = function() {
@@ -890,6 +922,7 @@ BeachBall.ToggleAutoclickFav = function(fav,shown) {
 	} else {
 		me.timer = window.setInterval(BeachBall.getAutoClickFav(fav),me.period)
 	}
+	BeachBall.SaveAutoclickFav();
 	if (shown)
 		Molpy.Notify('Autoclick Favorite '+Molpy.activeLayout.faves[fav].boost.name+' toggled : '+(me.timer ? 'activated, '+me.speed : 'disabled'), 1);
 }
@@ -923,12 +956,13 @@ BeachBall.LoadAutoclickFav = function() {
 	BeachBall.FavsAutoclick = localStorage['BB.FavsAutoclick'] ? JSON.parse(localStorage['BB.FavsAutoclick']) : {};
 	for (fav in BeachBall.FavsAutoclick) {
 		var me = BeachBall.FavsAutoclick[fav];
-		if (me) {
+		if (me && me.timer) {// if there was an active timer when the save occured
 			me.timer = 0;
 			BeachBall.ToggleAutoclickFav(fav,false);
 		}
 	}
 }
+
 BeachBall.SaveAutoclickFav = function() {
 	localStorage['BB.FavsAutoclick'] = JSON.stringify(BeachBall.FavsAutoclick);
 }
@@ -943,6 +977,7 @@ BeachBall.CheckToolFactory = function() {
 		Molpy.Notify('Tool Factory is still unavailable... keep playing!', 1);
 	}
 }
+
 BeachBall.LoadToolFactory = function() {
 	if (Molpy.Boosts['TF'].bought == 1) 
 		Molpy.LoadToolFactory(BeachBall.Settings['ToolFactory'].setting);
@@ -1214,7 +1249,8 @@ function BeachBallMainProgram() {
 	BeachBall.CagedAutoClick();
 	BeachBall.Ninja();
 	BeachBall.MontyHaul();
-	BeachBall.StartLoop()
+	BeachBall.RiftAutoClick();
+	BeachBall.StartLoop();
 }
 
 BeachBall.StartLoop = function () {
