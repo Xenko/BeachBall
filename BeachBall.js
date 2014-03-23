@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.2.0.1';
+BeachBall.version = '5.2.0.2';
 BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
@@ -834,7 +834,7 @@ BeachBall.ChooseAutoclick = function () {
 		Molpy.Notify('You need to set a favorite first.', 0);
 		return;
 	}
-	var buttons = $$("#sectionFave"+selectedFave+" input[type=Button]");
+	var buttons = $("#sectionFave"+selectedFave+" input[type=Button]");
 	
 	if (buttons.length == 0) {
 		Molpy.Notify('This favorite has no button to click !', 0);
@@ -932,7 +932,7 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 		return function(){
 			var me = BeachBall.FavsAutoclick[_fav];
 			if (me.timer) {
-				var buttons = $$("#sectionFave"+me.fave+" input[type=Button]");
+				var buttons = $("#sectionFave"+me.fave+" input[type=Button]");
 				if (buttons && buttons[me.choice] && (typeof(buttons[me.choice].click) == 'function'))
 					buttons[me.choice].click();
 			}
@@ -943,11 +943,11 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 BeachBall.ImplantAutoclickFavButtons = function () {
 	for (fav in BeachBall.FavsAutoclick) {
 		var me = BeachBall.FavsAutoclick[fav];
-		if (me && me.period && $$("#faveHeader"+fav+" h1")) 
-			if ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
-				$$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
+		if (me && me.period && $("#faveHeader"+fav+" h1")) 
+			if ($("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
+				$("#faveHeader"+fav+" h1")[0].innerHTML= $("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
 			} else {
-				$($$("#faveHeader"+fav+" h1 .BB_autoclick")[0]).first().css('text-decoration',me.timer ? '' : 'line-through');
+				$("#faveHeader"+fav+" h1 .BB_autoclick").first().css('text-decoration',me.timer ? '' : 'line-through');
 			}
 	}
 }
@@ -1035,7 +1035,7 @@ BeachBall.CreateMenu = function() {
 		Molpy.redactedToggle = 600;
 	}
 	
-	// $('#faveControls').append('<div id="autoclickFave" class="minifloatbox"><a onclick="BeachBall.ChooseAutoclick()">AutoClick</a></div>');
+	$('#faveControls').append('<div id="autoclickFave" class="minifloatbox"><a onclick="BeachBall.ChooseAutoclick()">AutoClick</a></div>');
 }
 
 BeachBall.DisplayDescription = function(option,type) {
@@ -1228,7 +1228,7 @@ BeachBall.SwitchStatus = function(option) {
 }
 
 BeachBall.AddImplants = function () {
-	// BeachBall.ImplantAutoclickFavButtons();
+	BeachBall.ImplantAutoclickFavButtons();
 }
 
 BeachBall.SpyRefresh = function () {
@@ -1261,7 +1261,7 @@ BeachBall.StartProgram = function() {
 	BeachBall.LoadSettings();
 	BeachBall.CreateMenu();
 	BeachBall.SpyRefresh();
-	// BeachBall.LoadAutoclickFav();
+	BeachBall.LoadAutoclickFav();
 	Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
 	if (BeachBall.storage == 0) {
 		Molpy.Notify('No Local Storage Available. BeachBall settings will NOT be saved.',1);
