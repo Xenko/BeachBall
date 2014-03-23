@@ -932,9 +932,9 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 		return function(){
 			var me = BeachBall.FavsAutoclick[_fav];
 			if (me.timer) {
-				var buttons = $$("#sectionFave"+me.fave+" input[type=Button]");
-				if (buttons && buttons[me.choice] && (typeof(buttons[me.choice].click) == 'function'))
-					buttons[me.choice].click();
+				// var buttons = $$("#sectionFave"+me.fave+" input[type=Button]");
+				// if (buttons && buttons[me.choice] && (typeof(buttons[me.choice].click) == 'function'))
+					// buttons[me.choice].click();
 			}
 		}
 	})(fav_to_auto);
@@ -944,11 +944,11 @@ BeachBall.ImplantAutoclickFavButtons = function () {
 	for (fav in BeachBall.FavsAutoclick) {
 		var me = BeachBall.FavsAutoclick[fav];
 		if (me && me.period && $$("#faveHeader"+fav+" h1")) 
-			if ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
-				$$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
-			} else {
-				$($$("#faveHeader"+fav+" h1 .BB_autoclick")[0]).first().css('text-decoration',me.timer ? '' : 'line-through');
-			}
+			// if ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
+				// $$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
+			// } else {
+				// $($$("#faveHeader"+fav+" h1 .BB_autoclick")[0]).first().css('text-decoration',me.timer ? '' : 'line-through');
+			// }
 	}
 }
 
@@ -1259,9 +1259,9 @@ BeachBall.StartLoop = function () {
 BeachBall.StartProgram = function() {
 	//Program Startup
 	BeachBall.LoadSettings();
-	BeachBall.LoadAutoclickFav();
 	BeachBall.CreateMenu();
 	BeachBall.SpyRefresh();
+	BeachBall.LoadAutoclickFav();
 	Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
 	if (BeachBall.storage == 0) {
 		Molpy.Notify('No Local Storage Available. BeachBall settings will NOT be saved.',1);
