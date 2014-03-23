@@ -678,8 +678,8 @@ BeachBall.RiftAutoClick = function () {
 			// check TL
 			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
 				return;
-			var buttons =  $$('#logItems input[onclick="Molpy.RiftJump()"]'); // buttons to jump in the log
-			if (buttons.length && !Molpy.Got('Temporal Rift'))
+			
+			if ((!Molpy.Got('Temporal Rift')) && (BeachBall.GetBeachState() == 'beachsafe'))
 				Molpy.RiftJump();
 			break;
 			
@@ -931,11 +931,11 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 	return (function (_fav) {
 		return function(){
 			var me = BeachBall.FavsAutoclick[_fav];
-			// if (me.timer) {
-				// var buttons = $$("#sectionFave"+me.fave+" input[type=Button]");
-				// if (buttons && buttons[me.choice] && (typeof(buttons[me.choice].click) == 'function'))
-					// buttons[me.choice].click();
-			// }
+			if (me.timer) {
+				var buttons = $$("#sectionFave"+me.fave+" input[type=Button]");
+				if (buttons && buttons[me.choice] && (typeof(buttons[me.choice].click) == 'function'))
+					buttons[me.choice].click();
+			}
 		}
 	})(fav_to_auto);
 }
@@ -943,12 +943,12 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 BeachBall.ImplantAutoclickFavButtons = function () {
 	for (fav in BeachBall.FavsAutoclick) {
 		var me = BeachBall.FavsAutoclick[fav];
-		// if (me && me.period && $$("#faveHeader"+fav+" h1")) 
-			// if ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
-				// $$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
-			// } else {
-				// $($$("#faveHeader"+fav+" h1 .BB_autoclick")[0]).first().css('text-decoration',me.timer ? '' : 'line-through');
-			// }
+		if (me && me.period && $$("#faveHeader"+fav+" h1")) 
+			if ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
+				$$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
+			} else {
+				$($$("#faveHeader"+fav+" h1 .BB_autoclick")[0]).first().css('text-decoration',me.timer ? '' : 'line-through');
+			}
 	}
 }
 
@@ -1035,7 +1035,7 @@ BeachBall.CreateMenu = function() {
 		Molpy.redactedToggle = 600;
 	}
 	
-	$('#faveControls').append('<div id="autoclickFave" class="minifloatbox"><a onclick="BeachBall.ChooseAutoclick()">AutoClick</a></div>');
+	// $('#faveControls').append('<div id="autoclickFave" class="minifloatbox"><a onclick="BeachBall.ChooseAutoclick()">AutoClick</a></div>');
 }
 
 BeachBall.DisplayDescription = function(option,type) {
@@ -1228,7 +1228,7 @@ BeachBall.SwitchStatus = function(option) {
 }
 
 BeachBall.AddImplants = function () {
-	BeachBall.ImplantAutoclickFavButtons();
+	// BeachBall.ImplantAutoclickFavButtons();
 }
 
 BeachBall.SpyRefresh = function () {
@@ -1253,7 +1253,7 @@ function BeachBallMainProgram() {
 }
 
 BeachBall.StartLoop = function () {
-	BeachBall.Timeout = setTimeout(typeof($$) == 'undefined' ? BeachBall.StartLoop : BeachBallMainProgram, BeachBall.Settings['RefreshRate'].setting);
+	BeachBall.Timeout = setTimeout(BeachBallMainProgram, BeachBall.Settings['RefreshRate'].setting);
 }
 
 BeachBall.StartProgram = function() {
@@ -1261,15 +1261,12 @@ BeachBall.StartProgram = function() {
 	BeachBall.LoadSettings();
 	BeachBall.CreateMenu();
 	BeachBall.SpyRefresh();
-	BeachBall.LoadAutoclickFav();
+	// BeachBall.LoadAutoclickFav();
 	Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
 	if (BeachBall.storage == 0) {
 		Molpy.Notify('No Local Storage Available. BeachBall settings will NOT be saved.',1);
 	}
 	BeachBall.StartLoop();
 }
-console.log($$);
-console.log(jQuery);
-console.log($);
-console.log(window);
+
 BeachBall.StartProgram();
