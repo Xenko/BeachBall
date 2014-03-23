@@ -834,7 +834,7 @@ BeachBall.ChooseAutoclick = function () {
 		Molpy.Notify('You need to set a favorite first.', 0);
 		return;
 	}
-	var buttons = $$("#sectionFave"+selectedFave+" input[type=Button]");
+	var buttons = $$ ? $$("#sectionFave"+selectedFave+" input[type=Button]") : [];
 	
 	if (buttons.length == 0) {
 		Molpy.Notify('This favorite has no button to click !', 0);
@@ -932,7 +932,7 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 		return function(){
 			var me = BeachBall.FavsAutoclick[_fav];
 			if (me.timer) {
-				var buttons = $$("#sectionFave"+me.fave+" input[type=Button]");
+				var buttons = $$ ? $$("#sectionFave"+me.fave+" input[type=Button]") : [];
 				if (buttons && buttons[me.choice] && (typeof(buttons[me.choice].click) == 'function'))
 					buttons[me.choice].click();
 			}
@@ -943,7 +943,7 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 BeachBall.ImplantAutoclickFavButtons = function () {
 	for (fav in BeachBall.FavsAutoclick) {
 		var me = BeachBall.FavsAutoclick[fav];
-		if (me && me.period && $$("#faveHeader"+fav+" h1")) 
+		if (me && me.period && ($$ ? $$("#faveHeader"+fav+" h1") : false)) 
 			if ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
 				$$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
 			} else {
