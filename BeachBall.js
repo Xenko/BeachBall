@@ -1196,7 +1196,6 @@ BeachBall.SwitchSetting = function(option) {
 		}
 		me.desc = BeachBall.LoadDefaultSetting(option, 'desc');
 		BeachBall.DisplayDescription(option);
-		console.log(option)
 	}
 }
 
