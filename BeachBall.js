@@ -1253,16 +1253,20 @@ function BeachBallMainProgram() {
 }
 
 BeachBall.StartLoop = function () {
-	BeachBall.Timeout = setTimeout(BeachBallMainProgram, BeachBall.Settings['RefreshRate'].setting);
+	BeachBall.Timeout = setTimeout(typeof($$) == 'undefined' ? BeachBall.StartLoop : BeachBallMainProgram, BeachBall.Settings['RefreshRate'].setting);
 }
 
-//Program Startup
-BeachBall.LoadSettings();
-BeachBall.LoadAutoclickFav();
-BeachBall.CreateMenu();
-BeachBall.SpyRefresh();
-Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
-if (BeachBall.storage == 0) {
-	Molpy.Notify('No Local Storage Available. BeachBall settings will NOT be saved.',1);
+BeachBall.StartProgram = function() {
+	//Program Startup
+	BeachBall.LoadSettings();
+	BeachBall.LoadAutoclickFav();
+	BeachBall.CreateMenu();
+	BeachBall.SpyRefresh();
+	Molpy.Notify('BeachBall version ' + BeachBall.version + ' loaded for SandCastle Builder version ' + BeachBall.SCBversion, 1);
+	if (BeachBall.storage == 0) {
+		Molpy.Notify('No Local Storage Available. BeachBall settings will NOT be saved.',1);
+	}
+	BeachBall.StartLoop();
 }
-BeachBall.StartLoop();
+
+BeachBall.StartProgram();
