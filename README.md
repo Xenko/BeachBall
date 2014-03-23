@@ -12,7 +12,7 @@
 
 ## How to use this script ?
 
-Start by installing this script (instructions here :http://xenko.github.io/BeachBall/)
+Start by installing this script (instructions here : http://xenko.github.io/BeachBall/)
 Go in the Option panel of the game, and you will find every option to enable at the bottom of the panel.
 
 ## Changelog
