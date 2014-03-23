@@ -931,11 +931,11 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 	return (function (_fav) {
 		return function(){
 			var me = BeachBall.FavsAutoclick[_fav];
-			if (me.timer) {
+			// if (me.timer) {
 				// var buttons = $$("#sectionFave"+me.fave+" input[type=Button]");
 				// if (buttons && buttons[me.choice] && (typeof(buttons[me.choice].click) == 'function'))
 					// buttons[me.choice].click();
-			}
+			// }
 		}
 	})(fav_to_auto);
 }
