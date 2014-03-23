@@ -943,7 +943,7 @@ BeachBall.getAutoClickFav = function (fav_to_auto) {
 BeachBall.ImplantAutoclickFavButtons = function () {
 	for (fav in BeachBall.FavsAutoclick) {
 		var me = BeachBall.FavsAutoclick[fav];
-		if (me && me.period && $$("#faveHeader"+fav+" h1")) 
+		// if (me && me.period && $$("#faveHeader"+fav+" h1")) 
 			// if ($$("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
 				// $$("#faveHeader"+fav+" h1")[0].innerHTML= $$("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
 			// } else {
