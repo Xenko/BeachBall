@@ -1268,5 +1268,8 @@ BeachBall.StartProgram = function() {
 	}
 	BeachBall.StartLoop();
 }
-
+console.log($$);
+console.log(jQuery);
+console.log($);
+console.log(window);
 BeachBall.StartProgram();
