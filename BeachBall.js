@@ -64,17 +64,20 @@ BB.Boost = {
 			desc : function(me) {
 				var unlockedAdvices = [];
 				if (!me.bought) {
-					unlockedAdvices[] = 'You see bouncing balls when you close your eyes...<br/>(BeachBall Script)'
+					unlockedAdvices.push('You see bouncing balls when you close your eyes...<br/>(BeachBall Script)');
 				} else {
-					if (!Molpy.Boosts['Beachball'].unlocked)
+					// if (!Molpy.Boosts['Beachball'].unlocked)
 				}
-				if (unlockedAdvices.length == 0) unlockedAdvices[] = 'I love balls !';
+				if (unlockedAdvices.length == 0) unlockedAdvices.push('I love balls !');
 				return unlockedAdvices[Math.floor((Math.random()*unlockedAdvices.length))] + (BB.Settings.unlocked['everything'] ? '' : '<br/><input type="Button" onclick="BB.Settings.unlockEverything()" value="Unlock everything"></input>');
 			},
-			price:{ Sand : '1' }
+			price:{ Sand : '1' },
+			checkUnlock : function () {
+				return true;
+			}
 		},
 		{
-			name: 'Balls',
+			name: 'Ball',
 			single: 'Ball',
 			plural: 'Balls',
 			icon: 'beachball',
@@ -93,30 +96,59 @@ BB.Boost = {
 			desc : function (me) {
 				if (!me.bought)
 					return '1 autoclick per NP (ninja or not)';
-				return (me.IsEnabled
-					? 'The ball is bouncing on the beach, clicking '+this.power+' time in the sand each mNP.'
-					: 'The ball is not bouncing right now.'
-					)+'<br/><input type"Button" onclick="BB.Boosts.toggle(\''+me.name+'\')" Value="Toggle"></input>';
+				return 'Cuegans'+(me.IsEnabled ? '' : ' don\'t')+' play Volleyball with NewPixBots'+(me.IsEnabled ? ', clicking the beach 10mNP after NewPixBots activate.' : '.')
+					+ '<br/>Cuegans are '+(me.power ? 'full of energy.' : 'exhausted.')
+					+ (me.bought ? '<br/><input type="Button" onclick="Molpy.GenericToggle('+ me.id + ');" value="' + (me.IsEnabled ? 'Dea' : 'A') + 'ctivate"></input>' : '');
 			},
-			price:{ Sand : '500' }
-			
-		}
-	],
-	// complementary attributes/functions not present in the base Boost object(or not understood)
-	lootComplement : {
-		'Buble advice' : {
-			unlock : function () {
-				return true;
+			IsEnabled: Molpy.BoostFuncs.BoolPowEnabled,
+			price:{ Sand : '2000' },
+			checkUnlock : function() {
+				return ((Molpy.SandTools['Cuegan'].amount > 8) && (Molpy.CastleTools['NewPixBot'].amount > 8));
+			},
+			unlockFunction : function () {
+				this.power = 1;
+			},
+			ONG : function () {
+				this.power = 1;
+			},
+			mNP : function () {
+				if (this.power && (!Molpy.ninjad) && Molpy.npbONG) {
+					this.power = 0;
+					Molpy.UnlockBoost('Match in session');
+					Molpy.GiveTempBoost('Match in session');
+				}
 			}
 		},
-		// 'Balls' : function() {
-			// return Molpy.Boosts['Beachball'].unlocked;
-		// }
+		{
+			name : 'Match in session',
+			icon : 'cheqflag',
+			group : 'beachball',
+			className: 'alert',
+			desc : function (me) {
+				return (me.countdown ? (
+					'Match is in session between the NewPixBots and the Cueagans. It will end in '+MolpifyCountdown(me.countdown)
+				) : '');
+			},
+			startCountdown : 10, // can also be function()
+			lockFunction : function () { // also unlockFunction
+				Molpy.ClickBeach();
+			}
+		}
+	],
+	ONG : function () {
+		for (i in this.loot)
+			if (Molpy.Boosts[this.loot[i].name].ONG)
+				Molpy.Boosts[this.loot[i].name].ONG();
+	},
+	mNP : function () {
+		for (i in this.loot)
+			if (Molpy.Boosts[this.loot[i].name].mNP)
+				Molpy.Boosts[this.loot[i].name].mNP();
 	},
 	updateUnlocks : function () {
-		for (i in this.lootComplement)
-			if (this.unlockConditions[i].unlock && this.lootComplement[i].unlock())
-				Molpy.Boosts[i].unlocked = 1;
+		for (i in this.loot)
+			if (Molpy.Boosts[this.loot[i].name].checkUnlock && Molpy.Boosts[this.loot[i].name].checkUnlock())
+				Molpy.Boosts[this.loot[i].name].unlocked = 1;
 	},
 	lootSelectionRepaint : function () {
 		var str = '';
@@ -137,11 +169,12 @@ BB.Boost = {
 		this.implantGroups();
 		this.implantLoot();
 		BB.Spy.putBug('RepaintLootSelection',Molpy,this.lootSelectionRepaint);
+		BB.Spy.putBug('ONG',Molpy,this.ONG);
 	},
 	baseBoostCount : 0, // essential for loading system (offset based on system state before the loading
 	// save system (taken and altered from castle.js, boostToSting/from section)
 	fromString : function (thread) {
-			console.log('load from : '+thread);
+			// console.log('load from : '+thread);
 		var s = 'S'; //Semicolon
 		var c = 'C'; //Comma
 		var pixels = thread.split(s);
@@ -188,7 +221,7 @@ BB.Boost = {
 					me.getDiv({});
 					me.faveRefresh=1;
 					
-					console.log('boost loaded : ',me);
+					// console.log('boost loaded : ',me);
 				// If no data was saved for the boost, set them to defaults
 				} else {
 					if ($.inArray(me.group,BB.Boost.groups)>=0)
@@ -203,7 +236,7 @@ BB.Boost = {
 		var str = '';
 		for( var which in BB.Boost.loot) {
 			var boost = Molpy.Boosts[BB.Boost.loot[which].name];
-			console.log(boost);
+			// console.log(boost);
 			var saveData = boost.saveData;
 			var fencePost = '';
 			for(var num in saveData){
@@ -212,7 +245,7 @@ BB.Boost = {
 			}
 			str += s;
 		}
-			console.log('save to : '+str);
+			// console.log('save to : '+str);
 		return str;
 	}
 }
@@ -239,6 +272,7 @@ BB.Balloon = {
 		BB.Persist.prepare();
 		BB.Spy.putBug('Think',Molpy,function() {
 			BB.Boost.updateUnlocks();
+			BB.Boost.mNP();
 		});
 	},
 	push : function () {// pushing it down the hill
@@ -257,4 +291,4 @@ BB.Balloon = {
 
 BB.Balloon.pump();
 BB.Balloon.push();
-BB.Balloon.test();
+// BB.Balloon.test();
