@@ -6,8 +6,8 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.2.0.2';
-BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
+BeachBall.version = '5.2.0.3';
+BeachBall.SCBversion = '3.412'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -74,7 +74,8 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	this.PopulateStatements = function() {
 		var i = 0;
-		var j = this.puzzleString.indexOf(">") + 1;
+		var j = this.puzzleString.indexOf("]<br>") > 0 ? this.puzzleString.indexOf("]<br>") + 5 : this.puzzleString.indexOf(">")+1;
+		// console.log(this.puzzleString);
 		var k = 0;
 		var l = 0;
 		var m = 0;
