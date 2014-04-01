@@ -6,7 +6,7 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.2.0.3';
+BeachBall.version = '5.2.0.4';
 BeachBall.SCBversion = '3.4121'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
