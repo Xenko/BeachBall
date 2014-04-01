@@ -7,7 +7,7 @@ BeachBall.resetCaged = 0;
 
 //Version Information
 BeachBall.version = '5.2.0.3';
-BeachBall.SCBversion = '3.412'; //Last SandCastle Builder version tested
+BeachBall.SCBversion = '3.4121'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -946,7 +946,8 @@ BeachBall.ImplantAutoclickFavButtons = function () {
 		var me = BeachBall.FavsAutoclick[fav];
 		if (me && me.period && $("#faveHeader"+fav+" h1")) 
 			if ($("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
-				$("#faveHeader"+fav+" h1")[0].innerHTML= $("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
+				if ($("#faveHeader"+fav+" h1").length>0)
+					$("#faveHeader"+fav+" h1")[0].innerHTML= $("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
 			} else {
 				$("#faveHeader"+fav+" h1 .BB_autoclick").first().css('text-decoration',me.timer ? '' : 'line-through');
 			}
