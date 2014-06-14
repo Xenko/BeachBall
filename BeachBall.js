@@ -678,6 +678,11 @@ BeachBall.RiftAutoClick = function () {
 			// check TL
 			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
 				return;
+                        
+                        //Vilnor - if Flux Harvest is purchased, and available use it
+                        if (Molpy.Boosts['Flux Harvest'].bought && isFinite(Molpy.Boosts['FluxCrystals'].power)) {
+                            Molpy.FluxHarvest();
+                        }
 			
 			if ((!Molpy.Got('Temporal Rift')) && (BeachBall.GetBeachState() == 'beachsafe'))
 				Molpy.RiftJump();
@@ -686,8 +691,13 @@ BeachBall.RiftAutoClick = function () {
 		case 2 : // rift to ONG
 			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
 				return;
-			if (Molpy.Got('Temporal Rift') && Molpy.Boosts['Sand'].Has(1) && (BeachBall.GetBeachState() == 'beachsafe')) // ninja click has passed, rift occuring, sand in stock
-				Molpy.RiftJump();
+                        // ninja click has passed, rift occuring, sand in stock
+			if (Molpy.Got('Temporal Rift') && (BeachBall.GetBeachState() == 'beachsafe'))
+                            /* Vilnor - Change to spend 1 sand instead of has, to allow Aleph One, and cracks checks to work */
+                            if (Molpy.Boosts['Sand'].Spend(1,1)) {
+                                Molpy.RiftJump();
+                            }
+				
 			break;
 	}
 }
