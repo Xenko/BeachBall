@@ -6,8 +6,8 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.2.0.2';
-BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
+BeachBall.version = '5.2.0.5';
+BeachBall.SCBversion = '3.4121'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -74,7 +74,8 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	this.PopulateStatements = function() {
 		var i = 0;
-		var j = this.puzzleString.indexOf(">") + 1;
+		var j = this.puzzleString.indexOf("]<br>") > 0 ? this.puzzleString.indexOf("]<br>") + 5 : this.puzzleString.indexOf(">")+1;
+		// console.log(this.puzzleString);
 		var k = 0;
 		var l = 0;
 		var m = 0;
@@ -675,13 +676,23 @@ BeachBall.RiftAutoClick = function () {
 	switch (parseInt(BeachBall.Settings['RiftAutoClick'].status)) {
 	
 		case 1 : // farm crystals
-			// check TL
-			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
-				return;
-			
-			if ((!Molpy.Got('Temporal Rift')) && (BeachBall.GetBeachState() == 'beachsafe'))
-				Molpy.RiftJump();
-			break;
+
+			if (!(Molpy.Boosts['Flux Harvest'] && Molpy.Boosts['Flux Harvest'].bought)) {
+                if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
+                    return;
+
+                if ((!Molpy.Got('Temporal Rift')) && (BeachBall.GetBeachState() == 'beachsafe'))
+                    Molpy.RiftJump();
+                break;
+            } else { // when flux harvest is owned and ready use it to farm quickly
+                if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power )) {
+                    return;
+                }
+                if (Molpy.Boosts['Time Lord'].power > 0) {
+                    Molpy.FluxHarvest();
+                }
+                break;
+            }
 			
 		case 2 : // rift to ONG
 			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
@@ -945,7 +956,8 @@ BeachBall.ImplantAutoclickFavButtons = function () {
 		var me = BeachBall.FavsAutoclick[fav];
 		if (me && me.period && $("#faveHeader"+fav+" h1")) 
 			if ($("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
-				$("#faveHeader"+fav+" h1")[0].innerHTML= $("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
+				if ($("#faveHeader"+fav+" h1").length>0)
+					$("#faveHeader"+fav+" h1")[0].innerHTML= $("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
 			} else {
 				$("#faveHeader"+fav+" h1 .BB_autoclick").first().css('text-decoration',me.timer ? '' : 'line-through');
 			}
