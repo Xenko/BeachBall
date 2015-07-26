@@ -27,7 +27,7 @@ BeachBall.RKTimer = Molpy.Redacted.toggle - Molpy.Redacted.countup;
 
 //Caged Logicat Variables
 BeachBall.cagedTimeout = false;
-BeachBall.cagedTimeoutLength = 5000;
+BeachBall.cagedTimeoutLength = 3600;
 BeachBall.Puzzle = {};
 
 BeachBall.PuzzleConstructor = function(name) {
@@ -568,16 +568,32 @@ BeachBall.CagedAutoClick = function() {
 		}
 		// Buy Maximum Puzzles, or Singles if Max is less than 10
 		else if (me.status == 2) {
-			if (Molpy.PokeBar() >= 11 && Molpy.Level('LogiPuzzle') >= Molpy.PokeBar() && tens && Molpy.Has('GlassBlocks', costMulti)) {
+			if (Molpy.PokeBar() >= 11 && Molpy.Level('LogiPuzzle') >= Molpy.PokeBar() * .9  && tens && Molpy.Has('GlassBlocks', costMulti)) {
 				Molpy.MakeCagedPuzzle(costMulti, tens);
 			}
-			else if (Molpy.PokeBar() < 11) {
+			else if (Molpy.Has('GlassBlocks', costSingle)){
 				Molpy.MakeCagedPuzzle(costSingle);
 			}
 		}
-		// Trade Logicats for Bonemeal
-		else if (me.status == 3 && Molpy.Got('ShadwDrgn') && Molpy.Level('LogiPuzzle') >= 100) {
-			Molpy.ShadowStrike(1);
+		// Trade Logicats for Bonemeal and solve continuous logicats
+		else if (me.status == 3) {
+		    if (Molpy.Got('ShadwDrgn')) {
+                // only shadowstrike at good times
+                if (Molpy.Level('LogiPuzzle')%100 > 85 && Molpy.PokeBar() > 100) {
+                    console.log("this is a good time ", Molpy.Level('LogiPuzzle'))
+                    Molpy.ShadowStrike(1);
+                // unless you are close to max then you gotta do it
+                } else if (Molpy.Level('LogiPuzzle') > 100 && Molpy.Level('LogiPuzzle') > Molpy.PokeBar() * .9) {
+                    console.log("being forced into a strike ", Molpy.Level('LogiPuzzle'))
+                    Molpy.ShadowStrike(1);
+                // otherwise just use a logicat
+                } else if (Molpy.Has('GlassBlocks', costSingle)) {
+                    Molpy.MakeCagedPuzzle(costSingle);
+                }
+            // dont have the ability to shadow strike yet? its a solve single
+            } else if (Molpy.Has('GlassBlocks', costSingle)) {
+                Molpy.MakeCagedPuzzle(costSingle);
+            }
 		}
 	}
 
@@ -833,6 +849,12 @@ BeachBall.ToggleMenus = function(wantOpen) {
 			}
 		}
 	}
+}
+
+BeachBall.ClearLog = function() {
+    if (BeachBall.Settings['ClearLog'].status == 1 ) {
+        Molpy.ClearLog()
+    }
 }
 
 BeachBall.FavsAutoclick = {};
@@ -1157,6 +1179,13 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'setting')	{return 0;}
 		if (key == 'desc')		{return ['Off', 'On - Flux Cristal', 'On - ONG'];}
 	}
+	else if (option == 'ClearLog') {
+		if (key == 'title')		{return 'Log Pruning';}
+		if (key == 'status') 	{return 0;}
+		if (key == 'maxStatus') {return 1;}
+		if (key == 'setting')	{return 0;}
+		if (key == 'desc')		{return ['Off', 'On'];}
+	}
 	else {
 		Molpy.Notify(BeachBall.Settings[option] + ' setting not found. Please contact developer.', 1);
 		return -1;
@@ -1164,7 +1193,8 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 }
 
 BeachBall.LoadSettings = function() {
-	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory','RiftAutoClick'];
+	BeachBall.AllOptions = ['AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate',
+	                        'RKAutoClick', 'ToolFactory', 'RiftAutoClick', "ClearLog"];
 	BeachBall.AllOptionsKeys = ['title', 'status', 'maxStatus', 'setting', 'minSetting', 'maxSetting', 'msg', 'desc'];
 	BeachBall.SavedOptionsKeys = ['status', 'setting'];
 	BeachBall.Settings = {};
@@ -1261,6 +1291,7 @@ function BeachBallMainProgram() {
 	BeachBall.Ninja();
 	BeachBall.MontyHaul();
 	BeachBall.RiftAutoClick();
+	BeachBall.ClearLog();
 	BeachBall.StartLoop();
 }
 
