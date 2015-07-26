@@ -580,11 +580,11 @@ BeachBall.CagedAutoClick = function() {
 		    if (Molpy.Got('ShadwDrgn')) {
                 // only shadowstrike at good times
                 if (Molpy.Level('LogiPuzzle')%100 > 85 && Molpy.PokeBar() > 100) {
-                    console.log("this is a good time ", Molpy.Level('LogiPuzzle'))
+//                    console.log("this is a good time ", Molpy.Level('LogiPuzzle'))
                     Molpy.ShadowStrike(1);
                 // unless you are close to max then you gotta do it
                 } else if (Molpy.Level('LogiPuzzle') > 100 && Molpy.Level('LogiPuzzle') > Molpy.PokeBar() * .9) {
-                    console.log("being forced into a strike ", Molpy.Level('LogiPuzzle'))
+//                    console.log("being forced into a strike ", Molpy.Level('LogiPuzzle'))
                     Molpy.ShadowStrike(1);
                 // otherwise just use a logicat
                 } else if (Molpy.Has('GlassBlocks', costSingle)) {
