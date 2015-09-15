@@ -857,6 +857,25 @@ BeachBall.ClearLog = function() {
     }
 }
 
+BeachBall.DragonQueen = function() {
+
+    if (Molpy.Got("DQ") && BeachBall.Settings['DragonQueen'].status == 1) {
+        var target_amount = BeachBall.Settings['DragonQueen'].setting;
+        if (Molpy.Boosts["Eggs"].Level < target_amount) {
+            console.log("Im doing stuff, I want to lay " + target_amount + " eggs")
+            if(Molpy.Spend({Bonemeal: Molpy.EggCost()})) {
+                console.log("I spent bonemeal, now lets lay an egg")
+                Molpy.Add('Eggs',1);
+            } else {
+                console.log("cant afford the bonemeal cost of an egg")
+            }
+        } else {
+//            console.log("Don't need to lay any eggs")
+        }
+    }
+
+}
+
 BeachBall.FavsAutoclick = {};
 
 BeachBall.ChooseAutoclick = function () {
@@ -1186,6 +1205,16 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'setting')	{return 0;}
 		if (key == 'desc')		{return ['Off', 'On'];}
 	}
+	else if (option == 'DragonQueen') {
+		if (key == 'title')		{return 'Dragon Queen Eggs';}
+		if (key == 'status') 	{return 0;}
+		if (key == 'maxStatus') {return 1;}
+		if (key == 'setting')	{return 1;}
+		if (key == 'minSetting'){return 1;}
+		if (key == 'maxSetting'){return 2;}
+		if (key == 'msg')		{return 'Please enter the desired number of eggs to be layed(0-2):';}
+		if (key == 'desc')		{return ['Off', 'On: <a onclick="BeachBall.SwitchSetting(\'DragonQueen\')">' + BeachBall.Settings[option].setting + ' eggs</a>'];}
+	}
 	else {
 		Molpy.Notify(BeachBall.Settings[option] + ' setting not found. Please contact developer.', 1);
 		return -1;
@@ -1194,7 +1223,7 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 
 BeachBall.LoadSettings = function() {
 	BeachBall.AllOptions = ['AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate',
-	                        'RKAutoClick', 'ToolFactory', 'RiftAutoClick', "ClearLog"];
+	                        'RKAutoClick', 'ToolFactory', 'RiftAutoClick', "ClearLog", "DragonQueen"];
 	BeachBall.AllOptionsKeys = ['title', 'status', 'maxStatus', 'setting', 'minSetting', 'maxSetting', 'msg', 'desc'];
 	BeachBall.SavedOptionsKeys = ['status', 'setting'];
 	BeachBall.Settings = {};
@@ -1292,6 +1321,7 @@ function BeachBallMainProgram() {
 	BeachBall.MontyHaul();
 	BeachBall.RiftAutoClick();
 	BeachBall.ClearLog();
+	BeachBall.DragonQueen();
 	BeachBall.StartLoop();
 }
 
