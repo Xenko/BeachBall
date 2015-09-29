@@ -6,8 +6,8 @@ BeachBall.lootBoxes = ['boosts', 'badges', 'hpt', 'ninj', 'chron', 'cyb', 'bean'
 BeachBall.resetCaged = 0;
 
 //Version Information
-BeachBall.version = '5.2.0.2';
-BeachBall.SCBversion = '3.33333'; //Last SandCastle Builder version tested
+BeachBall.version = '5.2.0.5';
+BeachBall.SCBversion = '3.4121'; //Last SandCastle Builder version tested
 
 //BB Audio Alerts Variables
 BeachBall.audio_Bell = new Audio("http://xenko.comxa.com/Ship_Bell.mp3");
@@ -27,7 +27,7 @@ BeachBall.RKTimer = Molpy.Redacted.toggle - Molpy.Redacted.countup;
 
 //Caged Logicat Variables
 BeachBall.cagedTimeout = false;
-BeachBall.cagedTimeoutLength = 5000;
+BeachBall.cagedTimeoutLength = 3600;
 BeachBall.Puzzle = {};
 
 BeachBall.PuzzleConstructor = function(name) {
@@ -74,7 +74,8 @@ BeachBall.PuzzleConstructor = function(name) {
 	
 	this.PopulateStatements = function() {
 		var i = 0;
-		var j = this.puzzleString.indexOf(">") + 1;
+		var j = this.puzzleString.indexOf("]<br>") > 0 ? this.puzzleString.indexOf("]<br>") + 5 : this.puzzleString.indexOf(">")+1;
+		// console.log(this.puzzleString);
 		var k = 0;
 		var l = 0;
 		var m = 0;
@@ -567,16 +568,32 @@ BeachBall.CagedAutoClick = function() {
 		}
 		// Buy Maximum Puzzles, or Singles if Max is less than 10
 		else if (me.status == 2) {
-			if (Molpy.PokeBar() >= 11 && Molpy.Level('LogiPuzzle') >= Molpy.PokeBar() && tens && Molpy.Has('GlassBlocks', costMulti)) {
+			if (Molpy.PokeBar() >= 11 && Molpy.Level('LogiPuzzle') >= Molpy.PokeBar() * .9  && tens && Molpy.Has('GlassBlocks', costMulti)) {
 				Molpy.MakeCagedPuzzle(costMulti, tens);
 			}
-			else if (Molpy.PokeBar() < 11) {
+			else if (Molpy.Has('GlassBlocks', costSingle)){
 				Molpy.MakeCagedPuzzle(costSingle);
 			}
 		}
-		// Trade Logicats for Bonemeal
-		else if (me.status == 3 && Molpy.Got('ShadwDrgn') && Molpy.Level('LogiPuzzle') >= 100) {
-			Molpy.ShadowStrike(1);
+		// Trade Logicats for Bonemeal and solve continuous logicats
+		else if (me.status == 3) {
+		    if (Molpy.Got('ShadwDrgn')) {
+                // only shadowstrike at good times
+                if (Molpy.Level('LogiPuzzle')%100 > 85 && Molpy.PokeBar() > 100) {
+//                    console.log("this is a good time ", Molpy.Level('LogiPuzzle'))
+                    Molpy.ShadowStrike(1);
+                // unless you are close to max then you gotta do it
+                } else if (Molpy.Level('LogiPuzzle') > 100 && Molpy.Level('LogiPuzzle') > Molpy.PokeBar() * .9) {
+//                    console.log("being forced into a strike ", Molpy.Level('LogiPuzzle'))
+                    Molpy.ShadowStrike(1);
+                // otherwise just use a logicat
+                } else if (Molpy.Has('GlassBlocks', costSingle)) {
+                    Molpy.MakeCagedPuzzle(costSingle);
+                }
+            // dont have the ability to shadow strike yet? its a solve single
+            } else if (Molpy.Has('GlassBlocks', costSingle)) {
+                Molpy.MakeCagedPuzzle(costSingle);
+            }
 		}
 	}
 
@@ -675,13 +692,23 @@ BeachBall.RiftAutoClick = function () {
 	switch (parseInt(BeachBall.Settings['RiftAutoClick'].status)) {
 	
 		case 1 : // farm crystals
-			// check TL
-			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
-				return;
-			
-			if ((!Molpy.Got('Temporal Rift')) && (BeachBall.GetBeachState() == 'beachsafe'))
-				Molpy.RiftJump();
-			break;
+
+			if (!(Molpy.Boosts['Flux Harvest'] && Molpy.Boosts['Flux Harvest'].bought)) {
+                if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
+                    return;
+
+                if ((!Molpy.Got('Temporal Rift')) && (BeachBall.GetBeachState() == 'beachsafe'))
+                    Molpy.RiftJump();
+                break;
+            } else { // when flux harvest is owned and ready use it to farm quickly
+                if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power )) {
+                    return;
+                }
+                if (Molpy.Boosts['Time Lord'].power > 0) {
+                    Molpy.FluxHarvest();
+                }
+                break;
+            }
 			
 		case 2 : // rift to ONG
 			if (!(Molpy.Boosts['Time Lord'] && Molpy.Boosts['Time Lord'].bought && Molpy.Boosts['Time Lord'].power))
@@ -824,6 +851,31 @@ BeachBall.ToggleMenus = function(wantOpen) {
 	}
 }
 
+BeachBall.ClearLog = function() {
+    if (BeachBall.Settings['ClearLog'].status == 1 ) {
+        Molpy.ClearLog()
+    }
+}
+
+BeachBall.DragonQueen = function() {
+
+    if (Molpy.Got("DQ") && BeachBall.Settings['DragonQueen'].status == 1) {
+        var target_amount = BeachBall.Settings['DragonQueen'].setting;
+        if (Molpy.Boosts["Eggs"].Level < target_amount) {
+            console.log("Im doing stuff, I want to lay " + target_amount + " eggs")
+            if(Molpy.Spend({Bonemeal: Molpy.EggCost()})) {
+                console.log("I spent bonemeal, now lets lay an egg")
+                Molpy.Add('Eggs',1);
+            } else {
+                console.log("cant afford the bonemeal cost of an egg")
+            }
+        } else {
+//            console.log("Don't need to lay any eggs")
+        }
+    }
+
+}
+
 BeachBall.FavsAutoclick = {};
 
 BeachBall.ChooseAutoclick = function () {
@@ -945,7 +997,8 @@ BeachBall.ImplantAutoclickFavButtons = function () {
 		var me = BeachBall.FavsAutoclick[fav];
 		if (me && me.period && $("#faveHeader"+fav+" h1")) 
 			if ($("#faveHeader"+fav+" h1 .BB_autoclick").length == 0){
-				$("#faveHeader"+fav+" h1")[0].innerHTML= $("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
+				if ($("#faveHeader"+fav+" h1").length>0)
+					$("#faveHeader"+fav+" h1")[0].innerHTML= $("#faveHeader"+fav+" h1")[0].innerHTML +"<a class='BB_autoclick' onclick='BeachBall.ToggleAutoclickFav(\""+fav+"\",true)' "+(me.timer ? "" : "style='text-decoration:line-through' ")+">[ "+me.speed+" ]</a>";
 			} else {
 				$("#faveHeader"+fav+" h1 .BB_autoclick").first().css('text-decoration',me.timer ? '' : 'line-through');
 			}
@@ -1145,6 +1198,23 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 		if (key == 'setting')	{return 0;}
 		if (key == 'desc')		{return ['Off', 'On - Flux Cristal', 'On - ONG'];}
 	}
+	else if (option == 'ClearLog') {
+		if (key == 'title')		{return 'Log Pruning';}
+		if (key == 'status') 	{return 0;}
+		if (key == 'maxStatus') {return 1;}
+		if (key == 'setting')	{return 0;}
+		if (key == 'desc')		{return ['Off', 'On'];}
+	}
+	else if (option == 'DragonQueen') {
+		if (key == 'title')		{return 'Dragon Queen Eggs';}
+		if (key == 'status') 	{return 0;}
+		if (key == 'maxStatus') {return 1;}
+		if (key == 'setting')	{return 1;}
+		if (key == 'minSetting'){return 1;}
+		if (key == 'maxSetting'){return 2;}
+		if (key == 'msg')		{return 'Please enter the desired number of eggs to be layed(0-2):';}
+		if (key == 'desc')		{return ['Off', 'On: <a onclick="BeachBall.SwitchSetting(\'DragonQueen\')">' + BeachBall.Settings[option].setting + ' eggs</a>'];}
+	}
 	else {
 		Molpy.Notify(BeachBall.Settings[option] + ' setting not found. Please contact developer.', 1);
 		return -1;
@@ -1152,7 +1222,8 @@ BeachBall.LoadDefaultSetting = function (option, key) {
 }
 
 BeachBall.LoadSettings = function() {
-	BeachBall.AllOptions = [ 'AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate', 'RKAutoClick', 'ToolFactory','RiftAutoClick'];
+	BeachBall.AllOptions = ['AudioAlerts', 'BeachAutoClick', 'CagedAutoClick', 'LCSolver', 'MHAutoClick', 'RefreshRate',
+	                        'RKAutoClick', 'ToolFactory', 'RiftAutoClick', "ClearLog", "DragonQueen"];
 	BeachBall.AllOptionsKeys = ['title', 'status', 'maxStatus', 'setting', 'minSetting', 'maxSetting', 'msg', 'desc'];
 	BeachBall.SavedOptionsKeys = ['status', 'setting'];
 	BeachBall.Settings = {};
@@ -1249,6 +1320,8 @@ function BeachBallMainProgram() {
 	BeachBall.Ninja();
 	BeachBall.MontyHaul();
 	BeachBall.RiftAutoClick();
+	BeachBall.ClearLog();
+	BeachBall.DragonQueen();
 	BeachBall.StartLoop();
 }
 
